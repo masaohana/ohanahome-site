@@ -1,0 +1,1358 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<meta name="description" content="オハナホーム株式会社｜空き家再生・相続・おうちじまい。千葉県八街市。">
+<style>*{box-sizing:border-box}body{margin:0;font-family:system-ui,sans-serif;background:#fff}img{max-width:100%}[hidden]{display:none!important}</style>
+</head>
+<body>
+<title>OUCHI JIMAI</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sofia+Sans+Extra+Condensed:wght@800;900&family=Noto+Sans+JP:wght@400;700;900&family=Zen+Maru+Gothic:wght@500;700&display=swap">
+<style>
+  :root{
+    --bk:#000;
+    --wh:#fff;
+    --gy:#9e9e9e;
+    --gy-soft:#f4f4f4;
+    --gy-dark:#333;
+    --night:#0b1a5c;
+    --night-deep:#060f3a;
+    --cream:#fbf5e6;
+    --sun:#f2a93b;
+    --cond:"Sofia Sans Extra Condensed","Arial Narrow",sans-serif;
+    --jp:"Noto Sans JP","Hiragino Kaku Gothic ProN",sans-serif;
+    --maru:"Zen Maru Gothic","Hiragino Maru Gothic ProN",sans-serif;
+    --pad:clamp(20px,5vw,72px);
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;overflow-x:clip;}
+  body{margin:0;background:var(--wh);color:var(--bk);font-family:var(--jp);font-weight:700;letter-spacing:.05em;-webkit-font-smoothing:antialiased;overflow-x:hidden;}
+  img{display:block;max-width:100%;}
+  a{color:inherit;text-decoration:none;}
+  .cond{font-family:var(--cond);font-weight:900;line-height:1;letter-spacing:.05em;}
+  .wrap{width:90%;max-width:1280px;margin-inline:auto;}
+  .concept-box>*,.case-head>*,.ba-mid>*,.story-head>*,.sp>*,.book>*,.guide>*,.book-grid>*,.guide-grid>*{min-width:0;}
+  p{overflow-wrap:anywhere;}
+  .ttl{font-size:clamp(64px,10vw,128px);margin:0;}
+  .sub{font-size:clamp(24px,3.5vw,50px);color:var(--gy);}
+  .sec-ttl{font-size:clamp(64px,10vw,128px);text-align:center;margin:0 0 clamp(36px,7vw,100px);}
+
+  .clip-l,.clip-r,.clip-b{clip-path:polygon(0 0,0 0,0 100%,0 100%);transition:clip-path .8s cubic-bezier(.77,0,.18,1);}
+  .clip-r{clip-path:polygon(100% 0,100% 0,100% 100%,100% 100%);}
+  .clip-b{clip-path:polygon(0 100%,100% 100%,100% 100%,0 100%);}
+  .is-shown{clip-path:polygon(0 0,100% 0,100% 100%,0 100%) !important;}
+  .fade{opacity:0;transform:translateY(24px);transition:opacity .9s ease,transform .9s cubic-bezier(.2,.7,.2,1);}
+  .fade.is-shown{opacity:1;transform:none;}
+  @media (prefers-reduced-motion:reduce){
+    .clip-l,.clip-r,.clip-b{clip-path:polygon(0 0,100% 0,100% 100%,0 100%);transition:none;}
+    .fade{opacity:1;transform:none;transition:none;}
+  }
+
+  /* header */
+  .hd{position:fixed;inset:0 0 auto 0;z-index:20;display:flex;justify-content:space-between;align-items:flex-start;padding:clamp(18px,3vw,44px) var(--pad);}
+  .logo{color:var(--wh);text-shadow:0 2px 24px rgba(0,0,0,.35);}
+  .logo small{display:block;font-family:var(--cond);font-weight:800;font-size:clamp(12px,1.2vw,16px);letter-spacing:.3em;margin-bottom:2px;}
+  .logo b{display:block;font-family:var(--cond);font-weight:900;font-size:clamp(40px,5.2vw,72px);line-height:.9;letter-spacing:.02em;}
+  .logo b i{font-style:normal;font-family:var(--jp);font-weight:900;font-size:.32em;letter-spacing:.2em;vertical-align:.55em;margin-left:.3em;}
+  .ham{width:44px;height:44px;background:var(--wh);border:0;display:grid;place-items:center;cursor:pointer;padding:0;}
+  .ham span{display:block;width:18px;height:2px;background:var(--bk);box-shadow:0 -6px 0 var(--bk),0 6px 0 var(--bk);}
+
+  /* hero */
+  .mv{position:relative;height:100svh;min-height:620px;background:var(--bk);overflow:hidden;}
+  .mv .slide{position:absolute;inset:0;opacity:0;transition:opacity 1.6s ease;}
+  .mv .slide.on{opacity:1;}
+  .mv .slide img{width:100%;height:100%;object-fit:cover;transform:scale(1.06);transition:transform 9s linear;}
+  .mv .slide.on img{transform:scale(1);}
+  .mv::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.4),transparent 32%,transparent 70%,rgba(0,0,0,.3));pointer-events:none;}
+  .catch{position:absolute;right:0;bottom:clamp(56px,9vh,90px);z-index:5;background:rgba(255,255,255,.45);backdrop-filter:blur(3px);padding:clamp(18px,3vw,40px) clamp(16px,3.6vw,50px);white-space:nowrap;max-width:100%;}
+  .catch .top{display:flex;align-items:flex-end;gap:.6em;color:var(--bk);font-weight:900;line-height:1;}
+  .catch .top .s{font-size:clamp(11px,1.4vw,20px);}
+  .catch .top .m{font-size:clamp(14px,2vw,28px);}
+  .catch .btm{display:flex;align-items:flex-end;margin-top:-.55em;color:var(--bk);}
+  .catch .btm .a{font-size:clamp(46px,7.4vw,102px);transform:translateY(-.2em);}
+  .catch .btm .b{font-size:clamp(78px,12.4vw,170px);margin-left:.05em;}
+  .dots{position:absolute;left:50%;bottom:26px;transform:translateX(-50%);display:flex;gap:10px;z-index:5;}
+  .dots button{width:8px;height:8px;border-radius:50%;border:0;padding:0;background:#707070;cursor:pointer;}
+  .dots button.on{background:var(--wh);}
+
+  /* news */
+  .news{margin-top:clamp(40px,8vw,110px);border:1px solid var(--bk);padding:clamp(18px,3vw,34px) clamp(18px,4vw,50px);display:flex;align-items:center;gap:clamp(14px,3vw,40px);flex-wrap:wrap;}
+  .news .t{font-size:clamp(28px,4vw,54px);}
+  .news .d{font-size:13px;color:var(--gy-dark);font-variant-numeric:tabular-nums;}
+  .news .tx{font-size:clamp(13px,1.3vw,16px);flex:1;min-width:220px;border-bottom:1px solid var(--bk);padding-bottom:6px;}
+  .news .va{font-family:var(--cond);font-weight:900;font-size:16px;letter-spacing:.1em;background:var(--bk);color:var(--wh);padding:10px 26px;}
+
+  /* concept */
+  .concept{position:relative;margin-top:clamp(60px,9vw,130px);padding:clamp(60px,9vw,130px) 0;color:var(--wh);isolation:isolate;}
+  .concept .bg{position:absolute;inset:0;z-index:-1;overflow:hidden;background:var(--bk);}
+  .concept .bg img{width:100%;height:100%;object-fit:cover;opacity:.38;filter:grayscale(.5) contrast(1.1);}
+  .concept-box{display:grid;grid-template-columns:46% 1fr;gap:clamp(40px,6vw,82px);align-items:start;}
+  .concept-catch{background:rgba(255,255,255,.92);color:var(--bk);padding:clamp(22px,3vw,40px) clamp(20px,3vw,44px);width:100%;white-space:nowrap;}
+  .concept-catch .top{font-size:clamp(12px,1.3vw,20px);font-weight:900;}
+  .concept-catch .btm{display:flex;align-items:flex-end;margin-top:-.3em;}
+  .concept-catch .btm .a{font-size:clamp(34px,4.6vw,92px);transform:translateY(-.2em);}
+  .concept-catch .btm .b{font-size:clamp(56px,7.6vw,150px);margin-left:.05em;}
+  .concept-catch .jp{font-size:clamp(15px,1.75vw,28px);font-weight:900;margin-top:.3em;line-height:1.5;}
+  @media(max-width:860px){.concept-catch .btm .a{font-size:clamp(34px,9vw,92px);}.concept-catch .btm .b{font-size:clamp(56px,15vw,150px);}.concept-catch .jp{font-size:clamp(15px,3.6vw,28px);}}
+  .concept-txt{display:flex;flex-direction:column;gap:28px;}
+  .concept-txt p{margin:0;font-size:clamp(14px,1.35vw,18px);line-height:1.7;font-weight:700;}
+  .readmore{margin-top:40px;align-self:flex-end;display:inline-flex;align-items:center;gap:18px;background:var(--wh);color:var(--bk);padding:20px 34px;font-family:var(--cond);font-weight:900;font-size:26px;letter-spacing:.08em;transition:opacity .3s;}
+  .readmore:hover{opacity:.6;}
+  .arrow{width:9px;height:17px;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(-45deg) scale(.8);}
+  @media(max-width:860px){.concept-box{grid-template-columns:1fr;}}
+
+  /* method */
+  .method{margin-top:clamp(60px,10vw,150px);}
+  .method .desc{display:flex;align-items:center;gap:clamp(4px,1vw,10px);margin-top:clamp(16px,2.5vw,30px);}
+  .method .desc .fl{font-size:clamp(36px,7vw,96px);font-weight:900;line-height:1;}
+  .method .desc .tx{font-size:clamp(15px,2.6vw,36px);font-weight:900;line-height:1.4;}
+  .method-strip{margin-top:clamp(28px,4vw,56px);overflow:hidden;position:relative;margin-left:calc(50% - 50vw);margin-right:calc(50% - 50vw);width:100vw;}
+  .method-track{display:flex;gap:28px;width:max-content;padding:0 28px;animation:mrq 42s linear infinite;}
+  .method-strip:hover .method-track{animation-play-state:paused;}
+  @keyframes mrq{to{transform:translateX(-50%);}}
+  @media (prefers-reduced-motion:reduce){.method-track{animation:none;width:auto;flex-wrap:wrap;justify-content:center;}}
+  .mcard{width:clamp(280px,32vw,420px);flex:none;}
+  .mcard .ph{aspect-ratio:4/3;overflow:hidden;background:var(--gy-soft);}
+  .mcard .ph img{width:100%;height:100%;object-fit:cover;filter:grayscale(1) contrast(1.1);transition:filter .5s,transform .8s;}
+  .mcard:hover .ph img{filter:none;transform:scale(1.04);}
+  .mcard .en{font-size:34px;margin-top:16px;color:var(--gy);}
+  .mcard h3{margin:2px 0 8px;font-size:clamp(17px,1.6vw,22px);font-weight:900;}
+  .mcard p{margin:0;font-size:14px;line-height:1.7;font-weight:700;color:var(--gy-dark);}
+
+  /* before / after */
+  .ba{margin-top:clamp(70px,11vw,160px);background:var(--bk);color:var(--wh);padding-bottom:clamp(60px,9vw,120px);}
+  .ba-hero{position:relative;height:clamp(420px,70vh,760px);overflow:hidden;}
+  .ba-hero img{width:100%;height:100%;object-fit:cover;filter:grayscale(1) contrast(1.15);}
+  .ba-hero .stamp{position:absolute;left:var(--pad);bottom:clamp(20px,4vw,50px);font-size:clamp(90px,18vw,260px);line-height:.85;color:var(--wh);mix-blend-mode:difference;}
+  .ba-hero .cap{position:absolute;right:var(--pad);bottom:clamp(24px,4vw,56px);max-width:36ch;text-align:right;font-size:clamp(13px,1.3vw,17px);line-height:1.8;text-shadow:0 2px 20px rgba(0,0,0,.8);}
+  .ba-after{margin-top:6px;}
+  .ba-after img{filter:none;}
+  .ba-after .stamp{color:var(--wh);mix-blend-mode:normal;text-shadow:0 10px 40px rgba(0,0,0,.6);}
+  .ba-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-top:6px;}
+  .ba-grid .ph{aspect-ratio:4/3;overflow:hidden;position:relative;}
+  .ba-grid .ph img{width:100%;height:100%;object-fit:cover;transition:transform 1s;}
+  .ba-grid .ph:hover img{transform:scale(1.05);}
+  .ba-grid .ph.wide{grid-column:span 2;}
+  .ba-grid .tag{position:absolute;left:14px;top:12px;font-family:var(--cond);font-weight:900;font-size:22px;letter-spacing:.1em;color:var(--wh);background:var(--bk);padding:4px 12px;}
+  .ba-grid .tag.af{background:var(--wh);color:var(--bk);}
+  .ba-mid{display:grid;grid-template-columns:1fr 1fr;align-items:center;gap:clamp(24px,5vw,80px);padding:clamp(48px,7vw,100px) 0;}
+  .ba-mid .big{font-size:clamp(64px,10vw,128px);}
+  .ba-mid .big span{display:block;color:var(--gy);font-size:.42em;}
+  .ba-mid p{margin:0;font-size:clamp(14px,1.35vw,17px);line-height:1.9;font-weight:700;color:#ddd;}
+  .ba-mid .jp{font-size:clamp(20px,2.4vw,32px);font-weight:900;margin:0 0 16px;line-height:1.4;}
+  .cmp-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;}
+  @media(max-width:1100px){.cmp-grid{grid-template-columns:1fr 1fr;}}
+  .cmp{position:relative;aspect-ratio:4/5;overflow:hidden;background:#111;--p:50%;user-select:none;}
+  .cmp img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;pointer-events:none;}
+  .cmp img.a{clip-path:inset(0 0 0 var(--p));}
+  .cmp .bar{position:absolute;top:0;bottom:0;left:var(--p);width:2px;background:var(--wh);transform:translateX(-1px);pointer-events:none;box-shadow:0 0 12px rgba(0,0,0,.6);}
+  .cmp .bar::before{content:"";position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:48px;height:48px;border-radius:50%;background:var(--wh);box-shadow:0 4px 16px rgba(0,0,0,.4);}
+  .cmp .bar::after{content:"";position:absolute;top:50%;left:50%;width:14px;height:14px;transform:translate(-50%,-50%) rotate(45deg);border-left:2.5px solid var(--bk);border-bottom:2.5px solid var(--bk);border-right:2.5px solid var(--bk);border-top:2.5px solid var(--bk);clip-path:polygon(0 0,45% 0,45% 100%,0 100%,0 55%,100% 55%,100% 45%,0 45%);}
+  .cmp input{position:absolute;inset:0;width:100%;height:100%;margin:0;opacity:0;cursor:ew-resize;}
+  .cmp .lb{position:absolute;top:12px;font-family:var(--cond);font-weight:900;font-size:22px;letter-spacing:.1em;padding:4px 12px;pointer-events:none;}
+  .cmp .lb.bl{left:12px;background:var(--bk);color:var(--wh);}
+  .cmp .lb.al{right:12px;background:var(--wh);color:var(--bk);}
+  .cmp .room{position:absolute;left:12px;bottom:12px;font-size:13px;font-weight:900;color:var(--wh);text-shadow:0 1px 8px rgba(0,0,0,.8);pointer-events:none;}
+  .cmp-note{margin-top:14px;font-size:12px;color:var(--gy);font-weight:700;letter-spacing:.08em;}
+  @media(max-width:860px){.ba-grid{grid-template-columns:repeat(2,1fr);}.ba-mid{grid-template-columns:1fr;}.cmp-grid{grid-template-columns:1fr;}}
+
+  /* story */
+  .story{position:relative;margin-top:clamp(70px,11vw,160px);background:var(--night-deep);color:var(--wh);padding:clamp(60px,9vw,130px) 0 clamp(50px,7vw,90px);overflow:hidden;}
+  .story-head{display:grid;grid-template-columns:1fr 1fr;gap:clamp(24px,5vw,80px);align-items:end;margin-bottom:clamp(40px,7vw,100px);}
+  .story-head .kanji{font-family:var(--maru);font-weight:700;font-size:clamp(34px,5vw,64px);line-height:1.25;margin:0;color:var(--sun);}
+  .story-head .kanji small{display:block;font-family:var(--cond);font-size:.42em;color:var(--wh);letter-spacing:.2em;margin-bottom:.4em;}
+  .story-head p{margin:0;font-size:clamp(14px,1.3vw,17px);line-height:1.9;color:#cfd4ea;font-weight:700;}
+  .story-head .credit{font-size:12px;color:#8e97c4;margin-top:14px;letter-spacing:.1em;}
+  .sp{display:grid;grid-template-columns:1fr 1fr;gap:clamp(20px,4vw,60px);align-items:center;margin-top:clamp(40px,7vw,100px);}
+  .sp:nth-child(even){direction:rtl;}
+  .sp:nth-child(even)>*{direction:ltr;}
+  .sp .ph{box-shadow:0 30px 60px -30px rgba(0,0,0,.8);}
+  .sp .ph img{width:100%;}
+  .sp .txt{font-family:var(--maru);font-weight:500;font-size:clamp(17px,1.9vw,26px);line-height:2;color:#fff;}
+  .sp .txt em{font-style:normal;color:var(--sun);}
+  .sp .pg{font-family:var(--cond);color:#8e97c4;font-size:22px;letter-spacing:.15em;margin-bottom:14px;}
+  .sp-full{margin:clamp(40px,7vw,100px) calc(50% - 50vw) 0;width:100vw;position:relative;}
+  .sp-full img{width:100%;height:clamp(300px,60vh,640px);object-fit:cover;}
+  .sp-full .txt{position:absolute;inset:auto 0 0 0;padding:clamp(24px,5vw,64px) var(--pad);background:linear-gradient(0deg,rgba(6,15,58,.95),transparent);font-family:var(--maru);font-size:clamp(18px,2.4vw,32px);line-height:1.8;text-align:center;}
+  .sp-seq{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:clamp(40px,7vw,100px);}
+  .sp-seq img{width:100%;aspect-ratio:16/9;object-fit:cover;}
+  .sp-seq figcaption{font-family:var(--maru);font-weight:700;color:#cfd4ea;font-size:15px;letter-spacing:.1em;margin-top:10px;}
+  .sp-seq figure{margin:0;}
+  .story-end{display:grid;grid-template-columns:auto 1fr;gap:clamp(20px,4vw,50px);align-items:center;margin-top:clamp(40px,7vw,100px);}
+  .story-end img{width:clamp(140px,20vw,260px);border-radius:50%;}
+  .story-end .txt{font-family:var(--maru);font-size:clamp(20px,2.6vw,36px);line-height:1.7;}
+  @media(max-width:860px){.story-head,.sp{grid-template-columns:1fr;}.sp:nth-child(even){direction:ltr;}.sp-seq{grid-template-columns:repeat(2,1fr);}}
+
+  /* books */
+  .books{position:relative;background:var(--night);color:var(--wh);padding:clamp(60px,9vw,120px) 0;isolation:isolate;overflow:hidden;}
+  .books .bg{position:absolute;inset:0;z-index:-1;}
+  .books .bg img{width:100%;height:100%;object-fit:cover;opacity:.5;}
+  .books .bg::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(11,26,92,.8),rgba(11,26,92,.2) 45%,rgba(11,26,92,.9));}
+  .book-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(28px,5vw,72px);}
+  .book{display:grid;grid-template-columns:42% 1fr;gap:clamp(16px,2.5vw,32px);align-items:center;background:rgba(255,255,255,.96);color:var(--bk);padding:clamp(18px,2.6vw,34px);}
+  .book .cv{box-shadow:0 24px 50px -20px rgba(0,0,0,.6);transform:rotate(-2deg);transition:transform .6s cubic-bezier(.2,.7,.2,1);position:relative;}
+  .book:hover .cv{transform:rotate(0) scale(1.03);}
+  .book .cv img{width:100%;}
+  .book .cv .sub-cv{position:absolute;right:-12%;bottom:-8%;width:46%;box-shadow:0 16px 30px -12px rgba(0,0,0,.6);transform:rotate(5deg);}
+  .book .en{font-size:clamp(28px,3.4vw,44px);color:var(--gy);}
+  .book h3{margin:4px 0 10px;font-size:clamp(20px,2.2vw,28px);font-weight:900;line-height:1.3;}
+  .book p{margin:0;font-size:14px;line-height:1.8;font-weight:700;color:var(--gy-dark);}
+  .book .meta{margin-top:12px;font-size:11px;color:var(--gy);font-weight:700;letter-spacing:.08em;line-height:1.7;}
+  .btn-bk{display:inline-flex;align-items:center;gap:18px;background:var(--bk);color:var(--wh);padding:18px 34px;font-family:var(--cond);font-weight:900;font-size:24px;letter-spacing:.08em;margin-top:22px;position:relative;transition:opacity .3s;}
+  .btn-bk:hover{opacity:.7;}
+  @media(max-width:960px){.book-grid{grid-template-columns:1fr;}}
+  @media(max-width:520px){.book{grid-template-columns:1fr;}.book .cv{width:70%;margin:0 auto 20px;}}
+
+  /* case */
+  .case{margin-top:clamp(70px,11vw,160px);}
+  .case-item{margin-top:clamp(48px,8vw,120px);}
+  .case-head{display:grid;grid-template-columns:1fr 1fr;gap:clamp(20px,4vw,60px);align-items:end;margin-bottom:22px;}
+  .case-item .name{display:flex;align-items:flex-end;line-height:1;}
+  .case-item .name .fl{font-size:clamp(72px,11vw,150px);}
+  .case-item .name .rest{font-size:clamp(28px,4vw,52px);margin-left:.06em;margin-bottom:.22em;}
+  .case-item .jp{font-size:clamp(18px,2vw,26px);font-weight:900;margin:8px 0 10px;}
+  .case-item p{margin:0;font-size:15px;line-height:1.8;font-weight:700;color:var(--gy-dark);max-width:52ch;}
+  .case-gal{display:grid;grid-template-columns:2fr 1fr 1fr;grid-template-rows:1fr 1fr;gap:8px;height:clamp(320px,52vw,620px);}
+  .case-gal .ph{overflow:hidden;position:relative;background:var(--gy-soft);}
+  .case-gal .ph:first-child{grid-row:span 2;}
+  .case-gal img{width:100%;height:100%;object-fit:cover;transition:transform 1.2s cubic-bezier(.2,.7,.2,1);}
+  .case-gal .ph:hover img{transform:scale(1.05);}
+  .case-gal .tag{position:absolute;left:12px;top:10px;font-family:var(--cond);font-weight:900;font-size:18px;letter-spacing:.1em;color:var(--wh);background:var(--bk);padding:3px 10px;}
+  .case-gal .tag.af{background:var(--wh);color:var(--bk);}
+  .case-item .btn-bk{margin-top:28px;}
+  @media(max-width:760px){.case-head{grid-template-columns:1fr;}.case-gal{grid-template-columns:1fr 1fr;grid-template-rows:auto;height:auto;}.case-gal .ph{aspect-ratio:4/3;}.case-gal .ph:first-child{grid-column:span 2;grid-row:auto;}}
+
+  /* works */
+  .works{margin-top:clamp(70px,11vw,160px);}
+  .works-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-top:clamp(28px,4vw,56px);margin-left:calc(50% - 50vw);margin-right:calc(50% - 50vw);width:100vw;}
+  .works-grid .ph{aspect-ratio:1;overflow:hidden;position:relative;}
+  .works-grid .ph.tall{grid-row:span 2;aspect-ratio:auto;}
+  .works-grid img{width:100%;height:100%;object-fit:cover;filter:grayscale(1);transition:filter .5s,transform 1s;}
+  .works-grid .ph:hover img{filter:none;transform:scale(1.04);}
+  .works-grid .lb{position:absolute;left:12px;bottom:10px;font-family:var(--cond);font-weight:900;font-size:20px;letter-spacing:.1em;color:var(--wh);text-shadow:0 2px 12px rgba(0,0,0,.8);}
+  @media(max-width:760px){.works-grid{grid-template-columns:repeat(2,1fr);}}
+
+  /* guides (characters) */
+  .guides{margin-top:clamp(70px,11vw,160px);background:var(--cream);padding:clamp(60px,9vw,120px) 0;}
+  .guides .lead{text-align:center;font-family:var(--maru);font-weight:700;font-size:clamp(16px,2vw,26px);line-height:1.7;margin:calc(-1 * clamp(20px,4vw,60px)) auto clamp(36px,6vw,80px);width:min(90%,720px);text-wrap:balance;}
+  .guide-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(24px,5vw,72px);}
+  .guide{display:grid;grid-template-columns:38% 1fr;gap:clamp(14px,2.5vw,32px);align-items:center;}
+  .guide img{width:100%;filter:drop-shadow(0 20px 30px rgba(0,0,0,.18));transition:transform .5s;}
+  .guide:hover img{transform:translateY(-6px) rotate(-2deg);}
+  .guide .en{font-size:clamp(26px,3vw,40px);color:var(--sun);}
+  .guide h3{margin:2px 0 10px;font-family:var(--maru);font-weight:700;font-size:clamp(20px,2.2vw,28px);}
+  .guide p{margin:0;font-family:var(--maru);font-weight:500;font-size:14.5px;line-height:1.9;color:var(--gy-dark);}
+  .guide .role{display:inline-block;background:var(--bk);color:var(--wh);font-family:var(--cond);font-weight:900;font-size:16px;letter-spacing:.14em;padding:4px 12px;margin-top:12px;}
+  .guide-king img{width:25%;margin:0 auto;align-self:end;}
+  @media(max-width:860px){.guide-grid{grid-template-columns:1fr;}}
+
+  /* contact */
+  .contact{position:relative;margin-top:clamp(70px,11vw,150px);padding:clamp(60px,9vw,120px) var(--pad);color:var(--wh);text-align:center;isolation:isolate;}
+  .contact .bg{position:absolute;inset:0;z-index:-1;background:var(--bk);overflow:hidden;}
+  .contact .bg img{width:100%;height:100%;object-fit:cover;opacity:.35;filter:grayscale(.6);}
+  .contact .ttl{margin:0 0 clamp(24px,4vw,50px);}
+  .contact p{font-size:clamp(14px,1.8vw,24px);font-weight:900;line-height:1.5;width:min(80%,760px);margin:0 auto clamp(24px,4vw,60px);text-wrap:balance;}
+  .contact .link{display:flex;width:min(70%,400px);margin:0 auto;background:var(--wh);color:var(--bk);padding:clamp(16px,2.4vw,30px) 0;align-items:center;justify-content:center;position:relative;font-family:var(--cond);font-weight:900;font-size:clamp(24px,3.4vw,44px);letter-spacing:.05em;transition:opacity .3s;}
+  .contact .link:hover{opacity:.75;}
+  .contact .link .arrow{position:absolute;right:20px;top:50%;margin-top:-8px;}
+  .cform{width:min(92%,760px);margin:0 auto;text-align:left;display:flex;flex-direction:column;gap:18px;}
+  .cform .row{display:grid;grid-template-columns:1fr 1fr;gap:18px;}
+  .cform label{display:flex;flex-direction:column;gap:8px;font-size:13px;letter-spacing:.12em;font-weight:900;color:var(--wh);}
+  .cform .req{display:inline-block;margin-left:8px;font-size:10px;background:var(--wh);color:var(--bk);padding:2px 6px;letter-spacing:.1em;vertical-align:1px;}
+  .cform input,.cform select,.cform textarea{font-family:var(--jp);font-size:16px;font-weight:700;letter-spacing:.04em;padding:14px 16px;border:0;background:var(--wh);color:var(--bk);border-radius:0;width:100%;}
+  .cform textarea{resize:vertical;min-height:120px;}
+  .cform input:focus,.cform select:focus,.cform textarea:focus{outline:3px solid var(--sun);outline-offset:0;}
+  .cform .chk{flex-direction:row;align-items:center;gap:10px;font-size:13px;letter-spacing:.06em;font-weight:700;}
+  .cform .chk input{width:20px;height:20px;accent-color:var(--bk);}
+  .cform button.link{border:0;cursor:pointer;font-family:var(--cond);margin-top:6px;}
+  .cform button.link:disabled{opacity:.5;cursor:default;}
+  .cform-msg{text-align:center;font-size:14px;font-weight:900;letter-spacing:.06em;min-height:1.4em;}
+  .cform-msg.ok{color:var(--sun);}
+  .cform-msg.ng{color:#ff8a8a;}
+  .cform.sent .row,.cform.sent label,.cform.sent button{display:none;}
+  @media(max-width:640px){.cform .row{grid-template-columns:1fr;}}
+
+  footer{background:var(--bk);color:var(--wh);padding:40px var(--pad) 30px;display:flex;flex-direction:column;gap:22px;}
+  footer .logo{text-shadow:none;}
+  footer .credit{font-size:10px;font-weight:400;letter-spacing:.06em;color:var(--gy);line-height:1.8;}
+  footer .copy{font-family:var(--cond);font-weight:800;font-size:13px;letter-spacing:.2em;color:var(--gy);}
+  *:focus-visible{outline:2px solid var(--wh);outline-offset:3px;}
+
+  /* ===== nav / pages ===== */
+  .hd{transition:background .3s;}
+  .hd.solid{background:rgba(0,0,0,.85);backdrop-filter:blur(6px);}
+  .nav{display:flex;gap:clamp(14px,2.4vw,34px);align-items:center;margin-right:18px;}
+  .nav a{font-family:var(--cond);font-weight:900;font-size:18px;letter-spacing:.14em;color:var(--wh);text-shadow:0 2px 12px rgba(0,0,0,.4);padding:6px 0;border-bottom:2px solid transparent;}
+  .nav a.on{border-bottom-color:var(--wh);}
+  .hd-right{display:flex;align-items:center;}
+  @media(max-width:860px){.nav{display:none;}}
+  .menu{position:fixed;inset:0;z-index:40;background:var(--bk);color:var(--wh);display:none;flex-direction:column;justify-content:center;padding:var(--pad);}
+  .menu.on{display:flex;}
+  .menu a{font-family:var(--cond);font-weight:900;font-size:clamp(48px,11vw,110px);line-height:1;letter-spacing:.04em;color:var(--wh);padding:.08em 0;border-bottom:1px solid rgba(255,255,255,.15);}
+  .menu a small{font-family:var(--jp);font-size:14px;letter-spacing:.2em;margin-left:.6em;vertical-align:.5em;color:var(--gy);}
+  .menu .close{position:absolute;top:22px;right:var(--pad);width:44px;height:44px;background:var(--wh);border:0;cursor:pointer;font-family:var(--cond);font-weight:900;font-size:22px;}
+  .menu .sub{margin-top:28px;display:flex;gap:22px;flex-wrap:wrap;font-size:13px;letter-spacing:.14em;color:var(--gy);}
+  .menu .sub a{font-family:var(--jp);font-size:13px;border:0;padding:0;color:var(--gy);}
+  .view{display:none;}
+  .view.on{display:block;}
+  .pg-hero{position:relative;height:clamp(420px,64vh,720px);overflow:hidden;background:var(--bk);}
+  .pg-hero img,.pg-hero video{width:100%;height:100%;object-fit:cover;filter:grayscale(.15) contrast(1.05);}
+  .pg-hero::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.55),transparent 40%,transparent 60%,rgba(0,0,0,.55));}
+  .pg-hero .stamp{position:absolute;left:var(--pad);bottom:clamp(20px,4vw,50px);z-index:2;font-size:clamp(72px,14vw,200px);line-height:.85;color:var(--wh);text-shadow:0 10px 40px rgba(0,0,0,.6);}
+  .pg-hero .cap{position:absolute;right:var(--pad);bottom:clamp(24px,4vw,56px);z-index:2;max-width:36ch;text-align:right;color:var(--wh);font-size:clamp(13px,1.3vw,17px);line-height:1.8;text-shadow:0 2px 20px rgba(0,0,0,.8);}
+  .pg-hero.top{padding-top:0;}
+  .lead-jp{font-size:clamp(22px,3vw,40px);font-weight:900;line-height:1.45;margin:0 0 20px;text-wrap:balance;}
+  .body-txt{font-size:clamp(14px,1.35vw,17px);line-height:2;font-weight:700;color:var(--gy-dark);max-width:60ch;}
+  .body-txt p{margin:0 0 1.2em;}
+  .vision-big{font-family:"Noto Sans JP",sans-serif;font-weight:900;font-size:clamp(28px,5.6vw,76px);line-height:1.35;letter-spacing:.02em;margin-top:clamp(20px,3vw,40px);word-break:keep-all;overflow-wrap:normal;}
+  .two{display:grid;grid-template-columns:1fr 1fr;gap:clamp(24px,5vw,80px);align-items:start;}
+  .two>*{min-width:0;}
+  @media(max-width:860px){.two{grid-template-columns:1fr;}}
+
+  /* activity cards (home) */
+  .act{margin-top:clamp(70px,11vw,160px);}
+  .act-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:clamp(28px,4vw,56px);}
+  .act-card{position:relative;aspect-ratio:3/4;overflow:hidden;background:var(--bk);color:var(--wh);display:block;}
+  .act-card img{width:100%;height:100%;object-fit:cover;filter:grayscale(1) contrast(1.05);transition:filter .6s,transform 1.2s cubic-bezier(.2,.7,.2,1);}
+  .act-card:hover img{filter:none;transform:scale(1.05);}
+  .act-card::after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(0,0,0,.85),transparent 55%);}
+  .act-card .t{position:absolute;left:20px;right:20px;bottom:22px;z-index:2;}
+  .act-card .en{font-size:clamp(34px,4vw,56px);}
+  .act-card .jp{font-size:clamp(14px,1.4vw,18px);font-weight:900;margin-top:6px;}
+  .act-card .more{display:inline-block;margin-top:12px;font-family:var(--cond);font-weight:900;font-size:16px;letter-spacing:.14em;border-bottom:1px solid var(--wh);}
+  @media(max-width:760px){.act-grid{grid-template-columns:1fr;}.act-card{aspect-ratio:4/3;}}
+
+  /* people */
+  .people{margin-top:clamp(70px,11vw,160px);}
+  .person{display:grid;grid-template-columns:38% 1fr;gap:clamp(24px,4vw,60px);align-items:start;margin-top:clamp(40px,7vw,100px);}
+  .person>*{min-width:0;}
+  .person:nth-child(even){direction:rtl;}
+  .person:nth-child(even)>*{direction:ltr;}
+  .person .ph{aspect-ratio:4/5;overflow:hidden;background:var(--gy-soft);}
+  .person .ph img{width:100%;height:100%;object-fit:cover;}
+  .person .role{font-family:var(--cond);font-weight:900;font-size:clamp(28px,3.4vw,44px);color:var(--gy);letter-spacing:.06em;}
+  .person h3{margin:4px 0 4px;font-size:clamp(26px,3vw,40px);font-weight:900;}
+  .person .kana{font-size:13px;letter-spacing:.2em;color:var(--gy-dark);margin-bottom:18px;}
+  .person .tags{display:flex;flex-wrap:wrap;gap:6px;margin:16px 0 0;}
+  .person .tags span{font-size:12px;font-weight:900;letter-spacing:.08em;border:1px solid var(--bk);padding:4px 10px;}
+  .person .pics{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:8px;}
+  .person .pics img{width:100%;aspect-ratio:4/3;object-fit:cover;}
+  @media(max-width:760px){.person{grid-template-columns:1fr;}.person:nth-child(even){direction:ltr;}}
+
+  /* company table */
+  .company{margin-top:clamp(70px,11vw,160px);}
+  .ctable{width:100%;border-collapse:collapse;margin-top:clamp(28px,4vw,56px);font-size:15px;}
+  .ctable th,.ctable td{text-align:left;vertical-align:top;padding:18px 0;border-top:1px solid var(--bk);line-height:1.8;}
+  .ctable th{width:12em;font-family:var(--cond);font-weight:900;font-size:18px;letter-spacing:.12em;color:var(--gy-dark);padding-right:20px;}
+  .ctable th small{display:block;font-family:var(--jp);font-size:12px;letter-spacing:.1em;color:var(--gy);}
+  .ctable tr:last-child td,.ctable tr:last-child th{border-bottom:1px solid var(--bk);}
+  .ctable td a{text-decoration:underline;}
+  @media(max-width:600px){.ctable th{width:7em;font-size:14px;}}
+
+  /* seminar */
+  .sem-themes{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:clamp(28px,4vw,56px);}
+  .sem-themes div{background:var(--bk);color:var(--wh);padding:clamp(20px,2.6vw,34px);}
+  .sem-themes .n{font-family:var(--cond);font-weight:900;font-size:44px;color:var(--gy);line-height:1;}
+  .sem-themes h4{margin:10px 0 8px;font-size:clamp(17px,1.6vw,21px);font-weight:900;}
+  .sem-themes p{margin:0;font-size:13.5px;line-height:1.8;color:#ccc;font-weight:700;}
+  .sem-pics{display:grid;grid-template-columns:2fr 1fr 1fr;grid-template-rows:1fr 1fr;gap:8px;margin-top:clamp(40px,6vw,80px);height:clamp(320px,52vw,620px);}
+  .sem-pics .ph{overflow:hidden;}
+  .sem-pics .ph:first-child{grid-row:span 2;}
+  .sem-pics img{width:100%;height:100%;object-fit:cover;}
+  @media(max-width:760px){.sem-themes{grid-template-columns:1fr;}.sem-pics{grid-template-columns:1fr 1fr;height:auto;}.sem-pics .ph{aspect-ratio:4/3;}.sem-pics .ph:first-child{grid-column:span 2;grid-row:auto;}}
+  .sem-facts{display:flex;gap:clamp(20px,5vw,70px);flex-wrap:wrap;margin-top:clamp(28px,4vw,56px);}
+  .sem-facts div{display:flex;flex-direction:column;}
+  .sem-facts b{font-family:var(--cond);font-weight:900;font-size:clamp(44px,6vw,84px);line-height:1;}
+  .sem-facts span{font-size:12px;letter-spacing:.14em;font-weight:900;color:var(--gy-dark);margin-top:6px;}
+
+  /* column */
+  .col-list{margin-top:clamp(28px,4vw,56px);border-top:1px solid var(--bk);}
+  .col-item{display:grid;grid-template-columns:110px 1fr auto;gap:clamp(14px,3vw,40px);align-items:baseline;padding:clamp(18px,2.6vw,30px) 0;border-bottom:1px solid var(--line);text-decoration:none;transition:background .2s;}
+  .col-item:hover{background:var(--gy-soft);}
+  .col-item .d{font-family:var(--cond);font-weight:900;font-size:20px;letter-spacing:.06em;color:var(--gy);font-variant-numeric:tabular-nums;}
+  .col-item h4{margin:0 0 6px;font-size:clamp(16px,1.5vw,20px);font-weight:900;line-height:1.5;}
+  .col-item p{margin:0;font-size:13px;line-height:1.7;color:var(--gy-dark);font-weight:700;}
+  .col-item .go{font-family:var(--cond);font-weight:900;font-size:16px;letter-spacing:.14em;white-space:nowrap;}
+  @media(max-width:600px){.col-item{grid-template-columns:1fr;gap:6px;}.col-item .go{display:none;}}
+  .col-note{margin-top:20px;font-size:12px;color:var(--gy);letter-spacing:.08em;font-weight:700;}
+
+  /* line block */
+  .line-blk{display:grid;grid-template-columns:auto 1fr;gap:clamp(20px,4vw,50px);align-items:center;background:var(--wh);color:var(--bk);padding:clamp(20px,3vw,40px);width:min(92%,760px);margin:clamp(30px,5vw,60px) auto 0;text-align:left;}
+  .line-blk img{width:clamp(120px,18vw,180px);height:auto;}
+  .line-blk .en{font-size:clamp(28px,3.4vw,44px);color:#06C755;}
+  .line-blk h4{margin:2px 0 8px;font-size:clamp(18px,2vw,24px);font-weight:900;}
+  .line-blk p{margin:0;font-size:13.5px;line-height:1.8;color:var(--gy-dark);font-weight:700;}
+  .line-btn{display:inline-flex;align-items:center;gap:12px;margin-top:14px;background:#06C755;color:var(--wh);padding:14px 26px;font-family:var(--cond);font-weight:900;font-size:22px;letter-spacing:.1em;}
+  .tel{margin-top:clamp(30px,5vw,60px);font-family:var(--cond);font-weight:900;font-size:clamp(40px,7vw,96px);letter-spacing:.04em;line-height:1;color:var(--wh);}
+  .tel small{display:block;font-family:var(--jp);font-size:13px;letter-spacing:.2em;font-weight:900;margin-top:10px;color:var(--gy);}
+  @media(max-width:600px){.line-blk{grid-template-columns:1fr;text-align:center;}.line-blk img{margin:0 auto;}}
+
+  /* articles */
+  .art-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:clamp(28px,4vw,56px);}
+  .art-card{display:block;background:var(--wh);border:1px solid var(--bk);text-decoration:none;color:var(--bk);transition:transform .3s;}
+  .art-card:hover{transform:translateY(-4px);}
+  .art-card .ph{aspect-ratio:16/10;overflow:hidden;background:var(--gy-soft);}
+  .art-card .ph img{width:100%;height:100%;object-fit:cover;filter:grayscale(1);transition:filter .5s;}
+  .art-card:hover .ph img{filter:none;}
+  .art-card .t{padding:18px 20px 22px;}
+  .art-card .cat{font-family:var(--cond);font-weight:900;font-size:14px;letter-spacing:.16em;color:var(--gy);}
+  .art-card h3{margin:6px 0 8px;font-size:clamp(16px,1.5vw,19px);font-weight:900;line-height:1.5;}
+  .art-card p{margin:0;font-size:13px;line-height:1.7;color:var(--gy-dark);font-weight:700;}
+  .art-card .more{display:inline-block;margin-top:12px;font-family:var(--cond);font-weight:900;font-size:16px;letter-spacing:.14em;border-bottom:1px solid var(--bk);}
+  @media(max-width:960px){.art-grid{grid-template-columns:1fr 1fr;}}
+  @media(max-width:600px){.art-grid{grid-template-columns:1fr;}}
+  .note-blk{display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap;margin-top:clamp(40px,6vw,80px);padding:clamp(20px,3vw,34px);border:1px solid var(--bk);}
+  .note-blk .en{font-size:32px;color:var(--gy);}
+  .note-blk h4{margin:2px 0 6px;font-size:18px;font-weight:900;}
+  .note-blk p{margin:0;font-size:13px;color:var(--gy-dark);font-weight:700;}
+  .art-body{padding-top:clamp(120px,18vw,200px);}
+  .art-head .back{font-family:var(--cond);font-weight:900;font-size:18px;letter-spacing:.12em;color:var(--gy);}
+  .art-head .cat{font-family:var(--cond);font-weight:900;font-size:16px;letter-spacing:.16em;color:var(--gy);margin-top:24px;}
+  .art-head h1{margin:8px 0 18px;font-size:clamp(26px,4vw,48px);font-weight:900;line-height:1.35;text-wrap:balance;max-width:24ch;}
+  .art-lead{font-size:clamp(15px,1.4vw,18px);line-height:1.9;font-weight:700;color:var(--gy-dark);max-width:60ch;margin:0;}
+  .art-hero{margin:clamp(28px,4vw,56px) 0;aspect-ratio:21/9;overflow:hidden;background:var(--gy-soft);}
+  .art-hero img{width:100%;height:100%;object-fit:cover;}
+  .art-text{max-width:64ch;}
+  .art-text h2{font-size:clamp(19px,2vw,26px);font-weight:900;line-height:1.5;margin:2.2em 0 .7em;padding-left:14px;border-left:4px solid var(--bk);}
+  .art-text p{font-size:clamp(15px,1.35vw,17px);line-height:2.1;font-weight:500;margin:0 0 1.4em;color:#222;}
+  .art-foot{margin-top:clamp(48px,7vw,90px);padding-top:clamp(28px,4vw,48px);border-top:1px solid var(--bk);display:grid;grid-template-columns:1fr 1.4fr;gap:clamp(24px,5vw,70px);align-items:center;}
+  .art-foot>*{min-width:0;}
+  .who{display:flex;align-items:center;gap:16px;}
+  .who img{width:72px;height:72px;object-fit:cover;object-position:50% 15%;border-radius:50%;}
+  .who b{display:block;font-size:16px;}
+  .who small{display:block;font-size:11px;letter-spacing:.1em;color:var(--gy-dark);margin-top:4px;}
+  .art-cta p{margin:0 0 12px;font-size:14px;font-weight:700;color:var(--gy-dark);}
+  .art-cta{display:flex;flex-direction:column;align-items:flex-start;gap:6px;}
+  .art-cta .btn-bk{margin:6px 8px 0 0;}
+  @media(max-width:760px){.art-foot{grid-template-columns:1fr;}}
+</style>
+
+<header class="hd" id="hd">
+  <a class="logo" href="#/">
+    <small>AKIYA · SOUZOKU · SHUKATSU</small>
+    <b>OHANA HOME<i>空き家再生</i></b>
+  </a>
+  <div class="hd-right">
+    <nav class="nav" id="nav">
+      <a href="#/" data-r="home">HOME</a>
+      <a href="#/about" data-r="about">ABOUT</a>
+      <a href="#/vision" data-r="vision">VISION</a>
+      <a href="#/seminar" data-r="seminar">SEMINAR</a>
+      <a href="#/column" data-r="column">COLUMN</a>
+      <a href="#/recruit" data-r="recruit">RECRUIT</a>
+      <a href="#/contact" data-r="contact">CONTACT</a>
+    </nav>
+    <button class="ham" id="ham" aria-label="メニュー"><span></span></button>
+  </div>
+</header>
+<div class="menu" id="menu">
+  <button class="close" id="menu-close" aria-label="閉じる">×</button>
+  <a href="#/">HOME<small>トップ</small></a>
+  <a href="#/about">ABOUT<small>会社概要・私たち</small></a>
+  <a href="#/vision">VISION<small>理念とビジョン</small></a>
+  <a href="#/seminar">SEMINAR<small>終活セミナー</small></a>
+  <a href="#/column">COLUMN<small>コラム</small></a>
+  <a href="#/recruit">RECRUIT<small>採用・代表に直接メッセージ</small></a>
+  <a href="#/contact">CONTACT<small>ご相談・公式LINE</small></a>
+  <div class="sub"><a href="https://lin.ee/wfuJh2m" target="_blank" rel="noopener">公式LINE</a><a href="https://www.instagram.com/ohanahome_official/" target="_blank" rel="noopener">Instagram（会社）</a><a href="https://www.instagram.com/masao.kikuchi/" target="_blank" rel="noopener">Instagram（菊池聖雄）</a><a href="https://www.instagram.com/akiya_ni_akari/" target="_blank" rel="noopener">Instagram（菊池あかり）</a><a href="https://x.com/ohanahome_jp" target="_blank" rel="noopener">X</a><a href="https://www.facebook.com/ohanahome.sns/" target="_blank" rel="noopener">Facebook（会社）</a><a href="https://www.facebook.com/profile.php?id=61579031979060" target="_blank" rel="noopener">Facebook（菊池聖雄）</a><a href="https://www.facebook.com/akiya.ni.akari" target="_blank" rel="noopener">Facebook（菊池あかり）</a></div>
+</div>
+
+<main class="view on" id="view-home">
+<section class="mv" id="top">
+  <div class="slide on"><video autoplay muted loop playsinline poster="img/top_loop_poster.jpg"><source src="img/top_loop.mp4" type="video/mp4"></video></div>
+  <div class="slide"><img src="img/hero_ext.jpg" alt="外構を整えた昭和築の二階建て住宅"></div>
+  <div class="slide"><img src="img/g_room_clutter2.jpg" alt="片付け前、家財が残されたままの部屋"></div>
+  <div class="slide"><img src="img/g_ext_ivy.jpg" alt="草木に覆われた二階建ての空き家"></div>
+  <div class="slide"><img src="img/after_kitchen.jpg" alt="再生後のキッチン"></div>
+  <div class="slide"><img src="img/hero_washitsu.jpg" alt="障子と畳の和室"></div>
+  <div class="catch clip-r">
+    <div class="top"><span class="s">想いをつなぎ、笑顔をつくる</span><span class="m">「終わりから、はじまる。」</span></div>
+    <div class="btm"><span class="cond a">OUCHI</span><span class="cond b">JIMAI.</span></div>
+  </div>
+  <div class="dots" aria-hidden="true"><button class="on"></button><button></button><button></button><button></button><button></button><button></button></div>
+</section>
+<div class="wrap"><div class="news fade">
+  <div class="cond t">NEWS</div>
+  <div class="d">2026.09</div>
+  <a class="tx" href="#/vision/tane">空き家を再生した、あきやフリースクール「たね」。10月開講に向けてクラウドファンディングに挑戦中です</a>
+  <a class="cond va" href="#">VIEW ALL</a>
+</div></div>
+<section class="concept">
+  <div class="bg"><img src="img/after_room.jpg" alt=""></div>
+  <h2 class="cond sec-ttl fade">CONCEPT</h2>
+  <div class="wrap concept-box">
+    <div class="concept-catch clip-l">
+      <div class="top">想いをつなぎ、笑顔をつくる。</div>
+      <div class="btm"><span class="cond a">BEYOND THE</span><span class="cond b">END</span></div>
+      <div class="jp">家じまいではなく、<br>「おうちじまい」。<br>“片づけ”ではなく、“再生”として。</div>
+    </div>
+    <div class="concept-txt fade">
+      <p>誰も住まなくなった家、誰かに残していく財産、誰もが一度は迎える人生の終わり方。多くの人にとって、それらは「向き合いたくないもの」として後回しにされてきました。</p>
+      <p>私たちが向き合うのは、立派な古民家ではありません。昭和50年代、平成のはじめに建てられた、どこにでもある「ふつうのおうち」。そこには家族の時間が染み込んでいます。だから私たちは「家じまい」ではなく、あえて「おうちじまい」と呼んでいます。</p>
+      <p>空き家再生士による全国ネットワーク、自治体との連携協定、絵本と終活ノートによる啓発。片づけるのではなく、次につなぐこと。「想いをつなぎ、笑顔をつくる」を一軒、一家族ずつ形にしています。</p>
+      <a class="readmore" href="#">READ MORE<span class="arrow"></span></a>
+    </div>
+  </div>
+</section>
+<a class="pg-hero band" href="#/about" style="display:block;height:clamp(300px,56vh,620px);margin-top:clamp(70px,11vw,160px)">
+  <video class="hero-video" autoplay muted loop playsinline poster="img/team_loop_poster.jpg"><source src="img/team_loop.mp4" type="video/mp4"></video>
+  <div class="cond stamp" style="font-size:clamp(56px,10vw,150px)">TEAM</div>
+  <div class="cap fade">社員と、職人と。<br>一軒ずつ、手で向き合う。</div>
+</a>
+<section class="method wrap">
+  <div class="cond sub fade">OUCHI JIMAI</div>
+  <h2 class="cond ttl fade">METHOD</h2>
+  <div class="desc fade">
+    <span class="fl">空</span>
+    <span class="tx">き家・相続・終活を、一つの流れとして扱う<br>「おうちじまい」の総合サポート</span>
+  </div>
+  <div class="method-strip">
+    <div class="method-track">
+      <article class="mcard"><div class="ph"><img src="img/g_ext_ivy.jpg" alt=""></div><div class="cond en">01 AKIYA</div><h3>空き家再生</h3><p>草に覆われた実家を、住む・使う・貸すへ。査定から片付け、再生プラン、活用後の管理まで一気通貫で伴走します。</p></article>
+      <article class="mcard"><div class="ph"><img src="img/hero_ext.jpg" alt=""></div><div class="cond en">02 SOUZOKU</div><h3>相続コンサルティング</h3><p>不動産が絡む相続は、法律・税務・感情が交差します。専門家と連携し、家族が納得できる着地点を一緒に探します。</p></article>
+      <article class="mcard"><div class="ph"><img src="img/after_kitchen.jpg" alt=""></div><div class="cond en">03 SHUKATSU</div><h3>終活サポート</h3><p>「もしも」の前に、住まいと財産、想いの整理を。おうち終活ノートを使って、エンディングを選べるものへ変えていきます。</p></article>
+      <article class="mcard"><div class="ph"><img src="img/g_ext_ivy.jpg" alt=""></div><div class="cond en">01 AKIYA</div><h3>空き家再生</h3><p>草に覆われた実家を、住む・使う・貸すへ。査定から片付け、再生プラン、活用後の管理まで一気通貫で伴走します。</p></article>
+      <article class="mcard"><div class="ph"><img src="img/hero_ext.jpg" alt=""></div><div class="cond en">02 SOUZOKU</div><h3>相続コンサルティング</h3><p>不動産が絡む相続は、法律・税務・感情が交差します。専門家と連携し、家族が納得できる着地点を一緒に探します。</p></article>
+      <article class="mcard"><div class="ph"><img src="img/after_kitchen.jpg" alt=""></div><div class="cond en">03 SHUKATSU</div><h3>終活サポート</h3><p>「もしも」の前に、住まいと財産、想いの整理を。おうち終活ノートを使って、エンディングを選べるものへ変えていきます。</p></article>
+    </div>
+  </div>
+</section>
+<section class="ba">
+  <div class="ba-hero">
+    <img src="img/g_room_clutter2.jpg" alt="片付け前、家財が残されたままの部屋">
+    <div class="cond stamp">BEFORE</div>
+    <div class="cap fade">誰かの暮らしが、そのまま止まっている部屋。<br>ここから「おうちじまい」ははじまります。</div>
+  </div>
+  <div class="wrap">
+    <div class="ba-grid">
+      <div class="ph clip-b"><img src="img/g_kitchen_clutter.jpg" alt="片付け前の台所"><span class="tag">BEFORE</span></div>
+      <div class="ph clip-b"><img src="img/g_piano.jpg" alt="残されたピアノ"><span class="tag">BEFORE</span></div>
+      <div class="ph clip-b"><img src="img/g_truck.jpg" alt="片付けの荷を積んだトラック"><span class="tag">WORK</span></div>
+      <div class="ph clip-b"><img src="img/g_room_clutter.jpg" alt="片付け前、箪笥と家財が残る部屋"><span class="tag">BEFORE</span></div>
+    </div>
+  </div>
+  <div class="ba-hero" style="height:clamp(360px,56vh,640px);margin-top:6px">
+    <video class="hero-video" autoplay muted loop playsinline poster="img/work_loop_poster.jpg" style="width:100%;height:100%;object-fit:cover;filter:grayscale(.2) contrast(1.05)"><source src="img/work_loop.mp4" type="video/mp4"></video>
+    <div class="cond stamp">WORK</div>
+    <div class="cap fade">片付けの現場で、まず探すのは「残すもの」。<br>再生は、そこから。</div>
+  </div>
+  <div class="wrap">
+    <div class="ba-grid" style="margin-top:6px">
+      <div class="ph wide clip-b"><img src="img/site_night.jpg" alt="足場と垂れ幕のかかった再生中の空き家"><span class="tag">WORK</span></div>
+      <div class="ph clip-b"><img src="img/g_truck.jpg" alt="片付けの荷を積んだトラック"><span class="tag">WORK</span></div>
+      <div class="ph clip-b"><img src="img/masao_office.jpg" alt="事務所での打合せ"><span class="tag">TEAM</span></div>
+    </div>
+    <div class="ba-mid">
+      <div class="cond big fade">AFTER<span>片付けて、直して、つなぐ。</span></div>
+      <div class="fade">
+        <p class="jp">大切なものは、<br>必ずお戻しします。</p>
+        <p>片付けは、ゴミを出す作業ではありません。家族の写真、位牌、通帳や権利証、子どもの頃の作品。私たちの現場では、出てきた大切なものを一つずつ分けて、ご家族にお戻しすることを決まりにしています。「捨ててしまった」を、一件も起こさないために。</p>
+        <p>残すもの・引き取るもの・手放すものを一緒に決めて、家を「次の暮らし」が入れる状態に整える。そこから先は、地元の職人と一緒に、住みたくなる家へ。</p>
+      </div>
+    </div>
+  </div>
+  <div class="ba-hero ba-after">
+    <img src="img/after_hero_kitchen.jpg" alt="再生後のアイランドキッチン">
+    <div class="cond stamp">AFTER</div>
+    <div class="cap fade">昭和の台所が、<br>家族が集まるアイランドキッチンに。</div>
+  </div>
+  <div class="wrap">
+    <div class="ba-grid" style="margin-top:6px">
+      <div class="ph clip-b"><img src="img/after_kitchen_island2.jpg" alt="再生後のキッチン"><span class="tag af">AFTER</span></div>
+      <div class="ph clip-b"><img src="img/after_hall_rokuzaki.jpg" alt="再生後の廊下"><span class="tag af">AFTER</span></div>
+      <div class="ph clip-b"><img src="img/after_kitchen.jpg" alt="再生後のキッチン"><span class="tag af">AFTER</span></div>
+      <div class="ph clip-b"><img src="img/after_bath.jpg" alt="再生後の浴室"><span class="tag af">AFTER</span></div>
+    </div>
+    <div class="ba-mid">
+      <div class="cond big fade">SAME<span>同じ部屋、同じ位置から。</span></div>
+      <div class="fade">
+        <p class="jp">マンションも、戸建ても。<br>工事中と、引き渡し前。</p>
+        <p>片付けを終え、壁も床も剥がした状態から、内装を仕上げるとこうなります。職人が工事前と同じ位置に立って撮った写真です。真ん中のつまみを左右に動かして見比べてください。</p>
+      </div>
+    </div>
+    <div class="cmp-grid">
+      <div class="cmp clip-b"><img class="b" src="img/cmp_living_b.jpg" alt="工事中の居室"><img class="a" src="img/cmp_living_a.jpg" alt="完成後の居室"><div class="bar"></div><span class="lb bl">BEFORE</span><span class="lb al">AFTER</span><span class="room">居室</span><input type="range" min="0" max="100" value="50" aria-label="居室の前後を比較"></div>
+      <div class="cmp clip-b"><img class="b" src="img/cmp_m_counter_b.jpg" alt="工事前の台所の角"><img class="a" src="img/cmp_m_counter_a.jpg" alt="完成後のカウンター"><div class="bar"></div><span class="lb bl">BEFORE</span><span class="lb al">AFTER</span><span class="room">台所</span><input type="range" min="0" max="100" value="50" aria-label="台所の前後を比較"></div>
+      <div class="cmp clip-b"><img class="b" src="img/cmp_wash_b.jpg" alt="工事中の洗面所"><img class="a" src="img/cmp_wash_a.jpg" alt="完成後の洗面所"><div class="bar"></div><span class="lb bl">BEFORE</span><span class="lb al">AFTER</span><span class="room">洗面所</span><input type="range" min="0" max="100" value="50" aria-label="洗面所の前後を比較"></div>
+      <div class="cmp clip-b"><img class="b" src="img/cmp_toilet_b.jpg" alt="工事中のトイレ"><img class="a" src="img/cmp_toilet_a.jpg" alt="完成後のトイレ"><div class="bar"></div><span class="lb bl">BEFORE</span><span class="lb al">AFTER</span><span class="room">トイレ</span><input type="range" min="0" max="100" value="50" aria-label="トイレの前後を比較"></div>
+      <div class="cmp clip-b"><img class="b" src="img/cmp_s_room_b.jpg" alt="工事中の居室（戸建て）"><img class="a" src="img/cmp_s_room_a.jpg" alt="完成後の居室（戸建て）"><div class="bar"></div><span class="lb bl">BEFORE</span><span class="lb al">AFTER</span><span class="room">戸建て・居室</span><input type="range" min="0" max="100" value="50" aria-label="戸建て居室の前後を比較"></div>
+      <div class="cmp clip-b"><img class="b" src="img/cmp_s_wash_b.jpg" alt="工事中の洗面所（戸建て）"><img class="a" src="img/cmp_s_wash_a.jpg" alt="完成後の洗面所（戸建て）"><div class="bar"></div><span class="lb bl">BEFORE</span><span class="lb al">AFTER</span><span class="room">戸建て・洗面所</span><input type="range" min="0" max="100" value="50" aria-label="戸建て洗面所の前後を比較"></div>
+      <div class="cmp clip-b"><img class="b" src="img/cmp_s_toilet_b.jpg" alt="工事中のトイレ（戸建て）"><img class="a" src="img/cmp_s_toilet_a.jpg" alt="完成後のトイレ（戸建て）"><div class="bar"></div><span class="lb bl">BEFORE</span><span class="lb al">AFTER</span><span class="room">戸建て・トイレ</span><input type="range" min="0" max="100" value="50" aria-label="戸建てトイレの前後を比較"></div>
+      <div class="cmp clip-b"><img class="b" src="img/cmp_k_wash_b.jpg" alt="工事中の洗面所（戸建て2）"><img class="a" src="img/cmp_k_wash_a.jpg" alt="完成後の洗面所（戸建て2）"><div class="bar"></div><span class="lb bl">BEFORE</span><span class="lb al">AFTER</span><span class="room">戸建て・洗面所</span><input type="range" min="0" max="100" value="50" aria-label="戸建て2洗面所の前後を比較"></div>
+    </div>
+    <div class="cmp-note">同一物件・同じ位置から撮影</div>
+  </div>
+</section>
+<section class="story">
+  <div class="wrap">
+    <div class="story-head">
+      <h2 class="kanji fade"><small>PICTURE BOOK</small>あきやに あかり</h2>
+      <div class="fade">
+        <p>夜のまちに、眠るように佇む空き家たち。暗闇に人々は戸惑い、外に出られずにいました。あるとき、人々が灯りを手に集まりはじめます。その灯りは「ありがとう」や「ごめんね」、「願い」や「希望」など、心の光をあらわすもの。空き家を「ただの空き家」ではなく「誰かの暮らしが刻まれた場所」として見つめ直すための絵本です。</p>
+        <div class="credit">企画 きくちまさお ／ 発行 一般社団法人 空き家再生協会</div>
+      </div>
+    </div>
+
+    <div class="sp">
+      <div class="ph clip-l"><img src="img/st_1.jpg" alt="空き家だらけの昼のまち"></div>
+      <div class="fade"><div class="pg">01</div><div class="txt">あるところに　ふるい　まちが　ありました<br>そこは　あきやだらけの　まちです<br><br>このいえも<br>あのいえも<br>ひとは　すんでいません</div></div>
+    </div>
+    <div class="sp-full">
+      <img src="img/st_4.jpg" alt="暗い夜のまち">
+      <div class="txt fade">よる　まちは　まっくら<br>まちのひとたちは　そとに　でられません</div>
+    </div>
+    <div class="sp">
+      <div class="ph clip-r"><img src="img/st_6.jpg" alt="電気屋さんが立ち上がるシーン" style="max-width:420px;margin:0 auto"></div>
+      <div class="fade"><div class="pg">02</div><div class="txt">すると　でんきやさんが　たちあがります<br><em>「くらいのなら　あきやに<br>あかりを　ともせばいい！」</em></div></div>
+    </div>
+    <div class="sp">
+      <div class="ph clip-l"><img src="img/st_8.jpg" alt="みんなで協力してあかりを集めるシーン"></div>
+      <div class="fade"><div class="pg">03</div><div class="txt">「それなら　きまりだ！　あかりを　あつめろ！」<br><br>まちのひとたちは<br>いえじゅうの　あかりを　かきあつめました<br>わあ　すごい<br>こんなにたくさん！</div></div>
+    </div>
+    <div class="sp-full">
+      <img src="img/st_9.jpg" alt="空き家を照らすシーン">
+      <div class="txt fade">まずは　このいえ<br>いいぞ！　あかるくなった！</div>
+    </div>
+    <div class="sp-seq">
+      <figure class="fade"><img src="img/st_11.jpg" alt="まばらにあかりがつく夜のまち"><figcaption>ぽつり</figcaption></figure>
+      <figure class="fade"><img src="img/st_12.jpg" alt="あかりが増える夜のまち"><figcaption>ぽつり　ぽつり</figcaption></figure>
+      <figure class="fade"><img src="img/st_13.jpg" alt="もっとあかりが増える夜のまち"><figcaption>ぽつり　ぽつり　ぽつり</figcaption></figure>
+      <figure class="fade"><img src="img/st_14.jpg" alt="あかりだらけになって賑わう夜のまち"><figcaption>どんどん　ふえていくね</figcaption></figure>
+    </div>
+    <div class="story-end">
+      <img class="fade" src="img/st_15.jpg" alt="ランプを持つ猫">
+      <div class="txt fade">あきやに　あかりをともして<br>まちは　げんきに　なったのです<br><em style="color:var(--sun);font-style:normal">さぁ　つぎは　きみのばん<br>あかりを　ともして　まちじゅうを　げんきにしよう</em></div>
+    </div>
+    <div style="display:flex;gap:14px;flex-wrap:wrap;justify-content:center;margin-top:clamp(36px,6vw,72px)">
+      <a class="btn-bk" href="https://amzn.asia/d/03BOzXKo" target="_blank" rel="noopener" style="background:var(--sun);color:var(--bk);font-size:28px;padding:22px 40px">絵本『あきやにあかり』を買う<span class="arrow"></span></a>
+      <a class="btn-bk" href="#/contact" style="background:transparent;color:var(--wh);border:2px solid var(--wh)">寄贈・読み聞かせの相談<span class="arrow"></span></a>
+    </div>
+  </div>
+</section>
+<a class="pg-hero band" href="#/about" style="display:block;height:clamp(300px,56vh,620px);margin-top:clamp(70px,11vw,160px)">
+  <video class="hero-video" autoplay muted loop playsinline poster="img/smile_loop_poster.jpg"><source src="img/smile_loop.mp4" type="video/mp4"></video>
+  <div class="cond stamp" style="font-size:clamp(56px,10vw,150px)">SMILE</div>
+  <div class="cap fade">「ありがとう」を、<br>直接もらえる仕事です。</div>
+</a>
+<section class="books">
+  <div class="bg"><img src="img/st_14.jpg" alt=""></div>
+  <h2 class="cond sec-ttl fade">BOOKS</h2>
+  <div class="wrap book-grid">
+    <article class="book clip-l">
+      <div class="cv"><img src="img/ehon_cover.jpg" alt="絵本『あきやにあかり』表紙"></div>
+      <div>
+        <div class="cond en">PICTURE BOOK</div>
+        <h3>絵本『あきやにあかり』</h3>
+        <p>空き家だらけのまちに、みんなで集めたあかりを灯していく物語。読み聞かせ、家族の対話ツール、終活支援の現場で。全国の学校・図書館・福祉施設への無償寄贈も行っています。</p>
+        <div class="meta">上製本 A4横 ／ 企画 きくちまさお<br>発行 一般社団法人 空き家再生協会</div>
+        <div style="display:flex;gap:10px;flex-wrap:wrap"><a class="btn-bk" href="https://amzn.asia/d/03BOzXKo" target="_blank" rel="noopener">AMAZON<span class="arrow"></span></a></div>
+      </div>
+    </article>
+    <article class="book clip-r">
+      <div class="cv"><img src="img/note_cover.jpg" alt="おうち終活ノート 表紙"><img class="sub-cv" src="img/note_family.jpg" alt="おうち終活ノート ご家族シート"></div>
+      <div>
+        <div class="cond en">ENDING NOTE</div>
+        <h3>おうち終活ノート</h3>
+        <p>「家」のことに特化した終活ノート。名義、境界、鍵の場所、残したい想い。別冊「ご家族シート」で、家族みんなでおうちの共通認識をつくります。書きはじめた日から、対話がはじまります。</p>
+        <div class="meta">第二版 ／ 定価 本体1,000円（税別） ／ 発行 一般社団法人 空き家再生協会<br>空き家再生協会の取り組みは「国土交通省 令和5年度 空き家対策モデル事業」に採択されました。</div>
+        <a class="btn-bk" href="https://amzn.asia/d/08x1ZKSq" target="_blank" rel="noopener">AMAZON<span class="arrow"></span></a>
+      </div>
+    </article>
+  </div>
+</section>
+<a class="pg-hero band" href="#/seminar" style="display:block;height:clamp(300px,56vh,620px);margin-top:clamp(70px,11vw,160px)">
+  <video class="hero-video" autoplay muted loop playsinline poster="img/semin_loop_poster.jpg"><source src="img/semin_loop.mp4" type="video/mp4"></video>
+  <div class="cond stamp" style="font-size:clamp(56px,10vw,150px)">SEMINAR</div>
+  <div class="cap fade">終活のセミナーは、<br>いつも満席になります。</div>
+</a>
+
+<section class="act wrap">
+  <div class="cond sub fade">OHANA HOME</div>
+  <h2 class="cond ttl fade">ACTIVITY</h2>
+  <div class="act-grid" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr))">
+    <a class="act-card clip-b" href="#/about">
+      <img src="img/ceremony.jpg" alt="八街市との空き家対策協定 締結式">
+      <div class="t"><div class="cond en">PARTNERSHIP</div><div class="jp">八街市と、空き家対策の協定を締結</div><span class="more">READ MORE</span></div>
+    </a>
+    <a class="act-card clip-b" href="#/seminar">
+      <img src="img/stage_duo.jpg" alt="ふたりで登壇するセミナー" style="object-position:50% 30%">
+      <div class="t"><div class="cond en">SEMINAR</div><div class="jp">おうち終活ノートで、家族の会話をつくる</div><span class="more">READ MORE</span></div>
+    </a>
+    <a class="act-card clip-b" href="#/about">
+      <img src="img/duo_navy.jpg" alt="菊池聖雄と菊池あかり" style="object-position:50% 20%">
+      <div class="t"><div class="cond en">PEOPLE</div><div class="jp">空き家と相続に、夫婦で向き合う</div><span class="more">READ MORE</span></div>
+    </a>
+    <a class="act-card clip-b" href="#/vision/tane">
+      <img src="img/tane_house.jpg" alt="フリースクールに生まれ変わる空き家">
+      <div class="t"><div class="cond en">FREE SCHOOL</div><div class="jp">空き家を、子どもたちの居場所に</div><span class="more">READ MORE</span></div>
+    </a>
+  </div>
+</section>
+
+<section class="works wrap">
+  <div class="cond sub fade">PHOTO</div>
+  <h2 class="cond ttl fade">WORKS</h2>
+  <div class="works-grid">
+    <div class="ph tall"><img src="img/after_stairs.jpg" alt=""><span class="lb">STAIRS</span></div>
+    <div class="ph"><img src="img/g_ext_ivy.jpg" alt=""><span class="lb">BEFORE</span></div>
+    <div class="ph"><img src="img/after_kitchen.jpg" alt=""><span class="lb">KITCHEN</span></div>
+    <div class="ph"><img src="img/g_piano.jpg" alt=""><span class="lb">PIANO</span></div>
+    <div class="ph"><img src="img/hero_washitsu.jpg" alt=""><span class="lb">WASHITSU</span></div>
+    <div class="ph"><img src="img/after_bath.jpg" alt=""><span class="lb">BATH</span></div>
+    <div class="ph"><img src="img/hero_ext.jpg" alt=""><span class="lb">EXTERIOR</span></div>
+    <div class="ph"><img src="img/g_after_tatami.jpg" alt=""><span class="lb">CLEARED</span></div>
+    <div class="ph"><img src="img/after_ldk.jpg" alt=""><span class="lb">LDK</span></div>
+    <div class="ph"><img src="img/before3.jpg" alt=""><span class="lb">GARDEN</span></div>
+    <div class="ph"><img src="img/g_truck.jpg" alt=""><span class="lb">WORK</span></div>
+  </div>
+</section>
+<a class="pg-hero band" href="#/about" style="display:block;height:clamp(300px,56vh,620px);margin-top:clamp(70px,11vw,160px)">
+  <video class="hero-video" autoplay muted loop playsinline poster="img/craft_loop_poster.jpg"><source src="img/craft_loop.mp4" type="video/mp4"></video>
+  <div class="cond stamp" style="font-size:clamp(56px,10vw,150px)">CRAFT</div>
+  <div class="cap fade">職人さんと、同じテーブルで。<br>打合せも、現場も、乾杯も。</div>
+</a>
+<section class="guides">
+  <div class="wrap">
+    <h2 class="cond sec-ttl fade">GUIDES</h2>
+    <p class="lead fade">むずかしい話は、案内役たちといっしょに。</p>
+    <div class="guide-grid">
+      <article class="guide fade">
+        <img src="img/ch_ouchama.png" alt="おうちゃま">
+        <div>
+          <div class="cond en">OUCHAMA</div>
+          <h3>おうちゃま</h3>
+          <p>家の冠に片眼鏡、赤いマント。「安心できる暮らし」を司る、おうちの王さま。相続や終活の話を、こわくない話に変えてくれます。</p>
+          <span class="role">ANSHIN · KURASHI</span>
+        </div>
+      </article>
+      <article class="guide fade">
+        <img src="img/ch_yamori.png" alt="家守神">
+        <div>
+          <div class="cond en">YAMORI-GAMI</div>
+          <h3>家守神（やもりがみ）</h3>
+          <p>「や」の冠に青い髪、白い衣。家を「見守る」神さま。住んでいる今から、いつか手放す日まで、家と家族をそっと見守ります。</p>
+          <span class="role">MIMAMORU</span>
+        </div>
+      </article>
+      <article class="guide fade">
+        <img src="img/ch_yuimori.png" alt="結守神">
+        <div>
+          <div class="cond en">YUIMORI-GAMI</div>
+          <h3>結守神（ゆいもりがみ）</h3>
+          <p>「ゆ」の冠に緑の衣、手には巻物。人と人、家と次の家族を「結ぶ」神さま。相続の話し合いや、次の住まい手との縁をつなぎます。</p>
+          <span class="role">MUSUBU</span>
+        </div>
+      </article>
+      <article class="guide fade guide-king">
+        <img src="img/ch_akiyaking.png" alt="空き家王">
+        <div>
+          <div class="cond en">AKIYA KING</div>
+          <h3>空き家王（あきやおう）</h3>
+          <p>「あ」の冠に∞のめがね。空き家の「課題と可能性」を語る小さな王。空き家のあらゆる相談の入口に、ちょこんと立っています。</p>
+          <span class="role">AKIYA</span>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+<a class="pg-hero band" href="#/about" style="display:block;height:clamp(300px,56vh,620px);margin-top:clamp(70px,11vw,160px)">
+  <video class="hero-video" autoplay muted loop playsinline poster="img/hq_loop_poster.jpg"><source src="img/hq_loop.mp4" type="video/mp4"></video>
+  <div class="cond stamp" style="font-size:clamp(56px,10vw,150px)">HOME BASE</div>
+  <div class="cap fade">本社も、空き家でした。<br>いまは、僕らの居場所です。</div>
+</a>
+
+<section class="contact" id="cta">
+  <div class="bg"><img src="img/hero_washitsu.jpg" alt=""></div>
+  <h2 class="cond ttl fade">CONTACT</h2>
+  <p class="fade">空き家、相続、終活。どこから話していいか分からない状態でも構いません。ご相談は無料です。</p>
+  <a class="link fade" href="#/contact">CONTACT FORM<span class="arrow"></span></a>
+</section>
+
+</main>
+<main class="view" id="view-about">
+
+<div class="pg-hero">
+  <img src="img/ceremony.jpg" alt="八街市との協定締結式" style="object-position:50% 35%">
+  <div class="cond stamp">ABOUT</div>
+  <div class="cap fade">行政と、家族と、職人と。<br>空き家の問題を、ひとりで抱えない仕組みをつくる。</div>
+</div>
+<section class="wrap" style="margin-top:clamp(60px,9vw,130px)">
+  <div class="cond sub fade">PARTNERSHIP</div>
+  <h2 class="cond ttl fade">八街市との協定</h2>
+  <div class="two" style="margin-top:clamp(28px,4vw,56px)">
+    <div class="fade">
+      <p class="lead-jp">協会が啓発を、会社が実務を。<br>行政と役割を分けて、空き家に向き合う。</p>
+    </div>
+    <div class="body-txt fade">
+      <div class="ph clip-r" style="margin-bottom:22px;aspect-ratio:3/2;overflow:hidden"><img src="img/mayor4.jpg" alt="八街市長との協定締結" style="width:100%;height:100%;object-fit:cover"></div>
+      <p>千葉県八街市と、空き家対策に関する協定を締結しました。一般社団法人 空き家再生協会が「相談窓口・啓発」を、オハナホーム株式会社が「片付け・再生・売買の実務」を担う2本立てです。</p>
+      <p>市に寄せられる「どうしたらいいか分からない空き家」の相談を、行政だけで抱えず、地域の専門家につなぐ。所有者にとっては、最初の一歩を踏み出しやすくする仕組みです。</p>
+      <p>絵本『あきやにあかり』と『おうち終活ノート』を使った啓発活動も、この協定の一部として進めています。</p>
+    </div>
+  </div>
+</section>
+
+<section class="wrap" style="margin-top:clamp(70px,11vw,160px)">
+  <div class="cond sub fade">HEAD OFFICE</div>
+  <h2 class="cond ttl fade">本社も、空き家でした</h2>
+  <div class="two" style="margin-top:clamp(28px,4vw,56px)">
+    <div class="fade"><p class="lead-jp">前の持ち主が、<br>航空写真を額に入れて残していた家。</p></div>
+    <div class="body-txt fade">
+      <p>八街の本社は、もともと誰も住まなくなった一軒の家でした。買い取ったとき、庭は草に覆われ、外壁は色あせていました。壁には、前の持ち主が額に入れて残した「我が家の航空撮影」。それだけ大切にされてきた家だと、ひと目でわかりました。</p>
+      <p>片付けて、直して、黒く塗り替えて、灯りをともす。僕らが毎日お客様にお伝えしている「おうちじまい」を、自分たちの本社で最初にやりました。</p>
+    </div>
+  </div>
+</section>
+<div class="pg-hero" style="height:clamp(360px,62vh,720px);margin-top:clamp(28px,4vw,56px)">
+  <video class="hero-video" autoplay muted loop playsinline poster="img/hq_loop_poster.jpg" style="filter:none"><source src="img/hq_loop.mp4" type="video/mp4"></video>
+  <div class="cap fade" style="left:var(--pad);right:auto;text-align:left">夕暮れの本社。<br>灯りがともる家に、人は集まる。</div>
+</div>
+<section class="wrap" style="margin-top:8px">
+  <div class="ba-grid" style="grid-template-columns:repeat(3,1fr)">
+    <div class="ph clip-b"><img src="img/hq_1999.jpg" alt="前の持ち主が残した航空写真の額"><span class="tag">ORIGIN</span></div>
+    <div class="ph clip-b"><img src="img/hq_before.jpg" alt="買取時の本社（草に覆われた庭と色あせた外壁）"><span class="tag">BEFORE</span></div>
+    <div class="ph clip-b"><img src="img/hq_now.jpg" alt="再生後の本社、夕暮れ"><span class="tag af">NOW</span></div>
+  </div>
+</section>
+
+<section class="wrap" style="margin-top:clamp(70px,11vw,160px)">
+  <div class="cond sub fade">TEAM</div>
+  <h2 class="cond ttl fade">オハナホームの日常</h2>
+  <p class="lead-jp fade" style="margin-top:20px">空き家の想いをつなぐパートナー。<br>八街の、再生した空き家の事務所から全国へ。</p>
+</section>
+<div class="pg-hero" style="height:clamp(360px,60vh,680px);margin-top:clamp(28px,4vw,56px)">
+  <video class="hero-video" autoplay muted loop playsinline poster="img/team_loop_poster.jpg"><source src="img/team_loop.mp4" type="video/mp4"></video>
+  <div class="cap fade" style="left:var(--pad);right:auto;text-align:left">空き家を再生した本社事務所。<br>社員・職人・仲間が、ここに集まります。</div>
+</div>
+<div class="pg-hero" style="height:clamp(320px,52vh,600px);margin-top:8px">
+  <video class="hero-video" autoplay muted loop playsinline poster="img/craft_loop_poster.jpg"><source src="img/craft_loop.mp4" type="video/mp4"></video>
+  <div class="cap fade" style="left:var(--pad);right:auto;text-align:left">職人さんとの時間。<br>打合せも、現場も、乾杯も、同じテーブルで。</div>
+</div>
+<section class="wrap" style="margin-top:8px">
+  <div class="ba-grid">
+    <div class="ph wide clip-b"><img src="img/team_endex.jpg" alt="エンディング産業展 ブースにて"></div>
+    <div class="ph clip-b"><img src="img/team_books.jpg" alt="絵本『あきやにあかり』を持つチーム"></div>
+    <div class="ph clip-b"><video autoplay muted loop playsinline poster="img/office_loop_poster.jpg" style="width:100%;height:100%;object-fit:cover"><source src="img/office_loop.mp4" type="video/mp4"></video></div>
+    <div class="ph clip-b"><img src="img/team_happi.jpg" alt="展示会での法被姿"></div>
+    <div class="ph clip-b"><img src="img/team_book.jpg" alt="社内読書会"></div>
+    <div class="ph wide clip-b"><img src="img/team_office.jpg" alt="八街の事務所でのチーム集合写真"></div>
+    <div class="ph clip-b"><img src="img/duo_tee.jpg" alt="「日本中を笑顔に。空き家再生」Tシャツ" style="object-position:50% 30%"></div>
+    <div class="ph clip-b"><img src="img/shrine.jpg" alt="地域の神社にて"></div>
+  </div>
+</section>
+
+<section class="people wrap">
+  <div class="cond sub fade">PEOPLE</div>
+  <h2 class="cond ttl fade">私たち</h2>
+</section>
+<div class="pg-hero" style="height:clamp(420px,80vh,880px);margin-top:clamp(28px,4vw,56px)">
+  <img src="img/duo_sky.jpg" alt="青空の下、本社の前に立つ菊池聖雄と菊池あかり" style="object-position:50% 35%;filter:none">
+  <div class="cap fade" style="left:var(--pad);right:auto;text-align:left">空き家と相続に、夫婦で向き合う。<br>菊池 聖雄 ／ 菊池 あかり</div>
+</div>
+<section class="wrap">
+  <article class="person">
+    <div class="ph clip-l"><img src="img/masao.jpg" alt="代表取締役 菊池聖雄" style="object-position:50% 15%"></div>
+    <div class="fade">
+      <div class="role">REPRESENTATIVE</div>
+      <h3>菊池 聖雄</h3>
+      <div class="kana">KIKUCHI MASAO ／ オハナホーム株式会社 代表取締役 ／ 一般社団法人 空き家再生協会</div>
+      <div class="body-txt">
+        <p>「どうしたらいいか分からない家」と向き合う仕事をしています。売るでも壊すでもなく、まず話を聞く。答えを急がず、家族が納得できる着地点を一緒に探す。それを一軒ずつ積み重ねてきました。</p>
+        <p>空き家の相談で、いちばん多いのは「どうしたらいいかわからない」という悩みです。だから、最初の一歩を軽くする仕組み——絵本、終活ノート、自治体との協定、全国の空き家再生士——をつくってきました。</p>
+      </div>
+      <div class="tags"><span>空き家再生</span><span>相続</span><span>買取・再生</span><span>絵本『あきやにあかり』企画</span></div>
+      <div style="display:flex;gap:12px;flex-wrap:wrap"><a class="btn-bk" href="#/column">COLUMN<span class="arrow"></span></a><a class="btn-bk" href="https://www.instagram.com/masao.kikuchi/" target="_blank" rel="noopener" style="background:var(--wh);color:var(--bk);border:2px solid var(--bk)">INSTAGRAM<span class="arrow"></span></a><a class="btn-bk" href="https://www.facebook.com/profile.php?id=61579031979060" target="_blank" rel="noopener" style="background:var(--wh);color:var(--bk);border:2px solid var(--bk)">FACEBOOK<span class="arrow"></span></a></div>
+    </div>
+  </article>
+  <article class="person">
+    <div class="ph clip-r"><img src="img/akari_portrait.jpg" alt="菊池あかり" style="object-position:50% 20%"></div>
+    <div class="fade">
+      <div class="role">SHUKATSU · NURSE</div>
+      <h3>菊池 あかり</h3>
+      <div class="kana">KIKUCHI AKARI ／ 株式会社ピーナッツ 代表取締役 ／ 看護師・相続診断士・終活カウンセラー</div>
+      <div class="body-txt">
+        <p>2001年から看護師として急性期病院・保健センター・在宅看護に携わり、2014年からは大家業へ。「空き家は相続から発生することが多い」と気づき、エンディングノートと相続を学びはじめました。</p>
+        <p>2020年から「相続と空き家の窓口」として、終活セミナーやおうち終活ノートの書き方講座を続けています。医療の現場で見てきた"最期"と、家の現場で見てきた"その後"を、ひとつの話としてお伝えします。</p>
+      </div>
+      <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:18px"><a class="btn-bk" href="#/seminar">SEMINAR<span class="arrow"></span></a><a class="btn-bk" href="https://www.instagram.com/akiya_ni_akari/" target="_blank" rel="noopener" style="background:var(--wh);color:var(--bk);border:2px solid var(--bk)">INSTAGRAM<span class="arrow"></span></a><a class="btn-bk" href="https://www.facebook.com/akiya.ni.akari" target="_blank" rel="noopener" style="background:var(--wh);color:var(--bk);border:2px solid var(--bk)">FACEBOOK<span class="arrow"></span></a></div>
+      <div class="tags"><span>看護師</span><span>相続診断士</span><span>終活カウンセラー</span><span>グリーフケアアドバイザー</span><span>福祉住環境コーディネーター</span></div>
+      <div class="pics"><img src="img/akari_shukatsu.jpg" alt="終活セミナー「終活とは」" style="object-position:70% 50%"><img src="img/akari_client.jpg" alt="ご高齢のお客様と"></div>
+      <a class="btn-bk" href="#/seminar">SEMINAR<span class="arrow"></span></a>
+    </div>
+  </article>
+</section>
+
+<section class="wrap" style="margin-top:clamp(70px,11vw,160px)">
+  <div class="cond sub fade">MEDIA</div>
+  <h2 class="cond ttl fade">取材・掲載</h2>
+  <div class="col-list">
+    <a class="col-item" href="https://note.com/chibakei/n/n2bf4b75c8957" target="_blank" rel="noopener"><div class="d">2026.05.15</div><div><h4>ちば経済産業新聞｜オハナホーム── 空き家を「誰かの居場所」に変える夫婦の挑戦</h4><p>年間30〜40棟の空き家を再生し「誰かの居場所」に変え続ける。夫婦二人三脚の会社運営を取材。</p></div><div class="go">READ →</div></a>
+    <a class="col-item" href="https://media.livedoctor.jp/interview/%E5%85%A8%E5%9B%BD%E3%81%AE%E7%A9%BA%E3%81%8D%E5%AE%B6%E3%82%92%E5%B1%85%E5%A0%B4%E6%89%80%E3%81%AB%E3%82%AA%E3%83%8F%E3%83%8A%E3%83%9B%E3%83%BC%E3%83%A0/" target="_blank" rel="noopener"><div class="d">2026.05.19</div><div><h4>LIVE Doctor｜全国の「空き家」を「居場所」に。菊池聖雄氏の目指す空き家再生の未来</h4><p>「社長の背中」インタビュー。2018年設立、2021年に空き家再生協会を立ち上げ、全国に空き家再生士のネットワークを。</p></div><div class="go">READ →</div></a>
+    <a class="col-item" href="https://prtimes.jp/main/html/rd/p/000000015.000166247.html" target="_blank" rel="noopener"><div class="d">PR TIMES</div><div><h4>空き家対策の実務推進に関する協定を締結｜八街市・空き家再生協会・オハナホーム</h4><p>プレスリリース。</p></div><div class="go">READ →</div></a>
+  </div>
+<div class="cond sub fade" style="margin-top:clamp(40px,6vw,80px)">VIDEO</div><div class="act-grid" style="margin-top:14px"><a class="act-card clip-b" href="https://youtu.be/68CmmhLIfc0" target="_blank" rel="noopener" style="aspect-ratio:16/9"><img src="img/yt_68CmmhLIfc0.jpg" alt="【セミナーダイジェスト】終活と空き家｜後悔しない相続と住まいの整理術" style="filter:none"><div class="t"><div class="cond en">SEMINAR</div><div class="jp">【セミナーダイジェスト】終活と空き家｜後悔しない相続と住まいの整理術</div><span class="more">Ohanahome Official · WATCH</span></div></a><a class="act-card clip-b" href="https://youtu.be/-qUFQ7HBOe0" target="_blank" rel="noopener" style="aspect-ratio:16/9"><img src="img/yt_-qUFQ7HBOe0.jpg" alt="Japan: Why Concerns Growing Over Vacant Homes（海外メディア取材）" style="filter:none"><div class="t"><div class="cond en">OVERSEAS</div><div class="jp">Japan: Why Concerns Growing Over Vacant Homes（海外メディア取材）</div><span class="more">The Japan Reporter · WATCH</span></div></a><a class="act-card clip-b" href="https://youtu.be/IRjUpoKtafg" target="_blank" rel="noopener" style="aspect-ratio:16/9"><img src="img/yt_IRjUpoKtafg.jpg" alt="【密着】傾いた家、残された荷物…空き家を再生する施工管理の1日が想像以上だった｜前編" style="filter:none"><div class="t"><div class="cond en">DOCUMENTARY</div><div class="jp">【密着】傾いた家、残された荷物…空き家を再生する施工管理の1日が想像以上だった｜前編</div><span class="more">建設メシ · WATCH</span></div></a><a class="act-card clip-b" href="https://youtu.be/vshrQYutfdA" target="_blank" rel="noopener" style="aspect-ratio:16/9"><img src="img/yt_vshrQYutfdA.jpg" alt="【密着】新築の半額…!? ただのリフォームじゃなかった空き家再生の本当の仕事｜後編" style="filter:none"><div class="t"><div class="cond en">DOCUMENTARY</div><div class="jp">【密着】新築の半額…!? ただのリフォームじゃなかった空き家再生の本当の仕事｜後編</div><span class="more">建設メシ · WATCH</span></div></a><a class="act-card clip-b" href="https://youtu.be/aVRw4Qxj0bg" target="_blank" rel="noopener" style="aspect-ratio:16/9"><img src="img/yt_aVRw4Qxj0bg.jpg" alt="MBSニュース解説｜空き家 過去最多900万戸のワケ（代表 菊池 出演）" style="filter:none"><div class="t"><div class="cond en">TV</div><div class="jp">MBSニュース解説｜空き家 過去最多900万戸のワケ（代表 菊池 出演）</div><span class="more">MBS NEWS · WATCH</span></div></a><a class="act-card clip-b" href="https://www.youtube.com/live/ENF7PguBaU0" target="_blank" rel="noopener" style="aspect-ratio:16/9"><img src="img/yt_ENF7PguBaU0.jpg" alt="第45回 空き家相談の現場からみる 家族間コミュニケーションの重要性" style="filter:none"><div class="t"><div class="cond en">TALK</div><div class="jp">第45回 空き家相談の現場からみる 家族間コミュニケーションの重要性</div><span class="more">笑顔相続ch · WATCH</span></div></a></div>
+  <div class="ba-grid" style="margin-top:clamp(28px,4vw,56px)">
+    <div class="ph clip-b"><img src="img/team_endex2.jpg" alt="エンディング産業展 チーム集合写真"></div>
+    <div class="ph clip-b"><img src="img/booth_wide.jpg" alt="展示会ブース"></div>
+    <div class="ph clip-b"><img src="img/masao_stage.jpg" alt="ステージ登壇"></div>
+    <div class="ph clip-b"><img src="img/akari_client.jpg" alt="ご高齢のお客様と"></div>
+  </div>
+</section>
+
+<section class="company wrap">
+  <div class="cond sub fade">COMPANY</div>
+  <h2 class="cond ttl fade">会社概要</h2>
+  <table class="ctable fade">
+    <tr><th>NAME<small>商号</small></th><td>オハナホーム株式会社</td></tr>
+    <tr><th>REPRESENTATIVE<small>代表者</small></th><td>代表取締役　菊池 聖雄</td></tr>
+    <tr><th>FOUNDED<small>設立</small></th><td>2018年4月3日</td></tr>
+    <tr><th>OFFICE<small>所在地</small></th><td>本社：〒289-1107 千葉県八街市八街は43番8<br>千葉オフィス：〒260-0015 千葉県千葉市中央区富士見2丁目13番地1 第2山崎ビル7階B</td></tr>
+    <tr><th>TEL<small>電話</small></th><td><a href="tel:0120087255">0120-087-255</a>（受付 9:00〜17:00）</td></tr>
+    <tr><th>LICENSE<small>免許</small></th><td>宅地建物取引業　千葉県知事免許（2）第17428号<br>古物商　千葉県公安委員会　第441200001475号</td></tr>
+    <tr><th>BUSINESS<small>事業内容</small></th><td>空き家の買取・再生・売却／相続対応／遺品整理・片付け／終活サポート（おうち終活ノート）／絵本『あきやにあかり』による啓発</td></tr>
+    <tr><th>AREA<small>対応エリア</small></th><td>関東全域（注力エリア：千葉県全域）。全国対応実績あり</td></tr>
+    <tr><th>MEMBER<small>加盟団体</small></th><td>（一社）千葉県宅地建物取引業協会 会員<br>（公社）全国宅地建物取引業保証協会 会員</td></tr>
+    <tr><th>GROUP<small>関連団体</small></th><td>一般社団法人 空き家再生協会（空き家再生士 資格認定／絵本・終活ノート発行）<br>株式会社ピーナッツ（終活・相続相談）</td></tr>
+  </table>
+</section>
+
+</main>
+<main class="view" id="view-vision">
+
+<div class="pg-hero">
+  <img src="img/duo_sky.jpg" alt="青空の下、本社の前に立つ菊池聖雄と菊池あかり" style="object-position:50% 35%">
+  <div class="cond stamp">VISION</div>
+  <div class="cap fade">空き家を、もう一度<br>誰かの居場所に。</div>
+</div>
+
+<section class="wrap" style="margin-top:clamp(70px,11vw,160px)">
+  <div class="cond sub fade">VISION</div>
+  <h2 class="cond ttl fade">ビジョン</h2>
+  <p class="vision-big clip-l">空き家再生をとおして、<br>日本中を笑顔に。</p>
+  <div class="two" style="margin-top:clamp(28px,4vw,56px)">
+    <div class="fade"><div class="ph" style="aspect-ratio:4/5;overflow:hidden"><img src="img/duo_tee.jpg" alt="「日本中を笑顔に。空き家再生」Tシャツ" style="width:100%;height:100%;object-fit:cover;object-position:50% 30%"></div></div>
+    <div class="body-txt fade">
+      <p>日本には、誰も住まなくなった家がたくさんあります。放っておけば、家は傷み、まちは暗くなり、家族は「どうしよう」を抱えたまま時間が過ぎていきます。</p>
+      <p>でも、空き家は終わりではありません。片付けて、直して、次に暮らす人へ手渡せば、家はもう一度あかりを灯します。住む人が笑顔になり、手放した家族がほっとして、まちに明かりが戻る。</p>
+      <p>一軒の再生で生まれる笑顔は小さくても、それを全国で積み重ねていけば、日本中を笑顔にできる。僕らはそう信じて、今日も一軒ずつ向き合っています。</p>
+    </div>
+  </div>
+</section>
+
+<section class="wrap" style="margin-top:clamp(70px,11vw,160px)">
+  <div class="cond sub fade">PHILOSOPHY</div>
+  <h2 class="cond ttl fade">理念</h2>
+  <p class="vision-big clip-l">想いをつなぎ、<br>笑顔をつくる。</p>
+  <div class="sem-themes">
+    <div class="clip-b"><div class="n">01</div><h4>家族の想いを、つなぐ</h4><p>家に残された写真や手紙、思い出の品。捨てずにご家族へお戻しし、家族の時間を次へ手渡します。</p></div>
+    <div class="clip-b"><div class="n">02</div><h4>家を、次の人へつなぐ</h4><p>職人さんと一緒に家を直し、次に暮らす人へ。家を終わらせるのではなく、引き継ぎます。</p></div>
+    <div class="clip-b"><div class="n">03</div><h4>人と地域を、つなぐ</h4><p>自治体、専門家、空き家再生士の仲間と。空き家の問題を、ひとりで抱えない仕組みをつくります。</p></div>
+  </div>
+</section>
+
+<div class="pg-hero" style="height:clamp(360px,60vh,680px);margin-top:clamp(70px,11vw,160px)">
+  <img src="img/hq_now.jpg" alt="再生後の本社、夕暮れ" style="filter:none">
+  <div class="cond stamp">IBASHO</div>
+  <div class="cap fade">家は、誰かの居場所になる。</div>
+</div>
+<section class="wrap" style="margin-top:clamp(60px,9vw,130px)">
+  <div class="cond sub fade">KEYWORD</div>
+  <h2 class="cond ttl fade">居場所</h2>
+  <div class="two" style="margin-top:clamp(28px,4vw,56px)">
+    <div class="fade"><p class="lead-jp">僕らが大切にしている言葉は、<br>「居場所」です。</p></div>
+    <div class="body-txt fade">
+      <p>家は、ただの建物ではありません。家族が帰ってくる場所であり、誰かがほっとできる場所です。空き家とは、その居場所が失われた状態なのだと思います。</p>
+      <p>だから僕らの仕事は、家を売り買いすることではなく、居場所をつくり直すこと。次に暮らす家族の居場所。相談に来た人が安心して話せる居場所。一緒に働く仲間の居場所。</p>
+      <p>僕らの本社も、もともとは空き家でした。いまは社員と職人さんが集まる、僕らの居場所になっています。</p>
+      <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:18px"><a class="btn-bk" href="#/about">ABOUT<span class="arrow"></span></a><a class="btn-bk" href="#/recruit" style="background:var(--wh);color:var(--bk);border:2px solid var(--bk)">RECRUIT<span class="arrow"></span></a></div>
+    </div>
+  </div>
+</section>
+
+<section class="wrap" id="tane" style="margin-top:clamp(70px,11vw,160px)">
+  <div class="cond sub fade">AKIYA FREE SCHOOL</div>
+  <h2 class="cond ttl fade">TANE</h2>
+  <div class="two" style="margin-top:clamp(28px,4vw,56px)">
+    <div class="fade">
+      <p class="lead-jp">空き家を、<br>子どもたちの居場所に。</p>
+      <div class="ph clip-l" style="margin-top:22px;aspect-ratio:4/3;overflow:hidden"><img src="img/tane_house.jpg" alt="フリースクールに生まれ変わる八街市の空き家" style="width:100%;height:100%;object-fit:cover"></div>
+    </div>
+    <div class="body-txt fade">
+      <p>八街市の一軒の空き家を再生して、あきやフリースクール「たね」を開きます。2026年10月開講です。</p>
+      <p>学校へ行きづらさを感じている子どもや、日本語の学びを必要としている子どもが、安心して過ごせる場所。ものづくりや地域の人との出会いを通して、小さな「できた」を一人ひとりのペースで育てます。</p>
+      <p>運営は一般社団法人 空き家再生協会、代表は菊池あかり。空き家再生と、不登校支援と、日本語教育。三つの課題に、一軒の家から向き合います。</p>
+      <p>開講に向けて、クラウドファンディングに挑戦しています。応援していただけたらうれしいです。</p>
+      <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:18px"><a class="btn-bk" href="https://camp-fire.jp/projects/971432/view" target="_blank" rel="noopener">CAMPFIREで応援する<span class="arrow"></span></a><a class="btn-bk" href="https://tane.akiyasaisei.jp/" target="_blank" rel="noopener" style="background:var(--wh);color:var(--bk);border:2px solid var(--bk)">たねの公式サイト<span class="arrow"></span></a></div>
+    </div>
+  </div>
+  <div class="ba-grid" style="margin-top:8px">
+    <div class="ph wide clip-b"><img src="img/tane_cf.jpg" alt="「フリースクールたね」開校プロジェクト"></div>
+    <div class="ph wide clip-b"><img src="img/tane_work.jpg" alt="開校に向けた再生工事"></div>
+  </div>
+</section>
+
+
+</main>
+<main class="view" id="view-seminar">
+
+<div class="pg-hero">
+  <video class="hero-video" autoplay muted loop playsinline poster="img/sem_poster.jpg"><source src="img/sem_loop.mp4" type="video/mp4"></video>
+  <div class="cond stamp">SEMINAR</div>
+  <div class="cap fade">終活は、あかりが。空き家は、まさおが。<br>ふたりで、家族の「その後」を話します。</div>
+</div>
+<section class="wrap" style="margin-top:8px">
+  <div class="ba-grid">
+    <div class="ph wide clip-b"><img src="img/stage_duo.jpg" alt="エンディング産業展 セミナー登壇：空き家再生協会 代表理事 菊池聖雄／株式会社ピーナッツ 代表取締役 菊池あかり" style="object-position:50% 30%"></div>
+    <div class="ph clip-b"><img src="img/headset_selfie.jpg" alt="登壇前、会場を背にしたふたり"></div>
+    <div class="ph clip-b"><img src="img/stage_talk.jpg" alt="相談者とのやりとりを紹介するふたり" style="object-position:50% 40%"></div>
+  </div>
+</section>
+<section class="wrap" style="margin-top:clamp(60px,9vw,130px)">
+  <div class="cond sub fade">01 · KIKUCHI AKARI</div>
+  <h2 class="cond ttl fade">終活セミナー</h2>
+  <div class="two" style="margin-top:clamp(28px,4vw,56px)">
+    <div class="fade">
+      <p class="lead-jp">みんなでワイワイ、<br>エンディングノートの書き方講座。</p>
+      <div class="sem-facts">
+        <div><b>2001</b><span>看護師として医療現場へ</span></div>
+        <div><b>2014</b><span>大家業・空き家再生へ</span></div>
+        <div><b>2020</b><span>相続と空き家の窓口 開設</span></div>
+      </div>
+    </div>
+    <div class="body-txt fade">
+      <p>講師は、看護師・相続診断士・終活カウンセラーの菊池あかり。病院・保健センター・在宅看護で見てきた「最期」と、空き家の現場で見てきた「家のその後」。その両方を知っているからこそ、終活を「暗い話」ではなく「家族の会話」に変える講座にしています。</p>
+      <p>自治体の生涯学習講座、地域の集会所、企業・団体の研修などで開催。『おうち終活ノート』を実際に書きながら進めるので、その日のうちに一歩目が終わります。</p>
+    </div>
+  </div>
+  <div class="sem-themes">
+    <div class="clip-b"><div class="n">01</div><h4>なぜ終活が大事なのか</h4><p>自分の意思を明確に伝える。自分らしい最後が迎えられる。家族に迷惑をかけない。7つの理由から、終活の入口を開きます。</p></div>
+    <div class="clip-b"><div class="n">02</div><h4>おうち終活ノートの書き方</h4><p>名義、境界、鍵の場所、残したい想い。「家」に特化したノートを、その場で書きはじめます。</p></div>
+    <div class="clip-b"><div class="n">03</div><h4>空き家にしないための準備</h4><p>相続から空き家が生まれる仕組みと、元気なうちに家族で決めておくこと。実家を「困った家」にしない話。</p></div>
+  </div>
+  <div class="sem-pics">
+    <div class="ph clip-l"><img src="img/akari_seminar.jpg" alt="講師 菊池あかり"></div>
+    <div class="ph clip-b"><img src="img/akari_tsukuba.jpg" alt="つくばでの講座"></div>
+    <div class="ph clip-b"><img src="img/note_cover2.jpg" alt="おうち終活ノート てんこもり版"></div>
+    <div class="ph clip-b"><img src="img/akari_room.jpg" alt="会場の様子"></div>
+    <div class="ph clip-b"><img src="img/akari_tsukuba2.jpg" alt="受講者との対話"></div>
+  </div>
+</section>
+
+<section class="wrap" style="margin-top:clamp(80px,12vw,180px)">
+  <div class="cond sub fade">02 · KIKUCHI MASAO</div>
+  <h2 class="cond ttl fade">空き家セミナー</h2>
+  <div class="two" style="margin-top:clamp(28px,4vw,56px)">
+    <div class="fade">
+      <p class="lead-jp">「どうしたらいいか分からない家」の、<br>最初の一歩を軽くする。</p>
+      <div class="sem-facts">
+        <div><b>30-40</b><span>年間の空き家再生棟数</span></div>
+        <div><b>200</b><span>全国の空き家再生士（名）</span></div>
+        <div><b>100+</b><span>貸し出し中の家（軒）</span></div>
+      </div>
+    </div>
+    <div class="body-txt fade">
+      <p>講師は、代表の菊池聖雄。年間30〜40棟の空き家を再生してきた現場の話を、そのまま持ち込みます。売るか、貸すか、壊すか。答えを急がず、家族が納得できる順番で考える方法をお伝えします。</p>
+      <p>自治体との空き家相談会、エンディング産業展などの展示会、業界団体の勉強会で登壇。セミナー後は個別相談の時間を設け、その場で「次に何を確かめるか」まで一緒に決めます。</p>
+    </div>
+  </div>
+  <div class="sem-themes">
+    <div class="clip-b"><div class="n">01</div><h4>空き家の相談で、最初に聞くこと</h4><p>「高い方が得ですよね？」の前に、僕が確かめたいこと。査定額より先に整理する順番の話。</p></div>
+    <div class="clip-b"><div class="n">02</div><h4>売るか、貸すか、壊すか</h4><p>解体して更地にする前に、売り方と税の条件を一緒に見る。固定資産税の焦りと一緒に見たい数字。</p></div>
+    <div class="clip-b"><div class="n">03</div><h4>家族で話す、実家のこと</h4><p>「兄弟が怒っていて話すのが怖い」「どう切り出せばいいか分からない」。相談現場で実際に使っている質問リスト。</p></div>
+  </div>
+  <div class="pg-hero" style="height:clamp(320px,50vh,560px);margin-top:clamp(40px,6vw,80px)">
+    <video class="hero-video" autoplay muted loop playsinline poster="img/sem_poster3.jpg"><source src="img/sem_loop3.mp4" type="video/mp4"></video>
+    <div class="cap fade" style="left:var(--pad);right:auto;text-align:left">業界団体・展示会・自治体の相談会で。<br>「空き家は困るが、役に立つ?!」</div>
+  </div>
+  <div class="sem-pics">
+    <div class="ph clip-l"><img src="img/masao_seminar.jpg" alt="八街市 空き家相談会＆セミナーで登壇する菊池聖雄"></div>
+    <div class="ph clip-b"><img src="img/masao_stage.jpg" alt="エンディング産業展での登壇"></div>
+    <div class="ph clip-b"><img src="img/soudan.jpg" alt="個別相談の様子"></div>
+    <div class="ph clip-b"><img src="img/masao_booth.jpg" alt="展示会ブースにて"></div>
+    <div class="ph clip-b"><img src="img/panel.jpg" alt="パネルディスカッションに登壇" style="object-position:70% 50%"></div>
+  </div>
+  <div style="margin-top:clamp(40px,6vw,80px);display:flex;gap:14px;flex-wrap:wrap">
+    <a class="btn-bk" href="#/contact">セミナーを依頼する<span class="arrow"></span></a>
+    <a class="btn-bk" href="https://amzn.asia/d/08x1ZKSq" target="_blank" rel="noopener" style="background:var(--wh);color:var(--bk);border:2px solid var(--bk)">おうち終活ノートを買う<span class="arrow"></span></a>
+    <a class="btn-bk" href="https://amzn.asia/d/03BOzXKo" target="_blank" rel="noopener" style="background:var(--wh);color:var(--bk);border:2px solid var(--bk)">絵本『あきやにあかり』を買う<span class="arrow"></span></a>
+  </div>
+</section>
+
+<a class="pg-hero band" href="#/contact" style="display:block;height:clamp(300px,56vh,620px);margin-top:clamp(70px,11vw,160px)">
+  <video class="hero-video" autoplay muted loop playsinline poster="img/semin_loop_poster.jpg"><source src="img/semin_loop.mp4" type="video/mp4"></video>
+  <div class="cond stamp" style="font-size:clamp(56px,10vw,150px)">LIVE</div>
+  <div class="cap fade">会場でも、オンラインでも。<br>まずは聞きにきてください。</div>
+</a>
+
+
+</main>
+<main class="view" id="view-column">
+
+<section class="wrap" style="padding-top:clamp(120px,18vw,200px)" id="col-list">
+  <div class="cond sub fade">OUCHI JIMAI</div>
+  <h2 class="cond ttl fade">COLUMN</h2>
+  <p class="lead-jp fade" style="margin-top:20px">空き家の相談現場で、僕が実際に考えていること。</p>
+  <div class="art-grid"><a class="art-card clip-b" href="#/column/shitsumon-list"><div class="ph"><img src="img/hero_washitsu.jpg" alt=""></div><div class="t"><div class="cat">空き家の相談</div><h3>空き家の相談で、最初に聞く7つのこと</h3><p>「売るか、残すか、壊すか」から始めると、たいてい進みません。先に必要なのは、気持ちの整理です。僕が相談の現場で実際に使っている質問を、順番ど…</p><span class="more">READ</span></div></a><a class="art-card clip-b" href="#/column/uru-kasu"><div class="ph"><img src="img/hero_ext.jpg" alt=""></div><div class="t"><div class="cat">売る・貸す・壊す</div><h3>売るか、貸すか。迷っている人に、僕がまず聞くこと</h3><p>築40年、駅には近い、でも雨漏りがある。「売った方がいいですか、貸した方がいいですか」。その問いに、今ある情報だけで「こちらが正解」とは言え…</p><span class="more">READ</span></div></a><a class="art-card clip-b" href="#/column/kaitai-mae-yakusho"><div class="ph"><img src="img/site_night.jpg" alt=""></div><div class="t"><div class="cat">税金・手続き</div><h3>解体を決める前に。課税明細書を持って、役所で聞いてほしいこと</h3><p>「解体したら固定資産税が下がりますよね」。ネットで調べた情報が出発点の相談は多いです。間違いではないけれど、「条件によって変わる」の部分が省…</p><span class="more">READ</span></div></a><a class="art-card clip-b" href="#/column/kyoudai-kowai"><div class="ph"><img src="img/g_room_clutter.jpg" alt=""></div><div class="t"><div class="cat">家族・相続</div><h3>「兄弟が怒っていて話すのが怖い」。売却の話を、僕が先にしない理由</h3><p>空き家の相談として来られたけれど、本題は家ではなく、関係のこじれのほうにある。そう感じたとき、僕は売却の話を先にしないと決めます。順番は、人…</p><span class="more">READ</span></div></a><a class="art-card clip-b" href="#/column/yukashita"><div class="ph"><img src="img/cmp_living_b.jpg" alt=""></div><div class="t"><div class="cat">建物の見方</div><h3>壁のカビを拭く前に、床下を見たい理由</h3><p>「拭けば取れますか」。壁一面のカビを前に、そう聞かれることがあります。表面を拭けば一度はきれいに見える。でも、床下まで湿気が強いなら、壁の表…</p><span class="more">READ</span></div></a></div>
+  <div class="cond sub fade" style="margin-top:clamp(60px,9vw,120px)">NOTE</div>
+  <h2 class="cond ttl fade" style="font-size:clamp(28px,3.4vw,44px)">代表・まさおのnote</h2>
+  <div class="art-grid"><a class="art-card clip-b" href="https://note.com/masao_kikuchi/n/n507a45006f3e" target="_blank" rel="noopener"><div class="ph"><img src="img/note_1.jpg" alt=""></div><div class="t"><div class="cat">NOTE · 2026.09</div><h3>学校に行けなかった僕が、空き家をフリースクールにする理由</h3><p>空き家を、子どもたちの居場所へ。フリースクール「たね」をつくる理由を書きました。</p><span class="more">noteで読む</span></div></a><a class="art-card clip-b" href="https://note.com/masao_kikuchi/n/nff95c3e73abf" target="_blank" rel="noopener"><div class="ph"><img src="img/note_2.jpg" alt=""></div><div class="t"><div class="cat">NOTE · 2025.12</div><h3>自己紹介｜居場所と、空き家再生と、これから</h3><p>僕がどんな人生を歩いてきて、なぜ空き家再生をしているのか。はじめてのnoteです。</p><span class="more">noteで読む</span></div></a><a class="art-card clip-b" href="https://note.com/masao_kikuchi/n/n86a5251c8bbf" target="_blank" rel="noopener"><div class="ph"><img src="img/note_3.jpg" alt=""></div><div class="t"><div class="cat">NOTE · 2025.12</div><h3>「どうしたらいいか分からないおうち」と向き合う、というお仕事</h3><p>片付かない家、決められない家族。僕らの仕事の本当の中身を書きました。</p><span class="more">noteで読む</span></div></a></div>
+  <div style="margin-top:clamp(20px,3vw,36px)"><a class="btn-bk" href="https://note.com/masao_kikuchi" target="_blank" rel="noopener" style="background:var(--wh);color:var(--bk);border:2px solid var(--bk)">noteをもっと読む<span class="arrow"></span></a></div>
+</section>
+<article class="wrap art-body" id="col-article" hidden>
+  <div class="art-head">
+    <a class="back" href="#/column">← COLUMN</a>
+    <div class="cat" id="art-cat"></div>
+    <h1 id="art-title"></h1>
+    <p class="art-lead" id="art-lead"></p>
+  </div>
+  <div class="art-hero"><img id="art-img" src="" alt=""></div>
+  <div class="art-text" id="art-text"></div>
+  <div class="art-foot">
+    <div class="who"><img src="img/masao.jpg" alt="菊池聖雄"><div><b>菊池 聖雄</b><small>オハナホーム株式会社 代表取締役／空き家再生士</small></div></div>
+    <div class="art-cta"><p>この記事の内容で、ご自身の家について聞いてみたいことがあれば。</p><a class="btn-bk" href="#/contact">無料で相談する<span class="arrow"></span></a><a class="btn-bk" id="art-note" href="#" target="_blank" rel="noopener" style="background:var(--wh);color:var(--bk);border:2px solid var(--bk)">元になったnoteの記事<span class="arrow"></span></a></div>
+  </div>
+</article>
+<script type="application/json" id="articles-json">[{"slug": "shitsumon-list", "cat": "空き家の相談", "title": "空き家の相談で、最初に聞く7つのこと", "lead": "「売るか、残すか、壊すか」から始めると、たいてい進みません。先に必要なのは、気持ちの整理です。僕が相談の現場で実際に使っている質問を、順番どおりに公開します。家族の中でも使えます。", "date": "2026-09", "note": "https://note.com/masao_kikuchi/n/n0ab78f121695", "img": "img/hero_washitsu.jpg", "body": [["結論より先に、「どう過ごしてきたか」を聞く", "空き家の相談は、「どうしますか」と聞いた瞬間に止まります。答えが出ていないから相談に来ているのに、答えを求められるからです。だから僕は、判断からいちばん遠い質問から始めます。順番が大事なので、そのまま載せます。"], ["① この家では、どんなことをして過ごされていましたか？", "最初の一問です。家を「物件」として見る前に、「時間の場所」に戻すための質問。この一問で空気が変わることが多いです。"], ["② その頃のことで、よく思い出す場面はありますか？", "出来事でなくていい。雰囲気でも、匂いでもいい。言葉にすることで、相談者自身が「自分は何を大切にしていたのか」に気づきはじめます。"], ["③ この家のことで、今いちばん気になっていることは何でしょう", "ここで初めて現在に戻ります。「どうしたいか」ではなく「何が気になるか」。答えが出ていなくても、ちゃんと話せる問いです。"], ["④ これまで、誰かとこの家の話をしたことはありますか？", "家族との関係を知る質問です。話しているか、いないか。うまくいったか、いかなかったか。相談の難しさの正体が、ここで見えてきます。"], ["⑤ もし今すぐ決めなくていいとしたら、何がいちばん引っかかりますか？", "期限を外したときに残るものを聞きます。焦りや世間体を外すと、本音が出やすくなります。決断の核心に近づく一問です。"], ["⑥ この家を、これから誰にどう引き継いでいきたいですか？", "売る・壊す・残す、の前の問い。「引き継ぐ」という言葉を使うと、家を終わらせる話から、つなぐ話に変わります。"], ["⑦ 今日ここまで話してみて、気づいたことはありますか？", "結論を出すためではなく、振り返るための問い。この一問で、相談者の中に「次に進む準備」が残ります。"], ["この順番で大切にしていること", "決めさせない。急がせない。正解を出さない。でも、立ち止まらせっぱなしにもしない。空き家の相談は、決断の前に対話が必要な時間です。不動産の知識がなくても使えるので、親子で、兄弟で、「どうする？」の前に「どう過ごしてきた？」から始めてみてください。"]], "noteTitle": "空き家の相談現場で、僕が実際に使っている質問リスト"}, {"slug": "uru-kasu", "cat": "売る・貸す・壊す", "title": "売るか、貸すか。迷っている人に、僕がまず聞くこと", "lead": "築40年、駅には近い、でも雨漏りがある。「売った方がいいですか、貸した方がいいですか」。その問いに、今ある情報だけで「こちらが正解」とは言えません。僕が先に確かめるのは、損得ではなく「これから何を大事にしたいか」です。", "date": "2026-09", "note": "https://note.com/masao_kikuchi/n/n9c6a54b5662c", "img": "img/hero_ext.jpg", "body": [["「どちらが得か」より先に聞くこと", "毎月の管理から離れたいのか。家賃収入を得ながら残したいのか。家族の誰かが、いつか使う可能性があるのか。相談者さん自身も、まだ整理できていないことがほとんどです。家族とも話せていない。その状態で「売る・貸す」を決めると、あとで必ず揺れます。"], ["やりたいことが見えたら、できることを調べる", "雨漏りの原因と修繕費。貸すために必要な工事と、その後の管理。今の状態で売るなら、どんな条件になるのか。地域の賃料や売買の動きを、数字で確かめます。ここは僕らの仕事です。"], ["二つが食い違ったときが、本当の相談", "やりたいことと、できることが同じ方向を向くこともあれば、思っていた選択が難しいと分かることもあります。そのとき、最初の希望を否定して終わりにはしたくありません。貸すのが難しければ、直してから貸すのか、今の状態で売るのか。売ることに家族が迷っているなら、いつまで管理を続けるのか。選べる幅を一緒に見直します。"], ["急いで決める前に", "売るか、貸すかを急いで決める前に、所有者さんの「やりたい」と、建物や地域の中で「できる」をすり合わせる。それが僕らの仕事だと思っています。売却や賃貸の可否、修繕費や収支は建物の状態と地域の市場で変わるので、判断の前に必ず現地を見せてください。"]], "noteTitle": "売るか、貸すか。迷っている人に、僕がまず聞いていること"}, {"slug": "kaitai-mae-yakusho", "cat": "税金・手続き", "title": "解体を決める前に。課税明細書を持って、役所で聞いてほしいこと", "lead": "「解体したら固定資産税が下がりますよね」。ネットで調べた情報が出発点の相談は多いです。間違いではないけれど、「条件によって変わる」の部分が省かれている。しくみと、動く前の確かめ方を書きます。", "date": "2026-09", "note": "https://note.com/masao_kikuchi/n/n4d6b03b2ec9d", "img": "img/site_night.jpg", "body": [["しくみ：住宅用地の特例", "家が建っている土地には「住宅用地の特例」という軽減があります。200平米以下の部分は課税標準が6分の1、それを超える部分は3分の1。この特例は、建物を解体すると適用されなくなります。建物分の税金は消えますが、土地の税金が上がる。合計では上がるケースが多いのです。"], ["確かめ方：課税明細書を持って、税務窓口へ", "手順は難しくありません。毎年届く固定資産税の課税明細書を持って、自治体の税務担当窓口でこう聞いてください。「この土地に建物がなくなった場合、土地の税額はどうなりますか」。電話でも教えてもらえることが多いです。いまの税額と、解体後の見込み額。二つの数字が並んで、はじめて比べられます。"], ["「壊さなければ安心」でもない", "管理されないまま「特定空家」に指定されると、建物があっても特例が外れる場合があります。傷みが進んでいる家は、管理か活用か、早めに方向を決めてあげてください。"], ["数字を知ってから決めても、遅くない", "解体が悪いわけではありません。数字を知ってから決めても遅くない、というだけの話です。税額の計算や特例の適用は自治体・土地の条件で異なるので、必ず税務窓口や税理士に確認してください。窓口で何を聞けばいいか分からなければ、一緒に行きます。"]], "noteTitle": "解体を決める前に。課税明細書を持って、役所で聞いてほしいこと"}, {"slug": "kyoudai-kowai", "cat": "家族・相続", "title": "「兄弟が怒っていて話すのが怖い」。売却の話を、僕が先にしない理由", "lead": "空き家の相談として来られたけれど、本題は家ではなく、関係のこじれのほうにある。そう感じたとき、僕は売却の話を先にしないと決めます。順番は、人が先、家があと。", "date": "2026-09", "note": "https://note.com/masao_kikuchi/n/n23971c2d9462", "img": "img/g_room_clutter.jpg", "body": [["手順が分からないのではなく、話すのが怖い", "関係がこじれているとき、正しい手続きの説明はあまり役に立ちません。止まっている理由は、手順ではなく、話すこと自体の怖さだからです。だから僕は、まず怖さの中身を聞きます。怒られることが怖いのか。関係が壊れることが怖いのか。それとも、もう壊れてしまったと感じているのか。"], ["話し合いを、小さく設計し直す", "いきなり「売却をどうするか」という一番大きな話をしない。誰と、何を、どの順番で話すか。最初の一歩を、返事のしやすい小さな連絡まで下げます。結論を求めない近況の連絡から。あるいは、家の状態の共有だけを目的にした連絡から。直接話すことが難しければ、第三者を間に挟む方法もあります。"], ["家は逃げないが、関係は放っておくとこじれ続ける", "家の話は、そのあとで間に合います。順番としては、人が先、家があと。怖さが少し軽くなったところから、一緒に始めたいと思っています。「兄弟に話す前に、まず誰かに話したい」——その最初の相手で構いません。"]], "noteTitle": "「兄弟が怒っていて話すのが怖い」。売却の話を、僕が先にしない理由"}, {"slug": "yukashita", "cat": "建物の見方", "title": "壁のカビを拭く前に、床下を見たい理由", "lead": "「拭けば取れますか」。壁一面のカビを前に、そう聞かれることがあります。表面を拭けば一度はきれいに見える。でも、床下まで湿気が強いなら、壁の表面だけを見て終わることはできません。", "date": "2026-09", "note": "https://note.com/masao_kikuchi/n/n982e1edc889e", "img": "img/cmp_living_b.jpg", "body": [["水分は、どこから来ているのか", "換気の状態はどうか。漏水や結露が続いていないか。原因が残ったままでは、また同じ場所にカビが出ます。僕らが先にするのは「取れるか、取れないか」を答えることではありません。どこまで広がっているかを記録し、床下や壁の内側まで確認が必要かを、建物の専門家と整理することです。"], ["きれいになることと、安心して使えることは別", "原因と影響する範囲が分かってから、清掃だけでよいのか、補修や換気の見直しまで必要なのかを考えます。見た目がきれいになることと、家が安心して使える状態になることは同じではありません。"], ["「まずきれいにしたい」を、繰り返さない片づけにつなぐ", "相談者さんの「まずきれいにしたい」という気持ちを否定したいわけではありません。その気持ちを、同じことを繰り返さない片づけにつなげたい。今日できるのは、無理に触らず、カビが見える場所と床下の湿気を記録すること。次に、原因を確かめてもらう先を決めることです。写真を送ってもらえれば、まず見るべき場所をお伝えします。"]], "noteTitle": "壁のカビを拭く前に、床下を見たい理由"}]</script>
+
+</main>
+<main class="view" id="view-recruit">
+
+<div class="pg-hero">
+  <video class="hero-video" autoplay muted loop playsinline poster="img/team_loop_poster.jpg"><source src="img/team_loop.mp4" type="video/mp4"></video>
+  <div class="cond stamp">RECRUIT</div>
+  <div class="cap fade">空き家再生をとおして、日本中を笑顔に。<br>その仕事を、一緒にやる仲間を探しています。</div>
+</div>
+<section class="wrap" style="margin-top:clamp(60px,9vw,130px)">
+  <div class="cond sub fade">MESSAGE</div>
+  <h2 class="cond ttl fade">代表から</h2>
+  <div class="two" style="margin-top:clamp(28px,4vw,56px)">
+    <div class="fade">
+      <div class="ph" style="aspect-ratio:4/5;overflow:hidden;max-width:420px"><img src="img/masao.jpg" alt="代表取締役 菊池聖雄" style="width:100%;height:100%;object-fit:cover;object-position:50% 15%"></div>
+      <div style="margin-top:14px;font-size:13px;letter-spacing:.2em;color:var(--gy-dark);font-weight:900">代表取締役　菊池 聖雄</div>
+    </div>
+    <div class="body-txt fade">
+      <p class="lead-jp">想いをつなぎ、<br>笑顔をつくる。</p>
+      <p>空き家には、そこで暮らした家族の時間が残っています。片付けの現場で見つかる写真や手紙を、僕らは捨てずにご家族へお戻しします。家を「物件」ではなく、誰かの大切な居場所として扱う。それが、オハナホームの仕事の出発点です。</p>
+      <p>誰も住まなくなった家を、職人さんと一緒に直して、次に暮らす人へ手渡す。相続や終活で迷っている家族の話を、急がせずに聞く。派手ではないけれど、「ありがとう」を直接受け取れる仕事です。</p>
+      <p>僕らの本社も、もともとは空き家でした。手をかければ、家はもう一度、誰かの居場所になる。その景色を、一緒に増やしていける仲間を探しています。</p>
+      <p>経験は問いません。空き家、相続、施工、事務、IT。どの入口から来ても、この想いにはきっと辿り着けます。</p>
+    </div>
+  </div>
+</section>
+
+<section class="wrap" style="margin-top:clamp(70px,11vw,160px)">
+  <div class="cond sub fade">POSITIONS</div>
+  <h2 class="cond ttl fade">募集職種</h2>
+  <div class="sem-themes" style="grid-template-columns:repeat(auto-fit,minmax(200px,1fr))">
+    <div class="clip-b"><div class="n">01</div><h4>施工管理・内装</h4><p>空き家再生の現場を、職人さんと一緒に動かす仕事。幹部候補も募集。</p></div>
+    <div class="clip-b"><div class="n">02</div><h4>多能工・大工・外構</h4><p>手を動かして家を直す仕事。未経験からの育成枠あり。</p></div>
+    <div class="clip-b"><div class="n">03</div><h4>不動産営業・反響営業</h4><p>買取再販、空き家相談、企画。お客様の「どうしたらいい」に最初に応える人。</p></div>
+    <div class="clip-b"><div class="n">04</div><h4>事務・経理・IT</h4><p>総務、営業事務、経理、ITサポート、ネット出品。会社の裏側を支える仕事。</p></div>
+    <div class="clip-b"><div class="n">05</div><h4>秘書</h4><p>代表のそばで、予定・連絡・資料づくりを支える仕事。会社の動きがいちばん見える場所。</p></div>
+  </div>
+  <div style="margin-top:clamp(28px,4vw,56px);display:flex;gap:14px;flex-wrap:wrap">
+    <a class="btn-bk" href="https://jp.indeed.com/cmp/%E3%82%AA%E3%83%8F%E3%83%8A%E3%83%9B%E3%83%BC%E3%83%A0%E6%A0%AA%E5%BC%8F%E4%BC%9A%E7%A4%BE" target="_blank" rel="noopener">INDEEDで求人を見る<span class="arrow"></span></a>
+    <a class="btn-bk" href="https://ohanahome.jp/recruit" target="_blank" rel="noopener" style="background:var(--wh);color:var(--bk);border:2px solid var(--bk)">求人情報（公式サイト）<span class="arrow"></span></a>
+  </div>
+</section>
+
+<section class="contact" id="ceo" style="margin-top:clamp(70px,11vw,160px)">
+  <div class="bg"><img src="img/duo_sky.jpg" alt=""></div>
+  <h2 class="cond ttl fade">DIRECT MESSAGE</h2>
+  <p class="fade">代表に直接メッセージ。応募前の質問でも、「話だけ聞きたい」でも構いません。人事を通さず、まさお本人が読んで返信します。</p>
+  <form class="cform fade" id="ceoform" novalidate>
+    <div class="row">
+      <label>お名前<span class="req">必須</span><input type="text" name="name" required autocomplete="name" placeholder="山田 太郎"></label>
+      <label>ご希望の連絡先<span class="req">必須</span><input type="text" name="contact" required placeholder="メール または 電話番号 または LINE ID"></label>
+    </div>
+    <div class="row">
+      <label>気になっている職種
+        <select name="kind">
+          <option value="未定">まだ決めていない</option>
+          <option value="施工管理・内装">施工管理・内装</option>
+          <option value="多能工・大工・外構">多能工・大工・外構</option>
+          <option value="不動産営業">不動産営業・反響営業</option>
+          <option value="事務・経理・IT">事務・経理・IT</option>
+          <option value="秘書">秘書</option>
+        </select>
+      </label>
+      <label>どこでオハナホームを知りましたか
+        <select name="source">
+          <option value="Indeed">Indeed</option>
+          <option value="求人サイト">その他の求人サイト</option>
+          <option value="紹介">知人の紹介</option>
+          <option value="SNS">SNS・YouTube</option>
+          <option value="その他">その他</option>
+        </select>
+      </label>
+    </div>
+    <label>代表へのメッセージ<span class="req">必須</span><textarea name="message" rows="6" required placeholder="聞きたいこと、いまの状況、不安に思っていること。何でも。"></textarea></label>
+    <label class="chk"><input type="checkbox" name="agree" required> 個人情報の取り扱いに同意して送信する</label>
+    <button type="submit" class="link">SEND TO MASAO<span class="arrow"></span></button>
+    <div class="cform-msg" id="ceoform-msg" role="status" aria-live="polite"></div>
+  </form>
+</section>
+
+</main>
+<main class="view" id="view-contact">
+<section class="contact" id="contact" style="margin-top:0;padding-top:clamp(140px,20vw,220px)">
+  <div class="bg"><img src="img/hq_now.jpg" alt="" style="opacity:.5;filter:none"></div>
+  <h2 class="cond ttl fade">CONTACT</h2>
+  <p class="fade">空き家、相続、終活。どこから話していいか分からない状態でも構いません。まずは今のお気持ちをお聞かせください。ご相談は無料です。</p>
+  <form class="cform fade" id="cform" novalidate>
+    <div class="row">
+      <label>お名前<span class="req">必須</span><input type="text" name="name" required autocomplete="name" placeholder="山田 太郎"></label>
+      <label>電話番号<input type="tel" name="tel" autocomplete="tel" placeholder="090-0000-0000"></label>
+    </div>
+    <div class="row">
+      <label>メールアドレス<span class="req">必須</span><input type="email" name="email" required autocomplete="email" placeholder="example@mail.com"></label>
+      <label>ご相談の種類
+        <select name="kind">
+          <option value="空き家">空き家のこと</option>
+          <option value="相続">相続のこと</option>
+          <option value="終活">終活・おうち終活ノート</option>
+          <option value="絵本">絵本『あきやにあかり』</option>
+          <option value="営業">営業・売り込み・提携のご提案（有料対応）</option>
+          <option value="その他">その他</option>
+        </select>
+      </label>
+    </div>
+    <label>ご相談内容<textarea name="message" rows="5" placeholder="家の場所（市区町村まで）や、いまの状況を、分かる範囲で。"></textarea></label>
+    <label class="chk"><input type="checkbox" name="agree" required> 個人情報の取り扱いに同意して送信する</label>
+    <div class="sales-note" id="sales-note"><b>営業・売り込み・提携のご提案について</b><br>お客様のご相談時間を守るため、事業者様からの営業・売り込み・提携提案への対応は<b>有料（1件 110,000円・税込）</b>とさせていただいています。送信いただいた時点で、対応費用のご請求に同意いただいたものとみなします。ご了承のうえお送りください。</div>
+    <button type="submit" class="link">SEND<span class="arrow"></span></button>
+    <div class="cform-msg" id="cform-msg" role="status" aria-live="polite"></div>
+  </form>
+  <div class="line-blk fade">
+    <img src="img/line_qr.png" alt="オハナホーム 公式LINE QRコード">
+    <div>
+      <div class="cond en">LINE</div>
+      <h4>公式LINEで、気軽に相談</h4>
+      <p>写真を送るだけで、おおよその状況をお伝えできます。「まだ売るか決めていない」段階でも大丈夫です。</p>
+      <a class="line-btn" href="https://lin.ee/wfuJh2m" target="_blank" rel="noopener">友だち追加<span class="arrow"></span></a>
+    </div>
+  </div>
+  <div class="tel"><a href="tel:0120087255">0120-087-255</a><small>受付 9:00〜17:00 ／ 通話無料</small></div>
+  <details class="tokusho fade">
+    <summary>営業・売り込み・提携提案への有料対応について（特定商取引法に基づく表記）</summary>
+    <table>
+      <tr><th>販売事業者</th><td>オハナホーム株式会社</td></tr>
+      <tr><th>代表者</th><td>代表取締役　菊池 聖雄</td></tr>
+      <tr><th>所在地</th><td>〒289-1107 千葉県八街市八街は43番8</td></tr>
+      <tr><th>電話番号</th><td>0120-087-255（受付 9:00〜17:00）</td></tr>
+      <tr><th>役務の内容</th><td>事業者様からの営業・売り込み・提携提案に対する、担当者による内容確認および回答（1件につき）</td></tr>
+      <tr><th>対応費用</th><td>1件 110,000円（税込）</td></tr>
+      <tr><th>費用の発生時期</th><td>「ご相談の種類」で営業・売り込み・提携のご提案を選択して送信された時点、または送信内容が営業・売り込みに該当すると当社が判断した時点</td></tr>
+      <tr><th>支払方法・時期</th><td>当社発行の請求書による銀行振込。請求書発行日から7日以内</td></tr>
+      <tr><th>役務の提供時期</th><td>対応費用のお支払い確認後、7営業日以内に回答</td></tr>
+      <tr><th>キャンセル</th><td>送信後のキャンセル・返金はお受けしていません</td></tr>
+      <tr><th>その他</th><td>一般のお客様（空き家・相続・終活のご相談）、採用へのご応募、取材のご依頼は無料です</td></tr>
+    </table>
+  </details>
+</section>
+</main>
+<footer>
+  <div class="logo"><small>AKIYA · SOUZOKU · SHUKATSU</small><b>OHANA HOME<i>空き家再生</i></b></div>
+  <div class="credit"><a href="https://lin.ee/wfuJh2m" target="_blank" rel="noopener" style="text-decoration:underline">公式LINE</a>　<a href="https://www.instagram.com/ohanahome_official/" target="_blank" rel="noopener" style="text-decoration:underline">Instagram</a>　<a href="https://www.instagram.com/masao.kikuchi/" target="_blank" rel="noopener" style="text-decoration:underline">Instagram（菊池聖雄）</a>　<a href="https://www.instagram.com/akiya_ni_akari/" target="_blank" rel="noopener" style="text-decoration:underline">Instagram（菊池あかり）</a>　<a href="https://x.com/ohanahome_jp" target="_blank" rel="noopener" style="text-decoration:underline">X</a>　<a href="https://www.facebook.com/ohanahome.sns/" target="_blank" rel="noopener" style="text-decoration:underline">Facebook</a>　<a href="https://www.facebook.com/profile.php?id=61579031979060" target="_blank" rel="noopener" style="text-decoration:underline">Facebook（菊池聖雄）</a>　<a href="https://www.facebook.com/akiya.ni.akari" target="_blank" rel="noopener" style="text-decoration:underline">Facebook（菊池あかり）</a><br>デザイン案。写真は自社取扱物件、絵本『あきやにあかり』、『おうち終活ノート』より。</div>
+  <div class="copy">© OHANA HOME — 想いをつなぎ、笑顔をつくる</div>
+</footer>
+<script>
+(function(){
+  var slides=document.querySelectorAll('.mv .slide'),dots=document.querySelectorAll('.dots button'),i=0,t;
+  function go(n){slides[i].classList.remove('on');dots[i].classList.remove('on');i=(n+slides.length)%slides.length;slides[i].classList.add('on');dots[i].classList.add('on');}
+  function auto(){clearInterval(t);t=setInterval(function(){go(i+1);},5000);}
+  dots.forEach(function(d,n){d.addEventListener('click',function(){go(n);auto();});});
+  if(!matchMedia('(prefers-reduced-motion: reduce)').matches) auto();
+
+  // clip-path で面積ゼロの要素は IntersectionObserver が交差を検知しないため、位置で判定する
+  var els=Array.prototype.slice.call(document.querySelectorAll('.clip-l,.clip-r,.clip-b,.fade')),tick=false;
+  function reveal(){
+    tick=false;var vh=innerHeight;
+    els=els.filter(function(e){var r=e.getBoundingClientRect();if(r.top<vh*.88&&r.bottom>0){e.classList.add('is-shown');return false;}return true;});
+  }
+  function onScroll(){if(!tick){tick=true;requestAnimationFrame(reveal);}}
+  addEventListener('scroll',onScroll,{passive:true});addEventListener('resize',onScroll);
+  requestAnimationFrame(function(){reveal();});
+
+  var form=document.getElementById('cform'),msg=document.getElementById('cform-msg');
+  form.addEventListener('submit',async function(ev){
+    ev.preventDefault();
+    if(!form.checkValidity()){form.reportValidity();return;}
+    var btn=form.querySelector('button');btn.disabled=true;msg.className='cform-msg';msg.textContent='送信しています…';
+    var f=new FormData(form),data={name:f.get('name'),tel:f.get('tel')||'',email:f.get('email'),kind:f.get('kind'),message:f.get('message')||'',sentAt:new Date().toISOString(),page:location.href};
+    try{
+      var db=window.claude&&window.claude.use?await window.claude.use('db'):null;
+      if(!db) throw new Error('nodb');
+      await db.collection('inquiries').add(data);
+      form.classList.add('sent');msg.className='cform-msg ok';msg.textContent='送信しました。2営業日以内にご連絡します。';
+    }catch(e){
+      btn.disabled=false;
+      var body=encodeURIComponent('お名前: '+data.name+'\n電話: '+data.tel+'\nメール: '+data.email+'\n種類: '+data.kind+'\n\n'+data.message);
+      msg.className='cform-msg ng';msg.innerHTML='この画面からは送信できませんでした。<a href="mailto:info@ohanahome.jp?subject='+encodeURIComponent('【おうちじまい相談】'+data.kind)+'&body='+body+'" style="text-decoration:underline">メールで送る</a>';
+    }
+  });
+
+  var cf=document.getElementById('ceoform'),cm=document.getElementById('ceoform-msg');
+  cf.addEventListener('submit',async function(ev){
+    ev.preventDefault();
+    if(!cf.checkValidity()){cf.reportValidity();return;}
+    var btn=cf.querySelector('button');btn.disabled=true;cm.className='cform-msg';cm.textContent='送信しています…';
+    var f=new FormData(cf),data={name:f.get('name'),contact:f.get('contact'),kind:f.get('kind'),source:f.get('source'),message:f.get('message'),sentAt:new Date().toISOString(),page:location.href};
+    try{
+      var db=window.claude&&window.claude.use?await window.claude.use('db'):null;
+      if(!db) throw new Error('nodb');
+      await db.collection('ceo_messages').add(data);
+      cf.classList.add('sent');cm.className='cform-msg ok';cm.textContent='届きました。まさお本人から、2営業日以内にご連絡します。';
+    }catch(e){
+      btn.disabled=false;
+      var body=encodeURIComponent('お名前: '+data.name+'\n連絡先: '+data.contact+'\n職種: '+data.kind+'\n知ったきっかけ: '+data.source+'\n\n'+data.message);
+      cm.className='cform-msg ng';cm.innerHTML='この画面からは送信できませんでした。<a href="mailto:info@ohanahome.jp?subject='+encodeURIComponent('【代表に直接メッセージ】'+data.name)+'&body='+body+'" style="text-decoration:underline">メールで送る</a>';
+    }
+  });
+
+  document.querySelectorAll('.cmp').forEach(function(c){
+    var r=c.querySelector('input');
+    function set(){c.style.setProperty('--p',r.value+'%');}
+    r.addEventListener('input',set);set();
+  });
+  // ---- router ----
+  var views={home:'view-home',about:'view-about',vision:'view-vision',seminar:'view-seminar',column:'view-column',recruit:'view-recruit',contact:'view-contact'};
+  var menu=document.getElementById('menu'),hd=document.getElementById('hd');
+  function route(){
+    var parts=(location.hash||'#/').replace('#/','').split('/'),h=parts[0]||'home',sub=parts[1]||'';
+    if(!views[h]) h='home';
+    Object.keys(views).forEach(function(k){document.getElementById(views[k]).classList.toggle('on',k===h);});
+    document.querySelectorAll('.nav a').forEach(function(a){a.classList.toggle('on',a.getAttribute('data-r')===h);});
+    menu.classList.remove('on');
+    hd.classList.toggle('solid',h!=='home');
+    window.scrollTo(0,0);
+    els=Array.prototype.slice.call(document.querySelectorAll('#'+views[h]+' .clip-l:not(.is-shown),#'+views[h]+' .clip-r:not(.is-shown),#'+views[h]+' .clip-b:not(.is-shown),#'+views[h]+' .fade:not(.is-shown)'));
+    reveal();
+    if(h==='home'){document.querySelector('.catch').classList.add('is-shown');}
+    if(h==='column'){showArticle(sub);}
+    if(h!=='column'&&sub){var t=document.getElementById(sub);if(t)setTimeout(function(){t.scrollIntoView();},60);}
+  }
+  var ARTS=JSON.parse(document.getElementById('articles-json').textContent);
+  function showArticle(slug){
+    var a=ARTS.filter(function(x){return x.slug===slug;})[0],list=document.getElementById('col-list'),art=document.getElementById('col-article');
+    if(!a){list.hidden=false;art.hidden=true;return;}
+    list.hidden=true;art.hidden=false;
+    document.getElementById('art-cat').textContent=a.cat;document.getElementById('art-title').textContent=a.title;document.getElementById('art-lead').textContent=a.lead;
+    document.getElementById('art-img').src=a.img;document.getElementById('art-note').href=a.note;
+    document.getElementById('art-text').innerHTML=a.body.map(function(b){return '<h2>'+b[0]+'</h2><p>'+b[1]+'</p>';}).join('');
+    document.title=a.title+' | OUCHI JIMAI';
+  }
+  addEventListener('hashchange',route);
+  document.getElementById('ham').addEventListener('click',function(){menu.classList.add('on');});
+  document.getElementById('menu-close').addEventListener('click',function(){menu.classList.remove('on');});
+  addEventListener('scroll',function(){if((location.hash||'#/')==='#/') hd.classList.toggle('solid',scrollY>innerHeight*.8);},{passive:true});
+  route();
+
+})();
+</script>
+
+</body>
+</html>
