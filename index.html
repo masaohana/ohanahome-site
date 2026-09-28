@@ -316,7 +316,35 @@
   .pg-hero .stamp{position:absolute;left:var(--pad);bottom:clamp(20px,4vw,50px);z-index:2;font-size:clamp(72px,14vw,200px);line-height:.85;color:var(--wh);text-shadow:0 10px 40px rgba(0,0,0,.6);}
   .pg-hero .cap{position:absolute;right:var(--pad);bottom:clamp(24px,4vw,56px);z-index:2;max-width:36ch;text-align:right;color:var(--wh);font-size:clamp(13px,1.3vw,17px);line-height:1.8;text-shadow:0 2px 20px rgba(0,0,0,.8);}
   /* video bands: keep the whole 16:9 frame visible on wide screens */
-  .vband { height:max(56.25vw,360px) !important;max-height:none; }
+  /* worries / features / faq (2026-09-28) */
+  .vband { height:max(56.25vw,300px) !important;max-height:none; }
+  @media (max-width:760px){
+    .pg-hero .stamp ~ .cap,.pg-hero .cap:has(~ .stamp) { left:var(--pad);right:var(--pad);max-width:none;text-align:left;bottom:calc(clamp(20px,4vw,50px) + 78px); }
+  }
+  .sec-gap { margin-top:clamp(70px,11vw,160px); }
+  .ib { display:inline-block; }
+  .wr-list { list-style:none;margin:clamp(28px,4vw,56px) 0 0;padding:0;display:grid;grid-template-columns:repeat(2,1fr);column-gap:clamp(20px,3vw,48px);counter-reset:wr; }
+  .wr-list li { counter-increment:wr;display:flex;gap:16px;align-items:baseline;border-top:1px solid var(--bk);padding:18px 0 20px;font-size:clamp(14px,1.25vw,17px);font-weight:700;line-height:1.7;min-width:0; }
+  .wr-list li::before { content:counter(wr,decimal-leading-zero);font-family:var(--cond);font-weight:900;font-size:22px;letter-spacing:.05em;color:var(--gy);flex:none; }
+  .wr-cta { margin-top:clamp(20px,3vw,36px);display:flex;flex-wrap:wrap;align-items:center;gap:8px 28px; }
+  .wr-cta p { margin:22px 0 0;font-size:clamp(14px,1.3vw,17px);font-weight:700; }
+  .ft-grid { list-style:none;margin:clamp(28px,4vw,56px) 0 0;padding:0;display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--bk);border:1px solid var(--bk); }
+  .ft-grid li { background:var(--wh);padding:clamp(22px,2.6vw,38px);min-width:0; }
+  .ft-grid .n { font-family:var(--cond);font-weight:900;font-size:clamp(44px,5vw,72px);line-height:1;color:var(--gy); }
+  .ft-grid h3 { margin:14px 0 10px;font-size:clamp(16px,1.5vw,20px);font-weight:900;line-height:1.5; }
+  .ft-grid p { margin:0;font-size:14px;line-height:1.9;font-weight:700;color:var(--gy-dark); }
+  .fq { margin-top:clamp(28px,4vw,56px);border-bottom:1px solid var(--bk);max-width:980px; }
+  .fq details { border-top:1px solid var(--bk); }
+  .fq summary { cursor:pointer;list-style:none;display:flex;gap:18px;align-items:baseline;padding:22px 44px 22px 0;position:relative;font-size:clamp(15px,1.4vw,18px);font-weight:900;line-height:1.6; }
+  .fq summary::-webkit-details-marker { display:none; }
+  .fq summary::before { content:"Q";font-family:var(--cond);font-weight:900;font-size:28px;line-height:1;color:var(--gy);flex:none; }
+  .fq summary::after { content:"+";position:absolute;right:6px;top:18px;font-family:var(--cond);font-weight:900;font-size:30px; }
+  .fq details[open] summary::after { content:"−"; }
+  .fq details p { margin:0;padding:0 0 26px 40px;font-size:clamp(14px,1.25vw,16px);line-height:2;font-weight:700;color:var(--gy-dark);max-width:70ch; }
+  .fq-note { margin-top:18px;font-size:13px;font-weight:700;color:var(--gy-dark); }
+  @media (max-width:900px){ .ft-grid { grid-template-columns:repeat(2,1fr); } }
+  @media (max-width:760px){ .wr-list { grid-template-columns:1fr; } }
+  @media (max-width:560px){ .ft-grid { grid-template-columns:1fr; } .wr-list li { font-size:14px;gap:12px; } }
   .pg-hero.top{padding-top:0;}
   .lead-jp{font-size:clamp(22px,3vw,40px);font-weight:900;line-height:1.45;margin:0 0 20px;text-wrap:balance;}
   .body-txt{font-size:clamp(14px,1.35vw,17px);line-height:2;font-weight:700;color:var(--gy-dark);max-width:60ch;}
@@ -516,6 +544,29 @@
   <div class="cond stamp" style="font-size:clamp(56px,10vw,150px)">TEAM</div>
   <div class="cap fade">社員と、職人と。<br>一軒ずつ、手で向き合う。</div>
 </a>
+<section class="wrap sec-gap" id="worries">
+  <div class="cond sub">OUCHI NO ONAYAMI</div>
+  <h2 class="cond ttl">WORRIES</h2>
+  <p class="lead-jp" style="margin-top:20px">おうちに関する、<br>こんなお悩みはありませんか？</p>
+  <ul class="wr-list">
+    <li><span class="tx"><span class="ib">親から実家を相続したけれど、</span><span class="ib">何から始めればいいかわからない</span></span></li>
+    <li><span class="tx"><span class="ib">これから実家をどうしたらいいのか、</span><span class="ib">わからない</span></span></li>
+    <li><span class="tx"><span class="ib">遠方に住んでいて、</span><span class="ib">空き家の管理ができない</span></span></li>
+    <li><span class="tx"><span class="ib">荷物や家財が残ったままで、</span><span class="ib">片付けられない</span></span></li>
+    <li><span class="tx"><span class="ib">建物が古く傷んでいて、</span><span class="ib">売れるのか不安</span></span></li>
+    <li><span class="tx"><span class="ib">他社に相談したけれど、</span><span class="ib">売却を断られてしまった</span></span></li>
+    <li><span class="tx"><span class="ib">売る・解体する・直して活用する、</span><span class="ib">どれがいいのかわからない</span></span></li>
+    <li><span class="tx"><span class="ib">固定資産税や管理の負担が続いている</span></span></li>
+    <li><span class="tx"><span class="ib">大切な家だから、</span><span class="ib">売ってしまっていいのか迷っている</span></span></li>
+    <li><span class="tx"><span class="ib">兄弟や親族との話し合いが、</span><span class="ib">なかなか進まない</span></span></li>
+    <li><span class="tx"><span class="ib">元気なうちに、</span><span class="ib">自宅や実家の将来を考えておきたい</span></span></li>
+    <li><span class="tx"><span class="ib">将来、</span><span class="ib">子どもに空き家の負担を残したくない</span></span></li>
+  </ul>
+  <div class="wr-cta">
+    <a class="btn-bk" href="#/contact">無料で相談する</a>
+    <p>ひとつでも当てはまったら、まずはお話を聞かせてください。</p>
+  </div>
+</section>
 <section class="method wrap">
   <div class="cond sub fade">OUCHI JIMAI</div>
   <h2 class="cond ttl fade">METHOD</h2>
@@ -532,6 +583,19 @@
       <article class="mcard"><div class="ph"><img src="img/after_kitchen.jpg" alt="" loading="lazy" decoding="async"></div><div class="cond en">03 SHUKATSU</div><h3>終活サポート</h3><p>「もしも」の前に、住まいと財産、想いの整理を。おうち終活ノートを使って、エンディングを選べるものへ変えていきます。</p></article>
     </div>
   </div>
+</section>
+<section class="wrap sec-gap" id="features">
+  <div class="cond sub">WHY OHANA HOME</div>
+  <h2 class="cond ttl">FEATURES</h2>
+  <p class="lead-jp" style="margin-top:20px">オハナホームの特徴</p>
+  <ul class="ft-grid">
+    <li><div class="n">01</div><h3><span class="ib">売却だけじゃない、</span><span class="ib">幅広い相談に対応</span></h3><p>売却・相続・家財整理・リフォーム・空き家再生・終活まで、住まいに関するさまざまなお悩みをまとめてご相談いただけます。</p></li>
+    <li><div class="n">02</div><h3>査定・ご相談は無料</h3><p>「まずは家の価値を知りたい」「何から始めればいいかわからない」という段階でも大丈夫。査定・ご相談は無料で承ります。</p></li>
+    <li><div class="n">03</div><h3><span class="ib">自社買取×自社施工で、</span><span class="ib">家の価値を活かす</span></h3><p>買取からリフォーム・再生まで自社で対応。再生まで見据えて価値を見極めることで、その家の可能性を活かした買取につなげます。</p></li>
+    <li><div class="n">04</div><h3><span class="ib">家財や荷物は</span><span class="ib">そのままでもOK</span></h3><p>家具や生活用品などが残っている状態でもご相談いただけます。片付けや処分をしていただく必要はなく、そのままの状態でお見せいただけます。</p></li>
+    <li><div class="n">05</div><h3><span class="ib">お客様とご家族の想いを</span><span class="ib">何より大切に</span></h3><p>家は、思い出や家族の歴史が詰まった大切な場所。売る・残す・活かすなど、お客様やご家族の想いを伺いながら、その家のこれからを一緒に考えます。</p></li>
+    <li><div class="n">06</div><h3><span class="ib">住まいと終活の専門家が、</span><span class="ib">選択肢を広げます</span></h3><p>終活・相続の知識を持つスタッフや空き家再生士が、それぞれの専門性を活かして対応。今の状況を整理し、売却だけにとらわれない住まいの選択肢をご提案します。</p></li>
+  </ul>
 </section>
 <section class="ba">
   <div class="ba-hero">
@@ -777,6 +841,22 @@
   <div class="cap fade">本社も、空き家でした。<br>いまは、僕らの居場所です。</div>
 </a>
 
+<section class="wrap sec-gap" id="faq">
+  <div class="cond sub">QUESTIONS</div>
+  <h2 class="cond ttl">FAQ</h2>
+  <p class="lead-jp" style="margin-top:20px">よくある質問</p>
+  <div class="fq">
+    <details><summary>不動産や相続のことが、まったく分からないのですが。</summary><p>ご安心ください。相続や不動産の取引に慣れた方は、ほとんどいません。空き家再生士と相続診断士がご要望を伺い、やりたいことと、できることを整理してご提案します。</p></details>
+    <details><summary>解体せずに、古い家を残したままでも売却できますか？</summary><p>古家付きのまま売却できる場合があります。建物の状態、土地の条件、費用を確認してから、解体前と解体後の条件を比べることが大切です。税の特例が使えるかどうかは、税務署または税理士へご確認ください。</p></details>
+    <details><summary>家の中の荷物は、整理しないと売れませんか？</summary><p>荷物はそのままで対応できます。大切なものがある場合は、事前にお申し付けください。スタッフで探してお届けするよう心がけています。</p></details>
+    <details><summary>なぜ、荷物がそのままでも買い取れるのですか？</summary><p>オハナホームは古物商の許可を持ち、古物市場に出入りしています。お荷物の中で市場に流通するものを、次に使う方へつなぐことができるからです。</p></details>
+    <details><summary>買取りにかかる期間は、どのくらいですか？</summary><p>登記や権利関係、荷物の状況によって大きく変わります。相続登記が終わっていない場合などは、期間が延びます。お急ぎの場合は、その旨をお伝えください。</p></details>
+    <details><summary>査定をお願いできるエリアは、どこですか？</summary><p>対応エリアは千葉県内です。相談と基本査定は、千葉県内のどの市町村の物件でもお受けします。実際の買取や現地訪問ができるかは、物件ごとに確認してご案内します。千葉県外の物件は、個別にご相談ください。</p></details>
+    <details><summary>他社の買取見積もりが適正か、知りたいのですが。</summary><p>他社で受けた見積もりについて、査定額や条件の見方を確かめるご相談もお受けしています。査定書をお作りすることもできます。</p></details>
+    <details><summary>荷物の処分だけ、お願いできますか？</summary><p>荷物の処分だけをご依頼される方も、たくさんいらっしゃいます。お気軽にご相談ください。</p></details>
+  </div>
+  <p class="fq-note">回答は、物件やご家庭の状況によって変わる場合があります。</p>
+</section>
 <section class="contact" id="cta">
   <div class="bg"><img src="img/hero_washitsu.jpg" alt="" loading="lazy" decoding="async"></div>
   <h2 class="cond ttl fade">CONTACT</h2>
