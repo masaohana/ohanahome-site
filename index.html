@@ -315,6 +315,8 @@
   .pg-hero::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.55),transparent 40%,transparent 60%,rgba(0,0,0,.55));}
   .pg-hero .stamp{position:absolute;left:var(--pad);bottom:clamp(20px,4vw,50px);z-index:2;font-size:clamp(72px,14vw,200px);line-height:.85;color:var(--wh);text-shadow:0 10px 40px rgba(0,0,0,.6);}
   .pg-hero .cap{position:absolute;right:var(--pad);bottom:clamp(24px,4vw,56px);z-index:2;max-width:36ch;text-align:right;color:var(--wh);font-size:clamp(13px,1.3vw,17px);line-height:1.8;text-shadow:0 2px 20px rgba(0,0,0,.8);}
+  /* video bands: keep the whole 16:9 frame visible on wide screens */
+  .vband { height:max(56.25vw,360px) !important;max-height:none; }
   .pg-hero.top{padding-top:0;}
   .lead-jp{font-size:clamp(22px,3vw,40px);font-weight:900;line-height:1.45;margin:0 0 20px;text-wrap:balance;}
   .body-txt{font-size:clamp(14px,1.35vw,17px);line-height:2;font-weight:700;color:var(--gy-dark);max-width:60ch;}
@@ -545,7 +547,7 @@
       <div class="ph clip-b"><img src="img/g_room_clutter.jpg" alt="片付け前、箪笥と家財が残る部屋" loading="lazy" decoding="async"><span class="tag">BEFORE</span></div>
     </div>
   </div>
-  <div class="ba-hero" style="height:clamp(360px,56vh,640px);margin-top:6px">
+  <div class="ba-hero vband" style="height:clamp(360px,56vh,640px);margin-top:6px">
     <video data-src="img/work_loop.mp4" preload="none" class="hero-video" autoplay muted loop playsinline data-poster="img/work_loop_poster.jpg" style="width:100%;height:100%;object-fit:cover;filter:grayscale(.2) contrast(1.05)"></video>
     <div class="cond stamp">WORK</div>
     <div class="cap fade">片付けの現場で、まず探すのは「残すもの」。<br>再生は、そこから。</div>
@@ -817,7 +819,7 @@
     </div>
   </div>
 </section>
-<div class="pg-hero" style="height:clamp(360px,62vh,720px);margin-top:clamp(28px,4vw,56px)">
+<div class="pg-hero vband" style="height:clamp(360px,62vh,720px);margin-top:clamp(28px,4vw,56px)">
   <video data-src="img/hq_loop.mp4" preload="none" class="hero-video" autoplay muted loop playsinline data-poster="img/hq_loop_poster.jpg" style="filter:none"></video>
   <div class="cap fade" style="left:var(--pad);right:auto;text-align:left">夕暮れの本社。<br>灯りがともる家に、人は集まる。</div>
 </div>
@@ -834,11 +836,11 @@
   <h2 class="cond ttl fade">オハナホームの日常</h2>
   <p class="lead-jp fade" style="margin-top:20px">空き家の想いをつなぐパートナー。<br>八街の、再生した空き家の事務所から全国へ。</p>
 </section>
-<div class="pg-hero" style="height:clamp(360px,60vh,680px);margin-top:clamp(28px,4vw,56px)">
+<div class="pg-hero vband" style="height:clamp(360px,60vh,680px);margin-top:clamp(28px,4vw,56px)">
   <video data-src="img/team_loop.mp4" preload="none" class="hero-video" autoplay muted loop playsinline data-poster="img/team_loop_poster.jpg"></video>
   <div class="cap fade" style="left:var(--pad);right:auto;text-align:left">空き家を再生した本社事務所。<br>社員・職人・仲間が、ここに集まります。</div>
 </div>
-<div class="pg-hero" style="height:clamp(320px,52vh,600px);margin-top:8px">
+<div class="pg-hero vband" style="height:clamp(320px,52vh,600px);margin-top:8px">
   <video data-src="img/craft_loop.mp4" preload="none" class="hero-video" autoplay muted loop playsinline data-poster="img/craft_loop_poster.jpg"></video>
   <div class="cap fade" style="left:var(--pad);right:auto;text-align:left">職人さんとの時間。<br>打合せも、現場も、乾杯も、同じテーブルで。</div>
 </div>
@@ -1009,7 +1011,7 @@
 </main>
 <main class="view" id="view-seminar">
 
-<div class="pg-hero">
+<div class="pg-hero vband">
   <video data-src="img/sem_loop.mp4" preload="none" class="hero-video" autoplay muted loop playsinline data-poster="img/sem_poster.jpg"></video>
   <div class="cond stamp">SEMINAR</div>
   <div class="cap fade">終活は、菊池あかりが。空き家は、菊池聖雄が。<br>夫婦ふたりで、家族の「その後」を話します。</div>
@@ -1078,7 +1080,7 @@
     <div class="clip-b"><div class="n">02</div><h4>売るか、貸すか、壊すか</h4><p>解体して更地にする前に、売り方と税の条件を一緒に見る。固定資産税の焦りと一緒に見たい数字。</p></div>
     <div class="clip-b"><div class="n">03</div><h4>家族で話す、実家のこと</h4><p>「兄弟が怒っていて話すのが怖い」「どう切り出せばいいか分からない」。相談現場で実際に使っている質問リスト。</p></div>
   </div>
-  <div class="pg-hero" style="height:clamp(320px,50vh,560px);margin-top:clamp(40px,6vw,80px)">
+  <div class="pg-hero vband" style="height:clamp(320px,50vh,560px);margin-top:clamp(40px,6vw,80px)">
     <video data-src="img/sem_loop3.mp4" preload="none" class="hero-video" autoplay muted loop playsinline data-poster="img/sem_poster3.jpg"></video>
     <div class="cap fade" style="left:var(--pad);right:auto;text-align:left">業界団体・展示会・自治体の相談会で。<br>「困った空き家が、誰かの役に立つ。」</div>
   </div>
@@ -1135,7 +1137,7 @@
 </main>
 <main class="view" id="view-recruit">
 
-<div class="pg-hero">
+<div class="pg-hero vband">
   <video data-src="img/team_loop.mp4" preload="none" class="hero-video" autoplay muted loop playsinline data-poster="img/team_loop_poster.jpg"></video>
   <div class="cond stamp">RECRUIT</div>
   <div class="cap fade">空き家再生をとおして、日本中を笑顔に。<br>その仕事を、一緒にやる仲間を探しています。</div>
