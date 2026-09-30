@@ -537,12 +537,12 @@
 
 <main class="view on" id="view-home">
 <section class="mv" id="top">
-  <div class="slide on"><video data-src="img/top_loop.mp4" preload="none" autoplay muted loop playsinline poster="img/top_loop_poster.jpg"></video></div>
-  <div class="slide"><video data-src="img/akiya_in_loop.mp4" preload="none" muted loop playsinline data-poster="img/akiya_in_loop_poster.jpg"></video></div>
-  <div class="slide"><video data-src="img/akiya_out_loop.mp4" preload="none" muted loop playsinline data-poster="img/akiya_out_loop_poster.jpg"></video></div>
-  <div class="slide"><video data-src="img/work_loop.mp4" preload="none" muted loop playsinline data-poster="img/work_loop_poster.jpg"></video></div>
-  <div class="slide"><video data-src="img/smile_loop.mp4" preload="none" muted loop playsinline data-poster="img/smile_loop_poster.jpg"></video></div>
-  <div class="slide"><video data-src="img/hq_loop.mp4" preload="none" muted loop playsinline data-poster="img/hq_loop_poster.jpg"></video></div>
+  <div class="slide on"><video data-src="img/top_loop.mp4" data-src-p="img/top_loop_p.mp4" data-poster-p="img/top_loop_p_poster.jpg" preload="none" autoplay muted loop playsinline poster="img/top_loop_poster.jpg"></video></div>
+  <div class="slide"><video data-src="img/akiya_in_loop.mp4" data-src-p="img/akiya_in_loop_p.mp4" data-poster-p="img/akiya_in_loop_p_poster.jpg" preload="none" muted loop playsinline data-poster="img/akiya_in_loop_poster.jpg"></video></div>
+  <div class="slide"><video data-src="img/akiya_out_loop.mp4" data-src-p="img/akiya_out_loop_p.mp4" data-poster-p="img/akiya_out_loop_p_poster.jpg" preload="none" muted loop playsinline data-poster="img/akiya_out_loop_poster.jpg"></video></div>
+  <div class="slide"><video data-src="img/work_loop.mp4" data-src-p="img/work_loop_p.mp4" data-poster-p="img/work_loop_p_poster.jpg" preload="none" muted loop playsinline data-poster="img/work_loop_poster.jpg"></video></div>
+  <div class="slide"><video data-src="img/smile_loop.mp4" data-src-p="img/smile_loop_p.mp4" data-poster-p="img/smile_loop_p_poster.jpg" preload="none" muted loop playsinline data-poster="img/smile_loop_poster.jpg"></video></div>
+  <div class="slide"><video data-src="img/hq_loop.mp4" data-src-p="img/hq_loop_p.mp4" data-poster-p="img/hq_loop_p_poster.jpg" preload="none" muted loop playsinline data-poster="img/hq_loop_poster.jpg"></video></div>
 <div class="catch clip-r">
     <div class="top"><span class="s">想いをつなぎ、笑顔をつくる</span><span class="m">「終わりから、はじまる。」</span></div>
     <div class="btm"><span class="cond a">OUCHI</span><span class="cond b">JIMAI.</span></div>
@@ -1632,10 +1632,13 @@
 (function(){
   var vids=[].slice.call(document.querySelectorAll('video[data-src]'));
   function shown(v){var m=v.closest('.view');return !m||m.classList.contains('on');}
+  var portrait=matchMedia('(orientation: portrait)').matches;
   function load(v){
-    if(v.dataset.poster){v.poster=v.dataset.poster;v.removeAttribute('data-poster');}
+    var pp=portrait&&v.dataset.posterP?v.dataset.posterP:v.dataset.poster;
+    if(pp&&!v.dataset.posterDone){v.poster=pp;v.dataset.posterDone='1';}
     if(!v.dataset.src) return;
-    var s=document.createElement('source');s.src=v.dataset.src;s.type='video/mp4';
+    var src=portrait&&v.dataset.srcP?v.dataset.srcP:v.dataset.src;
+    var s=document.createElement('source');s.src=src;s.type='video/mp4';
     v.appendChild(s);v.removeAttribute('data-src');v.load();
   }
   function play(v){
@@ -1665,6 +1668,7 @@
   addEventListener('resize',schedule);
   addEventListener('hashchange',function(){setTimeout(check,80);});
   document.addEventListener('visibilitychange',function(){if(!document.hidden)setTimeout(check,60);});
+  if(portrait){var fv=document.querySelector('.mv .slide.on video');if(fv&&fv.dataset.posterP){fv.poster=fv.dataset.posterP;fv.dataset.posterDone='1';}}
   check(); setTimeout(check,300); setTimeout(check,1200);
 })();
 </script>
