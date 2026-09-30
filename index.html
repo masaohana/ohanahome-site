@@ -485,6 +485,8 @@
     .ba-hero .cap { left:var(--pad);right:var(--pad);max-width:none;text-align:left;bottom:calc(clamp(20px,4vw,50px) + clamp(90px,18vw,256px)*.85 + 26px); }
   }
   @media (max-width:420px){ .catch .top { flex-wrap:wrap;gap:.4em .6em; } .catch .top .m { font-size:13px; } }
+  .sp { display:none; }
+  @media (max-width:480px){ .sp { display:inline; } }
 </style>
 
 <header class="hd" id="hd">
@@ -544,7 +546,7 @@
     <div class="concept-catch clip-l">
       <div class="top">想いをつなぎ、笑顔をつくる。</div>
       <div class="btm"><span class="cond a">BEYOND THE</span><span class="cond b">END</span></div>
-      <div class="jp">家じまいではなく、<br>「おうちじまい」。<br>「片づけ」ではなく、「再生」として。</div>
+      <div class="jp">家じまいではなく、</span><br>「おうちじまい」。</span><br>「片づけ」ではなく、</span>「再生」として。</span></div>
     </div>
     <div class="concept-txt fade">
       <p>誰も住まなくなった家、誰かに残していく財産、誰もが一度は迎える人生の終わり方。相談に来られる方の多くが、「ずっと後回しにしてきました」と言います。</p>
@@ -557,12 +559,12 @@
 <a class="pg-hero band" href="#/about" style="display:block;height:clamp(300px,56vh,620px);margin-top:clamp(70px,11vw,160px)">
   <video data-src="img/team_loop.mp4" preload="none" class="hero-video" autoplay muted loop playsinline data-poster="img/team_loop_poster.jpg"></video>
   <div class="cond stamp" style="font-size:clamp(56px,10vw,150px)">TEAM</div>
-  <div class="cap fade">社員と、職人と。<br>一軒ずつ、手で向き合う。</div>
+  <div class="cap fade"><span class="ib">社員と、</span><span class="ib">職人と。</span><br><span class="ib">一軒ずつ、</span><span class="ib">手で向き合う。</span></div>
 </a>
 <section class="wrap sec-gap" id="worries">
   <div class="cond sub">OUCHI NO ONAYAMI</div>
   <h2 class="cond ttl">WORRIES</h2>
-  <p class="lead-jp" style="margin-top:20px">おうちに関する、<br>こんなお悩みはありませんか？</p>
+  <p class="lead-jp" style="margin-top:20px"><span class="ib">おうちに関する、</span><br><span class="ib">こんなお悩みはありませんか？</span></p>
   <ul class="wr-list">
     <li><span class="tx"><span class="ib">親から実家を相続したけれど、</span><span class="ib">何から始めればいいかわからない</span></span></li>
     <li><span class="tx"><span class="ib">これから実家をどうしたらいいのか、</span><span class="ib">わからない</span></span></li>
@@ -602,7 +604,7 @@
 <section class="wrap sec-gap" id="features">
   <div class="cond sub">WHY OHANA HOME</div>
   <h2 class="cond ttl">FEATURES</h2>
-  <p class="lead-jp" style="margin-top:20px">オハナホームの特徴</p>
+  <p class="lead-jp" style="margin-top:20px"><span class="ib">オハナホームの特徴</span></p>
   <ul class="ft-grid">
     <li><div class="n">01</div><h3><span class="ib">売却だけじゃない、</span><span class="ib">幅広い相談に対応</span></h3><p>売却・相続・家財整理・リフォーム・空き家再生・終活まで、住まいに関するさまざまなお悩みをまとめてご相談いただけます。</p></li>
     <li><div class="n">02</div><h3>査定・ご相談は無料</h3><p>「まずは家の価値を知りたい」「何から始めればいいかわからない」という段階でも大丈夫。査定・ご相談は無料で承ります。</p></li>
@@ -616,7 +618,7 @@
   <div class="ba-hero">
     <img src="img/g_room_clutter2.jpg" alt="片付け前、家財が残されたままの部屋" loading="lazy" decoding="async">
     <div class="cond stamp">BEFORE</div>
-    <div class="cap fade">誰かの暮らしが、そのまま止まっている部屋。<br>ここから「おうちじまい」ははじまります。</div>
+    <div class="cap fade"><span class="ib">誰かの暮らしが、</span><span class="ib">そのまま止まっている部屋。</span><br><span class="ib">ここから「おうちじまい」ははじまります。</span></div>
   </div>
   <div class="wrap">
     <div class="ba-grid">
@@ -629,7 +631,7 @@
   <div class="ba-hero vband" style="height:clamp(360px,56vh,640px);margin-top:6px">
     <video data-src="img/work_loop.mp4" preload="none" class="hero-video" autoplay muted loop playsinline data-poster="img/work_loop_poster.jpg" style="width:100%;height:100%;object-fit:cover;filter:grayscale(.2) contrast(1.05)"></video>
     <div class="cond stamp">WORK</div>
-    <div class="cap fade">片付けの現場で、まず探すのは「残すもの」。<br>再生は、そこから。</div>
+    <div class="cap fade"><span class="ib">片付けの現場で、</span><span class="ib">まず探すのは「残すもの」。</span><br><span class="ib">再生は、</span><span class="ib">そこから。</span></div>
   </div>
   <div class="wrap">
     <div class="ba-grid" style="margin-top:6px">
@@ -640,7 +642,7 @@
     <div class="ba-mid">
       <div class="cond big fade">AFTER<span>片付けて、直して、つなぐ。</span></div>
       <div class="fade">
-        <p class="jp">見つけた大切なものは、<br>一つずつお戻しします。</p>
+        <p class="jp"><span class="ib">見つけた大切なものは、</span><br><span class="ib">一つずつお戻しします。</span></p>
         <p>片付けは、ゴミを出す作業ではありません。家族の写真、位牌、通帳や権利証、子どもの頃の作品。僕らの現場では、出てきた大切なものを一つずつ分けて、ご家族にお戻しすることを決まりにしています。「捨ててしまった」を、一件も起こさないために。</p>
         <p>残すもの・引き取るもの・手放すものを一緒に決めて、家を「次の暮らし」が入れる状態に整える。そこから先は、地元の職人と一緒に、住みたくなる家へ。</p>
       </div>
@@ -649,7 +651,7 @@
   <div class="ba-hero ba-after">
     <img src="img/after_hero_kitchen.jpg" alt="再生後のアイランドキッチン" loading="lazy" decoding="async">
     <div class="cond stamp">AFTER</div>
-    <div class="cap fade">昭和の台所が、<br>家族が集まるアイランドキッチンに。</div>
+    <div class="cap fade">昭和の台所が、<br><span class="ib">家族が集まるアイランドキッチンに。</span></div>
   </div>
   <div class="wrap">
     <div class="ba-grid" style="margin-top:6px">
@@ -661,7 +663,7 @@
     <div class="ba-mid">
       <div class="cond big fade">SAME<span>同じ部屋、同じ位置から。</span></div>
       <div class="fade">
-        <p class="jp">マンションも、戸建ても。<br>工事の途中と、お引き渡しの前。</p>
+        <p class="jp"><span class="ib">マンションも、</span><span class="ib">戸建ても。</span><br><span class="ib">工事の途中と、</span><span class="ib">お引き渡しの前。</span></p>
         <p>片付けを終え、壁も床も剥がした状態から、内装を仕上げるとこうなります。職人が工事前と同じ位置に立って撮った写真です。真ん中のつまみを左右に動かして見比べてください。</p>
       </div>
     </div>
@@ -727,7 +729,7 @@
 <a class="pg-hero band" href="#/about" style="display:block;height:clamp(300px,56vh,620px);margin-top:clamp(70px,11vw,160px)">
   <video data-src="img/smile_loop.mp4" preload="none" class="hero-video" autoplay muted loop playsinline data-poster="img/smile_loop_poster.jpg"></video>
   <div class="cond stamp" style="font-size:clamp(56px,10vw,150px)">SMILE</div>
-  <div class="cap fade">「ありがとう」を、<br>直接もらえる仕事です。</div>
+  <div class="cap fade"><span class="ib">「ありがとう」を、</span><br><span class="ib">直接もらえる仕事です。</span></div>
 </a>
 <section class="books">
   <div class="bg"><img src="img/st_14.jpg" alt="" loading="lazy" decoding="async"></div>
@@ -758,7 +760,7 @@
 <a class="pg-hero band" href="#/seminar" style="display:block;height:clamp(300px,56vh,620px);margin-top:clamp(70px,11vw,160px)">
   <video data-src="img/semin_loop.mp4" preload="none" class="hero-video" autoplay muted loop playsinline data-poster="img/semin_loop_poster.jpg"></video>
   <div class="cond stamp" style="font-size:clamp(56px,10vw,150px)">SEMINAR</div>
-  <div class="cap fade">終活のセミナーは、<br>自治体でも、企業でも。</div>
+  <div class="cap fade"><span class="ib">終活のセミナーは、</span><br><span class="ib">自治体でも、</span><span class="ib">企業でも。</span></div>
 </a>
 
 <section class="act wrap">
@@ -767,19 +769,19 @@
   <div class="act-grid" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr))">
     <a class="act-card clip-b" href="#/about">
       <img src="img/ceremony.jpg" alt="八街市との空き家対策協定 締結式" loading="lazy" decoding="async">
-      <div class="t"><div class="cond en">PARTNERSHIP</div><div class="jp">八街市と、空き家対策の協定を締結</div><span class="more">READ MORE</span></div>
+      <div class="t"><div class="cond en">PARTNERSHIP</div><div class="jp">八街市と、</span>空き家対策の協定を締結</span></div><span class="more">READ MORE</span></div>
     </a>
     <a class="act-card clip-b" href="#/seminar">
       <img src="img/stage_duo.jpg" alt="ふたりで登壇するセミナー" style="object-position:50% 30%" loading="lazy" decoding="async">
-      <div class="t"><div class="cond en">SEMINAR</div><div class="jp">おうち終活ノートで、家族の会話をつくる</div><span class="more">READ MORE</span></div>
+      <div class="t"><div class="cond en">SEMINAR</div><div class="jp">おうち終活ノートで、</span>家族の会話をつくる</span></div><span class="more">READ MORE</span></div>
     </a>
     <a class="act-card clip-b" href="#/about">
       <img src="img/duo_navy.jpg" alt="菊池聖雄と菊池あかり" style="object-position:50% 20%" loading="lazy" decoding="async">
-      <div class="t"><div class="cond en">PEOPLE</div><div class="jp">空き家と相続に、夫婦で向き合う</div><span class="more">READ MORE</span></div>
+      <div class="t"><div class="cond en">PEOPLE</div><div class="jp">空き家と相続に、</span>夫婦で向き合う</span></div><span class="more">READ MORE</span></div>
     </a>
     <a class="act-card clip-b" href="#/vision/tane">
       <img src="img/tane_house.jpg" alt="フリースクールに生まれ変わる空き家" loading="lazy" decoding="async">
-      <div class="t"><div class="cond en">FREE SCHOOL</div><div class="jp">空き家を、子どもたちの居場所に</div><span class="more">READ MORE</span></div>
+      <div class="t"><div class="cond en">FREE SCHOOL</div><div class="jp">空き家を、</span>子どもたちの居場所に</span></div><span class="more">READ MORE</span></div>
     </a>
   </div>
 </section>
@@ -804,7 +806,7 @@
 <a class="pg-hero band" href="#/about" style="display:block;height:clamp(300px,56vh,620px);margin-top:clamp(70px,11vw,160px)">
   <video data-src="img/craft_loop.mp4" preload="none" class="hero-video" autoplay muted loop playsinline data-poster="img/craft_loop_poster.jpg"></video>
   <div class="cond stamp" style="font-size:clamp(56px,10vw,150px)">CRAFT</div>
-  <div class="cap fade">職人さんと、同じテーブルで。<br>打合せも、現場も、乾杯も。</div>
+  <div class="cap fade"><span class="ib">職人さんと、</span><span class="ib">同じテーブルで。</span><br><span class="ib">打合せも、</span><span class="ib">現場も、</span><span class="ib">乾杯も。</span></div>
 </a>
 <section class="guides">
   <div class="wrap">
@@ -824,7 +826,7 @@
         <img src="img/ch_yamori.png" alt="家守神" loading="lazy" decoding="async">
         <div>
           <div class="cond en">YAMORI-GAMI</div>
-          <h3>家守神（やもりがみ）</h3>
+          <h3><span class="ib">家守神</span><span class="ib">（やもりがみ）</span></h3>
           <p>「や」の冠に青い髪、白い衣。家を「見守る」神さま。住んでいる今から、いつか手放す日まで、家と家族をそっと見守ります。</p>
           <span class="role">MIMAMORU</span>
         </div>
@@ -833,7 +835,7 @@
         <img src="img/ch_yuimori.png" alt="結守神" loading="lazy" decoding="async">
         <div>
           <div class="cond en">YUIMORI-GAMI</div>
-          <h3>結守神（ゆいもりがみ）</h3>
+          <h3><span class="ib">結守神</span><span class="ib">（ゆいもりがみ）</span></h3>
           <p>「ゆ」の冠に緑の衣、手には巻物。人と人、家と次の家族を「結ぶ」神さま。相続の話し合いや、次の住まい手との縁をつなぎます。</p>
           <span class="role">MUSUBU</span>
         </div>
@@ -842,7 +844,7 @@
         <img src="img/ch_akiyaking.png" alt="空き家王" loading="lazy" decoding="async">
         <div>
           <div class="cond en">AKIYA KING</div>
-          <h3>空き家王（あきやおう）</h3>
+          <h3><span class="ib">空き家王</span><span class="ib">（あきやおう）</span></h3>
           <p>「あ」の冠に∞のめがね。空き家の「課題と可能性」を語る小さな王。空き家のあらゆる相談の入口に、ちょこんと立っています。</p>
           <span class="role">AKIYA</span>
         </div>
@@ -853,7 +855,7 @@
 <a class="pg-hero band" href="#/about" style="display:block;height:clamp(300px,56vh,620px);margin-top:clamp(70px,11vw,160px)">
   <video data-src="img/hq_loop.mp4" preload="none" class="hero-video" autoplay muted loop playsinline data-poster="img/hq_loop_poster.jpg"></video>
   <div class="cond stamp" style="font-size:clamp(56px,10vw,150px)">HOME BASE</div>
-  <div class="cap fade">本社も、空き家でした。<br>いまは、僕らの居場所です。</div>
+  <div class="cap fade"><span class="ib">本社も、</span><span class="ib">空き家でした。</span><br><span class="ib">いまは、</span><span class="ib">僕らの居場所です。</span></div>
 </a>
 
 <section class="wrap sec-gap" id="faq">
@@ -885,14 +887,14 @@
 <div class="pg-hero">
   <img src="img/ceremony.jpg" alt="八街市との協定締結式" style="object-position:50% 35%" loading="lazy" decoding="async">
   <div class="cond stamp">ABOUT</div>
-  <div class="cap fade">行政と、家族と、職人と。<br>空き家の問題を、ひとりで抱えない仕組みをつくる。</div>
+  <div class="cap fade"><span class="ib">行政と、</span><span class="ib">家族と、</span><span class="ib">職人と。</span><br><span class="ib">空き家の問題を、</span><span class="ib">ひとりで抱えない仕組みをつくる。</span></div>
 </div>
 <section class="wrap" style="margin-top:clamp(60px,9vw,130px)">
   <div class="cond sub fade">PARTNERSHIP</div>
-  <h2 class="cond ttl fade">八街市との協定</h2>
+  <h2 class="cond ttl fade" style="font-size:min(clamp(64px,10vw,128px),calc(88vw / 7));white-space:nowrap">八街市との協定</h2>
   <div class="two" style="margin-top:clamp(28px,4vw,56px)">
     <div class="fade">
-      <p class="lead-jp">協会が啓発を、会社が実務を。<br>行政と役割を分けて、空き家に向き合う。</p>
+      <p class="lead-jp"><span class="ib">協会が啓発を、</span><span class="ib">会社が実務を。</span><br><span class="ib">行政と役割を分けて、</span><span class="ib">空き家に向き合う。</span></p>
     </div>
     <div class="body-txt fade">
       <div class="ph clip-r" style="margin-bottom:22px;aspect-ratio:3/2;overflow:hidden"><img src="img/mayor4.jpg" alt="八街市長との協定締結" style="width:100%;height:100%;object-fit:cover" loading="lazy" decoding="async"></div>
@@ -905,9 +907,9 @@
 
 <section class="wrap" style="margin-top:clamp(70px,11vw,160px)">
   <div class="cond sub fade">HEAD OFFICE</div>
-  <h2 class="cond ttl fade">本社も、空き家でした</h2>
+  <h2 class="cond ttl fade" style="font-size:min(clamp(64px,10vw,128px),calc(88vw / 10));white-space:nowrap">本社も、空き家でした</h2>
   <div class="two" style="margin-top:clamp(28px,4vw,56px)">
-    <div class="fade"><p class="lead-jp">前の持ち主が、<br>航空写真を額に入れて残していた家。</p></div>
+    <div class="fade"><p class="lead-jp">前の持ち主が、<br><span class="ib">航空写真を額に入れて</span><br class="sp"><span class="ib">残していた家。</span></p></div>
     <div class="body-txt fade">
       <p>八街の本社は、もともと誰も住まなくなった一軒の家でした。買い取ったとき、庭は草に覆われ、外壁は色あせていました。壁には、前の持ち主が額に入れて残した「我が家の航空撮影」。それだけ大切にされてきた家だと、ひと目でわかりました。</p>
       <p>片付けて、直して、黒く塗り替えて、灯りをともす。僕らが毎日お客様にお伝えしている「おうちじまい」を、自分たちの本社で最初にやりました。</p>
@@ -916,7 +918,7 @@
 </section>
 <div class="pg-hero vband" style="height:clamp(360px,62vh,720px);margin-top:clamp(28px,4vw,56px)">
   <video data-src="img/hq_loop.mp4" preload="none" class="hero-video" autoplay muted loop playsinline data-poster="img/hq_loop_poster.jpg" style="filter:none"></video>
-  <div class="cap fade" style="left:var(--pad);right:auto;text-align:left">夕暮れの本社。<br>灯りがともる家に、人は集まる。</div>
+  <div class="cap fade" style="left:var(--pad);right:auto;text-align:left">夕暮れの本社。<br><span class="ib">灯りがともる家に、</span><span class="ib">人は集まる。</span></div>
 </div>
 <section class="wrap" style="margin-top:8px">
   <div class="ba-grid" style="grid-template-columns:repeat(3,1fr)">
@@ -928,16 +930,16 @@
 
 <section class="wrap" style="margin-top:clamp(70px,11vw,160px)">
   <div class="cond sub fade">TEAM</div>
-  <h2 class="cond ttl fade">オハナホームの日常</h2>
-  <p class="lead-jp fade" style="margin-top:20px">空き家の想いをつなぐパートナー。<br>八街の、再生した空き家の事務所から全国へ。</p>
+  <h2 class="cond ttl fade" style="font-size:min(clamp(64px,10vw,128px),calc(88vw / 9));white-space:nowrap">オハナホームの日常</h2>
+  <p class="lead-jp fade" style="margin-top:20px"><span class="ib">空き家の想いをつなぐ</span><br class="sp"><span class="ib">パートナー。</span><br><span class="ib">八街の、</span><span class="ib">再生した空き家の事務所から</span><br class="sp"><span class="ib">全国へ。</span></p>
 </section>
 <div class="pg-hero vband" style="height:clamp(360px,60vh,680px);margin-top:clamp(28px,4vw,56px)">
   <video data-src="img/team_loop.mp4" preload="none" class="hero-video" autoplay muted loop playsinline data-poster="img/team_loop_poster.jpg"></video>
-  <div class="cap fade" style="left:var(--pad);right:auto;text-align:left">空き家を再生した本社事務所。<br>社員・職人・仲間が、ここに集まります。</div>
+  <div class="cap fade" style="left:var(--pad);right:auto;text-align:left"><span class="ib">空き家を再生した本社事務所。</span><br><span class="ib">社員・職人・仲間が、</span><span class="ib">ここに集まります。</span></div>
 </div>
 <div class="pg-hero vband" style="height:clamp(320px,52vh,600px);margin-top:8px">
   <video data-src="img/craft_loop.mp4" preload="none" class="hero-video" autoplay muted loop playsinline data-poster="img/craft_loop_poster.jpg"></video>
-  <div class="cap fade" style="left:var(--pad);right:auto;text-align:left">職人さんとの時間。<br>打合せも、現場も、乾杯も、同じテーブルで。</div>
+  <div class="cap fade" style="left:var(--pad);right:auto;text-align:left"><span class="ib">職人さんとの時間。</span><br><span class="ib">打合せも、</span><span class="ib">現場も、</span><span class="ib">乾杯も、</span><span class="ib">同じテーブルで。</span></div>
 </div>
 <section class="wrap" style="margin-top:8px">
   <div class="ba-grid">
@@ -954,11 +956,11 @@
 
 <section class="people wrap">
   <div class="cond sub fade">PEOPLE</div>
-  <h2 class="cond ttl fade">私たち</h2>
+  <h2 class="cond ttl fade" style="font-size:min(clamp(64px,10vw,128px),calc(88vw / 3));white-space:nowrap">私たち</h2>
 </section>
 <div class="pg-hero" style="height:clamp(420px,80vh,880px);margin-top:clamp(28px,4vw,56px)">
   <img src="img/duo_sky.jpg" alt="青空の下、本社の前に立つ菊池聖雄と菊池あかり" style="object-position:50% 35%;filter:none" loading="lazy" decoding="async">
-  <div class="cap fade" style="left:var(--pad);right:auto;text-align:left">空き家と相続に、夫婦で向き合う。<br>菊池 聖雄 ／ 菊池 あかり</div>
+  <div class="cap fade" style="left:var(--pad);right:auto;text-align:left"><span class="ib">空き家と相続に、</span><span class="ib">夫婦で向き合う。</span><br><span class="ib">菊池 聖雄 ／ 菊池 あかり</span></div>
 </div>
 <section class="wrap">
   <article class="person">
@@ -995,13 +997,13 @@
 
 <section class="wrap" style="margin-top:clamp(70px,11vw,160px)">
   <div class="cond sub fade">MEDIA</div>
-  <h2 class="cond ttl fade">取材・掲載</h2>
+  <h2 class="cond ttl fade" style="font-size:min(clamp(64px,10vw,128px),calc(88vw / 5));white-space:nowrap">取材・掲載</h2>
   <div class="col-list">
     <a class="col-item" href="https://note.com/chibakei/n/n2bf4b75c8957" target="_blank" rel="noopener"><div class="d">2026.05.15</div><div><h4>ちば経済産業新聞｜オハナホーム── 空き家を「誰かの居場所」に変える夫婦の挑戦</h4><p>年間30〜40棟の空き家を再生し「誰かの居場所」に変え続ける。夫婦二人三脚の会社運営を取材。</p></div><div class="go">READ →</div></a>
     <a class="col-item" href="https://media.livedoctor.jp/interview/%E5%85%A8%E5%9B%BD%E3%81%AE%E7%A9%BA%E3%81%8D%E5%AE%B6%E3%82%92%E5%B1%85%E5%A0%B4%E6%89%80%E3%81%AB%E3%82%AA%E3%83%8F%E3%83%8A%E3%83%9B%E3%83%BC%E3%83%A0/" target="_blank" rel="noopener"><div class="d">2026.05.19</div><div><h4>LIVE Doctor｜全国の「空き家」を「居場所」に。菊池聖雄氏の目指す空き家再生の未来</h4><p>「社長の背中」インタビュー。2018年設立、2021年に空き家再生協会を立ち上げ、全国に空き家再生士のネットワークを。</p></div><div class="go">READ →</div></a>
     <a class="col-item" href="https://prtimes.jp/main/html/rd/p/000000015.000166247.html" target="_blank" rel="noopener"><div class="d">PR TIMES</div><div><h4>空き家対策の実務推進に関する協定を締結｜八街市・空き家再生協会・オハナホーム</h4><p>プレスリリース。</p></div><div class="go">READ →</div></a>
   </div>
-<div class="cond sub fade" style="margin-top:clamp(40px,6vw,80px)">VIDEO</div><div class="act-grid" style="margin-top:14px"><a class="act-card clip-b" href="https://youtu.be/68CmmhLIfc0" target="_blank" rel="noopener" style="aspect-ratio:16/9"><img src="img/yt_68CmmhLIfc0.jpg" alt="【セミナーダイジェスト】終活と空き家｜後悔しない相続と住まいの整理術" style="filter:none" loading="lazy" decoding="async"><div class="t"><div class="cond en">SEMINAR</div><div class="jp">【セミナーダイジェスト】終活と空き家｜後悔しない相続と住まいの整理術</div><span class="more">Ohanahome Official · WATCH</span></div></a><a class="act-card clip-b" href="https://youtu.be/-qUFQ7HBOe0" target="_blank" rel="noopener" style="aspect-ratio:16/9"><img src="img/yt_-qUFQ7HBOe0.jpg" alt="Japan: Why Concerns Growing Over Vacant Homes（海外メディア取材）" style="filter:none" loading="lazy" decoding="async"><div class="t"><div class="cond en">OVERSEAS</div><div class="jp">Japan: Why Concerns Growing Over Vacant Homes（海外メディア取材）</div><span class="more">The Japan Reporter · WATCH</span></div></a><a class="act-card clip-b" href="https://youtu.be/IRjUpoKtafg" target="_blank" rel="noopener" style="aspect-ratio:16/9"><img src="img/yt_IRjUpoKtafg.jpg" alt="【密着】傾いた家、残された荷物…空き家を再生する施工管理の1日が想像以上だった｜前編" style="filter:none" loading="lazy" decoding="async"><div class="t"><div class="cond en">DOCUMENTARY</div><div class="jp">【密着】傾いた家、残された荷物…空き家を再生する施工管理の1日が想像以上だった｜前編</div><span class="more">建設メシ · WATCH</span></div></a><a class="act-card clip-b" href="https://youtu.be/vshrQYutfdA" target="_blank" rel="noopener" style="aspect-ratio:16/9"><img src="img/yt_vshrQYutfdA.jpg" alt="【密着】新築の半額…!? ただのリフォームじゃなかった空き家再生の本当の仕事｜後編" style="filter:none" loading="lazy" decoding="async"><div class="t"><div class="cond en">DOCUMENTARY</div><div class="jp">【密着】新築の半額…!? ただのリフォームじゃなかった空き家再生の本当の仕事｜後編</div><span class="more">建設メシ · WATCH</span></div></a><a class="act-card clip-b" href="https://youtu.be/aVRw4Qxj0bg" target="_blank" rel="noopener" style="aspect-ratio:16/9"><img src="img/yt_aVRw4Qxj0bg.jpg" alt="MBSニュース解説｜空き家 過去最多900万戸のワケ（代表 菊池 出演）" style="filter:none" loading="lazy" decoding="async"><div class="t"><div class="cond en">TV</div><div class="jp">MBSニュース解説｜空き家 過去最多900万戸のワケ（代表 菊池 出演）</div><span class="more">MBS NEWS · WATCH</span></div></a><a class="act-card clip-b" href="https://www.youtube.com/live/ENF7PguBaU0" target="_blank" rel="noopener" style="aspect-ratio:16/9"><img src="img/yt_ENF7PguBaU0.jpg" alt="第45回 空き家相談の現場からみる 家族間コミュニケーションの重要性" style="filter:none" loading="lazy" decoding="async"><div class="t"><div class="cond en">TALK</div><div class="jp">第45回 空き家相談の現場からみる 家族間コミュニケーションの重要性</div><span class="more">笑顔相続ch · WATCH</span></div></a></div>
+<div class="cond sub fade" style="margin-top:clamp(40px,6vw,80px)">VIDEO</div><div class="act-grid" style="margin-top:14px"><a class="act-card clip-b" href="https://youtu.be/68CmmhLIfc0" target="_blank" rel="noopener" style="aspect-ratio:16/9"><img src="img/yt_68CmmhLIfc0.jpg" alt="【セミナーダイジェスト】終活と空き家｜後悔しない相続と住まいの整理術" style="filter:none" loading="lazy" decoding="async"><div class="t"><div class="cond en">SEMINAR</div><div class="jp">【セミナーダイジェスト】終活と空き家｜</span>後悔しない相続と住まいの整理術</span></div><span class="more">Ohanahome Official · WATCH</span></div></a><a class="act-card clip-b" href="https://youtu.be/-qUFQ7HBOe0" target="_blank" rel="noopener" style="aspect-ratio:16/9"><img src="img/yt_-qUFQ7HBOe0.jpg" alt="Japan: Why Concerns Growing Over Vacant Homes（海外メディア取材）" style="filter:none" loading="lazy" decoding="async"><div class="t"><div class="cond en">OVERSEAS</div><div class="jp">Japan: Why Concerns Growing Over Vacant Homes</span>（</span>海外メディア取材）</span></div><span class="more">The Japan Reporter · WATCH</span></div></a><a class="act-card clip-b" href="https://youtu.be/IRjUpoKtafg" target="_blank" rel="noopener" style="aspect-ratio:16/9"><img src="img/yt_IRjUpoKtafg.jpg" alt="【密着】傾いた家、残された荷物…空き家を再生する施工管理の1日が想像以上だった｜前編" style="filter:none" loading="lazy" decoding="async"><div class="t"><div class="cond en">DOCUMENTARY</div><div class="jp">【密着】傾いた家、</span>残された荷物…空き家を再生する施工管理の1日が想像以上だった｜</span>前編</span></div><span class="more">建設メシ · WATCH</span></div></a><a class="act-card clip-b" href="https://youtu.be/vshrQYutfdA" target="_blank" rel="noopener" style="aspect-ratio:16/9"><img src="img/yt_vshrQYutfdA.jpg" alt="【密着】新築の半額…!? ただのリフォームじゃなかった空き家再生の本当の仕事｜後編" style="filter:none" loading="lazy" decoding="async"><div class="t"><div class="cond en">DOCUMENTARY</div><div class="jp">【密着】新築の半額…!? ただのリフォームじゃなかった空き家再生の本当の仕事｜</span>後編</span></div><span class="more">建設メシ · WATCH</span></div></a><a class="act-card clip-b" href="https://youtu.be/aVRw4Qxj0bg" target="_blank" rel="noopener" style="aspect-ratio:16/9"><img src="img/yt_aVRw4Qxj0bg.jpg" alt="MBSニュース解説｜空き家 過去最多900万戸のワケ（代表 菊池 出演）" style="filter:none" loading="lazy" decoding="async"><div class="t"><div class="cond en">TV</div><div class="jp">MBSニュース解説｜</span>空き家 過去最多900万戸のワケ</span>（</span>代表 菊池 出演）</span></div><span class="more">MBS NEWS · WATCH</span></div></a><a class="act-card clip-b" href="https://www.youtube.com/live/ENF7PguBaU0" target="_blank" rel="noopener" style="aspect-ratio:16/9"><img src="img/yt_ENF7PguBaU0.jpg" alt="第45回 空き家相談の現場からみる 家族間コミュニケーションの重要性" style="filter:none" loading="lazy" decoding="async"><div class="t"><div class="cond en">TALK</div><div class="jp">第45回 空き家相談の現場からみる 家族間コミュニケーションの重要性</span></div><span class="more">笑顔相続ch · WATCH</span></div></a></div>
   <div class="ba-grid" style="margin-top:clamp(28px,4vw,56px)">
     <div class="ph clip-b"><img src="img/team_endex2.jpg" alt="エンディング産業展 チーム集合写真" loading="lazy" decoding="async"></div>
     <div class="ph clip-b"><img src="img/booth_wide.jpg" alt="展示会ブース" loading="lazy" decoding="async"></div>
@@ -1012,7 +1014,7 @@
 
 <section class="company wrap">
   <div class="cond sub fade">COMPANY</div>
-  <h2 class="cond ttl fade">会社概要</h2>
+  <h2 class="cond ttl fade" style="font-size:min(clamp(64px,10vw,128px),calc(88vw / 4));white-space:nowrap">会社概要</h2>
   <table class="ctable fade">
     <tr><th>NAME<small>商号</small></th><td>オハナホーム株式会社</td></tr>
     <tr><th>REPRESENTATIVE<small>代表者</small></th><td>代表取締役　菊池 聖雄</td></tr>
@@ -1033,12 +1035,12 @@
 <div class="pg-hero">
   <img src="img/duo_sky.jpg" alt="青空の下、本社の前に立つ菊池聖雄と菊池あかり" style="object-position:50% 35%" loading="lazy" decoding="async">
   <div class="cond stamp">VISION</div>
-  <div class="cap fade">空き家を、もう一度<br>誰かの居場所に。</div>
+  <div class="cap fade"><span class="ib">空き家を、</span><span class="ib">もう一度</span><br><span class="ib">誰かの居場所に。</span></div>
 </div>
 
 <section class="wrap" style="margin-top:clamp(70px,11vw,160px)">
   <div class="cond sub fade">VISION</div>
-  <h2 class="cond ttl fade">ビジョン</h2>
+  <h2 class="cond ttl fade" style="font-size:min(clamp(64px,10vw,128px),calc(88vw / 4));white-space:nowrap">ビジョン</h2>
   <p class="vision-big clip-l">空き家再生をとおして、<br>日本中を笑顔に。</p>
   <div class="two" style="margin-top:clamp(28px,4vw,56px)">
     <div class="fade"><div class="ph" style="aspect-ratio:4/5;overflow:hidden"><img src="img/duo_tee.jpg" alt="「日本中を笑顔に。空き家再生」Tシャツ" style="width:100%;height:100%;object-fit:cover;object-position:50% 30%" loading="lazy" decoding="async"></div></div>
@@ -1052,7 +1054,7 @@
 
 <section class="wrap" style="margin-top:clamp(70px,11vw,160px)">
   <div class="cond sub fade">PHILOSOPHY</div>
-  <h2 class="cond ttl fade">理念</h2>
+  <h2 class="cond ttl fade" style="font-size:min(clamp(64px,10vw,128px),calc(88vw / 2));white-space:nowrap">理念</h2>
   <p class="vision-big clip-l">想いをつなぎ、<br>笑顔をつくる。</p>
   <div class="sem-themes">
     <div class="clip-b"><div class="n">01</div><h4>家族の想いを、つなぐ</h4><p>家に残された写真や手紙、思い出の品。捨てずにご家族へお戻しし、家族の時間を次へ手渡します。</p></div>
@@ -1064,13 +1066,13 @@
 <div class="pg-hero" style="height:clamp(360px,60vh,680px);margin-top:clamp(70px,11vw,160px)">
   <img src="img/hq_now.jpg" alt="再生後の本社、夕暮れ" style="filter:none" loading="lazy" decoding="async">
   <div class="cond stamp">IBASHO</div>
-  <div class="cap fade">家は、誰かの居場所になる。</div>
+  <div class="cap fade"><span class="ib">家は、</span><span class="ib">誰かの居場所になる。</span></div>
 </div>
 <section class="wrap" style="margin-top:clamp(60px,9vw,130px)">
   <div class="cond sub fade">KEYWORD</div>
-  <h2 class="cond ttl fade">居場所</h2>
+  <h2 class="cond ttl fade" style="font-size:min(clamp(64px,10vw,128px),calc(88vw / 3));white-space:nowrap">居場所</h2>
   <div class="two" style="margin-top:clamp(28px,4vw,56px)">
-    <div class="fade"><p class="lead-jp">僕らが大切にしている言葉は、<br>「居場所」です。</p></div>
+    <div class="fade"><p class="lead-jp"><span class="ib">僕らが大切にしている言葉は、</span><br><span class="ib">「居場所」です。</span></p></div>
     <div class="body-txt fade">
       <p>家は、ただの建物ではありません。家族が帰ってくる場所であり、誰かがほっとできる場所です。空き家とは、その居場所が失われた状態なのだと思います。</p>
       <p>だから僕らの仕事は、家を売り買いすることではなく、居場所をつくり直すこと。次に暮らす家族の居場所。相談に来た人が安心して話せる居場所。一緒に働く仲間の居場所。</p>
@@ -1085,7 +1087,7 @@
   <h2 class="cond ttl fade">TANE</h2>
   <div class="two" style="margin-top:clamp(28px,4vw,56px)">
     <div class="fade">
-      <p class="lead-jp">空き家を、<br>子どもたちの居場所に。</p>
+      <p class="lead-jp">空き家を、<br><span class="ib">子どもたちの居場所に。</span></p>
       <div class="ph clip-l" style="margin-top:22px;aspect-ratio:4/3;overflow:hidden"><img src="img/tane_house.jpg" alt="フリースクールに生まれ変わる八街市の空き家" style="width:100%;height:100%;object-fit:cover" loading="lazy" decoding="async"></div>
     </div>
     <div class="body-txt fade">
@@ -1109,7 +1111,7 @@
 <div class="pg-hero vband">
   <video data-src="img/sem_loop.mp4" preload="none" class="hero-video" autoplay muted loop playsinline data-poster="img/sem_poster.jpg"></video>
   <div class="cond stamp">SEMINAR</div>
-  <div class="cap fade">終活は、菊池あかりが。空き家は、菊池聖雄が。<br>夫婦ふたりで、家族の「その後」を話します。</div>
+  <div class="cap fade"><span class="ib">終活は、</span><span class="ib">菊池あかりが。</span><span class="ib">空き家は、</span><span class="ib">菊池聖雄が。</span><br><span class="ib">夫婦ふたりで、</span><span class="ib">家族の「その後」を話します。</span></div>
 </div>
 <section class="wrap" style="margin-top:8px">
   <div class="ba-grid">
@@ -1120,10 +1122,10 @@
 </section>
 <section class="wrap" style="margin-top:clamp(60px,9vw,130px)">
   <div class="cond sub fade">01 · KIKUCHI AKARI</div>
-  <h2 class="cond ttl fade">終活セミナー</h2>
+  <h2 class="cond ttl fade" style="font-size:min(clamp(64px,10vw,128px),calc(88vw / 6));white-space:nowrap">終活セミナー</h2>
   <div class="two" style="margin-top:clamp(28px,4vw,56px)">
     <div class="fade">
-      <p class="lead-jp">みんなでワイワイ、<br>おうち終活ノートの書き方講座。</p>
+      <p class="lead-jp"><span class="ib">みんなでワイワイ、</span><br><span class="ib">おうち終活ノートの</span><br class="sp"><span class="ib">書き方講座。</span></p>
       <div class="sem-facts">
         <div><b>2001</b><span>看護師として医療現場へ</span></div>
         <div><b>2014</b><span>大家業・空き家再生へ</span></div>
@@ -1151,14 +1153,14 @@
 
 <div class="pg-hero" style="height:clamp(320px,52vh,600px);margin-top:clamp(80px,12vw,180px)">
   <img src="img/sem_hall.jpg" alt="大ホールの壇上で話す菊池聖雄と菊池あかり" style="object-position:50% 40%" loading="lazy" decoding="async">
-  <div class="cap fade" style="left:var(--pad);right:auto;text-align:left">大きな会場でも、<br>話すことは現場のことだけ。</div>
+  <div class="cap fade" style="left:var(--pad);right:auto;text-align:left"><span class="ib">大きな会場でも、</span><br><span class="ib">話すことは現場のことだけ。</span></div>
 </div>
 <section class="wrap" style="margin-top:clamp(60px,9vw,130px)">
   <div class="cond sub fade">02 · KIKUCHI MASAO</div>
-  <h2 class="cond ttl fade">空き家セミナー</h2>
+  <h2 class="cond ttl fade" style="font-size:min(clamp(64px,10vw,128px),calc(88vw / 7));white-space:nowrap">空き家セミナー</h2>
   <div class="two" style="margin-top:clamp(28px,4vw,56px)">
     <div class="fade">
-      <p class="lead-jp">「どうしたらいいか分からない家」の、<br>最初の一歩を軽くする。</p>
+      <p class="lead-jp"><span class="ib">「どうしたらいいか</span><br class="sp"><span class="ib">分からない家」の、</span><br><span class="ib">最初の一歩を軽くする。</span></p>
       <div class="sem-facts">
         <div><b>30-40</b><span>年間の空き家再生棟数</span></div>
         <div><b>200</b><span>全国の空き家再生士（名・2026年9月現在）</span></div>
@@ -1177,7 +1179,7 @@
   </div>
   <div class="pg-hero vband" style="height:clamp(320px,50vh,560px);margin-top:clamp(40px,6vw,80px)">
     <video data-src="img/sem_loop3.mp4" preload="none" class="hero-video" autoplay muted loop playsinline data-poster="img/sem_poster3.jpg"></video>
-    <div class="cap fade" style="left:var(--pad);right:auto;text-align:left">業界団体・展示会・自治体の相談会で。<br>「困った空き家が、誰かの役に立つ。」</div>
+    <div class="cap fade" style="left:var(--pad);right:auto;text-align:left"><span class="ib">業界団体・展示会・自治体の相談会で。</span><br><span class="ib">「困った空き家が、</span><span class="ib">誰かの役に立つ。</span><span class="ib">」</span></div>
   </div>
   <div class="sem-pics">
     <div class="ph clip-l"><img src="img/masao_seminar.jpg" alt="八街市 空き家相談会＆セミナーで登壇する菊池聖雄" loading="lazy" decoding="async"></div>
@@ -1196,7 +1198,7 @@
 <a class="pg-hero band" href="#/contact" style="display:block;height:clamp(300px,56vh,620px);margin-top:clamp(70px,11vw,160px)">
   <video data-src="img/semin_loop.mp4" preload="none" class="hero-video" autoplay muted loop playsinline data-poster="img/semin_loop_poster.jpg"></video>
   <div class="cond stamp" style="font-size:clamp(56px,10vw,150px)">LIVE</div>
-  <div class="cap fade">会場でも、オンラインでも。<br>まずは聞きにきてください。</div>
+  <div class="cap fade"><span class="ib">会場でも、</span><span class="ib">オンラインでも。</span><br><span class="ib">まずは聞きにきてください。</span></div>
 </a>
 
 
@@ -1206,7 +1208,7 @@
 <section class="wrap" style="padding-top:clamp(120px,18vw,200px)" id="col-list">
   <div class="cond sub fade">OUCHI JIMAI</div>
   <h2 class="cond ttl fade">COLUMN</h2>
-  <p class="lead-jp fade" style="margin-top:20px">空き家の相談現場で、僕が実際に考えていること。</p>
+  <p class="lead-jp fade" style="margin-top:20px"><span class="ib">空き家の相談現場で、</span><span class="ib">僕が実際に考えていること。</span></p>
   <div class="art-grid"><a class="art-card clip-b" href="#/column/shitsumon-list"><div class="ph"><img src="img/hero_washitsu.jpg" alt="" loading="lazy" decoding="async"></div><div class="t"><div class="cat">空き家の相談</div><h3>空き家の相談で、最初に聞く7つのこと</h3><p>「売るか、残すか、壊すか」から始めると、たいてい進みません。先に必要なのは、気持ちの整理です。僕が相談の現場で実際に使っている質問を、順番ど…</p><span class="more">READ</span></div></a><a class="art-card clip-b" href="#/column/uru-kasu"><div class="ph"><img src="img/hero_ext.jpg" alt="" loading="lazy" decoding="async"></div><div class="t"><div class="cat">売る・貸す・壊す</div><h3>売るか、貸すか。迷っている人に、僕がまず聞くこと</h3><p>築40年、駅には近い、でも雨漏りがある。「売った方がいいですか、貸した方がいいですか」。その問いに、今ある情報だけで「こちらが正解」とは言え…</p><span class="more">READ</span></div></a><a class="art-card clip-b" href="#/column/kaitai-mae-yakusho"><div class="ph"><img src="img/site_night.jpg" alt="" loading="lazy" decoding="async"></div><div class="t"><div class="cat">税金・手続き</div><h3>解体を決める前に。課税明細書を持って、役所で聞いてほしいこと</h3><p>「解体したら固定資産税が下がりますよね」。ネットで調べた情報が出発点の相談は多いです。間違いではないけれど、「条件によって変わる」の部分が省…</p><span class="more">READ</span></div></a><a class="art-card clip-b" href="#/column/kyoudai-kowai"><div class="ph"><img src="img/g_room_clutter.jpg" alt="" loading="lazy" decoding="async"></div><div class="t"><div class="cat">家族・相続</div><h3>「兄弟が怒っていて話すのが怖い」。売却の話を、僕が先にしない理由</h3><p>空き家の相談として来られたけれど、本題は家ではなく、関係のこじれのほうにある。そう感じたとき、僕は売却の話を先にしないと決めます。順番は、人…</p><span class="more">READ</span></div></a><a class="art-card clip-b" href="#/column/yukashita"><div class="ph"><img src="img/cmp_living_b.jpg" alt="" loading="lazy" decoding="async"></div><div class="t"><div class="cat">建物の見方</div><h3>壁のカビを拭く前に、床下を見たい理由</h3><p>「拭けば取れますか」。壁一面のカビを前に、そう聞かれることがあります。表面を拭けば一度はきれいに見える。でも、床下まで湿気が強いなら、壁の表…</p><span class="more">READ</span></div></a></div>
   <div class="cond sub fade" style="margin-top:clamp(60px,9vw,120px)">NOTE</div>
   <h2 class="cond ttl fade" style="font-size:clamp(28px,3.4vw,44px)">代表・まさおのnote</h2>
@@ -1235,11 +1237,11 @@
 <div class="pg-hero vband">
   <video data-src="img/team_loop.mp4" preload="none" class="hero-video" autoplay muted loop playsinline data-poster="img/team_loop_poster.jpg"></video>
   <div class="cond stamp">RECRUIT</div>
-  <div class="cap fade">空き家再生をとおして、日本中を笑顔に。<br>その仕事を、一緒にやる仲間を探しています。</div>
+  <div class="cap fade"><span class="ib">空き家再生をとおして、</span><span class="ib">日本中を笑顔に。</span><br><span class="ib">その仕事を、</span><span class="ib">一緒にやる仲間を探しています。</span></div>
 </div>
 <section class="wrap" style="margin-top:clamp(60px,9vw,130px)">
   <div class="cond sub fade">MESSAGE</div>
-  <h2 class="cond ttl fade">代表から</h2>
+  <h2 class="cond ttl fade" style="font-size:min(clamp(64px,10vw,128px),calc(88vw / 4));white-space:nowrap">代表から</h2>
   <div class="two" style="margin-top:clamp(28px,4vw,56px)">
     <div class="fade">
       <div class="ph" style="aspect-ratio:4/5;overflow:hidden;max-width:420px"><img src="img/masao.jpg" alt="代表取締役 菊池聖雄" style="width:100%;height:100%;object-fit:cover;object-position:50% 15%" loading="lazy" decoding="async"></div>
@@ -1257,7 +1259,7 @@
 
 <section class="wrap" style="margin-top:clamp(70px,11vw,160px)">
   <div class="cond sub fade">POSITIONS</div>
-  <h2 class="cond ttl fade">募集職種</h2>
+  <h2 class="cond ttl fade" style="font-size:min(clamp(64px,10vw,128px),calc(88vw / 4));white-space:nowrap">募集職種</h2>
   <div class="sem-themes" style="grid-template-columns:repeat(auto-fit,minmax(200px,1fr))">
     <div class="clip-b"><div class="n">01</div><h4>施工管理・内装</h4><p>空き家再生の現場を、職人さんと一緒に動かす仕事。幹部候補も募集。</p></div>
     <div class="clip-b"><div class="n">02</div><h4>多能工・大工・外構</h4><p>手を動かして家を直す仕事。未経験からの育成枠あり。</p></div>
