@@ -536,12 +536,12 @@
 <main class="view on" id="view-home">
 <section class="mv" id="top">
   <div class="slide on"><video data-src="img/top_loop.mp4" preload="none" autoplay muted loop playsinline poster="img/top_loop_poster.jpg"></video></div>
-  <div class="slide"><img src="img/hero_ext.jpg" alt="外構を整えた昭和築の二階建て住宅" fetchpriority="high" decoding="async"></div>
-  <div class="slide"><img src="img/g_room_clutter2.jpg" alt="片付け前、家財が残されたままの部屋" loading="lazy" decoding="async"></div>
-  <div class="slide"><img src="img/g_ext_ivy.jpg" alt="草木に覆われた二階建ての空き家" loading="lazy" decoding="async"></div>
-  <div class="slide"><img src="img/after_kitchen.jpg" alt="再生後のキッチン" loading="lazy" decoding="async"></div>
-  <div class="slide"><img src="img/hero_washitsu.jpg" alt="障子と畳の和室" loading="lazy" decoding="async"></div>
-  <div class="catch clip-r">
+  <div class="slide"><video data-src="img/akiya_in_loop.mp4" preload="none" muted loop playsinline data-poster="img/akiya_in_loop_poster.jpg"></video></div>
+  <div class="slide"><video data-src="img/akiya_out_loop.mp4" preload="none" muted loop playsinline data-poster="img/akiya_out_loop_poster.jpg"></video></div>
+  <div class="slide"><video data-src="img/work_loop.mp4" preload="none" muted loop playsinline data-poster="img/work_loop_poster.jpg"></video></div>
+  <div class="slide"><video data-src="img/smile_loop.mp4" preload="none" muted loop playsinline data-poster="img/smile_loop_poster.jpg"></video></div>
+  <div class="slide"><video data-src="img/hq_loop.mp4" preload="none" muted loop playsinline data-poster="img/hq_loop_poster.jpg"></video></div>
+<div class="catch clip-r">
     <div class="top"><span class="s">想いをつなぎ、笑顔をつくる</span><span class="m">「終わりから、はじまる。」</span></div>
     <div class="btm"><span class="cond a">OUCHI</span><span class="cond b">JIMAI.</span></div>
   </div>
@@ -1394,8 +1394,8 @@
 <script>
 (function(){
   var slides=document.querySelectorAll('.mv .slide'),dots=document.querySelectorAll('.dots button'),i=0,t;
-  function go(n){slides[i].classList.remove('on');dots[i].classList.remove('on');i=(n+slides.length)%slides.length;slides[i].classList.add('on');dots[i].classList.add('on');}
-  function auto(){clearInterval(t);t=setInterval(function(){go(i+1);},5000);}
+  function go(n){slides[i].classList.remove('on');dots[i].classList.remove('on');i=(n+slides.length)%slides.length;slides[i].classList.add('on');dots[i].classList.add('on');window.dispatchEvent(new Event('scroll'));}
+  function auto(){clearInterval(t);t=setInterval(function(){go(i+1);},7000);}
   dots.forEach(function(d,n){d.addEventListener('click',function(){go(n);auto();});});
   if(!matchMedia('(prefers-reduced-motion: reduce)').matches) auto();
 
@@ -1530,13 +1530,19 @@
     for(var i=0;i<vids.length;i++){
       var v=vids[i];
       if(!shown(v)){ if(!v.paused) v.pause(); continue; }
+      var sl=v.closest('.mv .slide');
+      if(sl){ var on=sl.classList.contains('on'), nx=sl.nextElementSibling&&sl.nextElementSibling.classList&&sl.nextElementSibling.classList.contains('slide')?sl.nextElementSibling:null;
+        var prevOn=sl.previousElementSibling&&sl.previousElementSibling.classList&&sl.previousElementSibling.classList.contains('on');
+        var first=sl.parentElement.querySelector('.slide'); var lastOn=sl===first&&sl.parentElement.querySelectorAll('.slide')[sl.parentElement.querySelectorAll('.slide').length-1].classList.contains('on');
+        if(on){ load(v); play(v); } else if(prevOn||lastOn){ load(v); if(!v.paused) v.pause(); } else if(!v.paused){ v.pause(); }
+        continue; }
       var r=v.getBoundingClientRect();
       var near=r.top<innerHeight+400&&r.bottom>-400;
       if(near){ load(v); play(v); }
       else if(!v.paused){ v.pause(); }
     }
   }
-  function schedule(){ if(!tick){ tick=true; requestAnimationFrame(check); } }
+  function schedule(){ if(!tick){ tick=true; setTimeout(check,40); } }
   addEventListener('scroll',schedule,{passive:true});
   addEventListener('resize',schedule);
   addEventListener('hashchange',function(){setTimeout(check,80);});
