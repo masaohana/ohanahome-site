@@ -550,7 +550,7 @@
   .trk .lk{display:flex;flex-wrap:wrap;gap:6px 18px;margin-top:12px;}
   .trk .lk a{font-size:13px;font-weight:900;text-decoration:underline;text-underline-offset:3px;}
   #view-music .note{font-size:13px;color:var(--gy);}
-  @media(max-width:600px){.trk{grid-template-columns:96px 1fr;align-items:start;}.trk p{display:none;}.trk .pl{grid-column:1/-1;}.trk .tm{min-width:74px;font-size:14px;}}
+  @media(max-width:600px){.trk{grid-template-columns:84px 1fr;column-gap:14px;row-gap:0;align-items:start;}.trk .tb{display:contents;}.trk .cv{grid-row:1/3;}.trk .g{grid-column:2;align-self:end;}.trk h3{grid-column:2;font-size:17px;margin:2px 0 0;}.trk p{display:none;}.trk .pl{grid-column:1/-1;}.trk .lk{grid-column:1/-1;}.trk .tm{min-width:74px;font-size:14px;}}
   .hosts{margin-top:clamp(24px,3vw,40px);max-width:900px;display:flex;flex-wrap:wrap;gap:8px;align-items:center;}
   .hosts b{width:100%;font-size:13px;letter-spacing:.08em;margin-bottom:2px;}
   .hosts span{font-size:12px;font-weight:700;line-height:1.4;padding:5px 10px;border:1px solid var(--line);background:var(--wh);}
@@ -1139,7 +1139,7 @@
         <p>空き家の相談で、いちばん多いのは「どうしたらいいか分からない」という悩みです。だから、最初の一歩を軽くする仕組み——絵本、終活ノート、自治体との協定、全国の空き家再生士——をつくってきました。</p>
       </div>
       <div class="tags"><span>空き家再生</span><span>相続</span><span>買取・再生</span><span>絵本『あきやにあかり』企画</span></div>
-      <div style="display:flex;gap:12px;flex-wrap:wrap"><a class="btn-bk" href="/column/">COLUMN<span class="arrow"></span></a><a class="btn-bk" href="https://www.instagram.com/masao.kikuchi/" target="_blank" rel="noopener" style="background:var(--wh);color:var(--bk);border:2px solid var(--bk)">INSTAGRAM<span class="arrow"></span></a><a class="btn-bk" href="https://www.facebook.com/profile.php?id=61579031979060" target="_blank" rel="noopener" style="background:var(--wh);color:var(--bk);border:2px solid var(--bk)">FACEBOOK<span class="arrow"></span></a><a class="btn-bk" href="https://note.com/masao_kikuchi" target="_blank" rel="noopener" style="background:var(--wh);color:var(--bk);border:2px solid var(--bk)">NOTE<span class="arrow"></span></a><a class="btn-bk" href="https://www.youtube.com/watch?v=xqQT1Sf7J4Y" target="_blank" rel="noopener" style="background:var(--wh);color:var(--bk);border:2px solid var(--bk)" title="DIYがいいあんばい（作詞・作曲 masaohana）">SONG ♪ DIYがいいあんばい<span class="arrow"></span></a></div>
+      <div style="display:flex;gap:12px;flex-wrap:wrap"><a class="btn-bk" href="/column/">COLUMN<span class="arrow"></span></a><a class="btn-bk" href="https://www.instagram.com/masao.kikuchi/" target="_blank" rel="noopener" style="background:var(--wh);color:var(--bk);border:2px solid var(--bk)">INSTAGRAM<span class="arrow"></span></a><a class="btn-bk" href="https://www.facebook.com/profile.php?id=61579031979060" target="_blank" rel="noopener" style="background:var(--wh);color:var(--bk);border:2px solid var(--bk)">FACEBOOK<span class="arrow"></span></a><a class="btn-bk" href="https://note.com/masao_kikuchi" target="_blank" rel="noopener" style="background:var(--wh);color:var(--bk);border:2px solid var(--bk)">NOTE<span class="arrow"></span></a><a class="btn-bk" href="/music/" style="background:var(--wh);color:var(--bk);border:2px solid var(--bk)">MUSIC ♪ オハナホームのうた<span class="arrow"></span></a></div>
     </div>
   </article>
   <article class="person">
@@ -1709,7 +1709,7 @@
       <img class="cv" src="img/music_tomoshibi.jpg" alt="「空き家に ふたたび ともしびを」のジャケット" loading="lazy" decoding="async">
       <div class="tb">
         <div class="cond g">HIP HOP</div>
-        <h3>空き家に ふたたび ともしびを</h3>
+        <h3><span class="ib">空き家に ふたたび</span> <span class="ib">ともしびを</span></h3>
         <p>誰も住まなくなった家に、もう一度あかりを灯す。オハナホームの仕事を、そのまま歌にしました。</p>
         <div class="pl" data-src="audio/tomoshibi.m4a">
           <button type="button" class="pp" aria-label="「空き家に ふたたび ともしびを」を再生"><span class="ic"></span></button>
@@ -1751,7 +1751,7 @@
       <img class="cv" src="img/music_kureba.jpg" alt="「オハナにくれば？〜仕事にくれば〜」のジャケット" loading="lazy" decoding="async">
       <div class="tb">
         <div class="cond g">J-POP</div>
-        <h3>オハナにくれば？〜仕事にくれば〜</h3>
+        <h3><span class="ib">オハナにくれば？</span><span class="ib">〜仕事にくれば〜</span></h3>
         <p>一緒に働く仲間を呼ぶ、オハナホームの採用ソング。</p>
         <div class="pl" data-src="audio/kureba.m4a">
           <button type="button" class="pp" aria-label="「オハナにくれば？〜仕事にくれば〜」を再生"><span class="ic"></span></button>
