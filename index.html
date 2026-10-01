@@ -206,6 +206,7 @@
   .story-end{display:grid;grid-template-columns:auto 1fr;gap:clamp(20px,4vw,50px);align-items:center;margin-top:clamp(40px,7vw,99.5px);}
   .story-end img{width:clamp(140px,20vw,260px);border-radius:50%;}
   .story-end .txt{font-family:var(--maru);font-size:clamp(20px,2.6vw,36px);line-height:1.7;}
+  @media(max-width:600px){.story-end{grid-template-columns:1fr;justify-items:center;text-align:center;}.story-end img{width:min(48vw,220px);}}
   @media(max-width:860px){.story-head,.sp{grid-template-columns:1fr;}.sp:nth-child(even){direction:ltr;}.sp-seq{grid-template-columns:repeat(2,1fr);}}
 
   /* books */
@@ -375,7 +376,7 @@
     .pg-hero .stamp ~ .cap,.pg-hero .cap:has(~ .stamp) { left:var(--pad);right:var(--pad);max-width:none;text-align:left;bottom:calc(clamp(20px,4vw,50px) + 78px); }
   }
   .sec-gap { margin-top:clamp(70px,11vw,156.4px); }
-  .ib { display:inline-block; }
+  .ib { display:inline-block; max-width:100%; }  /* 区切りが列より長いときだけ中で折り返す（はみ出し防止） */
   .wr-list { list-style:none;margin:clamp(28px,4vw,56px) 0 0;padding:0;display:grid;grid-template-columns:repeat(2,1fr);column-gap:clamp(20px,3vw,42.7px);counter-reset:wr; }
   .wr-list li { counter-increment:wr;display:flex;gap:16px;align-items:baseline;border-top:1px solid var(--bk);padding:18px 0 20px;font-size:clamp(14px,1.25vw,17px);font-weight:700;line-height:1.7;min-width:0; }
   .wr-list li::before { content:counter(wr,decimal-leading-zero);font-family:var(--cond);font-weight:900;font-size:22px;letter-spacing:.05em;color:var(--gy);flex:none; }
@@ -795,10 +796,10 @@
     </div>
     <div class="story-end">
       <img class="fade" src="img/st_15.jpg" alt="ランプを持つ猫" loading="lazy" decoding="async">
-      <div class="txt fade">あきやに　あかりをともして<br>まちは　げんきに　なったのです<br><em style="color:var(--sun);font-style:normal">さぁ　つぎは　きみのばん<br>あかりを　ともして　まちじゅうを　げんきにしよう</em></div>
+      <div class="txt fade"><span class="ib">あきやに</span>　<span class="ib">あかりをともして</span><br><span class="ib">まちは</span>　<span class="ib">げんきに</span>　<span class="ib">なったのです</span><br><em style="color:var(--sun);font-style:normal"><span class="ib">さぁ</span>　<span class="ib">つぎは</span>　<span class="ib">きみのばん</span><br><span class="ib">あかりを</span>　<span class="ib">ともして</span>　<span class="ib">まちじゅうを</span>　<span class="ib">げんきにしよう</span></em></div>
     </div>
     <div style="display:flex;gap:14px;flex-wrap:wrap;justify-content:center;margin-top:clamp(36px,6vw,72px)">
-      <a class="btn-bk" href="https://amzn.asia/d/03BOzXKo" target="_blank" rel="noopener" style="background:var(--sun);color:var(--bk);font-size:28px;padding:22px 40px">絵本『あきやにあかり』を買う<span class="arrow"></span></a>
+      <a class="btn-bk" href="https://amzn.asia/d/03BOzXKo" target="_blank" rel="noopener" style="background:var(--sun);color:var(--bk);font-size:clamp(18px,5vw,28px);padding:clamp(16px,3vw,22px) clamp(20px,5vw,40px);white-space:nowrap">絵本『あきやにあかり』を買う<span class="arrow"></span></a>
       <a class="btn-bk" href="#/contact" style="background:transparent;color:var(--wh);border:2px solid var(--wh)">寄贈・読み聞かせの相談<span class="arrow"></span></a>
     </div>
   </div>
@@ -969,7 +970,7 @@
 </div>
 <section class="wrap" style="margin-top:clamp(60px,9vw,130px)">
   <div class="cond sub fade">PARTNERSHIP</div>
-  <h2 class="cond ttl fade" style="font-size:min(clamp(40px,6.4vw,84px),calc(88vw / 7));white-space:nowrap">八街市との協定</h2>
+  <h2 class="cond ttl fade" style="font-size:min(clamp(40px,6.4vw,84px),calc(84vw / 7));white-space:nowrap">八街市との協定</h2>
   <div class="two" style="margin-top:clamp(28px,4vw,56px)">
     <div class="fade">
       <p class="lead-jp"><span class="ib">協会が啓発を、</span><span class="ib">会社が実務を。</span><br><span class="ib">行政と役割を分けて、</span><span class="ib">空き家に向き合う。</span></p>
@@ -985,7 +986,7 @@
 
 <section class="wrap" style="margin-top:clamp(70px,11vw,160px)">
   <div class="cond sub fade">HEAD OFFICE</div>
-  <h2 class="cond ttl fade" style="font-size:min(clamp(40px,6.4vw,84px),calc(88vw / 10));white-space:nowrap">本社も、空き家でした</h2>
+  <h2 class="cond ttl fade" style="font-size:min(clamp(40px,6.4vw,84px),calc(84vw / 10));white-space:nowrap">本社も、空き家でした</h2>
   <div class="two" style="margin-top:clamp(28px,4vw,56px)">
     <div class="fade"><p class="lead-jp">前の持ち主が、<br><span class="ib">航空写真を額に入れて</span><br class="sp"><span class="ib">残していた家。</span></p></div>
     <div class="body-txt fade">
@@ -1008,7 +1009,7 @@
 
 <section class="wrap" style="margin-top:clamp(70px,11vw,160px)">
   <div class="cond sub fade">TEAM</div>
-  <h2 class="cond ttl fade" style="font-size:min(clamp(40px,6.4vw,84px),calc(88vw / 9));white-space:nowrap">オハナホームの日常</h2>
+  <h2 class="cond ttl fade" style="font-size:min(clamp(40px,6.4vw,84px),calc(84vw / 9));white-space:nowrap">オハナホームの日常</h2>
   <p class="lead-jp fade" style="margin-top:20px"><span class="ib">空き家の想いをつなぐ</span><br class="sp"><span class="ib">パートナー。</span><br><span class="ib">八街の、</span><span class="ib">再生した空き家の事務所から</span><br class="sp"><span class="ib">全国へ。</span></p>
 </section>
 <div class="pg-hero vband" style="height:clamp(360px,60vh,680px);margin-top:clamp(28px,4vw,56px)">
@@ -1034,7 +1035,7 @@
 
 <section class="people wrap">
   <div class="cond sub fade">PEOPLE</div>
-  <h2 class="cond ttl fade" style="font-size:min(clamp(40px,6.4vw,84px),calc(88vw / 3));white-space:nowrap">私たち</h2>
+  <h2 class="cond ttl fade" style="font-size:min(clamp(40px,6.4vw,84px),calc(84vw / 3));white-space:nowrap">私たち</h2>
 </section>
 <div class="pg-hero" style="height:clamp(420px,80vh,880px);margin-top:clamp(28px,4vw,56px)">
   <img src="img/duo_sky.jpg" alt="青空の下、本社の前に立つ菊池聖雄と菊池あかり" style="object-position:50% 35%;filter:none" loading="lazy" decoding="async">
@@ -1075,7 +1076,7 @@
 
 <section class="wrap" style="margin-top:clamp(70px,11vw,160px)">
   <div class="cond sub fade">MEDIA</div>
-  <h2 class="cond ttl fade" style="font-size:min(clamp(40px,6.4vw,84px),calc(88vw / 5));white-space:nowrap">取材・掲載</h2>
+  <h2 class="cond ttl fade" style="font-size:min(clamp(40px,6.4vw,84px),calc(84vw / 5));white-space:nowrap">取材・掲載</h2>
   <div class="col-list">
     <a class="col-item" href="https://note.com/chibakei/n/n2bf4b75c8957" target="_blank" rel="noopener"><div class="d">2026.05.15</div><div><h4>ちば経済産業新聞｜オハナホーム── 空き家を「誰かの居場所」に変える夫婦の挑戦</h4><p>年間30〜40棟の空き家を再生し「誰かの居場所」に変え続ける。夫婦二人三脚の会社運営を取材。</p></div><div class="go">READ →</div></a>
     <a class="col-item" href="https://media.livedoctor.jp/interview/%E5%85%A8%E5%9B%BD%E3%81%AE%E7%A9%BA%E3%81%8D%E5%AE%B6%E3%82%92%E5%B1%85%E5%A0%B4%E6%89%80%E3%81%AB%E3%82%AA%E3%83%8F%E3%83%8A%E3%83%9B%E3%83%BC%E3%83%A0/" target="_blank" rel="noopener"><div class="d">2026.05.19</div><div><h4>LIVE Doctor｜全国の「空き家」を「居場所」に。菊池聖雄氏の目指す空き家再生の未来</h4><p>「社長の背中」インタビュー。2018年設立、2021年に空き家再生協会を立ち上げ、全国に空き家再生士のネットワークを。</p></div><div class="go">READ →</div></a>
@@ -1093,7 +1094,7 @@
 
 <section class="company wrap">
   <div class="cond sub fade">COMPANY</div>
-  <h2 class="cond ttl fade" style="font-size:min(clamp(40px,6.4vw,84px),calc(88vw / 4));white-space:nowrap">会社概要</h2>
+  <h2 class="cond ttl fade" style="font-size:min(clamp(40px,6.4vw,84px),calc(84vw / 4));white-space:nowrap">会社概要</h2>
   <table class="ctable fade">
     <tr><th>NAME<small>商号</small></th><td>オハナホーム株式会社</td></tr>
     <tr><th>REPRESENTATIVE<small>代表者</small></th><td>代表取締役　菊池 聖雄</td></tr>
@@ -1119,7 +1120,7 @@
 
 <section class="wrap" style="margin-top:clamp(70px,11vw,160px)">
   <div class="cond sub fade">VISION</div>
-  <h2 class="cond ttl fade" style="font-size:min(clamp(40px,6.4vw,84px),calc(88vw / 4));white-space:nowrap">ビジョン</h2>
+  <h2 class="cond ttl fade" style="font-size:min(clamp(40px,6.4vw,84px),calc(84vw / 4));white-space:nowrap">ビジョン</h2>
   <p class="vision-big clip-l">空き家再生をとおして、<br>日本中を笑顔に。</p>
   <div class="two" style="margin-top:clamp(28px,4vw,56px)">
     <div class="fade"><div class="ph" style="aspect-ratio:4/5;overflow:hidden"><img src="img/duo_tee.jpg" alt="「日本中を笑顔に。空き家再生」Tシャツ" style="width:100%;height:100%;object-fit:cover;object-position:50% 30%" loading="lazy" decoding="async"></div></div>
@@ -1133,7 +1134,7 @@
 
 <section class="wrap" style="margin-top:clamp(70px,11vw,160px)">
   <div class="cond sub fade">PHILOSOPHY</div>
-  <h2 class="cond ttl fade" style="font-size:min(clamp(40px,6.4vw,84px),calc(88vw / 2));white-space:nowrap">理念</h2>
+  <h2 class="cond ttl fade" style="font-size:min(clamp(40px,6.4vw,84px),calc(84vw / 2));white-space:nowrap">理念</h2>
   <p class="vision-big clip-l">想いをつなぎ、<br>笑顔をつくる。</p>
   <div class="sem-themes">
     <div class="clip-b"><div class="n">01</div><h4>家族の想いを、つなぐ</h4><p>家に残された写真や手紙、思い出の品。捨てずにご家族へお戻しし、家族の時間を次へ手渡します。</p></div>
@@ -1149,7 +1150,7 @@
 </div>
 <section class="wrap" style="margin-top:clamp(60px,9vw,130px)">
   <div class="cond sub fade">KEYWORD</div>
-  <h2 class="cond ttl fade" style="font-size:min(clamp(40px,6.4vw,84px),calc(88vw / 3));white-space:nowrap">居場所</h2>
+  <h2 class="cond ttl fade" style="font-size:min(clamp(40px,6.4vw,84px),calc(84vw / 3));white-space:nowrap">居場所</h2>
   <div class="two" style="margin-top:clamp(28px,4vw,56px)">
     <div class="fade"><p class="lead-jp"><span class="ib">僕らが大切にしている言葉は、</span><br><span class="ib">「居場所」です。</span></p></div>
     <div class="body-txt fade">
@@ -1200,7 +1201,7 @@
 </section>
 <section class="wrap" style="margin-top:clamp(60px,9vw,130px)">
   <div class="cond sub fade">01 · KIKUCHI AKARI</div>
-  <h2 class="cond ttl fade" style="font-size:min(clamp(40px,6.4vw,84px),calc(88vw / 6));white-space:nowrap">終活セミナー</h2>
+  <h2 class="cond ttl fade" style="font-size:min(clamp(40px,6.4vw,84px),calc(84vw / 6));white-space:nowrap">終活セミナー</h2>
   <div class="two" style="margin-top:clamp(28px,4vw,56px)">
     <div class="fade">
       <p class="lead-jp"><span class="ib">みんなでワイワイ、</span><br><span class="ib">おうち終活ノートの</span><br class="sp"><span class="ib">書き方講座。</span></p>
@@ -1235,7 +1236,7 @@
 </div>
 <section class="wrap" style="margin-top:clamp(60px,9vw,130px)">
   <div class="cond sub fade">02 · KIKUCHI MASAO</div>
-  <h2 class="cond ttl fade" style="font-size:min(clamp(40px,6.4vw,84px),calc(88vw / 7));white-space:nowrap">空き家セミナー</h2>
+  <h2 class="cond ttl fade" style="font-size:min(clamp(40px,6.4vw,84px),calc(84vw / 7));white-space:nowrap">空き家セミナー</h2>
   <div class="two" style="margin-top:clamp(28px,4vw,56px)">
     <div class="fade">
       <p class="lead-jp"><span class="ib">「どうしたらいいか</span><br class="sp"><span class="ib">分からない家」の、</span><br><span class="ib">最初の一歩を軽くする。</span></p>
@@ -1319,7 +1320,7 @@
 </div>
 <section class="wrap" style="margin-top:clamp(60px,9vw,130px)">
   <div class="cond sub fade">MESSAGE</div>
-  <h2 class="cond ttl fade" style="font-size:min(clamp(40px,6.4vw,84px),calc(88vw / 4));white-space:nowrap">代表から</h2>
+  <h2 class="cond ttl fade" style="font-size:min(clamp(40px,6.4vw,84px),calc(84vw / 4));white-space:nowrap">代表から</h2>
   <div class="two" style="margin-top:clamp(28px,4vw,56px)">
     <div class="fade">
       <div class="ph" style="aspect-ratio:4/5;overflow:hidden;max-width:420px"><img src="img/masao.jpg" alt="代表取締役 菊池聖雄" style="width:100%;height:100%;object-fit:cover;object-position:50% 15%" loading="lazy" decoding="async"></div>
@@ -1337,7 +1338,7 @@
 
 <section class="wrap" style="margin-top:clamp(70px,11vw,160px)">
   <div class="cond sub fade">POSITIONS</div>
-  <h2 class="cond ttl fade" style="font-size:min(clamp(40px,6.4vw,84px),calc(88vw / 4));white-space:nowrap">募集職種</h2>
+  <h2 class="cond ttl fade" style="font-size:min(clamp(40px,6.4vw,84px),calc(84vw / 4));white-space:nowrap">募集職種</h2>
   <div class="sem-themes" style="grid-template-columns:repeat(auto-fit,minmax(200px,1fr))">
     <div class="clip-b"><div class="n">01</div><h4>施工管理・内装</h4><p>空き家再生の現場を、職人さんと一緒に動かす仕事。幹部候補も募集。</p></div>
     <div class="clip-b"><div class="n">02</div><h4>多能工・大工・外構</h4><p>手を動かして家を直す仕事。未経験からの育成枠あり。</p></div>
@@ -1407,14 +1408,14 @@
 </section>
 <section class="wrap sec-gap">
   <div class="cond sub">EXTERIOR</div>
-  <h2 class="cond ttl" style="font-size:min(clamp(40px,6.4vw,84px),calc(88vw / 2));white-space:nowrap">外観</h2>
+  <h2 class="cond ttl" style="font-size:min(clamp(40px,6.4vw,84px),calc(84vw / 2));white-space:nowrap">外観</h2>
   <div class="cmp-grid" style="grid-template-columns:1fr;max-width:1100px;margin-top:24px">
       <div class="cmp clip-b" style="aspect-ratio:1700/1224"><img class="b" src="img/cmp_k_ext_wide_b.jpg" alt="改修前の本社。全景。白い外壁と木目の雨戸" loading="lazy" decoding="async"><img class="a" src="img/cmp_k_ext_wide_a.jpg" alt="改修後の本社。全景。黒い外壁と玄関のレンガ" loading="lazy" decoding="async"><div class="bar"></div><span class="lb bl">BEFORE</span><span class="lb al">AFTER</span><span class="room">本社・外観</span><input type="range" min="0" max="100" value="50" aria-label="本社外観の前後を比較"></div>
   </div>
 </section>
 <section class="wrap sec-gap">
   <div class="cond sub">INTERIOR</div>
-  <h2 class="cond ttl" style="font-size:min(clamp(40px,6.4vw,84px),calc(88vw / 2));white-space:nowrap">室内</h2>
+  <h2 class="cond ttl" style="font-size:min(clamp(40px,6.4vw,84px),calc(84vw / 2));white-space:nowrap">室内</h2>
   <div class="cmp-grid cmp-sq" style="grid-template-columns:1fr 1fr;margin-top:24px">
       <div class="cmp clip-b"><img class="b" src="img/cmp_hq_hall_b5.jpg" alt="改修前の広間。荷物の残った和室" loading="lazy" decoding="async"><img class="a" src="img/cmp_hq_hall_a5.jpg" alt="改修後の広間。スタッフが働く事務所" loading="lazy" decoding="async"><div class="bar"></div><span class="lb bl">BEFORE</span><span class="lb al">AFTER</span><span class="room">広間 → 事務所</span><input type="range" min="0" max="100" value="50" aria-label="広間 → 事務所の前後を比較"></div>
       <div class="cmp clip-b"><img class="b" src="img/cmp_hq_room_b5.jpg" alt="改修前の広間の奥。仏間と押入れ" loading="lazy" decoding="async"><img class="a" src="img/cmp_hq_room_a5.jpg" alt="改修後の広間の奥。本棚とデスク" loading="lazy" decoding="async"><div class="bar"></div><span class="lb bl">BEFORE</span><span class="lb al">AFTER</span><span class="room">広間の奥 → デスク</span><input type="range" min="0" max="100" value="50" aria-label="広間の奥 → デスクの前後を比較"></div>
@@ -1425,7 +1426,7 @@
 </section>
 <section class="wrap sec-gap">
   <div class="cond sub">VISIT</div>
-  <h2 class="cond ttl" style="font-size:min(clamp(40px,6.4vw,84px),calc(88vw / 9));white-space:nowrap">見学も、相談も、この建物で</h2>
+  <h2 class="cond ttl" style="font-size:min(clamp(40px,6.4vw,84px),calc(84vw / 8))"><span class="ib">見学も、相談も、</span><span class="ib">この建物で</span></h2>
   <p class="body-txt" style="margin-top:18px">空き家の相談、おうちじまいの相談は、この事務所でお受けしています。</p>
   <a class="btn-bk" href="#/contact">CONTACT<span class="arrow"></span></a>
 </section>
@@ -1447,7 +1448,7 @@
 </section>
 <section class="wrap sec-gap">
   <div class="cond sub">TV</div>
-  <h2 class="cond ttl" style="font-size:min(clamp(40px,6.4vw,84px),calc(88vw / 5));white-space:nowrap">テレビ出演</h2>
+  <h2 class="cond ttl" style="font-size:min(clamp(40px,6.4vw,84px),calc(84vw / 5));white-space:nowrap">テレビ出演</h2>
   <div class="col-list">
     <a class="col-item" href="https://mezamashi.media/article/15539780" target="_blank" rel="noopener"><div class="d">2024.12.06</div><div><h4>めざまし8（フジテレビ）｜【深刻】5人に1人が後期高齢者になる「2025年問題」</h4><p>空き家の専門家として出演。私たちの生活への影響を解説。</p></div><div class="go">READ →</div></a>
     <a class="col-item" href="https://www.youtube.com/watch?v=aVRw4Qxj0bg" target="_blank" rel="noopener"><div class="d">2024.05.07</div><div><h4>よんチャンTV（毎日放送）｜【過去最多900万戸】空き家の理由1位は「物置として必要だから」</h4><p>代表・菊池聖雄が空き家の専門家として出演。</p></div><div class="go">WATCH →</div></a>
@@ -1455,7 +1456,7 @@
 </section>
 <section class="wrap sec-gap">
   <div class="cond sub">NEWSPAPER · MAGAZINE</div>
-  <h2 class="cond ttl" style="font-size:min(clamp(40px,6.4vw,84px),calc(88vw / 5));white-space:nowrap">新聞・雑誌</h2>
+  <h2 class="cond ttl" style="font-size:min(clamp(40px,6.4vw,84px),calc(84vw / 5));white-space:nowrap">新聞・雑誌</h2>
   <div class="col-list">
     <a class="col-item" href="https://www.chibanippo.co.jp/articles/1619974" target="_blank" rel="noopener"><div class="d">2026.05.27</div><div><h4>千葉日報オンライン｜空き家予防と解決、両輪で　八街市が2者と協定</h4><p>八街市・空き家再生協会・オハナホームの協定を、地元紙が報道。</p></div><div class="go">READ →</div></a>
     <a class="col-item" href="https://note.com/chibakei/n/n2bf4b75c8957" target="_blank" rel="noopener"><div class="d">2026.05.15</div><div><h4>ちば経済産業新聞｜空き家を「誰かの居場所」に変える夫婦の挑戦</h4><p>年間30〜40棟の空き家を再生し続ける、夫婦二人三脚の会社運営を取材。</p></div><div class="go">READ →</div></a>
@@ -1468,7 +1469,7 @@
 </section>
 <section class="wrap sec-gap">
   <div class="cond sub">WEB</div>
-  <h2 class="cond ttl" style="font-size:min(clamp(40px,6.4vw,84px),calc(88vw / 5));white-space:nowrap">Web記事</h2>
+  <h2 class="cond ttl" style="font-size:min(clamp(40px,6.4vw,84px),calc(84vw / 5));white-space:nowrap">Web記事</h2>
   <p class="body-txt" style="margin-top:18px">2021年以前の記事は、会社設立前に個人投資家「ピーナッツ大家」「ナース大家さん」として受けた取材です。</p>
   <div class="col-list">
     <a class="col-item" href="https://jimoharu.net/yachimata-freeschool-tane-2026/" target="_blank" rel="noopener"><div class="d">2026.09.25</div><div><h4>ジモはる｜八街市にフリースクール「たね」10月開校｜9/25・26プレオープン</h4><p>地域情報メディアが、あきやフリースクール「たね」の開校とプレオープンを紹介。</p></div><div class="go">READ →</div></a>
@@ -1499,7 +1500,7 @@
 </section>
 <section class="wrap sec-gap">
   <div class="cond sub">GUEST APPEARANCE</div>
-  <h2 class="cond ttl" style="font-size:min(clamp(40px,6.4vw,84px),calc(88vw / 9));white-space:nowrap">番組・対談への出演</h2>
+  <h2 class="cond ttl" style="font-size:min(clamp(40px,6.4vw,84px),calc(84vw / 9));white-space:nowrap">番組・対談への出演</h2>
   <div class="col-list">
     <a class="col-item" href="https://www.youtube.com/watch?v=ntEn_klY08E" target="_blank" rel="noopener"><div class="d">2026.09.09</div><div><h4>YouTube｜#64 人生の経験は、誰かの居場所になる。終活と空き家、その先へ</h4><p>対談番組にゲスト出演。</p></div><div class="go">WATCH →</div></a>
     <a class="col-item" href="https://www.youtube.com/watch?v=YdZGXeD2spA" target="_blank" rel="noopener"><div class="d">2025.04.19</div><div><h4>YouTube｜小野友葵子の Bella Serata!　ゲスト：菊池聖雄、菊池あかり</h4><p>トーク番組に夫婦で出演。</p></div><div class="go">WATCH →</div></a>
@@ -1508,7 +1509,7 @@
 </section>
 <section class="wrap sec-gap">
   <div class="cond sub">PRESS RELEASE</div>
-  <h2 class="cond ttl" style="font-size:min(clamp(40px,6.4vw,84px),calc(88vw / 7));white-space:nowrap">プレスリリース</h2>
+  <h2 class="cond ttl" style="font-size:min(clamp(40px,6.4vw,84px),calc(84vw / 7));white-space:nowrap">プレスリリース</h2>
   <div class="col-list">
     <a class="col-item" href="https://prtimes.jp/main/html/rd/p/000000018.000166247.html" target="_blank" rel="noopener"><div class="d">2026.09.17</div><div><h4>PR TIMES｜あきやフリースクール「たね」千葉・八街に今秋開校　クラウドファンディング挑戦</h4><p>空き家を再生したフリースクールの開校と、CAMPFIREでの挑戦を発表。</p></div><div class="go">READ →</div></a>
     <a class="col-item" href="https://prtimes.jp/main/html/rd/p/000000019.000166247.html" target="_blank" rel="noopener"><div class="d">2026.09</div><div><h4>PR TIMES｜落花生アート＆スライムづくり無料体験ワークショップ　たね 9/25・26プレオープン</h4><p>プレオープンの体験ワークショップの案内。</p></div><div class="go">READ →</div></a>
@@ -1522,7 +1523,7 @@
 </section>
 <section class="wrap sec-gap">
   <div class="cond sub">SEMINAR</div>
-  <h2 class="cond ttl" style="font-size:min(clamp(40px,6.4vw,84px),calc(88vw / 6));white-space:nowrap">セミナー登壇</h2>
+  <h2 class="cond ttl" style="font-size:min(clamp(40px,6.4vw,84px),calc(84vw / 6));white-space:nowrap">セミナー登壇</h2>
   <p class="body-txt" style="margin-top:18px">一般の方、自治体、地域団体、企業向けに、空き家・相続・終活のセミナーを行っています。</p>
   <div class="col-list">
     <a class="col-item" href="#/seminar" target="_blank" rel="noopener"><div class="d">2026.07.25</div><div><h4>第1回 八街市 空き家相談会＆セミナー</h4><p>八街市との協定にもとづく、市民向けの相談会とセミナー。代表・菊池聖雄が登壇。</p></div><div class="go">SEMINAR →</div></a>
@@ -1538,7 +1539,7 @@
 
 <section class="wrap sec-gap" style="margin-bottom:clamp(60px,9vw,130px)">
   <div class="cond sub">CONTACT</div>
-  <h2 class="cond ttl" style="font-size:min(clamp(40px,6.4vw,84px),calc(88vw / 9));white-space:nowrap">取材・講演のご依頼</h2>
+  <h2 class="cond ttl" style="font-size:min(clamp(40px,6.4vw,84px),calc(84vw / 9));white-space:nowrap">取材・講演のご依頼</h2>
   <p class="body-txt" style="margin-top:18px">テーマ、時間、会場、オンラインの可否など、ご相談に合わせて調整します。お問い合わせフォームで「その他」を選び、本文に「取材」または「講演」とお書きください。</p>
   <a class="btn-bk" href="#/contact">CONTACT<span class="arrow"></span></a>
 </section>
