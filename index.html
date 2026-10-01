@@ -1801,7 +1801,7 @@
 <script>
 (function(){
   var WORDS=['空き家再生','おうち終活','おうちじまい','空き家再生士','相続','終活','あきやにあかり','リフォーム','空き家のミカタ','源泉物件','おうちゃま','空き家王'];
-  var COLORS=['#000','#000','#000','#000','#1daa3a'];  // 黒＋はっぴの緑ひとつ
+  var RED='#e60012', GREEN='#1daa3a';  // 赤＝あかりの好きな色、緑＝はっぴの色。どちらも1語ずつ
   function rnd(a,b){return a+Math.random()*(b-a);}
   function shuffle(a){for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t;}return a;}
   function build(){
@@ -1820,7 +1820,7 @@
       shuffle(WORDS.slice()).forEach(function(w){list.push({t:w,size:rnd(2,2.8)});});
       list.forEach(function(it){
         var el=document.createElement('span'); el.className='ww'+(Math.random()<.38?' v':''); el.textContent=it.t;
-        el.style.fontSize=(it.size*vm)+'px'; el.style.color=COLORS[Math.floor(Math.random()*COLORS.length)];
+        el.style.fontSize=(it.size*vm)+'px'; el.style.color='#000'; el.dataset.size=it.size;
         el.style.visibility='hidden'; box.appendChild(el);
         var w=el.offsetWidth,hh=el.offsetHeight;
         if(w>W-pad*2||hh>H-pad*2){el.remove();return;}
@@ -1831,6 +1831,10 @@
         }
         el.remove();
       });
+      // 大きめの言葉から、赤と緑を1語ずつランダムに
+      var big=shuffle(els.filter(function(e){return +e.dataset.size>=6;}));
+      if(big[0]) big[0].style.color=RED;
+      if(big[1]) big[1].style.color=GREEN;
       return els;
     }
     function fit(el){ // 大きな文字が画面幅からはみ出さないように縮める
