@@ -346,6 +346,10 @@
   #splash .ww{position:absolute;left:0;top:0;font-family:var(--jp);font-weight:900;line-height:1.05;white-space:nowrap;letter-spacing:.02em;opacity:0;transform:translateY(6px);transition:opacity .4s ease,transform .6s ease;}
   #splash .ww.v{writing-mode:vertical-rl;letter-spacing:.08em;}
   #splash .ww.on{opacity:1;transform:none;}
+  #splash.focus .ww:not(.acc){opacity:.08;transition:opacity .6s ease;}
+  #splash .ww.acc{transform-origin:50% 50%;}
+  #splash.zoom .ww:not(.acc){opacity:0;}
+  #splash.zoom .ww.acc{opacity:0;transform:scale(2.6);transition:transform 1.2s cubic-bezier(.3,0,.2,1),opacity .9s ease .3s;}
   #splash .ww-title{position:absolute;inset:0;margin:0;display:flex;align-items:center;justify-content:center;gap:.22em;flex-wrap:wrap;text-align:center;font-family:var(--cond);font-weight:900;color:var(--bk);line-height:.86;letter-spacing:.005em;font-size:clamp(64px,17vw,360px);opacity:0;transform:scale(1.06);transition:opacity .7s ease,transform 1.6s cubic-bezier(.2,.7,.2,1);pointer-events:none;}
   #splash .ww-title span{white-space:nowrap;}
   #splash .ww-brand{position:absolute;inset:0;margin:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.06em;font-family:var(--cond);font-weight:900;color:var(--wh);line-height:1;letter-spacing:.16em;font-size:clamp(26px,5.2vw,80px);opacity:0;transform:scale(1.04);transition:opacity .6s ease,transform 1.4s cubic-bezier(.2,.7,.2,1);pointer-events:none;}
@@ -359,7 +363,7 @@
   #splash.p3 .ww-title{opacity:1;transform:none;transition:none;}
   #splash.out .ww-brand,#splash.out .ww-dark{transition-delay:0s;}
   @media(max-width:700px){#splash .ww-title{flex-direction:column;gap:0;font-size:min(30vw,24vh);}#splash .ww-brand{font-size:9vw;}}
-  @media(prefers-reduced-motion:reduce){#splash .ww,#splash .ww-brand,#splash .ww-brand .l2{transform:none !important;}}
+  @media(prefers-reduced-motion:reduce){#splash .ww:not(.acc),#splash .ww-brand,#splash .ww-brand .l2{transform:none !important;}}
 
   .menu .sub a{font-family:var(--jp);font-size:13px;font-weight:700;border:0;padding:0;color:var(--wh);letter-spacing:.06em;}
   .menu .sub a:hover{opacity:.6;}
@@ -1860,7 +1864,7 @@
       // 大きめの言葉から、1語だけランダムに色を付ける
       var big=shuffle(els.filter(function(e){return +e.dataset.size>=10;}));
       if(!big.length) big=shuffle(els.filter(function(e){return +e.dataset.size>=6;}));
-      if(big[0]){ big[0].style.color=ACCENT; big[0].dataset.last='1'; }
+      if(big[0]){ big[0].style.color=ACCENT; big[0].dataset.last='1'; big[0].classList.add('acc'); }
       return els;
     }
     function fit(el){ // 大きな文字が画面幅からはみ出さないように縮める
@@ -1880,7 +1884,10 @@
       var els=shuffle(place());
       var li=els.findIndex(function(e){return e.dataset.last;}); if(li>-1){ els.push(els.splice(li,1)[0]); }  // オレンジの言葉を最後に
       els.forEach(function(el,i){ later(function(){el.classList.add('on');}, 80+i*55); });
-      var t=80+els.length*55+1500;  // 最後の言葉のあと少し長めに見せる
+      var tLast=80+els.length*55;
+      later(function(){ s.classList.add('focus'); }, tLast+900);   // オレンジ以外を薄く
+      later(function(){ s.classList.add('zoom'); }, tLast+1600);   // オレンジの言葉が大きくなりながら消える
+      var t=tLast+2500;
       later(function(){ s.classList.add('p2'); }, t);          // 黒地に小さく OHANAHOME
       later(function(){ s.classList.add('p3'); }, t+2600);     // 白地に大きく What We are?（パッと切り替え）
       later(finish, t+2600+2400);
