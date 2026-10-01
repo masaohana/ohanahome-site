@@ -331,11 +331,11 @@
   /* ===== nav / pages ===== */
   .hd{transition:background .3s;}
   .hd.solid{background:rgba(0,0,0,.85);backdrop-filter:blur(6px);}
-  .nav{display:flex;gap:clamp(14px,2.4vw,34px);align-items:center;margin-right:18px;}
-  .nav a{font-family:var(--cond);font-weight:900;font-size:18px;letter-spacing:.14em;color:var(--wh);text-shadow:0 2px 12px rgba(0,0,0,.4);padding:6px 0;border-bottom:2px solid transparent;}
+  .nav{display:flex;gap:clamp(12px,1.4vw,34px);align-items:center;margin-right:18px;}
+  .nav a{font-family:var(--cond);font-weight:900;font-size:clamp(13px,1.15vw,18px);letter-spacing:.14em;color:var(--wh);text-shadow:0 2px 12px rgba(0,0,0,.4);padding:6px 0;border-bottom:2px solid transparent;}
   .nav a.on{border-bottom-color:var(--wh);}
   .hd-right{display:flex;align-items:center;}
-  @media(max-width:860px){.nav{display:none;}}
+  @media(max-width:1180px){.nav{display:none;}}
   @media(min-width:1181px){.ham{display:none;}}
   .menu{position:fixed;inset:0;z-index:40;background:var(--bk);color:var(--wh);display:none;flex-direction:column;justify-content:flex-start;padding:var(--pad);padding-top:calc(var(--pad) + 60px);padding-bottom:calc(var(--pad) + 24px);overflow-y:auto;-webkit-overflow-scrolling:touch;}
   .menu.on{display:flex;}
@@ -534,6 +534,23 @@
   .thumbs .th.tile{display:flex;align-items:center;justify-content:center;padding:10px;text-align:center;border:1px solid var(--line);}
   .thumbs .th.tile span{font-size:13px;font-weight:900;line-height:1.45;color:var(--bk);display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;}
   .thumbs .col-item .d{font-size:17px;}
+  .trks{display:grid;gap:clamp(18px,2.4vw,28px);margin-top:clamp(36px,5vw,64px);}
+  .trk{display:grid;grid-template-columns:clamp(120px,18vw,200px) 1fr;gap:clamp(16px,3vw,40px);align-items:center;padding-bottom:clamp(18px,2.4vw,28px);border-bottom:1px solid var(--line);}
+  .trk .cv{width:100%;aspect-ratio:1;object-fit:cover;display:block;}
+  .trk .g{font-size:14px;letter-spacing:.2em;color:var(--gy);}
+  .trk h3{margin:4px 0 8px;font-size:clamp(18px,2vw,26px);font-weight:900;line-height:1.4;}
+  .trk p{margin:0;font-size:14px;line-height:1.8;font-weight:700;color:var(--gy-dark);}
+  .trk .pl{display:flex;align-items:center;gap:14px;margin-top:14px;}
+  .trk .pp{flex:none;width:52px;height:52px;border-radius:50%;border:0;background:var(--bk);color:var(--wh);cursor:pointer;display:flex;align-items:center;justify-content:center;}
+  .trk .pp .ic{width:0;height:0;border-style:solid;border-width:9px 0 9px 15px;border-color:transparent transparent transparent currentColor;margin-left:4px;}
+  .trk .pp.on .ic{width:14px;height:16px;border:0;margin:0;background:linear-gradient(90deg,currentColor 0 5px,transparent 5px 9px,currentColor 9px 14px);}
+  .trk .bar{flex:1;height:6px;background:var(--line);cursor:pointer;position:relative;}
+  .trk .bar i{position:absolute;left:0;top:0;bottom:0;width:0;background:var(--bk);}
+  .trk .tm{flex:none;font-family:var(--cond);font-weight:900;font-size:16px;letter-spacing:.06em;color:var(--gy);font-variant-numeric:tabular-nums;min-width:86px;text-align:right;}
+  .trk .lk{display:flex;flex-wrap:wrap;gap:6px 18px;margin-top:12px;}
+  .trk .lk a{font-size:13px;font-weight:900;text-decoration:underline;text-underline-offset:3px;}
+  #view-music .note{font-size:13px;color:var(--gy);}
+  @media(max-width:600px){.trk{grid-template-columns:96px 1fr;align-items:start;}.trk p{display:none;}.trk .pl{grid-column:1/-1;}.trk .tm{min-width:74px;font-size:14px;}}
   .hosts{margin-top:clamp(24px,3vw,40px);max-width:900px;display:flex;flex-wrap:wrap;gap:8px;align-items:center;}
   .hosts b{width:100%;font-size:13px;letter-spacing:.08em;margin-bottom:2px;}
   .hosts span{font-size:12px;font-weight:700;line-height:1.4;padding:5px 10px;border:1px solid var(--line);background:var(--wh);}
@@ -639,6 +656,7 @@
       <a href="/media/" data-r="media">MEDIA</a>
       <a href="/office/" data-r="office">OFFICE</a>
       <a href="/recruit/" data-r="recruit">RECRUIT</a>
+      <a href="/music/" data-r="music">MUSIC</a>
       <a href="/contact/" data-r="contact">CONTACT</a>
     </nav>
     <button class="ham" id="ham" aria-label="メニュー"><span></span></button>
@@ -654,6 +672,7 @@
   <a href="/media/">MEDIA<small>取材・掲載・登壇</small></a>
   <a href="/office/">OFFICE<small>空き家を再生した本社</small></a>
   <a href="/recruit/">RECRUIT<small>採用・代表に直接メッセージ</small></a>
+  <a href="/music/">MUSIC<small>オハナホームのうた</small></a>
   <a href="/contact/">CONTACT<small>ご相談・公式LINE</small></a>
   <div class="sub fol">
     <div class="cond sub-ttl">FOLLOW US</div>
@@ -1670,6 +1689,71 @@
   <a class="btn-bk" href="/contact/">CONTACT<span class="arrow"></span></a>
 </section>
 </main>
+<main class="view" id="view-music">
+<h1 class="sr-only">オハナホームのうた｜空き家再生の現場から生まれたオリジナル曲</h1>
+<div class="pg-hero">
+  <img src="img/duo_sky.jpg" alt="空を背にした菊池聖雄と菊池あかり" style="object-position:36% 25%" decoding="async">
+  <div class="cond stamp">MUSIC</div>
+  <div class="cap"><span class="ib">現場で感じたことを、</span><br><span class="ib">うたにしました。</span></div>
+</div>
+<section class="wrap" style="margin-top:clamp(40px,6vw,80px)">
+  <div class="two">
+    <div><p class="lead-jp"><span class="ib">オハナホームの、</span><br><span class="ib">オリジナルソング。</span></p></div>
+    <div class="body-txt">
+      <p>空き家の現場で見てきたこと、会社として大事にしていることを、歌にしました。気になる曲があれば、▶ を押して聴いてみてください。</p>
+      <p class="note">※ AI作曲ツール Suno で制作しています。</p>
+    </div>
+  </div>
+  <div class="trks">
+    <div class="trk fade">
+      <img class="cv" src="img/music_tomoshibi.jpg" alt="「空き家に ふたたび ともしびを」のジャケット" loading="lazy" decoding="async">
+      <div class="tb">
+        <div class="cond g">HIP HOP</div>
+        <h3>空き家に ふたたび ともしびを</h3>
+        <p>誰も住まなくなった家に、もう一度あかりを灯す。オハナホームの仕事を、そのまま歌にしました。</p>
+        <div class="pl" data-src="audio/tomoshibi.m4a">
+          <button type="button" class="pp" aria-label="「空き家に ふたたび ともしびを」を再生"><span class="ic"></span></button>
+          <div class="bar" role="slider" aria-label="再生位置" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" tabindex="0"><i></i></div>
+          <span class="tm">0:00 / 3:16</span>
+        </div>
+        <div class="lk"><a href="https://suno.com/song/5989ba21-013d-42ea-a785-72e5f385724c" target="_blank" rel="noopener">Suno で聴く</a></div>
+      </div>
+    </div>
+    <div class="trk fade">
+      <img class="cv" src="img/music_diy.jpg" alt="「DIYがいいあんばい」のジャケット" loading="lazy" decoding="async">
+      <div class="tb">
+        <div class="cond g">J-POP</div>
+        <h3>DIYがいいあんばい</h3>
+        <p>傾いた床も、古い壁も、自分たちの手で直していく。空き家再生の現場の、いい塩梅のうた。</p>
+        <div class="pl" data-src="audio/diy.m4a">
+          <button type="button" class="pp" aria-label="「DIYがいいあんばい」を再生"><span class="ic"></span></button>
+          <div class="bar" role="slider" aria-label="再生位置" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" tabindex="0"><i></i></div>
+          <span class="tm">0:00 / 3:36</span>
+        </div>
+        <div class="lk"><a href="https://www.youtube.com/watch?v=xqQT1Sf7J4Y" target="_blank" rel="noopener">YouTube で聴く</a></div>
+      </div>
+    </div>
+    <div class="trk fade">
+      <img class="cv" src="img/music_kureba.jpg" alt="「オハナにくれば？〜仕事にくれば〜」のジャケット" loading="lazy" decoding="async">
+      <div class="tb">
+        <div class="cond g">J-POP</div>
+        <h3>オハナにくれば？〜仕事にくれば〜</h3>
+        <p>一緒に働く仲間を呼ぶ、オハナホームの採用ソング。</p>
+        <div class="pl" data-src="audio/kureba.m4a">
+          <button type="button" class="pp" aria-label="「オハナにくれば？〜仕事にくれば〜」を再生"><span class="ic"></span></button>
+          <div class="bar" role="slider" aria-label="再生位置" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" tabindex="0"><i></i></div>
+          <span class="tm">0:00 / 2:07</span>
+        </div>
+        <div class="lk"><a href="/recruit/">採用情報を見る</a></div>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="wrap sec-gap" style="margin-bottom:clamp(60px,9vw,130px)">
+  <a class="btn-bk" href="/contact/">CONTACT<span class="arrow"></span></a>
+</section>
+</main>
+
 <main class="view on" id="view-contact">
 <h1 class="sr-only">空き家・相続・おうちじまいの無料相談｜千葉県八街市のオハナホーム</h1>
 <section class="contact" id="contact" style="margin-top:0;padding-top:clamp(140px,20vw,220px)">
@@ -1820,7 +1904,7 @@
     r.addEventListener('input',set);set();
   });
   // ---- router ----
-  var views={home:'view-home',about:'view-about',vision:'view-vision',seminar:'view-seminar',column:'view-column',media:'view-media',office:'view-office',recruit:'view-recruit',contact:'view-contact'};
+  var views={home:'view-home',about:'view-about',vision:'view-vision',seminar:'view-seminar',column:'view-column',media:'view-media',office:'view-office',recruit:'view-recruit',music:'view-music',contact:'view-contact'};
   var menu=document.getElementById('menu'),hd=document.getElementById('hd'),cur='home';
   function route(){
     var parts=location.pathname.replace(/^\/+|\/+$/g,'').split('/'),h=parts[0]||'home',sub=parts[1]||'';
@@ -1835,7 +1919,7 @@
     els=Array.prototype.slice.call(document.querySelectorAll('#'+views[h]+' .clip-l:not(.is-shown),#'+views[h]+' .clip-r:not(.is-shown),#'+views[h]+' .clip-b:not(.is-shown),#'+views[h]+' .fade:not(.is-shown)'));
     reveal();
     if(h==='home'){document.querySelector('.catch').classList.add('is-shown');}
-    var TT={"home": "OUCHI JIMAI｜千葉・八街の空き家と相続の相談「おうちじまい」｜オハナホーム", "about": "ABOUT｜会社概要とチーム｜オハナホーム（千葉県八街市）", "vision": "VISION｜理念とビジョン｜オハナホーム", "seminar": "SEMINAR｜千葉の終活・空き家セミナー｜オハナホーム", "column": "COLUMN｜空き家と相続のコラム｜オハナホーム", "media": "MEDIA｜取材・掲載・登壇｜オハナホーム", "office": "OFFICE｜空き家を再生した本社（千葉県八街市）｜オハナホーム", "recruit": "RECRUIT｜採用情報（千葉県八街市）｜オハナホーム", "contact": "CONTACT｜空き家・相続の無料相談｜オハナホーム"};
+    var TT={"home": "OUCHI JIMAI｜千葉・八街の空き家と相続の相談「おうちじまい」｜オハナホーム", "about": "ABOUT｜会社概要とチーム｜オハナホーム（千葉県八街市）", "vision": "VISION｜理念とビジョン｜オハナホーム", "seminar": "SEMINAR｜千葉の終活・空き家セミナー｜オハナホーム", "column": "COLUMN｜空き家と相続のコラム｜オハナホーム", "media": "MEDIA｜取材・掲載・登壇｜オハナホーム", "office": "OFFICE｜空き家を再生した本社（千葉県八街市）｜オハナホーム", "recruit": "RECRUIT｜採用情報（千葉県八街市）｜オハナホーム", "contact": "CONTACT｜空き家・相続の無料相談｜オハナホーム", "music": "MUSIC｜オハナホームのうた｜オハナホーム"};
     document.title=TT[h]||'オハナホーム';
     if(h==='column'){showArticle(sub);}
     if(h!=='column'&&sub){var t=document.getElementById(sub);if(t)setTimeout(function(){t.scrollIntoView();},60);}
@@ -1857,6 +1941,25 @@
     var syncSale=function(){saleNote.hidden=(kindSel.value!=='営業');};
     kindSel.addEventListener('change',syncSale); syncSale();
   }
+
+  // MUSIC：▶で再生。同時に鳴るのは1曲だけ。自動再生はしない
+  (function(){
+    var au=new Audio(),cur=null;au.preload='none';
+    function fmt(s){s=Math.floor(s||0);return Math.floor(s/60)+':'+('0'+s%60).slice(-2);}
+    function ui(){document.querySelectorAll('.trk .pl').forEach(function(p){var on=(p===cur&&!au.paused);p.querySelector('.pp').classList.toggle('on',on);p.querySelector('.pp').setAttribute('aria-label',(on?'一時停止：':'再生：')+p.closest('.trk').querySelector('h3').textContent);});}
+    function tick(){if(!cur)return;var d=au.duration||0,t=au.currentTime||0;cur.querySelector('.bar i').style.width=(d?t/d*100:0)+'%';cur.querySelector('.bar').setAttribute('aria-valuenow',d?Math.round(t/d*100):0);if(d)cur.querySelector('.tm').textContent=fmt(t)+' / '+fmt(d);}
+    au.addEventListener('timeupdate',tick);au.addEventListener('play',ui);au.addEventListener('pause',ui);au.addEventListener('ended',function(){au.currentTime=0;tick();ui();});
+    document.querySelectorAll('.trk .pl').forEach(function(p){
+      p.querySelector('.pp').addEventListener('click',function(){
+        if(cur!==p){cur=p;au.src=p.getAttribute('data-src');au.play();}else if(au.paused){au.play();}else{au.pause();}
+      });
+      var bar=p.querySelector('.bar');
+      function seek(r){if(cur!==p){cur=p;au.src=p.getAttribute('data-src');}var go=function(){au.currentTime=r*au.duration;au.play();};if(au.duration)go();else au.addEventListener('loadedmetadata',go,{once:true});}
+      bar.addEventListener('click',function(e){var b=bar.getBoundingClientRect();seek(Math.min(1,Math.max(0,(e.clientX-b.left)/b.width)));});
+      bar.addEventListener('keydown',function(e){if(cur!==p||!au.duration)return;if(e.key==='ArrowRight'){au.currentTime=Math.min(au.duration,au.currentTime+5);}else if(e.key==='ArrowLeft'){au.currentTime=Math.max(0,au.currentTime-5);}});
+    });
+    window.addEventListener('routechange',function(){if(!document.getElementById('view-music').classList.contains('on'))au.pause();});
+  })();
   addEventListener('popstate',route);
   // サイト内リンクは、ページを読み直さずに切り替える（住所はきちんと変わる）
   document.addEventListener('click',function(e){
