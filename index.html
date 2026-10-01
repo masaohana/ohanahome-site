@@ -23,7 +23,7 @@
 <style>*{box-sizing:border-box}body{margin:0;font-family:system-ui,sans-serif;background:#fff}img{max-width:100%}[hidden]{display:none!important}</style>
 </head>
 <body>
-<div id="splash" style="position:fixed;inset:0;z-index:999;background:#fff"><div class="ww-words" aria-hidden="true"></div><div class="ww-dark"></div><div class="ww-brand" style="opacity:0"><span>OHANAHOME?</span></div><h1 class="ww-title" style="opacity:0"><span>What</span> <span>We are?</span></h1></div>
+<div id="splash" style="position:fixed;inset:0;z-index:999;background:#fff"><div class="ww-words" aria-hidden="true"></div><div class="ww-dark"></div><h1 class="ww-brand" style="opacity:0"><span class="l1">OHANAHOME</span><span class="l2">What We are?</span></h1></div>
 <script>try{if(sessionStorage.getItem("ww-seen")){document.getElementById("splash").remove();}}catch(e){}</script>
 <title>OUCHI JIMAI｜オハナホーム 空き家再生・相続・おうちじまい</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -347,17 +347,16 @@
   #splash .ww.on{opacity:1;transform:none;}
   #splash .ww-title{position:absolute;inset:0;margin:0;display:flex;align-items:center;justify-content:center;gap:.22em;flex-wrap:wrap;text-align:center;font-family:var(--cond);font-weight:900;color:var(--bk);line-height:.86;letter-spacing:.005em;font-size:clamp(64px,17vw,360px);opacity:0;transform:scale(1.06);transition:opacity .7s ease,transform 1.6s cubic-bezier(.2,.7,.2,1);pointer-events:none;}
   #splash .ww-title span{white-space:nowrap;}
-  #splash .ww-brand{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;gap:0;font-family:var(--cond);font-weight:900;color:var(--wh);line-height:.86;letter-spacing:.005em;font-size:clamp(64px,17vw,360px);opacity:0;transform:scale(1.04);transition:opacity .6s ease,transform 1.4s cubic-bezier(.2,.7,.2,1);pointer-events:none;}
+  #splash .ww-brand{position:absolute;inset:0;margin:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.14em;font-family:var(--cond);font-weight:900;color:var(--wh);line-height:.86;letter-spacing:.005em;font-size:clamp(64px,17vw,360px);opacity:0;transform:scale(1.04);transition:opacity .6s ease,transform 1.4s cubic-bezier(.2,.7,.2,1);pointer-events:none;}
   #splash .ww-dark{position:absolute;inset:0;background:var(--bk);opacity:0;transition:opacity .7s ease;pointer-events:none;}
   #splash .ww-brand span{white-space:nowrap;}
+  #splash .ww-brand .l2{font-size:.56em;opacity:0;transform:translateY(.25em);transition:opacity .7s ease,transform 1s cubic-bezier(.2,.7,.2,1);}
   #splash.p2 .ww-words{opacity:0;}
   #splash.p2 .ww-dark{opacity:1;transition-delay:.3s;}
   #splash.p2 .ww-brand{opacity:1;transform:none;transition-delay:.9s;}
-  #splash.p3 .ww-brand{opacity:0;transform:scale(.98);transition:opacity .4s ease,transform .4s ease;transition-delay:0s;}
-  #splash.p3 .ww-dark{opacity:0;transition:opacity .8s ease;transition-delay:.3s;}
-  #splash.p3 .ww-title{opacity:1;transform:none;transition-delay:1s;}
-  #splash.out .ww-title,#splash.out .ww-brand,#splash.out .ww-dark{transition-delay:0s;}
-  @media(max-width:700px){#splash .ww-title{flex-direction:column;gap:0;font-size:min(30vw,24vh);}#splash .ww-brand{font-size:30vw;}}
+  #splash.p3 .ww-brand .l2{opacity:1;transform:none;}
+  #splash.out .ww-brand,#splash.out .ww-dark{transition-delay:0s;}
+  @media(max-width:700px){#splash .ww-title{flex-direction:column;gap:0;font-size:min(30vw,24vh);}#splash .ww-brand{font-size:30vw;}#splash .ww-brand .l2{font-size:.6em;}}
   @media(prefers-reduced-motion:reduce){#splash,#splash .ww,#splash .ww-words,#splash .ww-dark,#splash .ww-brand,#splash .ww-title{transition:opacity .2s linear;transform:none;}}
 
   .menu .sub a{font-family:var(--jp);font-size:13px;font-weight:700;border:0;padding:0;color:var(--wh);letter-spacing:.06em;}
@@ -1805,11 +1804,11 @@
   function shuffle(a){for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t;}return a;}
   function build(){
     var s=document.createElement('div'); s.id='splash'; s.style.cssText='position:fixed;inset:0;z-index:999;background:#fff';
-    s.innerHTML='<div class="ww-words" aria-hidden="true"></div><div class="ww-dark"></div><div class="ww-brand" style="opacity:0"><span>OHANAHOME?</span></div><h1 class="ww-title" style="opacity:0"><span>What</span> <span>We are?</span></h1>';
+    s.innerHTML='<div class="ww-words" aria-hidden="true"></div><div class="ww-dark"></div><h1 class="ww-brand" style="opacity:0"><span class="l1">OHANAHOME</span><span class="l2">What We are?</span></h1>';
     document.body.appendChild(s); return s;
   }
   function play(s, waitFonts){
-    var box=s.querySelector('.ww-words'), brandEl=s.querySelector('.ww-brand'), title=s.querySelector('.ww-title'), timers=[], done=false;
+    var box=s.querySelector('.ww-words'), brandEl=s.querySelector('.ww-brand'), timers=[], done=false;
     function later(f,ms){timers.push(setTimeout(f,ms));}
     // 言葉を重ならないように散らす（大・中・小の3段）
     function place(){
@@ -1840,15 +1839,15 @@
     function finish(){ if(done) return; done=true; timers.forEach(clearTimeout); s.classList.add('p2','p3','out'); setTimeout(function(){s.remove();},1300); }
     s.addEventListener('click',finish);
     function start(){
-      title.style.opacity=''; if(brandEl) brandEl.style.opacity='';
-      fit(brandEl); fit(title);
+      brandEl.style.opacity='';
+      fit(brandEl);
       if(reduce){ s.classList.add('p2','p3'); later(finish,1600); return; }
       var els=shuffle(place());
       els.forEach(function(el,i){ later(function(){el.classList.add('on');}, 80+i*55); });
       var t=80+els.length*55+700;
-      later(function(){ s.classList.add('p2'); }, t);          // OHANAHOME?
-      later(function(){ s.classList.add('p3'); }, t+2400);     // What We are?
-      later(finish, t+2400+2600);
+      later(function(){ s.classList.add('p2'); }, t);          // 黒地に OHANAHOME
+      later(function(){ s.classList.add('p3'); }, t+1900);     // 同じ画面に What We are? を足す
+      later(finish, t+1900+1700);
     }
     if(waitFonts&&document.fonts&&document.fonts.ready){ var go=false; document.fonts.ready.then(function(){ if(!go){go=true;start();} }); setTimeout(function(){ if(!go){go=true;start();} },900); } else start();
   }
