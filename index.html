@@ -346,7 +346,7 @@
   #splash .ww{position:absolute;left:0;top:0;font-family:var(--jp);font-weight:900;line-height:1.05;white-space:nowrap;letter-spacing:.02em;opacity:0;transform:translateY(6px);transition:opacity .4s ease,transform .6s ease;}
   #splash .ww.v{writing-mode:vertical-rl;letter-spacing:.08em;}
   #splash .ww.on{opacity:1;transform:none;}
-  #splash .ww-title{position:absolute;inset:0;margin:0;display:flex;align-items:center;justify-content:center;gap:.22em;flex-wrap:wrap;text-align:center;font-family:var(--cond);font-weight:900;color:#dd742a;line-height:.86;letter-spacing:.005em;font-size:clamp(64px,17vw,360px);opacity:0;transform:scale(1.06);transition:opacity .7s ease,transform 1.6s cubic-bezier(.2,.7,.2,1);pointer-events:none;}
+  #splash .ww-title{position:absolute;inset:0;margin:0;display:flex;align-items:center;justify-content:center;gap:.22em;flex-wrap:wrap;text-align:center;font-family:var(--cond);font-weight:900;color:var(--bk);line-height:.86;letter-spacing:.005em;font-size:clamp(64px,17vw,360px);opacity:0;transform:scale(1.06);transition:opacity .7s ease,transform 1.6s cubic-bezier(.2,.7,.2,1);pointer-events:none;}
   #splash .ww-title span{white-space:nowrap;}
   #splash .ww-brand{position:absolute;inset:0;margin:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.06em;font-family:var(--cond);font-weight:900;color:var(--wh);line-height:1;letter-spacing:.16em;font-size:clamp(26px,5.2vw,80px);opacity:0;transform:scale(1.04);transition:opacity .6s ease,transform 1.4s cubic-bezier(.2,.7,.2,1);pointer-events:none;}
   #splash .ww-dark{position:absolute;inset:0;background:var(--bk);opacity:0;transition:opacity .7s ease;pointer-events:none;}
@@ -377,7 +377,34 @@
     .pg-hero .stamp ~ .cap,.pg-hero .cap:has(~ .stamp) { left:var(--pad);right:var(--pad);max-width:none;text-align:left;bottom:calc(clamp(20px,4vw,50px) + 78px); }
   }
   .sec-gap { margin-top:clamp(70px,11vw,156.4px); }
-  .ib { display:inline-block; max-width:100%; }  /* 区切りが列より長いときだけ中で折り返す（はみ出し防止） */
+  .ib { display:inline-block; max-width:100%; }
+  /* ===== スマホ：縦に長い並びを横スワイプに／長い一覧を畳む ===== */
+  .cmp .grip{display:none;}
+  .more-btn{display:none;}
+  .swipe-hint{display:none;}
+  @media(max-width:700px){
+    .ba-grid,.cmp-grid,.ft-grid,.act-grid,.works-grid,.guide-grid,.sem-themes,.sem-pics{display:flex!important;flex-wrap:nowrap!important;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;gap:10px!important;scrollbar-width:none;padding-bottom:2px;}
+    .ba-grid::-webkit-scrollbar,.cmp-grid::-webkit-scrollbar,.ft-grid::-webkit-scrollbar,.act-grid::-webkit-scrollbar,.works-grid::-webkit-scrollbar,.guide-grid::-webkit-scrollbar,.sem-themes::-webkit-scrollbar,.sem-pics::-webkit-scrollbar{display:none;}
+    .ba-grid>*,.cmp-grid>*,.ft-grid>*,.act-grid>*,.works-grid>*,.guide-grid>*,.sem-themes>*,.sem-pics>*{flex:0 0 82%!important;max-width:82%;scroll-snap-align:start;}
+    .ba-grid>:only-child,.cmp-grid>:only-child{flex-basis:100%!important;max-width:100%;}
+    .works-grid{padding-left:var(--pad);padding-right:var(--pad);scroll-padding-left:var(--pad);}
+    .works-grid .ph,.works-grid .ph.tall{aspect-ratio:1;}
+    .ft-grid{background:none!important;border:0!important;}
+    .ft-grid>*{border:1px solid var(--bk);}
+    .swipe-hint{display:block;margin-top:8px;font-family:var(--cond);font-weight:900;font-size:12px;letter-spacing:.18em;color:var(--gy);text-align:right;}
+    /* スライダーは「つまみ」の周りだけで動かし、ほかの場所は横スワイプにする */
+    .cmp input{pointer-events:none;}
+    .cmp .grip{display:block;position:absolute;top:0;bottom:0;left:var(--p);width:64px;transform:translateX(-50%);touch-action:none;z-index:3;cursor:ew-resize;}
+    /* 畳む */
+    .is-folded>.fold-hide{display:none!important;}
+    .clamp{position:relative;max-height:13.5em;overflow:hidden;}
+    .clamp::after{content:"";position:absolute;left:0;right:0;bottom:0;height:4.5em;background:linear-gradient(rgba(255,255,255,0),var(--wh));pointer-events:none;}
+    .person .btn-bk{font-size:14px;padding:10px 14px;gap:10px;margin-top:10px;}
+    .person .btn-bk .arrow{transform:scale(.7);}
+    .person div[style*="flex-wrap:wrap"]{gap:8px!important;}
+    .more-btn{display:inline-flex;align-items:center;gap:10px;margin-top:14px;padding:10px 18px;border:1.5px solid var(--bk);background:var(--wh);color:var(--bk);font-weight:900;font-size:13px;letter-spacing:.06em;cursor:pointer;}
+  }
+  /* 区切りが列より長いときだけ中で折り返す（はみ出し防止） */
   .wr-list { list-style:none;margin:clamp(28px,4vw,56px) 0 0;padding:0;display:grid;grid-template-columns:repeat(2,1fr);column-gap:clamp(20px,3vw,42.7px);counter-reset:wr; }
   .wr-list li { counter-increment:wr;display:flex;gap:16px;align-items:baseline;border-top:1px solid var(--bk);padding:18px 0 20px;font-size:clamp(14px,1.25vw,17px);font-weight:700;line-height:1.7;min-width:0; }
   .wr-list li::before { content:counter(wr,decimal-leading-zero);font-family:var(--cond);font-weight:900;font-size:22px;letter-spacing:.05em;color:var(--gy);flex:none; }
@@ -1831,8 +1858,9 @@
         el.remove();
       });
       // 大きめの言葉から、1語だけランダムに色を付ける
-      var big=shuffle(els.filter(function(e){return +e.dataset.size>=6;}));
-      if(big[0]) big[0].style.color=ACCENT;
+      var big=shuffle(els.filter(function(e){return +e.dataset.size>=10;}));
+      if(!big.length) big=shuffle(els.filter(function(e){return +e.dataset.size>=6;}));
+      if(big[0]){ big[0].style.color=ACCENT; big[0].dataset.last='1'; }
       return els;
     }
     function fit(el){ // 大きな文字が画面幅からはみ出さないように縮める
@@ -1850,8 +1878,9 @@
       if(l1&&l2){ l2.style.fontSize=''; var base=parseFloat(getComputedStyle(l2).fontSize), w2=l2.offsetWidth; if(w2>0) l2.style.fontSize=(base*l1.offsetWidth/w2)+'px'; }
       // 「視差効果を減らす」がオンでも1語ずつ出す（動き・拡大はCSSで止めて、その場に現れるだけ）
       var els=shuffle(place());
+      var li=els.findIndex(function(e){return e.dataset.last;}); if(li>-1){ els.push(els.splice(li,1)[0]); }  // オレンジの言葉を最後に
       els.forEach(function(el,i){ later(function(){el.classList.add('on');}, 80+i*55); });
-      var t=80+els.length*55+700;
+      var t=80+els.length*55+1500;  // 最後の言葉のあと少し長めに見せる
       later(function(){ s.classList.add('p2'); }, t);          // 黒地に小さく OHANAHOME
       later(function(){ s.classList.add('p3'); }, t+2600);     // 白地に大きく What We are?（パッと切り替え）
       later(finish, t+2600+2400);
@@ -1865,6 +1894,52 @@
   document.querySelectorAll('a[href="#/"]').forEach(function(a){
     a.addEventListener('click',function(){ if(document.getElementById('splash')) return; play(build(),false); });
   });
+})();
+</script>
+
+<script>
+(function(){
+  var mq=matchMedia('(max-width:700px)');
+  // スライダー：つまみ（grip）をドラッグして動かす
+  document.querySelectorAll('.cmp').forEach(function(c){
+    var r=c.querySelector('input'); if(!r||c.querySelector('.grip')) return;
+    var g=document.createElement('div'); g.className='grip'; g.setAttribute('aria-hidden','true'); c.appendChild(g);
+    function setFrom(x){ var b=c.getBoundingClientRect(); var p=Math.max(0,Math.min(100,(x-b.left)/b.width*100)); r.value=p; c.style.setProperty('--p',p+'%'); }
+    g.addEventListener('pointerdown',function(e){ g.setPointerCapture(e.pointerId); setFrom(e.clientX); e.preventDefault(); });
+    g.addEventListener('pointermove',function(e){ if(g.hasPointerCapture(e.pointerId)) setFrom(e.clientX); });
+  });
+  // 横スワイプの並びに「SWIPE →」の目印
+  document.querySelectorAll('.ba-grid,.cmp-grid,.ft-grid,.act-grid,.works-grid,.guide-grid,.sem-themes,.sem-pics').forEach(function(el){
+    if(el.children.length<2) return;
+    var n=el.nextElementSibling; if(n&&n.classList.contains('swipe-hint')) return;
+    var h=document.createElement('div'); h.className='swipe-hint'; h.textContent='SWIPE →'; el.insertAdjacentElement('afterend',h);
+  });
+  // 長い一覧：最初の n 件だけ見せる
+  function foldList(list,n,label){
+    var items=[].slice.call(list.children); if(items.length<=n||list.dataset.folded) return;
+    list.dataset.folded='1'; list.classList.add('is-folded');
+    items.slice(n).forEach(function(x){x.classList.add('fold-hide');});
+    var b=document.createElement('button'); b.type='button'; b.className='more-btn'; b.textContent=label.replace('{n}',items.length-n);
+    b.addEventListener('click',function(){ list.classList.remove('is-folded'); b.remove(); });
+    list.insertAdjacentElement('afterend',b);
+  }
+  // 長い文章：途中まで見せて「続きを読む」
+  function clampText(el){
+    if(el.dataset.clamped) return; if(el.scrollHeight<260) return;
+    el.dataset.clamped='1'; el.classList.add('clamp');
+    var b=document.createElement('button'); b.type='button'; b.className='more-btn'; b.textContent='続きを読む';
+    b.addEventListener('click',function(){ el.classList.remove('clamp'); b.remove(); });
+    el.insertAdjacentElement('afterend',b);
+  }
+  function apply(){
+    if(!mq.matches) return;
+    document.querySelectorAll('.wr-list').forEach(function(l){ foldList(l,6,'残り{n}件を見る'); });
+    document.querySelectorAll('.col-list').forEach(function(l){ foldList(l,4,'ほか{n}件を見る'); });
+    document.querySelectorAll('.person .body-txt, #view-seminar .two>.body-txt').forEach(clampText);
+  }
+  apply();
+  window.addEventListener('hashchange',function(){ setTimeout(apply,60); });
+  if(mq.addEventListener) mq.addEventListener('change',apply);
 })();
 </script>
 </body>
