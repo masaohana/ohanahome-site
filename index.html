@@ -1268,8 +1268,13 @@
     </div>
   </div>
   <div class="cmp-grid" style="margin-top:8px;grid-template-columns:1fr">
-      <div class="cmp clip-b" style="aspect-ratio:4/3"><img class="b" src="img/cmp_tane_b3.jpg" alt="改修前のたね。赤い雨戸が閉まり、木に覆われた外観" loading="lazy" decoding="async"><img class="a" src="img/cmp_tane_a3.jpg" alt="現在のたね。赤い屋根と黄色い玄関" loading="lazy" decoding="async"><div class="bar"></div><span class="lb bl">BEFORE</span><span class="lb al">AFTER</span><span class="room">同じ家を正面から。空き家だったころと現在</span><input type="range" min="0" max="100" value="50" aria-label="たね外観の前後を比較"></div>
-    </div>
+    <div class="cmp clip-b" style="aspect-ratio:3/2"><img class="b" src="img/cmp_tane_ext_b.jpg" alt="改修前のたね。茶色い瓦屋根と赤い雨戸の外観" loading="lazy" decoding="async"><img class="a" src="img/cmp_tane_ext_a.jpg" alt="現在のたね。赤い屋根と白い外壁、黄色い玄関" loading="lazy" decoding="async"><div class="bar"></div><span class="lb bl">BEFORE</span><span class="lb al">AFTER</span><span class="room">外観</span><input type="range" min="0" max="100" value="50" aria-label="たね外観の前後を比較"></div>
+  </div>
+  <div class="cmp-grid" style="margin-top:8px;grid-template-columns:repeat(3,1fr)">
+    <div class="cmp clip-b" style="aspect-ratio:3/2"><img class="b" src="img/cmp_tane_ent_b.jpg" alt="改修前の玄関。棚や荷物で埋まっていた" loading="lazy" decoding="async"><img class="a" src="img/cmp_tane_ent_a.jpg" alt="現在の玄関。黄色い格子戸と木の床" loading="lazy" decoding="async"><div class="bar"></div><span class="lb bl">BEFORE</span><span class="lb al">AFTER</span><span class="room">玄関</span><input type="range" min="0" max="100" value="50" aria-label="たね玄関の前後を比較"></div>
+    <div class="cmp clip-b" style="aspect-ratio:3/2"><img class="b" src="img/cmp_tane_kit_b.jpg" alt="改修前のキッチン。食器棚と荷物でいっぱいだった" loading="lazy" decoding="async"><img class="a" src="img/cmp_tane_kit_a.jpg" alt="現在のキッチン。木目の天井とステンレスの流し" loading="lazy" decoding="async"><div class="bar"></div><span class="lb bl">BEFORE</span><span class="lb al">AFTER</span><span class="room">キッチン</span><input type="range" min="0" max="100" value="50" aria-label="たねキッチンの前後を比較"></div>
+    <div class="cmp clip-b" style="aspect-ratio:3/2"><img class="b" src="img/cmp_tane_liv_b.jpg" alt="改修前の和室。畳と荷物、奥に台所" loading="lazy" decoding="async"><img class="a" src="img/cmp_tane_liv_a.jpg" alt="現在のリビング。壁を抜いて広げ、奥にキッチン" loading="lazy" decoding="async"><div class="bar"></div><span class="lb bl">BEFORE</span><span class="lb al">AFTER</span><span class="room">リビング</span><input type="range" min="0" max="100" value="50" aria-label="たねリビングの前後を比較"></div>
+  </div>
 </section>
 
 
@@ -1454,6 +1459,26 @@
   </div>
 </section>
 
+<section class="wrap" id="recruit-song" style="margin-top:clamp(60px,9vw,120px)">
+  <div class="cond sub fade">SONG</div>
+  <h2 class="cond ttl fade" style="font-size:min(clamp(40px,6.4vw,84px),calc(84vw / 7));white-space:nowrap">オハナのうた</h2>
+  <div class="trks" style="margin-top:clamp(24px,3vw,40px)">
+    <div class="trk fade">
+      <img class="cv" src="img/music_kureba.jpg" alt="「オハナにくれば？〜仕事にくれば〜」のジャケット" loading="lazy" decoding="async">
+      <div class="tb">
+        <div class="cond g">J-POP</div>
+        <h3><span class="ib">オハナにくれば？</span><span class="ib">〜仕事にくれば〜</span></h3>
+        <p>一緒に働く仲間を呼ぶ、オハナホームの採用ソングです。会社の空気を、まずは音で感じてみてください。</p>
+        <div class="pl" data-src="audio/kureba.m4a">
+          <button type="button" class="pp" aria-label="「オハナにくれば？〜仕事にくれば〜」を再生"><span class="ic"></span></button>
+          <div class="bar" role="slider" aria-label="再生位置" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" tabindex="0"><i></i></div>
+          <span class="tm">0:00 / 2:07</span>
+        </div>
+        <div class="lk"><a href="/music/">ほかの曲も聴く（MUSIC）</a></div>
+      </div>
+    </div>
+  </div>
+</section>
 <section class="wrap" style="margin-top:clamp(70px,11vw,160px)">
   <div class="cond sub fade">POSITIONS</div>
   <h2 class="cond ttl fade" style="font-size:min(clamp(40px,6.4vw,84px),calc(84vw / 4));white-space:nowrap">募集職種</h2>
@@ -1974,7 +1999,7 @@
       bar.addEventListener('click',function(e){var b=bar.getBoundingClientRect();seek(Math.min(1,Math.max(0,(e.clientX-b.left)/b.width)));});
       bar.addEventListener('keydown',function(e){if(cur!==p||!au.duration)return;if(e.key==='ArrowRight'){au.currentTime=Math.min(au.duration,au.currentTime+5);}else if(e.key==='ArrowLeft'){au.currentTime=Math.max(0,au.currentTime-5);}});
     });
-    window.addEventListener('routechange',function(){if(!document.getElementById('view-music').classList.contains('on'))au.pause();});
+    window.addEventListener('routechange',function(){au.pause();});
   })();
   addEventListener('popstate',route);
   // サイト内リンクは、ページを読み直さずに切り替える（住所はきちんと変わる）
