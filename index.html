@@ -23,7 +23,7 @@
 <style>*{box-sizing:border-box}body{margin:0;font-family:system-ui,sans-serif;background:#fff}img{max-width:100%}[hidden]{display:none!important}</style>
 </head>
 <body>
-<div id="splash" style="position:fixed;inset:0;z-index:999;background:#fff"><div class="ww-words" aria-hidden="true"></div><div class="ww-dark"></div><h1 class="ww-brand" style="opacity:0"><span class="l1">OHANAHOME</span><span class="l2">What We are?</span></h1></div>
+<div id="splash" style="position:fixed;inset:0;z-index:999;background:#fff"><div class="ww-words" aria-hidden="true"></div><div class="ww-dark"></div><div class="ww-brand" style="opacity:0"><span>OHANAHOME</span></div><h1 class="ww-title" style="opacity:0"><span>What</span> <span>We are?</span></h1></div>
 <script>try{if(sessionStorage.getItem("ww-seen")){document.getElementById("splash").remove();}}catch(e){}</script>
 <title>OUCHI JIMAI｜オハナホーム 空き家再生・相続・おうちじまい</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -348,16 +348,17 @@
   #splash .ww.on{opacity:1;transform:none;}
   #splash .ww-title{position:absolute;inset:0;margin:0;display:flex;align-items:center;justify-content:center;gap:.22em;flex-wrap:wrap;text-align:center;font-family:var(--cond);font-weight:900;color:var(--bk);line-height:.86;letter-spacing:.005em;font-size:clamp(64px,17vw,360px);opacity:0;transform:scale(1.06);transition:opacity .7s ease,transform 1.6s cubic-bezier(.2,.7,.2,1);pointer-events:none;}
   #splash .ww-title span{white-space:nowrap;}
-  #splash .ww-brand{position:absolute;inset:0;margin:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.06em;font-family:var(--cond);font-weight:900;color:var(--wh);line-height:.86;letter-spacing:.005em;font-size:clamp(64px,17vw,360px);opacity:0;transform:scale(1.04);transition:opacity .6s ease,transform 1.4s cubic-bezier(.2,.7,.2,1);pointer-events:none;}
+  #splash .ww-brand{position:absolute;inset:0;margin:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.06em;font-family:var(--cond);font-weight:900;color:var(--wh);line-height:1;letter-spacing:.16em;font-size:clamp(26px,5.2vw,80px);opacity:0;transform:scale(1.04);transition:opacity .6s ease,transform 1.4s cubic-bezier(.2,.7,.2,1);pointer-events:none;}
   #splash .ww-dark{position:absolute;inset:0;background:var(--bk);opacity:0;transition:opacity .7s ease;pointer-events:none;}
   #splash .ww-brand span{white-space:nowrap;}
   #splash .ww-brand .l2{font-size:.9em;opacity:0;transition:none;}
   #splash.p2 .ww-words{opacity:0;}
   #splash.p2 .ww-dark{opacity:1;transition-delay:.3s;}
   #splash.p2 .ww-brand{opacity:1;transform:none;transition-delay:.9s;}
-  #splash.p3 .ww-brand .l2{opacity:1;transform:none;}
+  #splash.p3 .ww-dark,#splash.p3 .ww-brand{opacity:0;transition:none;}
+  #splash.p3 .ww-title{opacity:1;transform:none;transition:none;}
   #splash.out .ww-brand,#splash.out .ww-dark{transition-delay:0s;}
-  @media(max-width:700px){#splash .ww-title{flex-direction:column;gap:0;font-size:min(30vw,24vh);}#splash .ww-brand{font-size:30vw;}}
+  @media(max-width:700px){#splash .ww-title{flex-direction:column;gap:0;font-size:min(30vw,24vh);}#splash .ww-brand{font-size:9vw;}}
   @media(prefers-reduced-motion:reduce){#splash .ww,#splash .ww-brand,#splash .ww-brand .l2{transform:none !important;}}
 
   .menu .sub a{font-family:var(--jp);font-size:13px;font-weight:700;border:0;padding:0;color:var(--wh);letter-spacing:.06em;}
@@ -1800,12 +1801,12 @@
 <script>
 (function(){
   var WORDS=['空き家再生','おうち終活','おうちじまい','空き家再生士','相続','終活','あきやにあかり','リフォーム','空き家のミカタ','源泉物件','おうちゃま','空き家王'];
-  var COLORS=['#000','#0b1a5c','#0b1a5c','#1daa3a','#1daa3a','#e60012','#e60012','#f2a93b','#9e9e9e'];
+  var COLORS=['#000','#000','#000','#000','#e60012','#e60012','#1daa3a','#1daa3a'];
   function rnd(a,b){return a+Math.random()*(b-a);}
   function shuffle(a){for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t;}return a;}
   function build(){
     var s=document.createElement('div'); s.id='splash'; s.style.cssText='position:fixed;inset:0;z-index:999;background:#fff';
-    s.innerHTML='<div class="ww-words" aria-hidden="true"></div><div class="ww-dark"></div><h1 class="ww-brand" style="opacity:0"><span class="l1">OHANAHOME</span><span class="l2">What We are?</span></h1>';
+    s.innerHTML='<div class="ww-words" aria-hidden="true"></div><div class="ww-dark"></div><div class="ww-brand" style="opacity:0"><span>OHANAHOME</span></div><h1 class="ww-title" style="opacity:0"><span>What</span> <span>We are?</span></h1>';
     document.body.appendChild(s); return s;
   }
   function play(s, waitFonts){
@@ -1842,15 +1843,16 @@
     function start(){
       brandEl.style.opacity='';
       fit(brandEl);
+      var titleEl=s.querySelector('.ww-title'); if(titleEl){ titleEl.style.opacity=''; fit(titleEl); }
       var l1=brandEl.querySelector('.l1'), l2=brandEl.querySelector('.l2');
       if(l1&&l2){ l2.style.fontSize=''; var base=parseFloat(getComputedStyle(l2).fontSize), w2=l2.offsetWidth; if(w2>0) l2.style.fontSize=(base*l1.offsetWidth/w2)+'px'; }
       // 「視差効果を減らす」がオンでも1語ずつ出す（動き・拡大はCSSで止めて、その場に現れるだけ）
       var els=shuffle(place());
       els.forEach(function(el,i){ later(function(){el.classList.add('on');}, 80+i*55); });
       var t=80+els.length*55+700;
-      later(function(){ s.classList.add('p2'); }, t);          // 黒地に OHANAHOME
-      later(function(){ s.classList.add('p3'); }, t+1900);     // 同じ画面に What We are? を足す
-      later(finish, t+1900+1700);
+      later(function(){ s.classList.add('p2'); }, t);          // 黒地に小さく OHANAHOME
+      later(function(){ s.classList.add('p3'); }, t+2600);     // 白地に大きく What We are?（パッと切り替え）
+      later(finish, t+2600+1800);
     }
     if(waitFonts&&document.fonts&&document.fonts.ready){ var go=false; document.fonts.ready.then(function(){ if(!go){go=true;start();} }); setTimeout(function(){ if(!go){go=true;start();} },900); } else start();
   }
