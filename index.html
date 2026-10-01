@@ -23,7 +23,8 @@
 <style>*{box-sizing:border-box}body{margin:0;font-family:system-ui,sans-serif;background:#fff}img{max-width:100%}[hidden]{display:none!important}</style>
 </head>
 <body>
-<div id="splash"><h1>What We are?</h1></div>
+<div id="splash"><div class="ww-words" aria-hidden="true"></div><h1 class="ww-title"><span>What</span> <span>We are?</span></h1></div>
+<script>try{if(sessionStorage.getItem("ww-seen")){document.getElementById("splash").remove();}}catch(e){}</script>
 <title>OUCHI JIMAI｜オハナホーム 空き家再生・相続・おうちじまい</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sofia+Sans+Extra+Condensed:wght@800;900&family=Noto+Sans+JP:wght@400;700;900&family=Zen+Maru+Gothic:wght@500;700&display=swap">
@@ -329,10 +330,18 @@
   .menu .close{position:absolute;top:22px;right:var(--pad);width:44px;height:44px;background:var(--wh);border:0;cursor:pointer;font-family:var(--cond);font-weight:900;font-size:22px;}
   .menu .sub{margin-top:28px;display:flex;gap:22px;flex-wrap:wrap;font-size:13px;letter-spacing:.14em;color:var(--gy);padding-bottom:20px;}
   @media(max-height:700px){.menu a{font-size:clamp(28px,8vw,64px);}}
-  #splash{position:fixed;inset:0;z-index:999;background:var(--wh);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:opacity 1.1s ease;}
+  #splash{position:fixed;inset:0;z-index:999;background:var(--wh);overflow:hidden;cursor:pointer;transition:opacity 1.1s ease;}
   #splash.out{opacity:0;pointer-events:none;}
-  #splash h1{font-family:var(--cond);font-weight:900;color:var(--bk);font-size:clamp(32px,7vw,76px);letter-spacing:.02em;text-align:center;margin:0;padding:0 24px;}
-  @media(prefers-reduced-motion:reduce){#splash{transition:opacity .2s linear;}}
+  #splash .ww-words{position:absolute;inset:0;transition:opacity .7s ease;}
+  #splash .ww{position:absolute;left:0;top:0;font-family:var(--jp);font-weight:900;line-height:1.05;white-space:nowrap;letter-spacing:.02em;opacity:0;transform:translateY(6px);transition:opacity .4s ease,transform .6s ease;}
+  #splash .ww.v{writing-mode:vertical-rl;letter-spacing:.08em;}
+  #splash .ww.on{opacity:1;transform:none;}
+  #splash .ww-title{position:absolute;inset:0;margin:0;display:flex;align-items:center;justify-content:center;gap:.22em;flex-wrap:wrap;text-align:center;font-family:var(--cond);font-weight:900;color:var(--bk);line-height:.86;letter-spacing:.005em;font-size:clamp(64px,17vw,360px);opacity:0;transform:scale(1.06);transition:opacity .7s ease,transform 1.6s cubic-bezier(.2,.7,.2,1);pointer-events:none;}
+  #splash .ww-title span{white-space:nowrap;}
+  #splash.p2 .ww-words{opacity:0;}
+  #splash.p2 .ww-title{opacity:1;transform:none;}
+  @media(max-width:700px){#splash .ww-title{flex-direction:column;gap:0;font-size:min(30vw,24vh);}}
+  @media(prefers-reduced-motion:reduce){#splash,#splash .ww,#splash .ww-words,#splash .ww-title{transition:opacity .2s linear;transform:none;}}
 
   .menu .sub a{font-family:var(--jp);font-size:13px;border:0;padding:0;color:var(--gy);}
   .view{display:none;}
@@ -1063,7 +1072,7 @@
     <tr><th>NAME<small>商号</small></th><td>オハナホーム株式会社</td></tr>
     <tr><th>REPRESENTATIVE<small>代表者</small></th><td>代表取締役　菊池 聖雄</td></tr>
     <tr><th>FOUNDED<small>設立</small></th><td>2018年4月3日</td></tr>
-    <tr><th>OFFICE<small>所在地</small></th><td>本社：〒289-1107 千葉県八街市八街は43番8<br>千葉オフィス：〒260-0015 千葉県千葉市中央区富士見2丁目13番地1 第2山崎ビル7階B</td></tr>
+    <tr><th>OFFICE<small>所在地</small></th><td>本社：〒289-1107 千葉県八街市八街は43番8<br>千葉オフィス：〒260-0015 千葉県千葉市中央区富士見2丁目13番地1 第2山崎ビル7階B<br>東京支店：東京都品川区北品川5丁目12番1号 フラワー御殿山ハイツ602号室（TEL <a href="tel:0358602489">03-5860-2489</a>）<br><small style="color:var(--gy)">※東京支店は宅地建物取引業の免許を申請中です。許可・免許番号は現在、千葉県のもののみです。</small></td></tr>
     <tr><th>TEL<small>電話</small></th><td><a href="tel:0120087255">0120-087-255</a>（受付 9:00〜17:00）</td></tr>
     <tr><th>LICENSE<small>免許</small></th><td>宅地建物取引業　千葉県知事免許（2）第17428号<br>古物商　千葉県公安委員会　第441200001475号</td></tr>
     <tr><th>BUSINESS<small>事業内容</small></th><td>空き家の買取・再生・売却／相続対応／遺品整理・片付け／終活サポート（おうち終活ノート）／絵本『あきやにあかり』による啓発</td></tr>
@@ -1764,10 +1773,54 @@
 <script>
 (function(){
   var s=document.getElementById('splash'); if(!s) return;
-  var done=false;
-  function go(){ if(done) return; done=true; s.classList.add('out'); setTimeout(function(){ s.remove(); }, 1300); }
-  s.addEventListener('click', go);
-  setTimeout(go, 1400);
+  try{sessionStorage.setItem('ww-seen','1');}catch(e){}
+  var box=s.querySelector('.ww-words'), title=s.querySelector('.ww-title');
+  var WORDS=['空き家再生','おうち終活','おうちじまい','空き家再生士','相続','終活','あきやにあかり','リフォーム','空き家のミカタ','源泉物件','おうちゃま','空き家王'];
+  var COLORS=['#000','#000','#000','#333','#9e9e9e','#c4c4c4'];
+  var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var timers=[], done=false;
+  function later(f,ms){timers.push(setTimeout(f,ms));}
+  function rnd(a,b){return a+Math.random()*(b-a);}
+  function shuffle(a){for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t;}return a;}
+  // 言葉を重ならないように散らす（大・中・小の3段）
+  function place(){
+    var W=innerWidth,H=innerHeight,vm=Math.min(W,H)/100,pad=Math.max(6,vm*1.2),rects=[],els=[];
+    var list=[];
+    shuffle(WORDS.slice()).forEach(function(w,i){list.push({t:w,size:i<4?rnd(10,13.5):rnd(6,8.5)});});
+    shuffle(WORDS.slice()).forEach(function(w){list.push({t:w,size:rnd(3,4.6)});});
+    shuffle(WORDS.slice()).forEach(function(w){list.push({t:w,size:rnd(2,2.8)});});
+    list.forEach(function(it){
+      var el=document.createElement('span'); el.className='ww'+(Math.random()<.38?' v':''); el.textContent=it.t;
+      el.style.fontSize=(it.size*vm)+'px'; el.style.color=COLORS[Math.floor(Math.random()*COLORS.length)];
+      el.style.visibility='hidden'; box.appendChild(el);
+      var w=el.offsetWidth,hh=el.offsetHeight;
+      if(w>W-pad*2||hh>H-pad*2){el.remove();return;}
+      for(var k=0;k<120;k++){
+        var x=rnd(pad,W-w-pad),y=rnd(pad,H-hh-pad),ok=true;
+        for(var r=0;r<rects.length;r++){var q=rects[r];if(x<q.x+q.w+pad&&x+w+pad>q.x&&y<q.y+q.h+pad&&y+hh+pad>q.y){ok=false;break;}}
+        if(ok){rects.push({x:x,y:y,w:w,h:hh});el.style.left=x+'px';el.style.top=y+'px';el.style.visibility='';els.push(el);return;}
+      }
+      el.remove();
+    });
+    return els;
+  }
+  function fitTitle(){ // 見出しが画面幅からはみ出さないように縮める
+    title.style.fontSize=''; var sp=title.querySelectorAll('span'),max=0;
+    sp.forEach(function(x){max=Math.max(max,x.offsetWidth);});
+    var lim=innerWidth*.92; if(max>lim){title.style.fontSize=(parseFloat(getComputedStyle(title).fontSize)*lim/max)+'px';}
+  }
+  function finish(){ if(done) return; done=true; timers.forEach(clearTimeout); s.classList.add('p2','out'); setTimeout(function(){s.remove();},1300); }
+  s.addEventListener('click',finish);
+  function start(){
+    fitTitle();
+    if(reduce){ s.classList.add('p2'); later(finish,1600); return; }
+    var els=shuffle(place());
+    els.forEach(function(el,i){ later(function(){el.classList.add('on');}, 80+i*55); });
+    var t=80+els.length*55+700;
+    later(function(){ s.classList.add('p2'); }, t);
+    later(finish, t+1900);
+  }
+  if(document.fonts&&document.fonts.ready){ var go=false; document.fonts.ready.then(function(){ if(!go){go=true;start();} }); setTimeout(function(){ if(!go){go=true;start();} },900); } else start();
 })();
 </script>
 </body>
