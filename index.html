@@ -1900,8 +1900,8 @@
   // 初回（同じタブで1回だけ）
   var first=document.getElementById('splash');
   if(first){ try{sessionStorage.setItem('ww-seen','1');}catch(e){} play(first,true); }
-  // TOPへのリンク（ロゴ・HOME）を押したら、もう一度流す
-  document.querySelectorAll('a[href="#/"]').forEach(function(a){
+  // 左上のロゴを押したときだけ、もう一度流す（HOMEのタブ・ハンバーガーでは流さない）
+  document.querySelectorAll('a.logo').forEach(function(a){
     a.addEventListener('click',function(){ if(document.getElementById('splash')) return; play(build(),false); });
   });
 })();
