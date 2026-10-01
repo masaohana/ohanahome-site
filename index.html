@@ -269,6 +269,11 @@
   .guide p{margin:0;font-family:var(--maru);font-weight:500;font-size:14.5px;line-height:1.9;color:var(--gy-dark);}
   .guide .role{display:inline-block;background:var(--bk);color:var(--wh);font-family:var(--cond);font-weight:900;font-size:16px;letter-spacing:.14em;padding:4px 12px;margin-top:12px;}
   .guide-king img{width:25%;margin:0 auto;align-self:end;}
+  .guide-king .king-link{width:25%;margin:0 auto;align-self:end;display:block;}
+  .guide-king .king-link img{width:100%;}
+  .guide-king .king-link:hover img{transform:translateY(-6px) rotate(-3deg);}
+  .king-btn{display:inline-flex;align-items:center;gap:12px;white-space:nowrap;margin-top:16px;padding:12px 20px;background:var(--bk);color:var(--wh);font-weight:900;font-size:14px;letter-spacing:.06em;transition:opacity .3s;}
+  .king-btn:hover{opacity:.7;}
   @media(max-width:860px){.guide-grid{grid-template-columns:1fr;}}
 
   /* contact */
@@ -893,12 +898,13 @@
         </div>
       </article>
       <article class="guide fade guide-king">
-        <img src="img/ch_akiyaking.png" alt="空き家王" loading="lazy" decoding="async">
+        <a class="king-link" href="https://soudan.ohanahome.jp/" target="_blank" rel="noopener" aria-label="空き家王の空き家相談室を開く"><img src="img/ch_akiyaking.png" alt="空き家王" loading="lazy" decoding="async"></a>
         <div>
           <div class="cond en">AKIYA KING</div>
           <h3><span class="ib">空き家王</span><span class="ib">（あきやおう）</span></h3>
           <p>「あ」の冠に∞のめがね。空き家の「課題と可能性」を語る小さな王。空き家のあらゆる相談の入口に、ちょこんと立っています。</p>
           <span class="role">AKIYA</span>
+          <a class="king-btn" href="https://soudan.ohanahome.jp/" target="_blank" rel="noopener">空き家王に相談する<span class="arrow"></span></a>
         </div>
       </article>
     </div>
