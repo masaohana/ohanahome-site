@@ -377,6 +377,18 @@
 
   .menu .sub a{font-family:var(--jp);font-size:13px;font-weight:700;border:0;padding:0;color:var(--wh);letter-spacing:.06em;}
   .menu .sub a:hover{opacity:.6;}
+  .menu .sub a.fol-line{max-width:640px;display:flex;align-items:center;gap:12px;margin:4px 0 18px;background:#06C755;color:var(--wh);padding:14px 18px;font-family:var(--jp);font-size:15px;font-weight:900;letter-spacing:.08em;border:0;}
+  .menu .sub a.fol-line svg{width:26px;height:26px;flex:none;}
+  .menu .sub a.fol-line .arrow{margin-left:auto;position:static;}
+  .menu .sub a.fol-line:hover{opacity:.85;}
+  .menu .fol-grid{display:grid;grid-template-columns:1fr;max-width:640px;}
+  .menu .fol-p{display:grid;grid-template-columns:120px 1fr;align-items:center;border-top:1px solid rgba(255,255,255,.18);padding:12px 0;}
+  .menu .fol-p .who{font-size:14px;font-weight:900;color:var(--wh);letter-spacing:.08em;}
+  .menu .fol .chips{display:flex;flex-wrap:nowrap;gap:8px;}
+  .menu .fol .chip{display:inline-flex;align-items:center;gap:7px;padding:8px 12px 8px 10px;border:1px solid rgba(255,255,255,.35);border-radius:999px;font-family:var(--jp);font-size:12px;font-weight:700;letter-spacing:.04em;color:var(--wh);line-height:1;transition:background .2s,color .2s;}
+  .menu .fol .chip svg{width:18px;height:18px;flex:none;}
+  .menu .fol .chip:hover{background:var(--wh);color:var(--bk);opacity:1;}
+  @media(max-width:700px){.menu .fol-grid{grid-template-columns:1fr;gap:0;}.menu .fol-p{display:block;padding:12px 0 14px;}.menu .fol-p .who{margin-bottom:8px;font-size:13px;}.menu .fol .chips{flex-wrap:nowrap;gap:6px;}.menu .fol .chip{padding:8px 10px 8px 9px;font-size:12px;gap:6px;}.menu .fol .chip svg{width:16px;height:16px;}}
   .view{display:none;}
   .view.on{display:block;}
   .pg-hero{position:relative;height:clamp(420px,64vh,720px);overflow:hidden;background:var(--bk);}
@@ -645,13 +657,14 @@
   <a href="/office/">OFFICE<small>空き家を再生した本社</small></a>
   <a href="/recruit/">RECRUIT<small>採用・代表に直接メッセージ</small></a>
   <a href="/contact/">CONTACT<small>ご相談・公式LINE</small></a>
-  <div class="sub">
+  <div class="sub fol">
     <div class="cond sub-ttl">FOLLOW US</div>
-    <div class="row"><span class="cond k">LINE</span><span class="v"><a href="https://lin.ee/wfuJh2m" target="_blank" rel="noopener">公式LINE</a></span></div>
-    <div class="row"><span class="cond k">INSTAGRAM</span><span class="v"><a href="https://www.instagram.com/ohanahome_official/" target="_blank" rel="noopener">会社</a><a href="https://www.instagram.com/masao.kikuchi/" target="_blank" rel="noopener">菊池聖雄</a><a href="https://www.instagram.com/akiya_ni_akari/" target="_blank" rel="noopener">菊池あかり</a></span></div>
-    <div class="row"><span class="cond k">FACEBOOK</span><span class="v"><a href="https://www.facebook.com/ohanahome.sns/" target="_blank" rel="noopener">会社</a><a href="https://www.facebook.com/profile.php?id=61579031979060" target="_blank" rel="noopener">菊池聖雄</a><a href="https://www.facebook.com/akiya.ni.akari" target="_blank" rel="noopener">菊池あかり</a></span></div>
-    <div class="row"><span class="cond k">X</span><span class="v"><a href="https://x.com/ohanahome_jp" target="_blank" rel="noopener">会社</a></span></div>
-    <div class="row"><span class="cond k">NOTE</span><span class="v"><a href="https://note.com/masao_kikuchi" target="_blank" rel="noopener">菊池聖雄</a></span></div>
+    <a class="fol-line" href="https://lin.ee/wfuJh2m" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 3.2c-5.1 0-9.2 3.3-9.2 7.4 0 3.7 3.3 6.8 7.7 7.3.3.1.7.2.8.5.1.3.1.7 0 .9l-.1.8c0 .3-.2 1 .8.5 1-.4 5.5-3.2 7.5-5.5 1.4-1.5 2-3.1 2-4.7 0-4-4.1-7.2-9.5-7.2z"/></svg><span>公式LINEで相談する</span><span class="arrow"></span></a>
+    <div class="fol-grid">
+      <div class="fol-p"><div class="who">会社</div><div class="chips"><a class="chip" href="https://www.instagram.com/ohanahome_official/" target="_blank" rel="noopener" aria-label="会社のInstagram"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="3.5" width="17" height="17" rx="5" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="17.2" cy="6.8" r="1.2" fill="currentColor"/></svg><span>Instagram</span></a><a class="chip" href="https://www.facebook.com/ohanahome.sns/" target="_blank" rel="noopener" aria-label="会社のFacebook"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M13.5 21v-7.5h2.6l.4-3h-3V8.6c0-.9.3-1.5 1.5-1.5h1.6V4.4c-.3 0-1.2-.1-2.3-.1-2.3 0-3.8 1.4-3.8 3.9v2.3H7.9v3h2.6V21z"/></svg><span>Facebook</span></a><a class="chip" href="https://x.com/ohanahome_jp" target="_blank" rel="noopener" aria-label="会社のX"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M4 3.5h4.6l4.2 5.7 5-5.7h2.1l-6.1 7 6.7 9.2h-4.6l-4.5-6.2-5.4 6.2H3.9l6.5-7.4z"/></svg><span>X</span></a></div></div>
+      <div class="fol-p"><div class="who">菊池聖雄</div><div class="chips"><a class="chip" href="https://www.instagram.com/masao.kikuchi/" target="_blank" rel="noopener" aria-label="菊池聖雄のInstagram"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="3.5" width="17" height="17" rx="5" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="17.2" cy="6.8" r="1.2" fill="currentColor"/></svg><span>Instagram</span></a><a class="chip" href="https://www.facebook.com/profile.php?id=61579031979060" target="_blank" rel="noopener" aria-label="菊池聖雄のFacebook"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M13.5 21v-7.5h2.6l.4-3h-3V8.6c0-.9.3-1.5 1.5-1.5h1.6V4.4c-.3 0-1.2-.1-2.3-.1-2.3 0-3.8 1.4-3.8 3.9v2.3H7.9v3h2.6V21z"/></svg><span>Facebook</span></a><a class="chip" href="https://note.com/masao_kikuchi" target="_blank" rel="noopener" aria-label="菊池聖雄のnote"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" d="M6.5 18.5V7.5h7c2.3 0 4 1.5 4 3.9v7.1"/></svg><span>note</span></a></div></div>
+      <div class="fol-p"><div class="who">菊池あかり</div><div class="chips"><a class="chip" href="https://www.instagram.com/akiya_ni_akari/" target="_blank" rel="noopener" aria-label="菊池あかりのInstagram"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="3.5" width="17" height="17" rx="5" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="17.2" cy="6.8" r="1.2" fill="currentColor"/></svg><span>Instagram</span></a><a class="chip" href="https://www.facebook.com/akiya.ni.akari" target="_blank" rel="noopener" aria-label="菊池あかりのFacebook"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M13.5 21v-7.5h2.6l.4-3h-3V8.6c0-.9.3-1.5 1.5-1.5h1.6V4.4c-.3 0-1.2-.1-2.3-.1-2.3 0-3.8 1.4-3.8 3.9v2.3H7.9v3h2.6V21z"/></svg><span>Facebook</span></a></div></div>
+    </div>
   </div>
 </div>
 
