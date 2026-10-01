@@ -173,8 +173,10 @@
   .cmp .lb.bl{left:12px;background:var(--bk);color:var(--wh);}
   .cmp .lb.al{right:12px;background:var(--wh);color:var(--bk);}
   .cmp .room{position:absolute;left:12px;bottom:12px;font-size:13px;font-weight:900;color:var(--wh);text-shadow:0 1px 8px rgba(0,0,0,.8);pointer-events:none;}
+  .cmp-sq .cmp{aspect-ratio:1/1;}
   .cmp-note{margin-top:14px;font-size:12px;color:var(--gy);font-weight:700;letter-spacing:.08em;}
-  @media(max-width:860px){.ba-grid{grid-template-columns:repeat(2,1fr);}.ba-mid{grid-template-columns:1fr;}.cmp-grid{grid-template-columns:1fr;}}
+  @media(max-width:1100px){.cmp-grid{grid-template-columns:1fr 1fr!important;}}
+  @media(max-width:860px){.ba-grid{grid-template-columns:repeat(2,1fr);}.ba-mid{grid-template-columns:1fr;}.cmp-grid{grid-template-columns:1fr!important;}}
 
   /* story */
   .story{position:relative;margin-top:clamp(70px,11vw,156.4px);background:var(--night-deep);color:var(--wh);padding:clamp(60px,9vw,128px) 0 clamp(50px,7vw,90px);overflow:hidden;}
@@ -700,24 +702,12 @@
         <p>片付けを終え、壁も床も剥がした状態から、内装を仕上げるとこうなります。職人が工事前と同じ位置に立って撮った写真です。真ん中のつまみを左右に動かして見比べてください。</p>
       </div>
     </div>
-    <div class="pair-grid">
-    <figure class="pair" style="--r:4/3">
-      <div class="ph"><img src="img/cmp_living_b.jpg" alt="改修前の居室" loading="lazy" decoding="async"><span class="lb bl">BEFORE</span></div>
-      <div class="ph"><img src="img/cmp_living_a.jpg" alt="改修後の居室" loading="lazy" decoding="async"><span class="lb al">AFTER</span></div>
-      <figcaption>居室</figcaption>
-    </figure>
-    <figure class="pair" style="--r:4/3">
-      <div class="ph"><img src="img/cmp_k_wash_b.jpg" alt="改修前の洗面所" loading="lazy" decoding="async"><span class="lb bl">BEFORE</span></div>
-      <div class="ph"><img src="img/cmp_k_wash_a.jpg" alt="改修後の洗面所" loading="lazy" decoding="async"><span class="lb al">AFTER</span></div>
-      <figcaption>戸建て・洗面所</figcaption>
-    </figure>
-    <figure class="pair" style="--r:4/3">
-      <div class="ph"><img src="img/tane_before.jpg" alt="改修前のたね。赤い雨戸が閉まり、木に覆われた外観" loading="lazy" decoding="async"><span class="lb bl">BEFORE</span></div>
-      <div class="ph"><img src="img/tane_after.jpg" alt="現在のたね。赤い屋根と黄色い玄関" loading="lazy" decoding="async"><span class="lb al">AFTER</span></div>
-      <figcaption>フリースクール たね・外観</figcaption>
-    </figure>
+    <div class="cmp-grid cmp-sq" style="grid-template-columns:repeat(3,1fr)">
+      <div class="cmp clip-b"><img class="b" src="img/cmp_living_b.jpg" alt="改修前の居室" loading="lazy" decoding="async"><img class="a" src="img/cmp_living_a.jpg" alt="改修後の居室" loading="lazy" decoding="async"><div class="bar"></div><span class="lb bl">BEFORE</span><span class="lb al">AFTER</span><span class="room">居室</span><input type="range" min="0" max="100" value="50" aria-label="居室の前後を比較"></div>
+      <div class="cmp clip-b"><img class="b" src="img/cmp_k_wash_b.jpg" alt="改修前の洗面所" loading="lazy" decoding="async"><img class="a" src="img/cmp_k_wash_a.jpg" alt="改修後の洗面所" loading="lazy" decoding="async"><div class="bar"></div><span class="lb bl">BEFORE</span><span class="lb al">AFTER</span><span class="room">戸建て・洗面所</span><input type="range" min="0" max="100" value="50" aria-label="戸建て洗面所の前後を比較"></div>
+      <div class="cmp clip-b"><img class="b" src="img/cmp_tane_b3.jpg" alt="改修前のたね。赤い雨戸が閉まり、木に覆われた外観" loading="lazy" decoding="async"><img class="a" src="img/cmp_tane_a3.jpg" alt="現在のたね。赤い屋根と黄色い玄関" loading="lazy" decoding="async"><div class="bar"></div><span class="lb bl">BEFORE</span><span class="lb al">AFTER</span><span class="room">フリースクール たね・外観</span><input type="range" min="0" max="100" value="50" aria-label="フリースクールたね外観の前後を比較"></div>
     </div>
-    <div class="cmp-note">同一物件。左が工事前、右が工事後</div>
+    <div class="cmp-note">同一物件。真ん中のつまみを左右に動かすと見比べられます</div>
   </div>
 </section>
 <section class="story">
@@ -1139,12 +1129,8 @@
       <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:18px"><a class="btn-bk" href="https://camp-fire.jp/projects/971432/view" target="_blank" rel="noopener">CAMPFIREで応援する<span class="arrow"></span></a><a class="btn-bk" href="https://tane.akiyasaisei.jp/" target="_blank" rel="noopener" style="background:var(--wh);color:var(--bk);border:2px solid var(--bk)">たねの公式サイト<span class="arrow"></span></a></div>
     </div>
   </div>
-  <div class="pair-grid" style="margin-top:8px;grid-template-columns:1fr">
-    <figure class="pair" style="--r:3/2">
-      <div class="ph"><img src="img/tane_before.jpg" alt="改修前のたね。赤い雨戸が閉まり、木に覆われた外観" loading="lazy" decoding="async"><span class="lb bl">BEFORE</span></div>
-      <div class="ph"><img src="img/tane_after.jpg" alt="現在のたね。赤い屋根と黄色い玄関" loading="lazy" decoding="async"><span class="lb al">AFTER</span></div>
-      <figcaption>同じ家を正面から。左が空き家だったころ、右が現在</figcaption>
-    </figure>
+  <div class="cmp-grid" style="margin-top:8px;grid-template-columns:1fr">
+      <div class="cmp clip-b" style="aspect-ratio:4/3"><img class="b" src="img/cmp_tane_b3.jpg" alt="改修前のたね。赤い雨戸が閉まり、木に覆われた外観" loading="lazy" decoding="async"><img class="a" src="img/cmp_tane_a3.jpg" alt="現在のたね。赤い屋根と黄色い玄関" loading="lazy" decoding="async"><div class="bar"></div><span class="lb bl">BEFORE</span><span class="lb al">AFTER</span><span class="room">同じ家を正面から。空き家だったころと現在</span><input type="range" min="0" max="100" value="50" aria-label="たね外観の前後を比較"></div>
     </div>
 </section>
 
