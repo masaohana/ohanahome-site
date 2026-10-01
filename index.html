@@ -1800,7 +1800,7 @@
 <script>
 (function(){
   var WORDS=['空き家再生','おうち終活','おうちじまい','空き家再生士','相続','終活','あきやにあかり','リフォーム','空き家のミカタ','源泉物件','おうちゃま','空き家王'];
-  var RED='#e60012', GREEN='#1daa3a';  // 赤＝あかりの好きな色、緑＝はっぴの色。どちらも1語ずつ
+  var ACCENT='#dd742a';  // 色付きは1語だけ（M70 Y100 相当のオレンジ）
   function rnd(a,b){return a+Math.random()*(b-a);}
   function shuffle(a){for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t;}return a;}
   function build(){
@@ -1830,10 +1830,9 @@
         }
         el.remove();
       });
-      // 大きめの言葉から、赤と緑を1語ずつランダムに
+      // 大きめの言葉から、1語だけランダムに色を付ける
       var big=shuffle(els.filter(function(e){return +e.dataset.size>=6;}));
-      if(big[0]) big[0].style.color=RED;
-      if(big[1]) big[1].style.color=GREEN;
+      if(big[0]) big[0].style.color=ACCENT;
       return els;
     }
     function fit(el){ // 大きな文字が画面幅からはみ出さないように縮める
