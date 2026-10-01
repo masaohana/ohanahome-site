@@ -349,7 +349,7 @@
   #splash.focus .ww:not(.acc){opacity:.08;transition:opacity .6s ease;}
   #splash .ww.acc{transform-origin:50% 50%;}
   #splash.zoom .ww:not(.acc){opacity:0;}
-  #splash.zoom .ww.acc{opacity:0;transform:scale(2.6);transition:transform 1.2s cubic-bezier(.3,0,.2,1),opacity .9s ease .3s;}
+  #splash.zoom .ww.acc{opacity:0;transform:translate(var(--dx,0),var(--dy,0)) scale(3.4);transition:transform 1.3s cubic-bezier(.5,0,.2,1),opacity .7s ease .75s;}
   #splash .ww-title{position:absolute;inset:0;margin:0;display:flex;align-items:center;justify-content:center;gap:.22em;flex-wrap:wrap;text-align:center;font-family:var(--cond);font-weight:900;color:var(--bk);line-height:.86;letter-spacing:.005em;font-size:clamp(64px,17vw,360px);opacity:0;transform:scale(1.06);transition:opacity .7s ease,transform 1.6s cubic-bezier(.2,.7,.2,1);pointer-events:none;}
   #splash .ww-title span{white-space:nowrap;}
   #splash .ww-brand{position:absolute;inset:0;margin:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.06em;font-family:var(--cond);font-weight:900;color:var(--wh);line-height:1;letter-spacing:.16em;font-size:clamp(26px,5.2vw,80px);opacity:0;transform:scale(1.04);transition:opacity .6s ease,transform 1.4s cubic-bezier(.2,.7,.2,1);pointer-events:none;}
@@ -1882,11 +1882,14 @@
       if(l1&&l2){ l2.style.fontSize=''; var base=parseFloat(getComputedStyle(l2).fontSize), w2=l2.offsetWidth; if(w2>0) l2.style.fontSize=(base*l1.offsetWidth/w2)+'px'; }
       // 「視差効果を減らす」がオンでも1語ずつ出す（動き・拡大はCSSで止めて、その場に現れるだけ）
       var els=shuffle(place());
-      var li=els.findIndex(function(e){return e.dataset.last;}); if(li>-1){ els.push(els.splice(li,1)[0]); }  // オレンジの言葉を最後に
       els.forEach(function(el,i){ later(function(){el.classList.add('on');}, 80+i*55); });
       var tLast=80+els.length*55;
       later(function(){ s.classList.add('focus'); }, tLast+900);   // オレンジ以外を薄く
-      later(function(){ s.classList.add('zoom'); }, tLast+1600);   // オレンジの言葉が大きくなりながら消える
+      later(function(){ // オレンジの言葉が画面の中心に向かって、ぶわっと大きくなりながら消える
+        var a=s.querySelector('.ww.acc');
+        if(a){ var b=a.getBoundingClientRect(); a.style.setProperty('--dx',(innerWidth/2-(b.left+b.width/2))+'px'); a.style.setProperty('--dy',(innerHeight/2-(b.top+b.height/2))+'px'); }
+        s.classList.add('zoom');
+      }, tLast+1600);
       var t=tLast+2500;
       later(function(){ s.classList.add('p2'); }, t);          // 黒地に小さく OHANAHOME
       later(function(){ s.classList.add('p3'); }, t+2600);     // 白地に大きく What We are?（パッと切り替え）
