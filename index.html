@@ -1778,56 +1778,66 @@
 </script>
 <script>
 (function(){
-  var s=document.getElementById('splash'); if(!s) return;
-  try{sessionStorage.setItem('ww-seen','1');}catch(e){}
-  var box=s.querySelector('.ww-words'), title=s.querySelector('.ww-title');
   var WORDS=['空き家再生','おうち終活','おうちじまい','空き家再生士','相続','終活','あきやにあかり','リフォーム','空き家のミカタ','源泉物件','おうちゃま','空き家王'];
   var COLORS=['#000','#000','#000','#333','#9e9e9e','#c4c4c4'];
   var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var timers=[], done=false;
-  function later(f,ms){timers.push(setTimeout(f,ms));}
   function rnd(a,b){return a+Math.random()*(b-a);}
   function shuffle(a){for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t;}return a;}
-  // 言葉を重ならないように散らす（大・中・小の3段）
-  function place(){
-    var W=innerWidth,H=innerHeight,vm=Math.min(W,H)/100,pad=Math.max(6,vm*1.2),rects=[],els=[];
-    var list=[];
-    shuffle(WORDS.slice()).forEach(function(w,i){list.push({t:w,size:i<4?rnd(10,13.5):rnd(6,8.5)});});
-    shuffle(WORDS.slice()).forEach(function(w){list.push({t:w,size:rnd(3,4.6)});});
-    shuffle(WORDS.slice()).forEach(function(w){list.push({t:w,size:rnd(2,2.8)});});
-    list.forEach(function(it){
-      var el=document.createElement('span'); el.className='ww'+(Math.random()<.38?' v':''); el.textContent=it.t;
-      el.style.fontSize=(it.size*vm)+'px'; el.style.color=COLORS[Math.floor(Math.random()*COLORS.length)];
-      el.style.visibility='hidden'; box.appendChild(el);
-      var w=el.offsetWidth,hh=el.offsetHeight;
-      if(w>W-pad*2||hh>H-pad*2){el.remove();return;}
-      for(var k=0;k<120;k++){
-        var x=rnd(pad,W-w-pad),y=rnd(pad,H-hh-pad),ok=true;
-        for(var r=0;r<rects.length;r++){var q=rects[r];if(x<q.x+q.w+pad&&x+w+pad>q.x&&y<q.y+q.h+pad&&y+hh+pad>q.y){ok=false;break;}}
-        if(ok){rects.push({x:x,y:y,w:w,h:hh});el.style.left=x+'px';el.style.top=y+'px';el.style.visibility='';els.push(el);return;}
-      }
-      el.remove();
-    });
-    return els;
+  function build(){
+    var s=document.createElement('div'); s.id='splash'; s.style.cssText='position:fixed;inset:0;z-index:999;background:#fff';
+    s.innerHTML='<div class="ww-words" aria-hidden="true"></div><h1 class="ww-title" style="opacity:0"><span>What</span> <span>We are?</span></h1>';
+    document.body.appendChild(s); return s;
   }
-  function fitTitle(){ // 見出しが画面幅からはみ出さないように縮める
-    title.style.fontSize=''; var sp=title.querySelectorAll('span'),max=0;
-    sp.forEach(function(x){max=Math.max(max,x.offsetWidth);});
-    var lim=innerWidth*.92; if(max>lim){title.style.fontSize=(parseFloat(getComputedStyle(title).fontSize)*lim/max)+'px';}
+  function play(s, waitFonts){
+    var box=s.querySelector('.ww-words'), title=s.querySelector('.ww-title'), timers=[], done=false;
+    function later(f,ms){timers.push(setTimeout(f,ms));}
+    // 言葉を重ならないように散らす（大・中・小の3段）
+    function place(){
+      var W=innerWidth,H=innerHeight,vm=Math.min(W,H)/100,pad=Math.max(6,vm*1.2),rects=[],els=[],list=[];
+      shuffle(WORDS.slice()).forEach(function(w,i){list.push({t:w,size:i<4?rnd(10,13.5):rnd(6,8.5)});});
+      shuffle(WORDS.slice()).forEach(function(w){list.push({t:w,size:rnd(3,4.6)});});
+      shuffle(WORDS.slice()).forEach(function(w){list.push({t:w,size:rnd(2,2.8)});});
+      list.forEach(function(it){
+        var el=document.createElement('span'); el.className='ww'+(Math.random()<.38?' v':''); el.textContent=it.t;
+        el.style.fontSize=(it.size*vm)+'px'; el.style.color=COLORS[Math.floor(Math.random()*COLORS.length)];
+        el.style.visibility='hidden'; box.appendChild(el);
+        var w=el.offsetWidth,hh=el.offsetHeight;
+        if(w>W-pad*2||hh>H-pad*2){el.remove();return;}
+        for(var k=0;k<120;k++){
+          var x=rnd(pad,W-w-pad),y=rnd(pad,H-hh-pad),ok=true;
+          for(var r=0;r<rects.length;r++){var q=rects[r];if(x<q.x+q.w+pad&&x+w+pad>q.x&&y<q.y+q.h+pad&&y+hh+pad>q.y){ok=false;break;}}
+          if(ok){rects.push({x:x,y:y,w:w,h:hh});el.style.left=x+'px';el.style.top=y+'px';el.style.visibility='';els.push(el);return;}
+        }
+        el.remove();
+      });
+      return els;
+    }
+    function fitTitle(){ // 見出しが画面幅からはみ出さないように縮める
+      title.style.fontSize=''; var sp=title.querySelectorAll('span'),max=0;
+      sp.forEach(function(x){max=Math.max(max,x.offsetWidth);});
+      var lim=innerWidth*.92; if(max>lim){title.style.fontSize=(parseFloat(getComputedStyle(title).fontSize)*lim/max)+'px';}
+    }
+    function finish(){ if(done) return; done=true; timers.forEach(clearTimeout); s.classList.add('p2','out'); setTimeout(function(){s.remove();},1300); }
+    s.addEventListener('click',finish);
+    function start(){
+      title.style.opacity='';
+      fitTitle();
+      if(reduce){ s.classList.add('p2'); later(finish,1600); return; }
+      var els=shuffle(place());
+      els.forEach(function(el,i){ later(function(){el.classList.add('on');}, 80+i*55); });
+      var t=80+els.length*55+700;
+      later(function(){ s.classList.add('p2'); }, t);
+      later(finish, t+1900);
+    }
+    if(waitFonts&&document.fonts&&document.fonts.ready){ var go=false; document.fonts.ready.then(function(){ if(!go){go=true;start();} }); setTimeout(function(){ if(!go){go=true;start();} },900); } else start();
   }
-  function finish(){ if(done) return; done=true; timers.forEach(clearTimeout); s.classList.add('p2','out'); setTimeout(function(){s.remove();},1300); }
-  s.addEventListener('click',finish);
-  function start(){
-    title.style.opacity='';
-    fitTitle();
-    if(reduce){ s.classList.add('p2'); later(finish,1600); return; }
-    var els=shuffle(place());
-    els.forEach(function(el,i){ later(function(){el.classList.add('on');}, 80+i*55); });
-    var t=80+els.length*55+700;
-    later(function(){ s.classList.add('p2'); }, t);
-    later(finish, t+1900);
-  }
-  if(document.fonts&&document.fonts.ready){ var go=false; document.fonts.ready.then(function(){ if(!go){go=true;start();} }); setTimeout(function(){ if(!go){go=true;start();} },900); } else start();
+  // 初回（同じタブで1回だけ）
+  var first=document.getElementById('splash');
+  if(first){ try{sessionStorage.setItem('ww-seen','1');}catch(e){} play(first,true); }
+  // TOPへのリンク（ロゴ・HOME）を押したら、もう一度流す
+  document.querySelectorAll('a[href="#/"]').forEach(function(a){
+    a.addEventListener('click',function(){ if(document.getElementById('splash')) return; play(build(),false); });
+  });
 })();
 </script>
 </body>
