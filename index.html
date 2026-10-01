@@ -170,9 +170,9 @@
   .cmp .bar::before{content:"";position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:48px;height:48px;border-radius:50%;background:var(--wh);box-shadow:0 4px 16px rgba(0,0,0,.4);}
   .cmp .bar::after{content:"";position:absolute;top:50%;left:50%;width:14px;height:14px;transform:translate(-50%,-50%) rotate(45deg);border-left:2.5px solid var(--bk);border-bottom:2.5px solid var(--bk);border-right:2.5px solid var(--bk);border-top:2.5px solid var(--bk);clip-path:polygon(0 0,45% 0,45% 100%,0 100%,0 55%,100% 55%,100% 45%,0 45%);}
   .cmp input{position:absolute;inset:0;width:100%;height:100%;margin:0;opacity:0;cursor:ew-resize;}
-  .cmp .lb{position:absolute;top:12px;font-family:var(--cond);font-weight:900;font-size:22px;letter-spacing:.1em;padding:4px 12px;pointer-events:none;}
-  .cmp .lb.bl{left:12px;background:var(--bk);color:var(--wh);}
-  .cmp .lb.al{right:12px;background:var(--wh);color:var(--bk);}
+  .cmp .lb{position:absolute;top:10px;font-family:var(--cond);font-weight:900;font-size:13px;letter-spacing:.12em;padding:3px 8px;pointer-events:none;}
+  .cmp .lb.bl{left:10px;background:var(--bk);color:var(--wh);}
+  .cmp .lb.al{right:10px;background:var(--wh);color:var(--bk);}
   .cmp .room{position:absolute;left:12px;bottom:12px;font-size:13px;font-weight:900;color:var(--wh);text-shadow:0 1px 8px rgba(0,0,0,.8);pointer-events:none;}
   .cmp-sq .cmp{aspect-ratio:1/1;}
   .cmp-note{margin-top:14px;font-size:12px;color:var(--gy);font-weight:700;letter-spacing:.08em;}
@@ -512,7 +512,7 @@
   .pair .ph { position:relative;aspect-ratio:var(--r,4/3);overflow:hidden;background:#111; }
   .pair .ph+.ph { margin-top:6px; }
   .pair img { width:100%;height:100%;object-fit:cover;display:block; }
-  .pair .lb { position:absolute;top:10px;left:10px;font-family:var(--cond);font-weight:900;font-size:18px;letter-spacing:.1em;padding:3px 10px; }
+  .pair .lb { position:absolute;top:10px;left:10px;font-family:var(--cond);font-weight:900;font-size:12px;letter-spacing:.12em;padding:2px 8px; }
   .pair .lb.bl { background:var(--bk);color:var(--wh); }
   .pair .lb.al { background:var(--wh);color:var(--bk); }
   .pair figcaption { margin-top:10px;font-size:13px;font-weight:900;color:var(--wh); }
@@ -714,30 +714,14 @@
       <div class="cond big fade">OFFICE<span><span class="ib">本社も、</span><span class="ib">空き家でした。</span></span></div>
       <div class="fade">
         <p class="jp"><span class="ib">荷物の残った和室が、</span><span class="ib">いまの事務所です。</span></p>
-        <p>八街の本社は、空き家だった一軒を自分たちで再生した建物です。上のスライダーの黒い外壁の家が、この建物です。室内は撮った位置が前と後で違うので、上下に並べています。</p>
+        <p>八街の本社は、空き家だった一軒を自分たちで再生した建物です。上のスライダーの黒い外壁の家が、この建物です。室内は撮った位置が前と後で少し違いますが、同じ部屋です。</p>
       </div>
     </div>
-    <div class="pair-grid" style="grid-template-columns:1fr 1fr">
-    <figure class="pair" style="--r:4/3">
-      <div class="ph"><img src="img/cmp_hq_hall_b.jpg" alt="改修前の広間。荷物の残った和室" loading="lazy" decoding="async"><span class="lb bl">BEFORE</span></div>
-      <div class="ph"><img src="img/cmp_hq_hall_a.jpg" alt="改修後の広間。スタッフが働く事務所" loading="lazy" decoding="async"><span class="lb al">AFTER</span></div>
-      <figcaption>広間 → 事務所</figcaption>
-    </figure>
-    <figure class="pair" style="--r:4/3">
-      <div class="ph"><img src="img/cmp_hq_room_b.jpg" alt="改修前の広間。荷物が残った和室" loading="lazy" decoding="async"><span class="lb bl">BEFORE</span></div>
-      <div class="ph"><img src="img/cmp_hq_room_a.jpg" alt="改修後の広間。いまの事務所" loading="lazy" decoding="async"><span class="lb al">AFTER</span></div>
-      <figcaption>広間の奥 → デスク</figcaption>
-    </figure>
-    <figure class="pair" style="--r:4/3">
-      <div class="ph"><img src="img/cmp_hq_engawa_b.jpg" alt="改修前の縁側。カーテンと障子" loading="lazy" decoding="async"><span class="lb bl">BEFORE</span></div>
-      <div class="ph"><img src="img/cmp_hq_engawa_a.jpg" alt="改修後の縁側。窓際のデスクと本棚" loading="lazy" decoding="async"><span class="lb al">AFTER</span></div>
-      <figcaption>縁側 → 窓際のデスク</figcaption>
-    </figure>
-    <figure class="pair" style="--r:4/3">
-      <div class="ph"><img src="img/cmp_hq_desk_b.jpg" alt="改修前の和室。たんすと荷物" loading="lazy" decoding="async"><span class="lb bl">BEFORE</span></div>
-      <div class="ph"><img src="img/cmp_hq_desk_a.jpg" alt="改修後の部屋。デスクと窓" loading="lazy" decoding="async"><span class="lb al">AFTER</span></div>
-      <figcaption>和室 → デスクのある部屋</figcaption>
-    </figure>
+    <div class="cmp-grid cmp-sq" style="grid-template-columns:repeat(4,1fr)">
+      <div class="cmp clip-b"><img class="b" src="img/cmp_hq_hall_b.jpg" alt="改修前の広間。荷物の残った和室" loading="lazy" decoding="async"><img class="a" src="img/cmp_hq_hall_a.jpg" alt="改修後の広間。スタッフが働く事務所" loading="lazy" decoding="async"><div class="bar"></div><span class="lb bl">BEFORE</span><span class="lb al">AFTER</span><span class="room">広間 → 事務所</span><input type="range" min="0" max="100" value="50" aria-label="広間 → 事務所の前後を比較"></div>
+      <div class="cmp clip-b"><img class="b" src="img/cmp_hq_room_b.jpg" alt="改修前の広間。荷物が残った和室" loading="lazy" decoding="async"><img class="a" src="img/cmp_hq_room_a.jpg" alt="改修後の広間。いまの事務所" loading="lazy" decoding="async"><div class="bar"></div><span class="lb bl">BEFORE</span><span class="lb al">AFTER</span><span class="room">広間の奥 → デスク</span><input type="range" min="0" max="100" value="50" aria-label="広間の奥 → デスクの前後を比較"></div>
+      <div class="cmp clip-b"><img class="b" src="img/cmp_hq_engawa_b.jpg" alt="改修前の縁側。カーテンと障子" loading="lazy" decoding="async"><img class="a" src="img/cmp_hq_engawa_a.jpg" alt="改修後の縁側。窓際のデスクと本棚" loading="lazy" decoding="async"><div class="bar"></div><span class="lb bl">BEFORE</span><span class="lb al">AFTER</span><span class="room">縁側 → 窓際のデスク</span><input type="range" min="0" max="100" value="50" aria-label="縁側 → 窓際のデスクの前後を比較"></div>
+      <div class="cmp clip-b"><img class="b" src="img/cmp_hq_desk_b.jpg" alt="改修前の和室。たんすと荷物" loading="lazy" decoding="async"><img class="a" src="img/cmp_hq_desk_a.jpg" alt="改修後の部屋。デスクと窓" loading="lazy" decoding="async"><div class="bar"></div><span class="lb bl">BEFORE</span><span class="lb al">AFTER</span><span class="room">和室 → デスクのある部屋</span><input type="range" min="0" max="100" value="50" aria-label="和室 → デスクのある部屋の前後を比較"></div>
     </div>
   </div>
 </section>
