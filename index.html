@@ -1842,7 +1842,7 @@
       fit(brandEl);
       var l1=brandEl.querySelector('.l1'), l2=brandEl.querySelector('.l2');
       if(l1&&l2){ l2.style.fontSize=''; var base=parseFloat(getComputedStyle(l2).fontSize), w2=l2.offsetWidth; if(w2>0) l2.style.fontSize=(base*l1.offsetWidth/w2)+'px'; }
-      if(reduce){ var es=place(); es.forEach(function(el){el.classList.add('on');}); later(function(){ s.classList.add('p2'); },1800); later(function(){ s.classList.add('p3'); },4000); later(finish,5600); return; }
+      // 「視差効果を減らす」がオンでも1語ずつ出す（動き・拡大はCSSで止めて、その場に現れるだけ）
       var els=shuffle(place());
       els.forEach(function(el,i){ later(function(){el.classList.add('on');}, 80+i*55); });
       var t=80+els.length*55+700;
