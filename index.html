@@ -23,7 +23,7 @@
 <style>*{box-sizing:border-box}body{margin:0;font-family:system-ui,sans-serif;background:#fff}img{max-width:100%}[hidden]{display:none!important}</style>
 </head>
 <body>
-<div id="splash"><div class="ww-words" aria-hidden="true"></div><h1 class="ww-title"><span>What</span> <span>We are?</span></h1></div>
+<div id="splash" style="position:fixed;inset:0;z-index:999;background:#fff"><div class="ww-words" aria-hidden="true"></div><h1 class="ww-title" style="opacity:0"><span>What</span> <span>We are?</span></h1></div>
 <script>try{if(sessionStorage.getItem("ww-seen")){document.getElementById("splash").remove();}}catch(e){}</script>
 <title>OUCHI JIMAI｜オハナホーム 空き家再生・相続・おうちじまい</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -1812,6 +1812,7 @@
   function finish(){ if(done) return; done=true; timers.forEach(clearTimeout); s.classList.add('p2','out'); setTimeout(function(){s.remove();},1300); }
   s.addEventListener('click',finish);
   function start(){
+    title.style.opacity='';
     fitTitle();
     if(reduce){ s.classList.add('p2'); later(finish,1600); return; }
     var els=shuffle(place());
