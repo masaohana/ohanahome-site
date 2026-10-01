@@ -23,7 +23,7 @@
 <style>*{box-sizing:border-box}body{margin:0;font-family:system-ui,sans-serif;background:#fff}img{max-width:100%}[hidden]{display:none!important}</style>
 </head>
 <body>
-<div id="splash" style="position:fixed;inset:0;z-index:999;background:#fff"><div class="ww-words" aria-hidden="true"></div><div class="ww-brand" style="opacity:0"><span>オハナ</span><span>ホーム</span></div><h1 class="ww-title" style="opacity:0"><span>What</span> <span>We are?</span></h1></div>
+<div id="splash" style="position:fixed;inset:0;z-index:999;background:#fff"><div class="ww-words" aria-hidden="true"></div><div class="ww-brand" style="opacity:0"><span>OHANAHOME?</span></div><h1 class="ww-title" style="opacity:0"><span>What</span> <span>We are?</span></h1></div>
 <script>try{if(sessionStorage.getItem("ww-seen")){document.getElementById("splash").remove();}}catch(e){}</script>
 <title>OUCHI JIMAI｜オハナホーム 空き家再生・相続・おうちじまい</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -333,7 +333,11 @@
   .menu a{font-family:var(--cond);font-weight:900;font-size:clamp(34px,8.6vw,96px);line-height:1;letter-spacing:.04em;color:var(--wh);padding:.1em 0;border-bottom:1px solid rgba(255,255,255,.15);}
   .menu a small{font-family:var(--jp);font-size:14px;letter-spacing:.2em;margin-left:.6em;vertical-align:.5em;color:var(--gy);}
   .menu .close{position:absolute;top:22px;right:var(--pad);width:44px;height:44px;background:var(--wh);border:0;cursor:pointer;font-family:var(--cond);font-weight:900;font-size:22px;}
-  .menu .sub{margin-top:28px;display:flex;gap:22px;flex-wrap:wrap;font-size:13px;letter-spacing:.14em;color:var(--gy);padding-bottom:20px;}
+  .menu .sub{margin-top:28px;padding-bottom:20px;font-size:13px;color:var(--gy);}
+  .menu .sub .sub-ttl{font-size:14px;letter-spacing:.2em;color:var(--wh);margin-bottom:10px;}
+  .menu .sub .row{display:grid;grid-template-columns:96px 1fr;align-items:baseline;padding:7px 0;border-bottom:1px solid rgba(255,255,255,.08);}
+  .menu .sub .k{font-size:13px;letter-spacing:.16em;color:var(--gy);}
+  .menu .sub .v{display:flex;flex-wrap:wrap;gap:4px 18px;}
   @media(max-height:700px){.menu a{font-size:clamp(28px,8vw,64px);}}
   #splash{position:fixed;inset:0;z-index:999;background:var(--wh);overflow:hidden;cursor:pointer;transition:opacity 1.1s ease;}
   #splash.out{opacity:0;pointer-events:none;}
@@ -343,17 +347,18 @@
   #splash .ww.on{opacity:1;transform:none;}
   #splash .ww-title{position:absolute;inset:0;margin:0;display:flex;align-items:center;justify-content:center;gap:.22em;flex-wrap:wrap;text-align:center;font-family:var(--cond);font-weight:900;color:var(--bk);line-height:.86;letter-spacing:.005em;font-size:clamp(64px,17vw,360px);opacity:0;transform:scale(1.06);transition:opacity .7s ease,transform 1.6s cubic-bezier(.2,.7,.2,1);pointer-events:none;}
   #splash .ww-title span{white-space:nowrap;}
-  #splash .ww-brand{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;gap:0;font-family:var(--jp);font-weight:900;color:var(--bk);line-height:1;letter-spacing:.04em;font-size:min(14vw,24vh);opacity:0;transform:scale(1.04);transition:opacity .6s ease,transform 1.4s cubic-bezier(.2,.7,.2,1);pointer-events:none;}
+  #splash .ww-brand{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;gap:0;font-family:var(--cond);font-weight:900;color:var(--bk);line-height:.86;letter-spacing:.005em;font-size:clamp(64px,17vw,360px);opacity:0;transform:scale(1.04);transition:opacity .6s ease,transform 1.4s cubic-bezier(.2,.7,.2,1);pointer-events:none;}
   #splash .ww-brand span{white-space:nowrap;}
   #splash.p2 .ww-words{opacity:0;}
   #splash.p2 .ww-brand{opacity:1;transform:none;transition-delay:.5s;}
   #splash.p3 .ww-brand{opacity:0;transform:scale(.98);transition:opacity .4s ease,transform .4s ease;transition-delay:0s;}
   #splash.p3 .ww-title{opacity:1;transform:none;transition-delay:.45s;}
   #splash.out .ww-title,#splash.out .ww-brand{transition-delay:0s;}
-  @media(max-width:700px){#splash .ww-title{flex-direction:column;gap:0;font-size:min(30vw,24vh);}#splash .ww-brand{flex-direction:column;font-size:min(27vw,20vh);}}
+  @media(max-width:700px){#splash .ww-title{flex-direction:column;gap:0;font-size:min(30vw,24vh);}#splash .ww-brand{font-size:30vw;}}
   @media(prefers-reduced-motion:reduce){#splash,#splash .ww,#splash .ww-words,#splash .ww-brand,#splash .ww-title{transition:opacity .2s linear;transform:none;}}
 
-  .menu .sub a{font-family:var(--jp);font-size:13px;border:0;padding:0;color:var(--gy);}
+  .menu .sub a{font-family:var(--jp);font-size:13px;font-weight:700;border:0;padding:0;color:var(--wh);letter-spacing:.06em;}
+  .menu .sub a:hover{opacity:.6;}
   .view{display:none;}
   .view.on{display:block;}
   .pg-hero{position:relative;height:clamp(420px,64vh,720px);overflow:hidden;background:var(--bk);}
@@ -581,7 +586,14 @@
   <a href="#/office">OFFICE<small>空き家を再生した本社</small></a>
   <a href="#/recruit">RECRUIT<small>採用・代表に直接メッセージ</small></a>
   <a href="#/contact">CONTACT<small>ご相談・公式LINE</small></a>
-  <div class="sub"><a href="https://lin.ee/wfuJh2m" target="_blank" rel="noopener">公式LINE</a><a href="https://www.instagram.com/ohanahome_official/" target="_blank" rel="noopener">Instagram（会社）</a><a href="https://www.instagram.com/masao.kikuchi/" target="_blank" rel="noopener">Instagram（菊池聖雄）</a><a href="https://www.instagram.com/akiya_ni_akari/" target="_blank" rel="noopener">Instagram（菊池あかり）</a><a href="https://x.com/ohanahome_jp" target="_blank" rel="noopener">X</a><a href="https://www.facebook.com/ohanahome.sns/" target="_blank" rel="noopener">Facebook（会社）</a><a href="https://www.facebook.com/profile.php?id=61579031979060" target="_blank" rel="noopener">Facebook（菊池聖雄）</a><a href="https://www.facebook.com/akiya.ni.akari" target="_blank" rel="noopener">Facebook（菊池あかり）</a><a href="https://note.com/masao_kikuchi" target="_blank" rel="noopener">note（菊池聖雄）</a></div>
+  <div class="sub">
+    <div class="cond sub-ttl">FOLLOW US</div>
+    <div class="row"><span class="cond k">LINE</span><span class="v"><a href="https://lin.ee/wfuJh2m" target="_blank" rel="noopener">公式LINE</a></span></div>
+    <div class="row"><span class="cond k">INSTAGRAM</span><span class="v"><a href="https://www.instagram.com/ohanahome_official/" target="_blank" rel="noopener">会社</a><a href="https://www.instagram.com/masao.kikuchi/" target="_blank" rel="noopener">菊池聖雄</a><a href="https://www.instagram.com/akiya_ni_akari/" target="_blank" rel="noopener">菊池あかり</a></span></div>
+    <div class="row"><span class="cond k">FACEBOOK</span><span class="v"><a href="https://www.facebook.com/ohanahome.sns/" target="_blank" rel="noopener">会社</a><a href="https://www.facebook.com/profile.php?id=61579031979060" target="_blank" rel="noopener">菊池聖雄</a><a href="https://www.facebook.com/akiya.ni.akari" target="_blank" rel="noopener">菊池あかり</a></span></div>
+    <div class="row"><span class="cond k">X</span><span class="v"><a href="https://x.com/ohanahome_jp" target="_blank" rel="noopener">会社</a></span></div>
+    <div class="row"><span class="cond k">NOTE</span><span class="v"><a href="https://note.com/masao_kikuchi" target="_blank" rel="noopener">菊池聖雄</a></span></div>
+  </div>
 </div>
 
 <main class="view on" id="view-home">
@@ -1790,7 +1802,7 @@
   function shuffle(a){for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t;}return a;}
   function build(){
     var s=document.createElement('div'); s.id='splash'; s.style.cssText='position:fixed;inset:0;z-index:999;background:#fff';
-    s.innerHTML='<div class="ww-words" aria-hidden="true"></div><div class="ww-brand" style="opacity:0"><span>オハナ</span><span>ホーム</span></div><h1 class="ww-title" style="opacity:0"><span>What</span> <span>We are?</span></h1>';
+    s.innerHTML='<div class="ww-words" aria-hidden="true"></div><div class="ww-brand" style="opacity:0"><span>OHANAHOME?</span></div><h1 class="ww-title" style="opacity:0"><span>What</span> <span>We are?</span></h1>';
     document.body.appendChild(s); return s;
   }
   function play(s, waitFonts){
@@ -1831,7 +1843,7 @@
       var els=shuffle(place());
       els.forEach(function(el,i){ later(function(){el.classList.add('on');}, 80+i*55); });
       var t=80+els.length*55+700;
-      later(function(){ s.classList.add('p2'); }, t);          // オハナホーム
+      later(function(){ s.classList.add('p2'); }, t);          // OHANAHOME?
       later(function(){ s.classList.add('p3'); }, t+1900);     // What We are?
       later(finish, t+1900+2100);
     }
