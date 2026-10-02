@@ -2085,6 +2085,7 @@
 <script>
 (function(){
   var WORDS=['空き家再生','おうち終活','おうちじまい','空き家再生士','相続','終活','あきやにあかり','リフォーム','空き家のミカタ','源泉物件','おうちゃま','空き家王'];
+  var NO_NARA=['おうちゃま','あきやにあかり','源泉物件','空き家王'];  // 「のことなら」がつながりにくい言葉は、色付き（拡大）の候補から外す（コラージュには出る）
   var ACCENT='#dd742a';  // 色付きは1語だけ（M70 Y100 相当のオレンジ）
   function rnd(a,b){return a+Math.random()*(b-a);}
   function shuffle(a){for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t;}return a;}
@@ -2116,8 +2117,10 @@
         el.remove();
       });
       // 大きめの言葉から、1語だけランダムに色を付ける
-      var big=shuffle(els.filter(function(e){return +e.dataset.size>=10;}));
-      if(!big.length) big=shuffle(els.filter(function(e){return +e.dataset.size>=6;}));
+      var ok=function(e){return NO_NARA.indexOf(e.textContent)<0;};
+      var big=shuffle(els.filter(function(e){return +e.dataset.size>=10&&ok(e);}));
+      if(!big.length) big=shuffle(els.filter(function(e){return +e.dataset.size>=6&&ok(e);}));
+      if(!big.length) big=shuffle(els.filter(ok));
       if(big[0]){ big[0].style.color=ACCENT; big[0].dataset.last='1'; big[0].classList.add('acc'); }
       return els;
     }
