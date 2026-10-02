@@ -556,6 +556,14 @@
   .trk .lk a{font-size:13px;font-weight:900;text-decoration:underline;text-underline-offset:3px;}
   #view-music .note{font-size:13px;color:var(--gy);}
   @media(max-width:600px){.trk{grid-template-columns:84px 1fr;column-gap:14px;row-gap:0;align-items:start;}.trk .tb{display:contents;}.trk .cv{grid-row:1/3;}.trk .g{grid-column:2;align-self:end;}.trk h3{grid-column:2;font-size:17px;margin:2px 0 0;}.trk p{display:none;}.trk .pl{grid-column:1/-1;}.trk .lk{grid-column:1/-1;}.trk .tm{min-width:74px;font-size:14px;}}
+  .acc-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(18px,3vw,40px);margin-top:clamp(24px,3vw,40px);}
+  .acc-card h3{margin:0 0 6px;font-size:clamp(18px,2vw,24px);font-weight:900;}
+  .acc-card .ad{margin:0;font-size:14px;line-height:1.7;font-weight:700;}
+  .acc-card .st{margin:2px 0 12px;font-size:13px;font-weight:700;color:var(--gy-dark);}
+  .acc-card .mp{aspect-ratio:4/3;background:var(--gy-soft);overflow:hidden;margin-bottom:12px;}
+  .acc-card .mp iframe{width:100%;height:100%;border:0;display:block;}
+  .acc-note{margin-top:22px;font-size:13px;line-height:1.8;font-weight:700;color:var(--gy-dark);}
+  @media(max-width:700px){.acc-grid{grid-template-columns:1fr;}}
   .hosts{margin-top:clamp(24px,3vw,40px);max-width:900px;display:flex;flex-wrap:wrap;gap:8px;align-items:center;}
   .hosts b{width:100%;font-size:13px;letter-spacing:.08em;margin-bottom:2px;}
   .hosts span{font-size:12px;font-weight:700;line-height:1.4;padding:5px 10px;border:1px solid var(--line);background:var(--wh);}
@@ -1199,6 +1207,27 @@
     <tr><th>GROUP<small>関連団体</small></th><td>一般社団法人 空き家再生協会（空き家再生士 資格認定／絵本・終活ノート発行）<br>株式会社ピーナッツ（終活・相続相談）</td></tr>
   </table>
 </section>
+<section class="wrap sec-gap" id="access">
+  <div class="cond sub fade">ACCESS</div>
+  <h2 class="cond ttl fade" style="font-size:min(clamp(40px,6.4vw,84px),calc(84vw / 5));white-space:nowrap">アクセス</h2>
+  <div class="acc-grid">
+    <div class="acc-card fade">
+      <h3>本社（八街）</h3>
+      <p class="ad">〒289-1107 千葉県八街市八街は43番8</p>
+      <p class="st">最寄駅：JR総武本線 八街駅 車で10分</p>
+      <div class="mp"><iframe src="https://maps.google.com/maps?q=%E5%8D%83%E8%91%89%E7%9C%8C%E5%85%AB%E8%A1%97%E5%B8%82%E5%85%AB%E8%A1%97%E3%81%AF43%E7%95%AA8&hl=ja&z=16&output=embed" title="本社（八街）の地図" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe></div>
+      <a class="btn-bk" href="https://www.google.com/maps/search/?api=1&query=%E5%8D%83%E8%91%89%E7%9C%8C%E5%85%AB%E8%A1%97%E5%B8%82%E5%85%AB%E8%A1%97%E3%81%AF43%E7%95%AA8" target="_blank" rel="noopener">Googleマップで開く<span class="arrow"></span></a>
+    </div>
+    <div class="acc-card fade">
+      <h3>千葉オフィス</h3>
+      <p class="ad">〒260-0015 千葉県千葉市中央区富士見2丁目13番地1 第2山崎ビル7階B</p>
+      <p class="st">最寄駅：JR総武本線・中央線 千葉駅 車で5分</p>
+      <div class="mp"><iframe src="https://maps.google.com/maps?q=%E5%8D%83%E8%91%89%E7%9C%8C%E5%8D%83%E8%91%89%E5%B8%82%E4%B8%AD%E5%A4%AE%E5%8C%BA%E5%AF%8C%E5%A3%AB%E8%A6%8B2%E4%B8%81%E7%9B%AE13%E7%95%AA%E5%9C%B01%20%E7%AC%AC2%E5%B1%B1%E5%B4%8E%E3%83%93%E3%83%AB&hl=ja&z=16&output=embed" title="千葉オフィスの地図" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe></div>
+      <a class="btn-bk" href="https://www.google.com/maps/search/?api=1&query=%E5%8D%83%E8%91%89%E7%9C%8C%E5%8D%83%E8%91%89%E5%B8%82%E4%B8%AD%E5%A4%AE%E5%8C%BA%E5%AF%8C%E5%A3%AB%E8%A6%8B2%E4%B8%81%E7%9B%AE13%E7%95%AA%E5%9C%B01%20%E7%AC%AC2%E5%B1%B1%E5%B4%8E%E3%83%93%E3%83%AB" target="_blank" rel="noopener">Googleマップで開く<span class="arrow"></span></a>
+    </div>
+  </div>
+  <p class="acc-note fade">ご来社の際は、事前にお電話（<a href="tel:0120087255">0120-087-255</a>・受付 9:00〜17:00）でお知らせください。<br>東京支店（東京都品川区北品川5丁目12番1号 フラワー御殿山ハイツ602号室）は、宅地建物取引業の免許を申請中です。</p>
+</section>
 
 </main>
 <main class="view" id="view-vision">
@@ -1840,6 +1869,7 @@
     </div>
   </div>
   <div class="tel"><a href="tel:0120087255">0120-087-255</a><small>受付 9:00〜17:00 ／ 通話無料</small></div>
+  <p style="text-align:center;margin:14px 0 0;font-size:13px;font-weight:900"><a href="/about/#access" style="text-decoration:underline;text-underline-offset:3px;color:inherit">オハナホームへのアクセス（地図）</a></p>
   <details class="tokusho fade">
     <summary>営業・売り込み・提携提案への有料対応について（特定商取引法に基づく表記）</summary>
     <table>
