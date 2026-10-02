@@ -358,7 +358,9 @@
   #splash.focus .ww:not(.acc){opacity:.08;transition:opacity .6s ease;}
   #splash .ww.acc{transform-origin:50% 50%;}
   #splash.zoom .ww:not(.acc){opacity:0;}
-  #splash.zoom .ww.acc{opacity:0;transform:translate(var(--dx,0),var(--dy,0)) scale(3.4);transition:transform 1.3s cubic-bezier(.5,0,.2,1),opacity .7s ease .75s;}
+  #splash.zoom .ww.acc{opacity:1;transform:translate(var(--dx,0),var(--dy,0)) scale(var(--sc,3));transition:transform 1.3s cubic-bezier(.5,0,.2,1);}
+  #splash .ww-nara{position:absolute;left:0;right:0;text-align:center;font-family:var(--jp);font-weight:900;color:#000;line-height:1.3;white-space:nowrap;opacity:0;transition:opacity .6s ease;pointer-events:none;}
+  #splash.nara .ww-nara{opacity:1;}
   #splash .ww-title{position:absolute;inset:0;margin:0;display:flex;align-items:center;justify-content:center;gap:.22em;flex-wrap:wrap;text-align:center;font-family:var(--cond);font-weight:900;color:var(--bk);line-height:.86;letter-spacing:.005em;font-size:clamp(64px,17vw,360px);opacity:0;transform:scale(1.06);transition:opacity .7s ease,transform 1.6s cubic-bezier(.2,.7,.2,1);pointer-events:none;}
   #splash .ww-title span{white-space:nowrap;}
   #splash .ww-brand{position:absolute;inset:0;margin:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.06em;font-family:var(--cond);font-weight:900;color:var(--wh);line-height:1;letter-spacing:.16em;font-size:clamp(26px,5.2vw,80px);opacity:0;transform:scale(1.04);transition:opacity .6s ease,transform 1.4s cubic-bezier(.2,.7,.2,1);pointer-events:none;}
@@ -2113,8 +2115,8 @@
         el.remove();
       });
       // 大きめの言葉から、1語だけランダムに色を付ける
-      var big=shuffle(els.filter(function(e){return +e.dataset.size>=10;}));
-      if(!big.length) big=shuffle(els.filter(function(e){return +e.dataset.size>=6;}));
+      var big=shuffle(els.filter(function(e){return +e.dataset.size>=10&&!e.classList.contains('v');}));
+      if(!big.length) big=shuffle(els.filter(function(e){return +e.dataset.size>=6&&!e.classList.contains('v');}));
       if(big[0]){ big[0].style.color=ACCENT; big[0].dataset.last='1'; big[0].classList.add('acc'); }
       return els;
     }
@@ -2136,12 +2138,18 @@
       els.forEach(function(el,i){ later(function(){el.classList.add('on');}, 80+i*55); });
       var tLast=80+els.length*55;
       later(function(){ s.classList.add('focus'); }, tLast+900);   // オレンジ以外を薄く
-      later(function(){ // オレンジの言葉が画面の中心に向かって、ぶわっと大きくなりながら消える
-        var a=s.querySelector('.ww.acc');
-        if(a){ var b=a.getBoundingClientRect(); a.style.setProperty('--dx',(innerWidth/2-(b.left+b.width/2))+'px'); a.style.setProperty('--dy',(innerHeight/2-(b.top+b.height/2))+'px'); }
+      var t0=tLast+1600;
+      later(function(){ // オレンジの言葉が、中心へ動きながら画面に収まる大きさまで拡大 → 「のことなら」
+        var a=s.querySelector('.ww.acc'),W=innerWidth,H=innerHeight;
+        if(a){
+          var b=a.getBoundingClientRect(),sc=Math.min(W*.88/b.width,H*.46/b.height),wH=b.height*sc,nF=Math.max(18,Math.min(wH*.34,W*.09)),gap=nF*.35,blk=wH+gap+nF*1.3,cy=(H-blk)/2+wH/2;
+          a.style.setProperty('--dx',(W/2-(b.left+b.width/2))+'px'); a.style.setProperty('--dy',(cy-(b.top+b.height/2))+'px'); a.style.setProperty('--sc',sc);
+          var n=document.createElement('div'); n.className='ww-nara'; n.textContent='のことなら'; n.style.fontSize=nF+'px'; n.style.top=(cy+wH/2+gap)+'px'; box.appendChild(n);
+        }
         s.classList.add('zoom');
-      }, tLast+1600);
-      var t=tLast+2500;
+      }, t0);
+      later(function(){ s.classList.add('nara'); }, t0+1100);
+      var t=t0+2900;
       later(function(){ s.classList.add('p2'); }, t);          // 黒地に小さく OHANAHOME
       later(function(){ s.classList.add('p3'); }, t+2600);     // 白地に大きく What We are?（パッと切り替え）
       later(finish, t+2600+2400);
