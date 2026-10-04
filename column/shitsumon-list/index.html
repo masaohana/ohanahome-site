@@ -306,7 +306,9 @@
   .cform .privacy{color:var(--wh);font-size:13px;line-height:1.8;}
   .cform .privacy summary{cursor:pointer;font-weight:900;letter-spacing:.06em;}
   .cform .privacy p{margin:8px 0 0;font-weight:700;opacity:.85;}
-  .cform-note{margin:0;color:var(--wh);font-size:12px;line-height:1.7;font-weight:700;opacity:.8;}
+  .cform p.cform-note{margin:0;width:auto;text-align:left;color:var(--wh);font-size:12px;line-height:1.7;font-weight:700;opacity:.8;}
+  .cform.sent>*:not(.cform-msg){display:none!important;}
+  .cform.sent .cform-msg{font-size:16px;line-height:1.8;padding:24px 0;}
   @media(max-width:600px){.cform .row{grid-template-columns:1fr;}}
   .cform .lb{display:block;line-height:1.5;min-height:1.5em;}
   .cform .row{align-items:end;}
@@ -1909,7 +1911,7 @@
     <label><span class="lb" id="msg-lb">ご相談内容<span class="req">必須</span></span><textarea name="message" rows="5" required placeholder="家の場所（市区町村まで）や、いまの状況を、分かる範囲で。"></textarea></label>
     <details class="privacy"><summary>個人情報の取り扱いについて</summary><p>ご入力いただいたお客様の個人情報（お名前・ご住所・メールアドレスなど）は、厳重に管理・保管し、お客様からのお問い合わせ対応と連絡の手段のみに使用します。第三者に開示することはありません。ただし、法令等に基づいた要請があった場合や、お客様の同意を得られた場合に限り、情報を開示します。</p></details>
     <label class="chk"><input type="checkbox" name="agree" required> 「個人情報の取り扱いについて」に同意する</label>
-    <p class="cform-note">SENDを押すと、入力内容を入れたGoogleフォームが別タブで開きます。そこで内容をご確認のうえ「送信」を押してください。</p>
+    <p class="cform-note">確認画面はありません。入力内容をご確認のうえ、SENDを押してください。</p>
     <div class="sales-note" id="sales-note" hidden><b>営業・売り込み・提携のご提案について</b><br>お客様のご相談時間を守るため、事業者様からの営業・売り込み・提携提案への対応は<b>有料（1件 110,000円・税込）</b>とさせていただいています。送信いただいた時点で、対応費用のご請求に同意いただいたものとみなします。ご了承のうえお送りください。</div>
     <button type="submit" class="link">SEND<span class="arrow"></span></button>
     <div class="cform-msg" id="cform-msg" role="status" aria-live="polite"></div>
@@ -1979,9 +1981,9 @@
   var KIND_HEAD={'査定':'【無料査定のご依頼】\n','取材':'【取材のご依頼】\n','講演':'【講演・セミナーのご依頼】\n'};
   var JOB_MAP={'未定':'未定','施工管理・内装':'施工管理・内装','多能工・大工・外構':'多能工・大工・外構','不動産営業':'不動産営業・反響営業','事務・経理・IT':'事務・経理・IT','秘書':'秘書'};
   var SRC_MAP={'Indeed':'Indeed','求人サイト':'その他の求人サイト','紹介':'知人の紹介','SNS':'SNS・YouTube','その他':'その他'};
-  function gopen(url,entries){
-    var q=new URLSearchParams(entries).toString();
-    window.open(url+'?usp=pp_url&'+q,'_blank','noopener');
+  // Googleフォームへ、この画面から直接送る（別タブは開かない）
+  function gsend(url,entries){
+    return fetch(url.replace(/\/viewform$/,'/formResponse'),{method:'POST',mode:'no-cors',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:new URLSearchParams(entries).toString()});
   }
   var form=document.getElementById('cform'),msg=document.getElementById('cform-msg');
   form.addEventListener('submit',async function(ev){
@@ -1995,13 +1997,13 @@
     if(data.message) L.push('',(data.kind==='査定'?'■ 備考\n':'')+data.message);
     var body=L.join('\n');
     try{
-      gopen(GF_CONTACT,{
+      await gsend(GF_CONTACT,{
         'entry.962870540':data.name+(g('kana')?'（'+g('kana')+'）':''),
         'entry.1318355957':data.email,
         'entry.1508941475':KIND_MAP[data.kind]||data.kind,
         'entry.140108967':body
       });
-      form.classList.add('sent');msg.className='cform-msg ok';msg.innerHTML='別タブでGoogleフォームが開きます。内容をご確認のうえ、そちらの「送信」ボタンを押してください。<br>タブが開かない場合は <a href="'+GF_CONTACT+'" target="_blank" rel="noopener" style="text-decoration:underline">こちら</a> からどうぞ。';
+      form.classList.add('sent');msg.className='cform-msg ok';msg.innerHTML='送信しました。ありがとうございます。<br>内容を確認のうえ、ご希望の方法でご連絡します。';
     }catch(e){
       btn.disabled=false;
       var mb=encodeURIComponent('お名前: '+data.name+'\nメール: '+data.email+'\n種類: '+data.kind+'\n\n'+body);
@@ -2017,14 +2019,14 @@
     var btn=cf.querySelector('button');btn.disabled=true;cm.className='cform-msg';cm.textContent='送信しています…';
     var f=new FormData(cf),data={name:f.get('name'),contact:f.get('contact'),kind:f.get('kind'),source:f.get('source'),message:f.get('message'),sentAt:new Date().toISOString(),page:location.href};
     try{
-      gopen(GF_RECRUIT,{
+      await gsend(GF_RECRUIT,{
         'entry.1169203629':data.name,
         'entry.282390629':data.contact,
         'entry.844830649':JOB_MAP[data.kind]||data.kind,
         'entry.1742733194':SRC_MAP[data.source]||data.source,
         'entry.701245271':data.message
       });
-      cf.classList.add('sent');cm.className='cform-msg ok';cm.innerHTML='別タブでGoogleフォームが開きます。内容をご確認のうえ、そちらの「送信」ボタンを押してください。まさお本人が読みます。<br>タブが開かない場合は <a href="'+GF_RECRUIT+'" target="_blank" rel="noopener" style="text-decoration:underline">こちら</a> からどうぞ。';
+      cf.classList.add('sent');cm.className='cform-msg ok';cm.innerHTML='送信しました。ありがとうございます。<br>代表の菊池が直接読みます。';
     }catch(e){
       btn.disabled=false;
       var body=encodeURIComponent('お名前: '+data.name+'\n連絡先: '+data.contact+'\n職種: '+data.kind+'\n知ったきっかけ: '+data.source+'\n\n'+data.message);
