@@ -296,9 +296,22 @@
   .cform{width:min(92%,760px);margin:0 auto;text-align:left;display:flex;flex-direction:column;gap:18px;}
   .cform .row{display:grid;grid-template-columns:1fr 1fr;gap:18px;}
   .cform label{display:flex;flex-direction:column;gap:8px;font-size:13px;letter-spacing:.12em;font-weight:900;color:var(--wh);}
+  .cform .fld{display:flex;flex-direction:column;gap:8px;font-size:13px;letter-spacing:.12em;font-weight:900;color:var(--wh);}
+  .cform .rg{display:flex;flex-wrap:wrap;gap:10px 22px;min-height:52px;align-items:center;}
+  .cform .rg label{flex-direction:row;align-items:center;gap:8px;font-size:15px;letter-spacing:.04em;font-weight:700;}
+  .cform input[type=radio]{width:20px;height:20px;padding:0;accent-color:var(--sun);flex:none;}
+  .cform .satei{display:flex;flex-direction:column;gap:18px;padding:20px;border:1px solid rgba(255,255,255,.35);}
+  .cform .satei[hidden]{display:none;}
+  .cform .satei-ttl{font-size:15px;font-weight:900;letter-spacing:.1em;color:var(--wh);}
+  .cform .satei-ttl small{margin-left:10px;font-size:12px;font-weight:700;opacity:.75;}
+  .cform .privacy{color:var(--wh);font-size:13px;line-height:1.8;}
+  .cform .privacy summary{cursor:pointer;font-weight:900;letter-spacing:.06em;}
+  .cform .privacy p{margin:8px 0 0;font-weight:700;opacity:.85;}
+  .cform-note{margin:0;color:var(--wh);font-size:12px;line-height:1.7;font-weight:700;opacity:.8;}
+  @media(max-width:600px){.cform .row{grid-template-columns:1fr;}}
   .cform .lb{display:block;line-height:1.5;min-height:1.5em;}
   .cform .row{align-items:end;}
-  .cform input:not([type=checkbox]),.cform select{height:52px;box-sizing:border-box;line-height:1.2;}
+  .cform input:not([type=checkbox]):not([type=radio]),.cform select{height:52px;box-sizing:border-box;line-height:1.2;}
   .cform .req{display:inline-block;margin-left:8px;font-size:10px;background:var(--wh);color:var(--bk);padding:2px 6px;letter-spacing:.1em;vertical-align:1px;}
   .cform input,.cform select,.cform textarea{font-family:var(--jp);font-size:16px;font-weight:700;letter-spacing:.04em;padding:14px 16px;border:0;background:var(--wh);color:var(--bk);border-radius:0;width:100%;}
   .cform textarea{resize:vertical;min-height:120px;}
@@ -1846,15 +1859,10 @@
   <h2 class="cond ttl fade">CONTACT</h2>
   <p class="fade">空き家、相続、終活。どこから話していいか分からない状態でも構いません。まずは今のお気持ちをお聞かせください。ご相談は無料です。</p>
   <form class="cform fade" id="cform" novalidate>
-    <div class="row">
-      <label><span class="lb">お名前<span class="req">必須</span></span><input type="text" name="name" required autocomplete="name" placeholder="山田 太郎"></label>
-      <label><span class="lb">電話番号</span><input type="tel" name="tel" autocomplete="tel" placeholder="090-0000-0000"></label>
-    </div>
-    <div class="row">
-      <label><span class="lb">メールアドレス<span class="req">必須</span></span><input type="email" name="email" required autocomplete="email" placeholder="example@mail.com"></label>
-      <label><span class="lb">ご相談の種類</span>
-        <select name="kind">
+    <div class="fld"><span class="lb">ご用件</span>
+      <select name="kind" aria-label="ご用件">
           <option value="空き家">空き家のこと</option>
+          <option value="査定">無料査定（売却・買取のご相談）</option>
           <option value="相続">相続のこと</option>
           <option value="終活">終活・おうち終活ノート</option>
           <option value="絵本">絵本『あきやにあかり』</option>
@@ -1862,11 +1870,47 @@
           <option value="講演">講演・セミナーのご依頼</option>
           <option value="営業">営業・売り込み・提携のご提案（有料対応）</option>
           <option value="その他">その他</option>
-        </select>
-      </label>
+      </select>
     </div>
-    <label><span class="lb">ご相談内容</span><textarea name="message" rows="5" placeholder="家の場所（市区町村まで）や、いまの状況を、分かる範囲で。"></textarea></label>
-    <label class="chk"><input type="checkbox" name="agree" required> いただいた情報は、ご相談への回答にのみ使います。同意して送信する</label>
+    <div class="row">
+      <label><span class="lb">お名前<span class="req">必須</span></span><input type="text" name="name" required autocomplete="name" placeholder="山田 太郎"></label>
+      <label><span class="lb">フリガナ<span class="req">必須</span></span><input type="text" name="kana" required placeholder="ヤマダ タロウ"></label>
+    </div>
+    <div class="row">
+      <label><span class="lb">メールアドレス<span class="req">必須</span></span><input type="email" name="email" required autocomplete="email" placeholder="example@mail.com"></label>
+      <label><span class="lb">メールアドレス（確認）<span class="req">必須</span></span><input type="email" name="email2" required autocomplete="off" placeholder="もう一度ご入力ください"></label>
+    </div>
+    <div class="row">
+      <label><span class="lb">電話番号<span class="req" id="tel-req" hidden>必須</span></span><input type="tel" name="tel" autocomplete="tel" placeholder="090-0000-0000"></label>
+      <div class="fld"><span class="lb">ご希望の連絡方法</span>
+        <div class="rg"><label><input type="radio" name="via" value="電話" checked> 電話</label><label><input type="radio" name="via" value="メール"> メール</label></div>
+      </div>
+    </div>
+    <div class="satei" id="satei" hidden>
+      <div class="satei-ttl">物件の情報<small>分かる範囲で大丈夫です</small></div>
+      <div class="row">
+        <label><span class="lb">郵便番号</span><input type="text" name="zip" inputmode="numeric" autocomplete="postal-code" placeholder="2891107（住所が入ります）" maxlength="8"></label>
+        <label><span class="lb">所在地</span><input type="text" name="addr" placeholder="千葉県八街市〇〇"></label>
+      </div>
+      <label><span class="lb">番地・建物名など</span><input type="text" name="addr2" placeholder="1-2-3 〇〇ハイツ101"></label>
+      <div class="fld"><span class="lb">物件種別</span>
+        <div class="rg"><label><input type="radio" name="ptype" value="戸建" checked> 戸建</label><label><input type="radio" name="ptype" value="マンション"> マンション</label><label><input type="radio" name="ptype" value="土地"> 土地</label><label><input type="radio" name="ptype" value="その他"> その他</label></div>
+      </div>
+      <div class="row">
+        <label><span class="lb">間取り</span><input type="text" name="plan" placeholder="〇LDK など"></label>
+        <label><span class="lb">売却希望時期</span>
+          <select name="when"><option>指定なし</option><option>大至急（2週間以内）</option><option>至急（1ヶ月以内）</option><option>3ヶ月以内</option><option>半年以内</option></select>
+        </label>
+      </div>
+      <div class="row">
+        <label><span class="lb">土地面積</span><input type="text" name="land" placeholder="〇坪・〇㎡ など"></label>
+        <label><span class="lb">建物面積</span><input type="text" name="bldg" placeholder="〇㎡ など"></label>
+      </div>
+    </div>
+    <label><span class="lb" id="msg-lb">ご相談内容<span class="req">必須</span></span><textarea name="message" rows="5" required placeholder="家の場所（市区町村まで）や、いまの状況を、分かる範囲で。"></textarea></label>
+    <details class="privacy"><summary>個人情報の取り扱いについて</summary><p>ご入力いただいたお客様の個人情報（お名前・ご住所・メールアドレスなど）は、厳重に管理・保管し、お客様からのお問い合わせ対応と連絡の手段のみに使用します。第三者に開示することはありません。ただし、法令等に基づいた要請があった場合や、お客様の同意を得られた場合に限り、情報を開示します。</p></details>
+    <label class="chk"><input type="checkbox" name="agree" required> 「個人情報の取り扱いについて」に同意する</label>
+    <p class="cform-note">SENDを押すと、入力内容を入れたGoogleフォームが別タブで開きます。そこで内容をご確認のうえ「送信」を押してください。</p>
     <div class="sales-note" id="sales-note" hidden><b>営業・売り込み・提携のご提案について</b><br>お客様のご相談時間を守るため、事業者様からの営業・売り込み・提携提案への対応は<b>有料（1件 110,000円・税込）</b>とさせていただいています。送信いただいた時点で、対応費用のご請求に同意いただいたものとみなします。ご了承のうえお送りください。</div>
     <button type="submit" class="link">SEND<span class="arrow"></span></button>
     <div class="cform-msg" id="cform-msg" role="status" aria-live="polite"></div>
@@ -1932,8 +1976,8 @@
   requestAnimationFrame(function(){reveal();});
 
   var GF_CONTACT='https://docs.google.com/forms/d/e/1FAIpQLSdagB0MAwfdwB2BGQ-TdyFf7W32BLCp9WYjCjrbrQ3w0LwjgA/viewform';
-  var KIND_MAP={'空き家':'空き家のこと','相続':'相続のこと','終活':'終活・おうち終活ノート','絵本':'絵本『あきやにあかり』','営業':'営業・売り込み・提携のご提案（有料対応）','その他':'その他','取材':'その他','講演':'その他'};
-  var KIND_HEAD={'取材':'【取材のご依頼】\n','講演':'【講演・セミナーのご依頼】\n'};
+  var KIND_MAP={'査定':'空き家のこと','空き家':'空き家のこと','相続':'相続のこと','終活':'終活・おうち終活ノート','絵本':'絵本『あきやにあかり』','営業':'営業・売り込み・提携のご提案（有料対応）','その他':'その他','取材':'その他','講演':'その他'};
+  var KIND_HEAD={'査定':'【無料査定のご依頼】\n','取材':'【取材のご依頼】\n','講演':'【講演・セミナーのご依頼】\n'};
   var JOB_MAP={'未定':'未定','施工管理・内装':'施工管理・内装','多能工・大工・外構':'多能工・大工・外構','不動産営業':'不動産営業・反響営業','事務・経理・IT':'事務・経理・IT','秘書':'秘書'};
   var SRC_MAP={'Indeed':'Indeed','求人サイト':'その他の求人サイト','紹介':'知人の紹介','SNS':'SNS・YouTube','その他':'その他'};
   function gopen(url,entries){
@@ -1945,19 +1989,24 @@
     ev.preventDefault();
     if(!form.checkValidity()){form.reportValidity();return;}
     var btn=form.querySelector('button');btn.disabled=true;msg.className='cform-msg';msg.textContent='送信しています…';
-    var f=new FormData(form),data={name:f.get('name'),tel:f.get('tel')||'',email:f.get('email'),kind:f.get('kind'),message:f.get('message')||'',sentAt:new Date().toISOString(),page:location.href};
+    var f=new FormData(form),g=function(k){return (f.get(k)||'').toString().trim();},data={name:g('name'),tel:g('tel'),email:g('email'),kind:g('kind'),message:g('message')};
+    var L=[]; if(KIND_HEAD[data.kind]) L.push(KIND_HEAD[data.kind].trim());
+    L.push('フリガナ: '+g('kana')); if(data.tel) L.push('電話: '+data.tel); L.push('ご希望の連絡方法: '+g('via'));
+    if(data.kind==='査定'){ L.push('','■ 物件の情報','所在地: '+(g('zip')?'〒'+g('zip')+' ':'')+g('addr')+' '+g('addr2'),'物件種別: '+g('ptype'),'間取り: '+g('plan'),'土地面積: '+g('land'),'建物面積: '+g('bldg'),'売却希望時期: '+g('when')); }
+    if(data.message) L.push('',(data.kind==='査定'?'■ 備考\n':'')+data.message);
+    var body=L.join('\n');
     try{
       gopen(GF_CONTACT,{
-        'entry.962870540':data.name,
+        'entry.962870540':data.name+(g('kana')?'（'+g('kana')+'）':''),
         'entry.1318355957':data.email,
         'entry.1508941475':KIND_MAP[data.kind]||data.kind,
-        'entry.140108967':(KIND_HEAD[data.kind]||'')+(data.tel?'電話: '+data.tel+'\n\n':'')+data.message
+        'entry.140108967':body
       });
       form.classList.add('sent');msg.className='cform-msg ok';msg.innerHTML='別タブでGoogleフォームが開きます。内容をご確認のうえ、そちらの「送信」ボタンを押してください。<br>タブが開かない場合は <a href="'+GF_CONTACT+'" target="_blank" rel="noopener" style="text-decoration:underline">こちら</a> からどうぞ。';
     }catch(e){
       btn.disabled=false;
-      var body=encodeURIComponent('お名前: '+data.name+'\n電話: '+data.tel+'\nメール: '+data.email+'\n種類: '+data.kind+'\n\n'+data.message);
-      msg.className='cform-msg ng';msg.innerHTML='この画面からは送信できませんでした。<a href="mailto:info@ohanahome.jp?subject='+encodeURIComponent('【おうちじまい相談】'+data.kind)+'&body='+body+'" style="text-decoration:underline">メールで送る</a>';
+      var mb=encodeURIComponent('お名前: '+data.name+'\nメール: '+data.email+'\n種類: '+data.kind+'\n\n'+body);
+      msg.className='cform-msg ng';msg.innerHTML='この画面からは送信できませんでした。<a href="mailto:info@ohanahome.jp?subject='+encodeURIComponent('【おうちじまい相談】'+data.kind)+'&body='+mb+'" style="text-decoration:underline">メールで送る</a>';
     }
   });
 
@@ -2022,6 +2071,19 @@
     document.title=a.title+'｜オハナホーム';
   }
 
+  (function(){
+    var fm=document.getElementById('cform'); if(!fm) return;
+    var ks=fm.querySelector('select[name=kind]'),sa=document.getElementById('satei'),ml=document.getElementById('msg-lb'),ta=fm.querySelector('textarea[name=message]'),e1=fm.querySelector('[name=email]'),e2=fm.querySelector('[name=email2]'),tel=fm.querySelector('[name=tel]'),tr=document.getElementById('tel-req');
+    function sync(){var s=ks.value==='査定';sa.hidden=!s;ta.required=!s;ml.innerHTML=s?'備考':'ご相談内容<span class="req">必須</span>';ta.placeholder=s?'何かあればご記入ください。':'家の場所（市区町村まで）や、いまの状況を、分かる範囲で。';}
+    function mail(){e2.setCustomValidity(e2.value&&e1.value!==e2.value?'メールアドレスが一致しません':'');}
+    function via(){var p=(fm.querySelector('[name=via]:checked')||{}).value==='電話';tel.required=p;tr.hidden=!p;}
+    ks.addEventListener('change',sync);e1.addEventListener('input',mail);e2.addEventListener('input',mail);fm.querySelectorAll('[name=via]').forEach(function(r){r.addEventListener('change',via);});
+    var zip=fm.querySelector('[name=zip]'),addr=fm.querySelector('[name=addr]');
+    zip.addEventListener('input',function(){var z=zip.value.replace(/[０-９]/g,function(c){return String.fromCharCode(c.charCodeAt(0)-65248);}).replace(/[^0-9]/g,'');if(z.length!==7||addr.value)return;
+      var cb='zc'+Date.now(),sc=document.createElement('script');window[cb]=function(r){try{var x=r&&r.results&&r.results[0];if(x&&!addr.value)addr.value=x.address1+x.address2+x.address3;}catch(e){}delete window[cb];sc.remove();};
+      sc.src='https://zipcloud.ibsnet.co.jp/api/search?zipcode='+z+'&callback='+cb;sc.onerror=function(){delete window[cb];sc.remove();};document.head.appendChild(sc);});
+    sync();mail();via();
+  })();
   var kindSel=document.querySelector('#cform select[name=kind]'),saleNote=document.getElementById('sales-note');
   if(kindSel&&saleNote){
     var syncSale=function(){saleNote.hidden=(kindSel.value!=='営業');};
