@@ -1885,7 +1885,7 @@
       </div>
     </div>
     <div class="satei" id="satei" hidden>
-      <div class="satei-ttl">物件の情報<small>分かる範囲で大丈夫です</small></div>
+      <div class="satei-ttl">物件の情報<small>分かる範囲で大丈夫です（空欄でも送れます）</small></div>
       <div class="row">
         <label><span class="lb">郵便番号</span><input type="text" name="zip" inputmode="numeric" autocomplete="postal-code" placeholder="2891107（住所が入ります）" maxlength="8"></label>
         <label><span class="lb">所在地</span><input type="text" name="addr" placeholder="千葉県八街市〇〇"></label>
@@ -1896,7 +1896,7 @@
       </div>
       <div class="row">
         <label><span class="lb">間取り</span><input type="text" name="plan" placeholder="〇LDK など"></label>
-        <label><span class="lb">売却希望時期</span>
+        <label><span class="lb">売却・活用の希望時期</span>
           <select name="when"><option>指定なし</option><option>大至急（2週間以内）</option><option>至急（1ヶ月以内）</option><option>3ヶ月以内</option><option>半年以内</option></select>
         </label>
       </div>
@@ -1990,7 +1990,7 @@
     var f=new FormData(form),g=function(k){return (f.get(k)||'').toString().trim();},data={name:g('name'),tel:g('tel'),email:g('email'),kind:g('kind'),message:g('message')};
     var L=[]; if(KIND_HEAD[data.kind]) L.push(KIND_HEAD[data.kind].trim());
     L.push('フリガナ: '+g('kana')); if(data.tel) L.push('電話: '+data.tel); L.push('ご希望の連絡方法: '+g('via'));
-    if(data.kind==='査定'){ L.push('','■ 物件の情報','所在地: '+(g('zip')?'〒'+g('zip')+' ':'')+g('addr')+' '+g('addr2'),'物件種別: '+g('ptype'),'間取り: '+g('plan'),'土地面積: '+g('land'),'建物面積: '+g('bldg'),'売却希望時期: '+g('when')); }
+    if(['空き家','査定','相続'].indexOf(data.kind)>=0&&(g('zip')||g('addr')||g('addr2')||g('plan')||g('land')||g('bldg'))){ L.push('','■ 物件の情報','所在地: '+(g('zip')?'〒'+g('zip')+' ':'')+g('addr')+' '+g('addr2'),'物件種別: '+g('ptype'),'間取り: '+g('plan'),'土地面積: '+g('land'),'建物面積: '+g('bldg'),'売却・活用の希望時期: '+g('when')); }
     if(data.message) L.push('',(data.kind==='査定'?'■ 備考\n':'')+data.message);
     var body=L.join('\n');
     try{
@@ -2072,7 +2072,8 @@
   (function(){
     var fm=document.getElementById('cform'); if(!fm) return;
     var ks=fm.querySelector('select[name=kind]'),sa=document.getElementById('satei'),ml=document.getElementById('msg-lb'),ta=fm.querySelector('textarea[name=message]'),e1=fm.querySelector('[name=email]'),e2=fm.querySelector('[name=email2]'),tel=fm.querySelector('[name=tel]'),tr=document.getElementById('tel-req');
-    function sync(){var s=ks.value==='査定';sa.hidden=!s;ta.required=!s;ml.innerHTML=s?'備考':'ご相談内容<span class="req">必須</span>';ta.placeholder=s?'何かあればご記入ください。':'家の場所（市区町村まで）や、いまの状況を、分かる範囲で。';}
+    var PROP=['空き家','査定','相続'];  // 物件の相談になる用件のときだけ、物件の情報を出す
+    function sync(){var s=ks.value==='査定';sa.hidden=PROP.indexOf(ks.value)<0;ta.required=!s;ml.innerHTML=s?'備考':'ご相談内容<span class="req">必須</span>';ta.placeholder=s?'何かあればご記入ください。':'家の場所（市区町村まで）や、いまの状況を、分かる範囲で。';}
     function mail(){e2.setCustomValidity(e2.value&&e1.value!==e2.value?'メールアドレスが一致しません':'');}
     function via(){var p=(fm.querySelector('[name=via]:checked')||{}).value==='電話';tel.required=p;tr.hidden=!p;}
     ks.addEventListener('change',sync);e1.addEventListener('input',mail);e2.addEventListener('input',mail);fm.querySelectorAll('[name=via]').forEach(function(r){r.addEventListener('change',via);});
