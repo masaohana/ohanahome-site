@@ -2245,10 +2245,10 @@
       if(l1&&l2){ l2.style.fontSize=''; var base=parseFloat(getComputedStyle(l2).fontSize), w2=l2.offsetWidth; if(w2>0) l2.style.fontSize=(base*l1.offsetWidth/w2)+'px'; }
       // 「視差効果を減らす」がオンでも1語ずつ出す（動き・拡大はCSSで止めて、その場に現れるだけ）
       var els=shuffle(place());
-      els.forEach(function(el,i){ later(function(){el.classList.add('on');}, 60+i*26); });
-      var tLast=60+els.length*26;
-      later(function(){ s.classList.add('focus'); }, tLast+250);   // オレンジ以外を薄く
-      var t0=tLast+550;
+      els.forEach(function(el,i){ later(function(){el.classList.add('on');}, 60+i*38); });
+      var tLast=60+els.length*38;
+      later(function(){ s.classList.add('focus'); }, tLast+500);   // オレンジ以外を薄く
+      var t0=tLast+800;
       later(function(){ // 色付きの言葉が中心へ動きながら画面に収まる大きさまで拡大 → 「のことなら」を末尾にそろえて出す
         var a=s.querySelector('.ww.acc'),W=s.clientWidth,H=s.clientHeight;
         if(a){
