@@ -694,6 +694,16 @@
     #view-media .soon{font-size:13px;}
   }
 
+  /* media-upcoming v1: これからの登壇を一番上に */
+  #media-upcoming .up-list{margin-top:clamp(20px,3vw,32px);display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px;}
+  .up-card{border:1.5px solid var(--bk);padding:18px 18px 16px;display:flex;flex-direction:column;gap:8px;background:#fff;}
+  .up-card .ud{font-family:var(--cond);font-weight:900;font-size:30px;line-height:1;letter-spacing:.02em;}
+  .up-card .ud small{font-size:15px;margin-left:8px;color:var(--gy);letter-spacing:.08em;}
+  .up-card .ut{font-weight:900;font-size:15px;line-height:1.5;}
+  .up-card .up{font-size:12.5px;line-height:1.7;color:var(--gy-dark);}
+  .up-card .lks{display:flex;flex-wrap:wrap;gap:6px;margin-top:auto;padding-top:4px;}
+  .up-card .lks .soon{display:none;}
+  .up-card .nx{align-self:flex-start;font-family:var(--cond);font-weight:900;font-size:12px;letter-spacing:.14em;background:var(--bk);color:#fff;padding:3px 8px;}
   /* sem-filter v1: セミナーを「開催予定／実績」で切り替え */
   .sem-filter{display:flex;gap:8px;flex-wrap:wrap;margin-top:clamp(20px,3vw,32px);}
   .sem-filter button{font:inherit;font-size:13px;font-weight:900;letter-spacing:.04em;padding:9px 16px;border:1.5px solid var(--bk);border-radius:999px;background:#fff;color:var(--bk);cursor:pointer;}
@@ -1689,6 +1699,11 @@
   </div>
 </section>
 <nav class="wrap media-jump" aria-label="MEDIAの目次"><button type="button" data-t="media-seminar">セミナー登壇<b></b></button><button type="button" data-t="media-tv">テレビ<b></b></button><button type="button" data-t="media-paper">新聞・雑誌<b></b></button><button type="button" data-t="media-web">Web記事<b></b></button><button type="button" data-t="media-guest">番組・対談<b></b></button><button type="button" data-t="media-press">プレスリリース<b></b></button></nav>
+<section class="wrap" id="media-upcoming" hidden style="margin-top:clamp(36px,5vw,64px)">
+  <div class="cond sub">UPCOMING</div>
+  <h2 class="cond ttl" style="font-size:min(clamp(40px,6.4vw,84px),calc(84vw / 5));white-space:nowrap">登壇予定</h2>
+  <div class="up-list"></div>
+</section>
 <section class="wrap sec-gap" id="media-tv">
   <div class="cond sub">TV</div>
   <h2 class="cond ttl" style="font-size:min(clamp(40px,6.4vw,84px),calc(84vw / 5));white-space:nowrap">テレビ出演</h2>
@@ -1721,9 +1736,9 @@
   <h2 class="cond ttl" style="font-size:min(clamp(40px,6.4vw,84px),calc(84vw / 5));white-space:nowrap">Web記事</h2>
   <p class="body-txt" style="margin-top:18px">2021年以前の記事は、会社設立前に個人投資家「ピーナッツ大家」「ナース大家さん」として受けた取材です。</p>
   <div class="col-list thumbs">
-    <div class="col-item"><div class="th"><img src="img/m/m_09.jpg" alt="" loading="lazy" decoding="async"></div><div class="d">2026.09.25</div><div><h4><a href="https://jimoharu.net/yachimata-freeschool-tane-2026/" target="_blank" rel="noopener">ジモはる｜八街市にフリースクール「たね」10月開校｜9/25・26プレオープン</a></h4><p>地域情報メディアが、あきやフリースクール「たね」の開校とプレオープンを紹介。</p></div><div class="go lks"><a class="lk web" href="https://jimoharu.net/yachimata-freeschool-tane-2026/" target="_blank" rel="noopener"><span class="k">記事</span>ジモはる<span class="ar">→</span></a></div></div>
+    <div class="col-item"><div class="th"><img src="img/m/m_09.jpg" alt="" loading="lazy" decoding="async"></div><div class="d">2026.09.25</div><div><h4><a href="https://jimoharu.net/yachimata-freeschool-tane-2026/" target="_blank" rel="noopener">ジモはる｜八街市にフリースクール「たね」10月開校｜9/25・26プレオープン</a></h4><p>地域情報メディアが、あきやフリースクール「たね」の開校とプレオープンを紹介。</p></div><div class="go lks"><a class="lk web" href="https://jimoharu.net/yachimata-freeschool-tane-2026/" target="_blank" rel="noopener"><span class="k">記事</span>ジモはる<span class="ar">→</span></a><a class="lk ig" href="https://www.instagram.com/p/Dda4ilsJoOm/" target="_blank" rel="noopener"><span class="k">投稿</span>Instagram<span class="ar">→</span></a></div></div>
     <div class="col-item"><div class="th"><img src="img/m/m_10.jpg" alt="" loading="lazy" decoding="async"></div><div class="d">2026.05.19</div><div><h4><a href="https://media.livedoctor.jp/interview/%E5%85%A8%E5%9B%BD%E3%81%AE%E7%A9%BA%E3%81%8D%E5%AE%B6%E3%82%92%E5%B1%85%E5%A0%B4%E6%89%80%E3%81%AB%E3%82%AA%E3%83%8F%E3%83%8A%E3%83%9B%E3%83%BC%E3%83%A0/" target="_blank" rel="noopener">LIVE Doctor｜全国の「空き家」を「居場所」に。菊池聖雄氏の目指す空き家再生の未来</a></h4><p>「社長の背中」インタビュー。2018年設立、2021年に空き家再生協会を立ち上げ、全国に空き家再生士のネットワークを。</p></div><div class="go lks"><a class="lk web" href="https://media.livedoctor.jp/interview/%E5%85%A8%E5%9B%BD%E3%81%AE%E7%A9%BA%E3%81%8D%E5%AE%B6%E3%82%92%E5%B1%85%E5%A0%B4%E6%89%80%E3%81%AB%E3%82%AA%E3%83%8F%E3%83%8A%E3%83%9B%E3%83%BC%E3%83%A0/" target="_blank" rel="noopener"><span class="k">記事</span>LIVE Doctor<span class="ar">→</span></a></div></div>
-    <div class="col-item"><div class="th"><img src="img/m/m_11.jpg" alt="" loading="lazy" decoding="async"></div><div class="d">2025.07.22</div><div><h4><a href="https://souken.info/ohanahome-matudo-seminar/" target="_blank" rel="noopener">葬研｜「おうちじまい®から考える 空き家と相続セミナー in 松戸」開催</a></h4><p>葬儀業界メディアに掲載。菊池あかり・菊池聖雄が登壇するセミナーの案内。</p></div><div class="go lks"><a class="lk web" href="https://souken.info/ohanahome-matudo-seminar/" target="_blank" rel="noopener"><span class="k">記事</span>葬研<span class="ar">→</span></a></div></div>
+    <div class="col-item"><div class="th"><img src="img/m/m_11.jpg" alt="" loading="lazy" decoding="async"></div><div class="d">2025.07.22</div><div><h4><a href="https://souken.info/ohanahome-matudo-seminar/" target="_blank" rel="noopener">葬研｜「おうちじまい®から考える 空き家と相続セミナー in 松戸」開催</a></h4><p>葬儀業界メディアに掲載。菊池あかり・菊池聖雄が登壇するセミナーの案内。</p></div><div class="go lks"><a class="lk web" href="https://souken.info/ohanahome-matudo-seminar/" target="_blank" rel="noopener"><span class="k">記事</span>葬研<span class="ar">→</span></a><a class="lk ig" href="https://www.instagram.com/p/DLeZ3otTJSp/" target="_blank" rel="noopener"><span class="k">投稿</span>Instagram<span class="ar">→</span></a></div></div>
     <div class="col-item"><div class="th"><img src="img/m/x_smartflash2023.jpg" alt="" loading="lazy" decoding="async"></div><div class="d">2023.04.30</div><div><h4><a href="https://smart-flash.jp/sociopolitics/233520/" target="_blank" rel="noopener">Smart FLASH｜相続空き家のゴミ捨てだけで100万円以上…「国庫帰属制度」開始でも安心できぬ“負動産”の現実</a></h4><p>4月27日に始まった「相続土地国庫帰属制度」について、菊池聖雄が実務の目線で解説。</p></div><div class="go lks"><a class="lk web" href="https://smart-flash.jp/sociopolitics/233520/" target="_blank" rel="noopener"><span class="k">記事</span>Smart FLASH<span class="ar">→</span></a><a class="lk web" href="https://news.livedoor.com/article/detail/24152101/" target="_blank" rel="noopener"><span class="k">記事</span>ライブドアニュース<span class="ar">→</span></a><a class="lk web" href="https://ohanahome.jp/%e3%82%aa%e3%83%8f%e3%83%8a%e3%83%9b%e3%83%bc%e3%83%a0%e3%81%ae%e3%83%9b%e3%83%bc%e3%83%a0%e3%83%9a%e3%83%bc%e3%82%b8%e3%82%92%e3%83%aa%e3%83%a5%e3%83%8b%e3%83%a5%e3%83%bc%e3%82%a2%e3%83%ab%e3%81%84-2/" target="_blank" rel="noopener"><span class="k">報告</span>公式ブログ<span class="ar">→</span></a></div></div>
     <div class="col-item"><div class="th"><img src="img/m/m_12.jpg" alt="" loading="lazy" decoding="async"></div><div class="d">2021.08.02</div><div><h4><a href="https://life.insweb.co.jp/souzoku/akiya-kyoutsu-ninshiki.html" target="_blank" rel="noopener">保険の窓口 インズウェブ!｜空き家における「共通認識」の重要性</a></h4><p>家族で「おうちの共通認識」をつくることの大切さ。</p></div><div class="go lks"><a class="lk web" href="https://life.insweb.co.jp/souzoku/akiya-kyoutsu-ninshiki.html" target="_blank" rel="noopener"><span class="k">記事</span>インズウェブ<span class="ar">→</span></a></div></div>
     <div class="col-item"><div class="th"><img src="img/m/m_13.jpg" alt="" loading="lazy" decoding="async"></div><div class="d">2021.01.24</div><div><h4><a href="https://hbol.jp/236850" target="_blank" rel="noopener">ハーバー・ビジネス・オンライン｜問い合わせ増ランキング1位の街、千葉県八街在住の空き家再生請負人</a></h4><p>創業前、個人投資家「ピーナッツ大家」として。50戸超の空き家再生の実践を取材。</p></div><div class="go lks"><a class="lk web" href="https://hbol.jp/236850" target="_blank" rel="noopener"><span class="k">記事</span>ハーバー・ビジネス<span class="ar">→</span></a></div></div>
@@ -1760,15 +1775,15 @@
   <div class="cond sub">PRESS RELEASE</div>
   <h2 class="cond ttl" style="font-size:min(clamp(40px,6.4vw,84px),calc(84vw / 7));white-space:nowrap">プレスリリース</h2>
   <div class="col-list thumbs">
-    <div class="col-item"><div class="th"><img src="img/m/m_26.jpg" alt="" loading="lazy" decoding="async"></div><div class="d">2026</div><div><h4><a href="https://prtimes.jp/main/html/rd/p/000000017.000166247.html" target="_blank" rel="noopener">PR TIMES｜オハナホーム、終活業界最大規模イベント『エンディング産業展2026』に出展</a></h4><p>出展と登壇の案内。</p></div><div class="go lks"><a class="lk web" href="https://prtimes.jp/main/html/rd/p/000000017.000166247.html" target="_blank" rel="noopener"><span class="k">記事</span>PR TIMES<span class="ar">→</span></a></div></div>
-    <div class="col-item"><div class="th"><img src="img/m/m_24.jpg" alt="" loading="lazy" decoding="async"></div><div class="d">2026.09</div><div><h4><a href="https://prtimes.jp/main/html/rd/p/000000019.000166247.html" target="_blank" rel="noopener">PR TIMES｜落花生アート＆スライムづくり無料体験ワークショップ　たね 9/25・26プレオープン</a></h4><p>プレオープンの体験ワークショップの案内。</p></div><div class="go lks"><a class="lk web" href="https://prtimes.jp/main/html/rd/p/000000019.000166247.html" target="_blank" rel="noopener"><span class="k">記事</span>PR TIMES<span class="ar">→</span></a></div></div>
-    <div class="col-item"><div class="th"><img src="img/m/m_23.jpg" alt="" loading="lazy" decoding="async"></div><div class="d">2026.09.17</div><div><h4><a href="https://prtimes.jp/main/html/rd/p/000000018.000166247.html" target="_blank" rel="noopener">PR TIMES｜あきやフリースクール「たね」千葉・八街に今秋開校　クラウドファンディング挑戦</a></h4><p>空き家を再生したフリースクールの開校と、CAMPFIREでの挑戦を発表。</p></div><div class="go lks"><a class="lk web" href="https://prtimes.jp/main/html/rd/p/000000018.000166247.html" target="_blank" rel="noopener"><span class="k">記事</span>PR TIMES<span class="ar">→</span></a></div></div>
+    <div class="col-item"><div class="th"><img src="img/m/m_26.jpg" alt="" loading="lazy" decoding="async"></div><div class="d">2026</div><div><h4><a href="https://prtimes.jp/main/html/rd/p/000000017.000166247.html" target="_blank" rel="noopener">PR TIMES｜オハナホーム、終活業界最大規模イベント『エンディング産業展2026』に出展</a></h4><p>出展と登壇の案内。</p></div><div class="go lks"><a class="lk web" href="https://prtimes.jp/main/html/rd/p/000000017.000166247.html" target="_blank" rel="noopener"><span class="k">記事</span>PR TIMES<span class="ar">→</span></a><a class="lk ig" href="https://www.instagram.com/p/Dc-Rfnfie6C/" target="_blank" rel="noopener"><span class="k">投稿</span>Instagram<span class="ar">→</span></a></div></div>
+    <div class="col-item"><div class="th"><img src="img/m/m_24.jpg" alt="" loading="lazy" decoding="async"></div><div class="d">2026.09</div><div><h4><a href="https://prtimes.jp/main/html/rd/p/000000019.000166247.html" target="_blank" rel="noopener">PR TIMES｜落花生アート＆スライムづくり無料体験ワークショップ　たね 9/25・26プレオープン</a></h4><p>プレオープンの体験ワークショップの案内。</p></div><div class="go lks"><a class="lk web" href="https://prtimes.jp/main/html/rd/p/000000019.000166247.html" target="_blank" rel="noopener"><span class="k">記事</span>PR TIMES<span class="ar">→</span></a><a class="lk ig" href="https://www.instagram.com/p/Dda4ilsJoOm/" target="_blank" rel="noopener"><span class="k">投稿</span>Instagram<span class="ar">→</span></a></div></div>
+    <div class="col-item"><div class="th"><img src="img/m/m_23.jpg" alt="" loading="lazy" decoding="async"></div><div class="d">2026.09.17</div><div><h4><a href="https://prtimes.jp/main/html/rd/p/000000018.000166247.html" target="_blank" rel="noopener">PR TIMES｜あきやフリースクール「たね」千葉・八街に今秋開校　クラウドファンディング挑戦</a></h4><p>空き家を再生したフリースクールの開校と、CAMPFIREでの挑戦を発表。</p></div><div class="go lks"><a class="lk web" href="https://prtimes.jp/main/html/rd/p/000000018.000166247.html" target="_blank" rel="noopener"><span class="k">記事</span>PR TIMES<span class="ar">→</span></a><a class="lk ig" href="https://www.instagram.com/p/DdF2WwCCUcU/" target="_blank" rel="noopener"><span class="k">投稿</span>Instagram<span class="ar">→</span></a></div></div>
     <div class="col-item"><div class="th"><img src="img/m/m_25.jpg" alt="" loading="lazy" decoding="async"></div><div class="d">2026.04.21</div><div><h4><a href="https://prtimes.jp/main/html/rd/p/000000015.000166247.html" target="_blank" rel="noopener">PR TIMES｜空き家対策の実務推進に関する協定を締結（八街市・空き家再生協会・オハナホーム）</a></h4><p>八街市と、空き家対策の実務推進に関する協定を締結。相談会・セミナー・再生の実務で連携。</p></div><div class="go lks"><a class="lk web" href="https://prtimes.jp/main/html/rd/p/000000015.000166247.html" target="_blank" rel="noopener"><span class="k">記事</span>PR TIMES<span class="ar">→</span></a><a class="lk ig" href="https://www.instagram.com/p/DXdqYi1Cbh_/" target="_blank" rel="noopener"><span class="k">投稿</span>Instagram<span class="ar">→</span></a><a class="lk web" href="https://ohanahome.jp/%e5%85%ab%e8%a1%97%e5%b8%82%e3%81%a8%e3%80%8c%e7%a9%ba%e3%81%8d%e5%ae%b6%e5%af%be%e7%ad%96%e3%81%ae%e5%ae%9f%e5%8b%99%e6%8e%a8%e9%80%b2%e3%81%ab%e9%96%a2%e3%81%99%e3%82%8b%e5%8d%94%e5%ae%9a%e3%80%8d-2/" target="_blank" rel="noopener"><span class="k">記事</span>公式ブログ<span class="ar">→</span></a><a class="lk web" href="https://akiyasaisei.jp/%e5%85%ab%e8%a1%97%e5%b8%82%e3%81%a8%e3%80%8c%e7%a9%ba%e3%81%8d%e5%ae%b6%e5%af%be%e7%ad%96%e3%81%ae%e5%ae%9f%e5%8b%99%e6%8e%a8%e9%80%b2%e3%81%ab%e9%96%a2%e3%81%99%e3%82%8b%e5%8d%94%e5%ae%9a%e3%80%8d/" target="_blank" rel="noopener"><span class="k">記事</span>協会サイト<span class="ar">→</span></a></div></div>
     <div class="col-item"><div class="th"><img src="img/m/m_30.jpg" alt="" loading="lazy" decoding="async"></div><div class="d">2025</div><div><h4><a href="https://prtimes.jp/main/html/rd/p/000000008.000166247.html" target="_blank" rel="noopener">PR TIMES｜絵本『あきやにあかり』50冊を全国の学校・図書館・空き家相談窓口・福祉施設等へ無償寄贈</a></h4><p>絵本の寄贈先の募集を発表。</p></div><div class="go lks"><a class="lk web" href="https://prtimes.jp/main/html/rd/p/000000008.000166247.html" target="_blank" rel="noopener"><span class="k">記事</span>PR TIMES<span class="ar">→</span></a></div></div>
     <div class="col-item"><div class="th"><img src="img/m/x_newscast.jpg" alt="" loading="lazy" decoding="async"></div><div class="d">2025.10.06</div><div><h4><a href="https://newscast.jp/news/6072786" target="_blank" rel="noopener">NEWSCAST（@Press）｜エンディング業界に向けて新たなビジネスモデルを提案「終活をきっかけに創りだす好循環の仕組み」</a></h4><p>エンディング産業展2025での講演内容をもとにした、葬送事業者向けの提案。</p></div><div class="go lks"><a class="lk web" href="https://newscast.jp/news/6072786" target="_blank" rel="noopener"><span class="k">記事</span>NEWSCAST<span class="ar">→</span></a></div></div>
     <div class="col-item"><div class="th"><img src="img/m/m_27.jpg" alt="" loading="lazy" decoding="async"></div><div class="d">2025.08.12</div><div><h4><a href="https://prtimes.jp/main/html/rd/p/000000011.000166247.html" target="_blank" rel="noopener">PR TIMES｜心に灯る絵本『あきやにあかり』が全国の学校・図書館へ無償寄贈スタート</a></h4><p>空き家をテーマにした絵本を、学校・図書館・福祉施設へ寄贈。</p></div><div class="go lks"><a class="lk web" href="https://prtimes.jp/main/html/rd/p/000000011.000166247.html" target="_blank" rel="noopener"><span class="k">記事</span>PR TIMES<span class="ar">→</span></a></div></div>
     <div class="col-item"><div class="th"><img src="img/m/m_28.jpg" alt="" loading="lazy" decoding="async"></div><div class="d">2025.08.08</div><div><h4><a href="https://prtimes.jp/main/html/rd/p/000000009.000166247.html" target="_blank" rel="noopener">PR TIMES｜フューネラル業界向け「おうちじまい」支援プログラム本格始動</a></h4><p>遺族支援×不動産×終活。葬儀社と連携した「おうちじまい」支援の開始を発表。</p></div><div class="go lks"><a class="lk web" href="https://prtimes.jp/main/html/rd/p/000000009.000166247.html" target="_blank" rel="noopener"><span class="k">記事</span>PR TIMES<span class="ar">→</span></a></div></div>
-    <div class="col-item"><div class="th"><img src="img/m/m_29.jpg" alt="" loading="lazy" decoding="async"></div><div class="d">2025.07</div><div><h4><a href="https://prtimes.jp/main/html/rd/p/000000005.000166247.html" target="_blank" rel="noopener">PR TIMES｜「おうちじまい®から考える 空き家と相続セミナー in 松戸」開催</a></h4><p>松戸でのセミナー開催を発表。</p></div><div class="go lks"><a class="lk web" href="https://prtimes.jp/main/html/rd/p/000000005.000166247.html" target="_blank" rel="noopener"><span class="k">記事</span>PR TIMES<span class="ar">→</span></a></div></div>
+    <div class="col-item"><div class="th"><img src="img/m/m_29.jpg" alt="" loading="lazy" decoding="async"></div><div class="d">2025.07</div><div><h4><a href="https://prtimes.jp/main/html/rd/p/000000005.000166247.html" target="_blank" rel="noopener">PR TIMES｜「おうちじまい®から考える 空き家と相続セミナー in 松戸」開催</a></h4><p>松戸でのセミナー開催を発表。</p></div><div class="go lks"><a class="lk web" href="https://prtimes.jp/main/html/rd/p/000000005.000166247.html" target="_blank" rel="noopener"><span class="k">記事</span>PR TIMES<span class="ar">→</span></a><a class="lk ig" href="https://www.instagram.com/p/DLeZ3otTJSp/" target="_blank" rel="noopener"><span class="k">投稿</span>Instagram<span class="ar">→</span></a></div></div>
   </div>
 </section>
 <section class="wrap sec-gap" id="media-seminar">
@@ -2439,6 +2454,39 @@
       if(fold){ if(f==='all'){ fold.style.display=''; if(fold.getAttribute('aria-expanded')!=='true') items.forEach(function(x,i){x.classList.toggle('fold-hide',i>=10);}); }
                 else { fold.style.display='none'; items.forEach(function(x){x.classList.remove('fold-hide');}); } }
     });
+  }
+  if(document.readyState!=='loading') setTimeout(init,0); else document.addEventListener('DOMContentLoaded',function(){setTimeout(init,0);});
+})();
+</script>
+<script>
+/* media-upcoming v1：セミナー一覧から「今日以降」を拾い、近い順にページ上部へ並べる */
+(function(){
+  function init(){
+    var box=document.getElementById('media-upcoming'), sem=document.getElementById('media-seminar'); if(!box||!sem||box.dataset.done) return; box.dataset.done='1';
+    var t=new Date(), today=t.getFullYear()*10000+(t.getMonth()+1)*100+t.getDate(), W='日月火水木金土';
+    var rows=[].slice.call(sem.querySelectorAll('.col-list > .col-item')).map(function(x){
+      var d=((x.querySelector('.d')||{}).textContent||'').match(/(\d{4})\.(\d{2})\.(\d{2})/); if(!d) return null;
+      var n=(+d[1])*10000+(+d[2])*100+(+d[3]); return n>=today?{n:n,y:+d[1],m:+d[2],dd:+d[3],x:x}:null;
+    }).filter(Boolean).sort(function(a,b){return a.n-b.n;});
+    if(!rows.length) return;
+    var list=box.querySelector('.up-list');
+    rows.forEach(function(r,i){
+      var c=document.createElement('div'); c.className='up-card';
+      var wd=W[new Date(r.y,r.m-1,r.dd).getDay()];
+      var h4=r.x.querySelector('h4'), p=r.x.querySelector('p'), lk=r.x.querySelector('.lks');
+      c.innerHTML=(i===0?'<span class="nx">NEXT</span>':'')+'<div class="ud">'+r.m+'.'+('0'+r.dd).slice(-2)+'<small>'+r.y+' ('+wd+')</small></div>'
+        +'<div class="ut"></div><div class="up"></div><div class="lks"></div>';
+      c.querySelector('.ut').textContent=h4?h4.textContent:''; c.querySelector('.up').textContent=p?p.textContent:'';
+      if(lk) c.querySelector('.lks').innerHTML=lk.innerHTML;
+      list.appendChild(c);
+    });
+    box.hidden=false;
+    var nav=document.querySelector('#view-media .media-jump');
+    if(nav&&!nav.querySelector('[data-t="media-upcoming"]')){
+      var b=document.createElement('button'); b.type='button'; b.dataset.t='media-upcoming'; b.innerHTML='登壇予定<b>'+rows.length+'</b>';
+      b.addEventListener('click',function(){box.scrollIntoView({behavior:'smooth',block:'start'});});
+      nav.insertBefore(b,nav.firstChild);
+    }
   }
   if(document.readyState!=='loading') setTimeout(init,0); else document.addEventListener('DOMContentLoaded',function(){setTimeout(init,0);});
 })();
