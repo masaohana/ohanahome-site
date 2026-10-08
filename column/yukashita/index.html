@@ -562,6 +562,14 @@
   .rc-flow small{display:block;margin-top:6px;font-size:13px;line-height:1.7;font-weight:700;color:var(--gy-dark);}
   @media(max-width:860px){.rc-list{grid-template-columns:1fr 1fr;}.rc-flow{grid-template-columns:1fr 1fr;}}
   @media(max-width:520px){.rc-list,.rc-flow{grid-template-columns:1fr;}}
+  .g-rate{display:inline-flex;align-items:center;gap:12px;margin-top:20px;padding:12px 18px;border:2px solid var(--bk);color:var(--bk);text-decoration:none;}
+  .g-rate .st{font-size:26px;line-height:1;}
+  .g-rate b{font-family:var(--cond);font-weight:900;font-size:40px;line-height:1;}
+  .g-rate .lb{display:flex;flex-direction:column;font-size:14px;font-weight:900;letter-spacing:.06em;}
+  .g-rate small{margin-top:2px;font-size:11px;font-weight:700;letter-spacing:.04em;color:var(--gy-dark);}
+  .g-rate .ar{font-weight:900;}
+  .g-rate:hover{background:var(--bk);color:var(--wh);}
+  .g-rate:hover small{color:#ccc;}
   .num-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(28px,4vw,56px) clamp(20px,3vw,44px);margin-top:clamp(28px,4vw,56px);}
   .num{border-top:2px solid var(--bk);padding-top:18px;min-width:0;}
   .num > div{display:flex;flex-direction:column;}
@@ -935,6 +943,7 @@
   <div class="cond sub">OHANA HOME IN NUMBERS</div>
   <h2 class="cond ttl">NUMBERS</h2>
   <p class="lead-jp" style="margin-top:20px"><span class="ib">数字で見るオハナホーム</span></p>
+  <a class="g-rate fade" href="https://maps.google.com/?cid=10357819551472249823" target="_blank" rel="noopener"><span class="st" aria-hidden="true">★</span><b>4.9</b><span class="lb">Googleの口コミ評価<small>本社（八街）・43件・2026年10月9日時点</small></span><span class="ar" aria-hidden="true">→</span></a>
   <div class="num-grid">
     <div class="num fade"><div><b>2011</b><span><span class="ib">空き家の再生を</span><span class="ib">始めた年</span></span></div><p>会社員のかたわら空き家の再生を始め、2018年にオハナホームを設立しました。</p></div>
     <div class="num fade"><div><b>30-40</b><span>年間の買取（件）</span></div><p>ここ2年は、年に30〜40件の家と土地を買い取っています。</p></div>
