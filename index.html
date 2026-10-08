@@ -323,6 +323,8 @@
   .cform input:focus,.cform select:focus,.cform textarea:focus{outline:3px solid var(--sun);outline-offset:0;}
   .cform .chk{flex-direction:row;align-items:center;gap:10px;font-size:13px;letter-spacing:.06em;font-weight:700;}
   .cform .chk input{width:20px;height:20px;accent-color:var(--bk);}
+  .cform .sales-blk{display:flex;flex-direction:column;gap:12px;}
+  .cform .sales-blk[hidden]{display:none;}
   .cform button.link{border:0;cursor:pointer;font-family:var(--cond);margin-top:6px;}
   .cform button.link:disabled{opacity:.5;cursor:default;}
   .cform-msg{text-align:center;font-size:14px;font-weight:900;letter-spacing:.06em;min-height:1.4em;}
@@ -1230,13 +1232,13 @@
     <div class="fade">
       <div class="role">SHUKATSU · NURSE</div>
       <h3>菊池 あかり</h3>
-      <div class="kana">KIKUCHI AKARI ／ 株式会社ピーナッツ 代表取締役 ／ 看護師・上級相続診断士・終活カウンセラー協会認定講師・<a href="https://www.jpsa.net/speakers/31732/" target="_blank" rel="noopener" title="一般財団法人日本プロスピーカー協会" style="text-decoration:underline;text-underline-offset:3px;color:inherit">JPSAベーシックプロスピーカー</a></div>
+      <div class="kana">KIKUCHI AKARI ／ 株式会社ピーナッツ 代表取締役 ／ 看護師・上級相続診断士・終活カウンセラー認定講師・<a href="https://www.jpsa.net/speakers/31732/" target="_blank" rel="noopener" title="一般財団法人日本プロスピーカー協会" style="text-decoration:underline;text-underline-offset:3px;color:inherit">JPSAベーシックプロスピーカー</a></div>
       <div class="body-txt">
         <p>2001年から看護師として急性期病院・保健センター・在宅看護に携わり、2014年からは大家業へ。「空き家は相続から発生することが多い」と気づき、エンディングノートと相続を学びはじめました。</p>
         <p>2020年から「相続と空き家の窓口」として、終活セミナーやおうち終活ノートの書き方講座を続けています。医療の現場で見てきた"最期"と、家の現場で見てきた"その後"を、ひとつの話としてお伝えします。</p>
       </div>
       <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:18px"><a class="btn-bk" href="/seminar/">SEMINAR<span class="arrow"></span></a><a class="btn-bk" href="https://www.instagram.com/akiya_ni_akari/" target="_blank" rel="noopener" style="background:var(--wh);color:var(--bk);border:2px solid var(--bk)">INSTAGRAM<span class="arrow"></span></a><a class="btn-bk" href="https://www.facebook.com/akiya.ni.akari" target="_blank" rel="noopener" style="background:var(--wh);color:var(--bk);border:2px solid var(--bk)">FACEBOOK<span class="arrow"></span></a></div>
-      <div class="tags qual"><b>資格</b><span>看護師</span><span>上級相続診断士</span><span>終活カウンセラー協会認定講師</span><span>空き家再生士®</span><span>グリーフケアアドバイザー</span><span>福祉住環境コーディネーター</span><span>JPSAベーシックプロスピーカー</span></div>
+      <div class="tags qual"><b>資格</b><span>看護師</span><span>上級相続診断士</span><span>終活カウンセラー認定講師</span><span>空き家再生士®</span><span>グリーフケアアドバイザー</span><span>福祉住環境コーディネーター</span><span>JPSAベーシックプロスピーカー</span></div>
       <div class="pics"><img src="img/akari_shukatsu.jpg" alt="終活セミナー「終活とは」" style="object-position:70% 50%" loading="lazy" decoding="async"><img src="img/akari_client.jpg" alt="ご高齢のお客様と" loading="lazy" decoding="async"></div>
       <a class="btn-bk" href="/seminar/">SEMINAR<span class="arrow"></span></a>
     </div>
@@ -1986,7 +1988,7 @@
     <details class="privacy"><summary>個人情報の取り扱いについて</summary><p>ご入力いただいたお客様の個人情報（お名前・ご住所・メールアドレスなど）は、厳重に管理・保管し、お客様からのお問い合わせ対応と連絡の手段のみに使用します。第三者に開示することはありません。ただし、法令等に基づいた要請があった場合や、お客様の同意を得られた場合に限り、情報を開示します。</p></details>
     <label class="chk"><input type="checkbox" name="agree" required> 「個人情報の取り扱いについて」に同意する</label>
     <p class="cform-note">確認画面はありません。入力内容をご確認のうえ、SENDを押してください。</p>
-    <details class="privacy sales-note" id="sales-note" hidden><summary>営業・売り込みへの対応について</summary><p>お客様のご相談時間を守るため、事業者様からの営業・売り込みへの対応は有料（1件 110,000円・税込）とさせていただいています。送信いただいた時点で、対応費用のご請求に同意いただいたものとみなします。ご了承のうえお送りください。提携のご提案は「提携のご提案」を選んでお送りください（無料）。</p></details>
+    <div class="sales-blk" id="sales-note" hidden><details class="privacy"><summary>営業・売り込みへの対応について</summary><p>お客様のご相談時間を守るため、事業者様からの営業・売り込みへの対応は有料（1件 110,000円・税込）とさせていただいています。内容とお支払い方法は、このページ下の「特定商取引法に基づく表記」をご覧ください。提携のご提案は「提携のご提案」を選んでお送りください（無料）。</p></details><label class="chk"><input type="checkbox" name="sale_agree" disabled> 営業・売り込みへの有料対応（1件 110,000円・税込）に同意する</label></div>
     <button type="submit" class="link">SEND<span class="arrow"></span></button>
     <div class="cform-msg" id="cform-msg" role="status" aria-live="polite"></div>
   </form>
@@ -2010,7 +2012,7 @@
       <tr><th>電話番号</th><td>0120-087-255（受付 9:00〜17:00）</td></tr>
       <tr><th>役務の内容</th><td>事業者様からの営業・売り込みに対する、担当者による内容確認および回答（1件につき）</td></tr>
       <tr><th>対応費用</th><td>1件 110,000円（税込）</td></tr>
-      <tr><th>費用の発生時期</th><td>「ご相談の種類」で営業・売り込みを選択して送信された時点、または送信内容が営業・売り込みに該当すると当社が判断した時点</td></tr>
+      <tr><th>費用の発生時期</th><td>「ご相談の種類」で営業・売り込みを選び、有料対応への同意欄にチェックして送信された時点、または送信内容が営業・売り込みに該当すると当社が判断した時点</td></tr>
       <tr><th>支払方法・時期</th><td>当社発行の請求書による銀行振込。請求書発行日から7日以内</td></tr>
       <tr><th>役務の提供時期</th><td>対応費用のお支払い確認後、7営業日以内に回答</td></tr>
       <tr><th>キャンセル</th><td>送信後のキャンセル・返金はお受けしていません</td></tr>
@@ -2066,6 +2068,7 @@
     var btn=form.querySelector('button');btn.disabled=true;msg.className='cform-msg';msg.textContent='送信しています…';
     var f=new FormData(form),g=function(k){return (f.get(k)||'').toString().trim();},data={name:g('name'),tel:g('tel'),email:g('email'),kind:g('kind'),message:g('message')};
     var L=[]; if(KIND_HEAD[data.kind]) L.push(KIND_HEAD[data.kind].trim());
+    if(data.kind==='営業'&&g('sale_agree')) L.push('有料対応（1件 110,000円・税込）への同意: 同意済み（'+new Date().toLocaleString('ja-JP')+' 送信）');
     L.push('フリガナ: '+g('kana')); if(data.tel) L.push('電話: '+data.tel); L.push('ご希望の連絡方法: '+g('via'));
     if(['空き家','査定','相続'].indexOf(data.kind)>=0&&(g('zip')||g('addr')||g('addr2')||g('plan')||g('land')||g('bldg'))){ L.push('','■ 物件の情報','所在地: '+(g('zip')?'〒'+g('zip')+' ':'')+g('addr')+' '+g('addr2'),'物件種別: '+g('ptype'),'間取り: '+g('plan'),'土地面積: '+g('land'),'建物面積: '+g('bldg'),'売却・活用の希望時期: '+g('when')); }
     if(data.message) L.push('',(data.kind==='査定'?'■ 備考\n':'')+data.message);
@@ -2162,7 +2165,8 @@
   })();
   var kindSel=document.querySelector('#cform select[name=kind]'),saleNote=document.getElementById('sales-note');
   if(kindSel&&saleNote){
-    var syncSale=function(){saleNote.hidden=(kindSel.value!=='営業');};
+    var saleCb=saleNote.querySelector('input[name=sale_agree]');
+    var syncSale=function(){var on=(kindSel.value==='営業');saleNote.hidden=!on;saleCb.disabled=!on;saleCb.required=on;if(!on)saleCb.checked=false;};
     kindSel.addEventListener('change',syncSale); syncSale();
   }
 
