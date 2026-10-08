@@ -678,6 +678,31 @@
   #tane .pair .ph+.ph { margin-top:0; }
   #tane .pair figcaption { grid-column:1/-1; }
   @media (max-width:900px){ .pair-grid { grid-template-columns:1fr; } .pair { display:grid;grid-template-columns:1fr 1fr;gap:6px; } .pair .ph+.ph { margin-top:0; } .pair figcaption { grid-column:1/-1; } }
+
+  /* seminar-links v1: セミナー欄のリンクは行き先を名乗る */
+  #media-seminar .col-item{cursor:default;}
+  #media-seminar .go.lks{display:flex;flex-direction:column;align-items:flex-end;gap:6px;}
+  #media-seminar .lk{display:inline-flex;align-items:center;gap:6px;padding:7px 11px;border:1.5px solid var(--bk);border-radius:999px;font-size:12px;font-weight:900;letter-spacing:.04em;color:var(--bk);text-decoration:none;white-space:nowrap;line-height:1;transition:background .15s,color .15s;}
+  #media-seminar .lk:hover{background:var(--bk);color:#fff;}
+  #media-seminar .lk .k{font-size:10px;letter-spacing:.12em;opacity:.65;}
+  #media-seminar .lk .ar{font-family:var(--cond);font-weight:900;font-size:14px;}
+  #media-seminar .soon{font-family:var(--cond);font-weight:900;font-size:16px;letter-spacing:.14em;color:var(--gy);}
+  #media-seminar .soon:empty{display:none;}
+  @media(max-width:600px){
+    #media-seminar .thumbs .col-item .go.lks{display:flex;grid-column:2;flex-direction:row;flex-wrap:wrap;align-items:center;justify-content:flex-start;gap:6px;margin-top:6px;}
+    #media-seminar .lk{font-size:11px;padding:6px 10px;}
+    #media-seminar .soon{font-size:13px;}
+  }
+
+  /* media-fold v1: MEDIAの目次と「もっと見る」 */
+  .media-jump{display:flex;flex-wrap:wrap;gap:8px;margin-top:clamp(28px,4vw,48px);}
+  .media-jump button{font-family:inherit;cursor:pointer;display:inline-flex;align-items:center;gap:8px;padding:9px 14px;border:1.5px solid var(--bk);border-radius:999px;font-size:13px;font-weight:900;letter-spacing:.04em;color:var(--bk);text-decoration:none;background:#fff;}
+  .media-jump button:hover{background:var(--bk);color:#fff;}
+  .media-jump b{font-family:var(--cond);font-size:15px;font-weight:900;opacity:.6;}
+  .col-item.fold-hide{display:none!important;}
+  #view-media section[id]{scroll-margin-top:96px;}
+  .fold-btn{display:block;width:100%;margin-top:14px;padding:14px;border:1.5px solid var(--bk);background:#fff;color:var(--bk);font:inherit;font-size:14px;font-weight:900;letter-spacing:.06em;cursor:pointer;}
+  .fold-btn:hover{background:var(--bk);color:#fff;}
 </style>
 
 <header class="hd" id="hd">
@@ -1441,7 +1466,7 @@
   <div class="two" style="margin-top:clamp(28px,4vw,56px)">
     <div class="fade">
       <div class="sem-facts">
-        <div><b>27</b><span>講演・セミナーの登壇（回・2018年〜）</span></div>
+        <div><b>29</b><span>講演・セミナーの登壇（回・2018年〜）</span></div>
         <div><b>6</b><span>相続診断士会での登壇（回）</span></div>
         <div><b>5</b><span>自治体・JAからの依頼（回）</span></div>
       </div>
@@ -1657,18 +1682,22 @@
     </div>
   </div>
 </section>
-<section class="wrap sec-gap">
+<nav class="wrap media-jump" aria-label="MEDIAの目次"><button type="button" data-t="media-seminar">セミナー登壇<b></b></button><button type="button" data-t="media-tv">テレビ<b></b></button><button type="button" data-t="media-paper">新聞・雑誌<b></b></button><button type="button" data-t="media-web">Web記事<b></b></button><button type="button" data-t="media-guest">番組・対談<b></b></button><button type="button" data-t="media-press">プレスリリース<b></b></button></nav>
+<section class="wrap sec-gap" id="media-tv">
   <div class="cond sub">TV</div>
   <h2 class="cond ttl" style="font-size:min(clamp(40px,6.4vw,84px),calc(84vw / 5));white-space:nowrap">テレビ出演</h2>
   <div class="col-list thumbs">
+    <a class="col-item" href="https://www.instagram.com/p/DWVmNlNiRr6/" target="_blank" rel="noopener"><div class="th tile"><span>噂の東京マガジン</span></div><div class="d">2026.04</div><div><h4>噂の東京マガジン（TBS）｜終活スナック「めめんともり」で取材</h4><p>菊池あかりが、終活への想いと「おうち終活ノート」について取材を受けました。</p></div><div class="go">READ →</div></a>
     <a class="col-item" href="https://ohanahome.jp/?p=1199" target="_blank" rel="noopener"><div class="th"><img src="img/m/x_mezamashi8.jpg" alt="" loading="lazy" decoding="async"></div><div class="d">2024.12.06</div><div><h4>めざまし8（フジテレビ）｜【深刻】5人に1人が後期高齢者になる「2025年問題」</h4><p>空き家の専門家として出演。私たちの生活への影響を解説。</p></div><div class="go">READ →</div></a>
     <a class="col-item" href="https://www.youtube.com/watch?v=aVRw4Qxj0bg" target="_blank" rel="noopener"><div class="th"><img src="img/m/m_01.jpg" alt="" loading="lazy" decoding="async"></div><div class="d">2024.05.07</div><div><h4>よんチャンTV（毎日放送）｜【過去最多900万戸】空き家の理由1位は「物置として必要だから」</h4><p>代表・菊池聖雄が空き家の専門家として出演。YouTubeでの再生は159万回を超えています（2026年10月時点）。</p></div><div class="go">WATCH →</div></a>
   </div>
 </section>
-<section class="wrap sec-gap">
+<section class="wrap sec-gap" id="media-paper">
   <div class="cond sub">NEWSPAPER · MAGAZINE</div>
   <h2 class="cond ttl" style="font-size:min(clamp(40px,6.4vw,84px),calc(84vw / 5));white-space:nowrap">新聞・雑誌</h2>
   <div class="col-list thumbs">
+    <a class="col-item" href="https://www.instagram.com/p/Dd3DImwpqQN/" target="_blank" rel="noopener"><div class="th tile"><span>リフォーム産業新聞</span></div><div class="d">2026.09.28</div><div><h4>リフォーム産業新聞｜八街市との空き家対策協定と「あきやフリースクール たね」</h4><p>登壇後の取り組みとして、八街市との協定と、空き家を再生して生まれたフリースクール「たね」を紹介いただきました。</p></div><div class="go">READ →</div></a>
+    <a class="col-item" href="https://www.instagram.com/p/Dc2xWl6if_F/" target="_blank" rel="noopener"><div class="th tile"><span>MANAGEMENT SQUARE</span></div><div class="d">2026.09</div><div><h4>MANAGEMENT SQUARE 2026年9月号（ちばぎん総合研究所）｜インタビュー掲載</h4><p>菊池聖雄・菊池あかりが、空き家再生への想いと地域とのつながりについて話しました。</p></div><div class="go">READ →</div></a>
     <a class="col-item" href="https://www.chibanippo.co.jp/articles/1619974" target="_blank" rel="noopener"><div class="th"><img src="img/m/m_02.jpg" alt="" loading="lazy" decoding="async"></div><div class="d">2026.05.27</div><div><h4>千葉日報オンライン｜空き家予防と解決、両輪で　八街市が2者と協定</h4><p>八街市・空き家再生協会・オハナホームの協定を、地元紙が報道。</p></div><div class="go">READ →</div></a>
     <a class="col-item" href="https://note.com/chibakei/n/n2bf4b75c8957" target="_blank" rel="noopener"><div class="th"><img src="img/m/m_03.jpg" alt="" loading="lazy" decoding="async"></div><div class="d">2026.05.15</div><div><h4>ちば経済産業新聞｜空き家を「誰かの居場所」に変える夫婦の挑戦</h4><p>年間30〜40棟の空き家を再生し続ける、夫婦二人三脚の会社運営を取材。</p></div><div class="go">READ →</div></a>
     <a class="col-item" href="https://www.jutaku-s.com/newsp/id/0000066530" target="_blank" rel="noopener"><div class="th tile"><span>住宅新報web</span></div><div class="d">2026.04.28</div><div><h4>住宅新報web｜空き家対策の実務推進で団体、地元業者と協定　千葉県八街市</h4><p>業界紙の報道（本文は会員限定）。</p></div><div class="go">READ →</div></a>
@@ -1681,7 +1710,7 @@
     <div class="col-item is-static"><div class="th tile"><span>朝日新聞</span></div><div class="d">2020.01.18</div><div><h4>朝日新聞｜掲載</h4><p>全国紙の朝日新聞に掲載。</p></div><div class="go"></div></div>
   </div>
 </section>
-<section class="wrap sec-gap">
+<section class="wrap sec-gap" id="media-web">
   <div class="cond sub">WEB</div>
   <h2 class="cond ttl" style="font-size:min(clamp(40px,6.4vw,84px),calc(84vw / 5));white-space:nowrap">Web記事</h2>
   <p class="body-txt" style="margin-top:18px">2021年以前の記事は、会社設立前に個人投資家「ピーナッツ大家」「ナース大家さん」として受けた取材です。</p>
@@ -1713,7 +1742,7 @@
   </div>
 
 </section>
-<section class="wrap sec-gap">
+<section class="wrap sec-gap" id="media-guest">
   <div class="cond sub">GUEST APPEARANCE</div>
   <h2 class="cond ttl" style="font-size:min(clamp(40px,6.4vw,84px),calc(84vw / 9));white-space:nowrap">番組・対談への出演</h2>
   <div class="col-list thumbs">
@@ -1721,7 +1750,7 @@
     <a class="col-item" href="https://www.youtube.com/watch?v=YdZGXeD2spA" target="_blank" rel="noopener"><div class="th"><img src="img/m/m_21.jpg" alt="" loading="lazy" decoding="async"></div><div class="d">2025.04.19</div><div><h4>鳥越アズーリFM｜小野友葵子の Bella Serata!　ゲスト：菊池聖雄、菊池あかり</h4><p>ラジオ番組に夫婦で出演。YouTubeでアーカイブを公開中。</p></div><div class="go">WATCH →</div></a>
   </div>
 </section>
-<section class="wrap sec-gap">
+<section class="wrap sec-gap" id="media-press">
   <div class="cond sub">PRESS RELEASE</div>
   <h2 class="cond ttl" style="font-size:min(clamp(40px,6.4vw,84px),calc(84vw / 7));white-space:nowrap">プレスリリース</h2>
   <div class="col-list thumbs">
@@ -1744,32 +1773,33 @@
     <div class="col-item is-static"><div class="th tile"><span>白井市 民生委員</span></div><div class="d">2026.11.17</div><div><h4>白井市 民生委員｜民生委員向けセミナー</h4><p>千葉県白井市にて。菊池聖雄・菊池あかりが登壇します。</p></div><div class="go" data-until="2026-11-18">開催予定</div></div>
     <div class="col-item is-static"><div class="th tile"><span>JAあいら伊豆</span></div><div class="d">2026.11.03</div><div><h4>JAあいら伊豆｜終活・空き家セミナー</h4><p>静岡県にて、JA組合員向け。菊池聖雄が登壇します。</p></div><div class="go" data-until="2026-11-04">開催予定</div></div>
     <div class="col-item is-static"><div class="th tile"><span>八街市</span></div><div class="d">2026.10.31</div><div><h4>八街市｜第2回 空き家セミナー＆相談会</h4><p>千葉県八街市にて、市民向け。菊池聖雄・菊池あかりが登壇します。</p></div><div class="go" data-until="2026-11-01">開催予定</div></div>
-    <a class="col-item" href="https://akiyasaisei.jp/akiyasaisei-reception-2026/" target="_blank" rel="noopener"><div class="th tile"><span>一般社団法人空き家再生協会</span></div><div class="d">2026.10.21</div><div><h4>一般社団法人空き家再生協会｜全国交流レセプション2026 代表講演</h4><p>東京・虎ノ門（官民共創HUB）にて、全国の空き家再生士向け。菊池聖雄が登壇します。</p></div><div class="go" data-until="2026-10-22">開催予定</div></a>
-    <div class="col-item is-static"><div class="th tile"><span>JA伊豆</span></div><div class="d">2026.10.16</div><div><h4>JA伊豆｜終活・空き家セミナー</h4><p>静岡県にて、JA組合員向け。菊池聖雄が登壇します。</p></div><div class="go" data-until="2026-10-17">開催予定</div></div>
-    <a class="col-item" href="https://www.instagram.com/p/DeK6nB4gZWb/" target="_blank" rel="noopener"><div class="th tile"><span>JPSA千葉支部</span></div><div class="d">2026.10.13</div><div><h4>JPSA千葉支部｜10月定例会「部下を変えたかった私がはじめに変えたもの」</h4><p>千葉県船橋市にて。菊池あかりが登壇します。</p></div><div class="go" data-until="2026-10-14">開催予定</div></a>
-    <a class="col-item" href="/seminar/"><div class="th"><img src="img/m/m_31.jpg" alt="" loading="lazy" decoding="async"></div><div class="d">2026.07.25</div><div><h4>第1回 八街市 空き家相談会＆セミナー</h4><p>八街市との協定にもとづく、市民向けの相談会とセミナー。菊池聖雄・菊池あかりが登壇。</p></div><div class="go">SEMINAR →</div></a>
-    <a class="col-item" href="https://www.instagram.com/p/DYTtAvGiaic/" target="_blank" rel="noopener"><div class="th"><img src="img/m/ev_20260516.jpg" alt="" loading="lazy" decoding="async"></div><div class="d">2026.05.16</div><div><h4>アイダ設計｜終活と空き家対策セミナー（第2回）</h4><p>アイダ設計 八千代モデル店にて、菊池あかりが登壇。「おうち終活から考える後悔しない相続と住まいの整理術」。</p></div><div class="go">READ →</div></a>
+    <div class="col-item"><div class="th tile"><span>一般社団法人空き家再生協会</span></div><div class="d">2026.10.21</div><div><h4><a href="https://akiyasaisei.jp/akiyasaisei-reception-2026/" target="_blank" rel="noopener">一般社団法人空き家再生協会｜全国交流レセプション2026 代表講演</a></h4><p>東京・虎ノ門（官民共創HUB）にて、全国の空き家再生士向け。菊池聖雄が登壇します。</p></div><div class="go lks"><span class="soon" data-until="2026-10-22">開催予定</span><a class="lk web" href="https://akiyasaisei.jp/akiyasaisei-reception-2026/" target="_blank" rel="noopener"><span class="k">告知</span>協会サイト<span class="ar">→</span></a></div></div>
+    <div class="col-item"><div class="th tile"><span>JPSA千葉支部</span></div><div class="d">2026.10.13</div><div><h4><a href="https://www.instagram.com/p/DeK6nB4gZWb/" target="_blank" rel="noopener">JPSA千葉支部｜10月定例会「部下を変えたかった私がはじめに変えたもの」</a></h4><p>千葉県船橋市にて。菊池あかりが登壇します。</p></div><div class="go lks"><span class="soon" data-until="2026-10-14">開催予定</span><a class="lk ig" href="https://www.instagram.com/p/DeK6nB4gZWb/" target="_blank" rel="noopener"><span class="k">告知</span>Instagram<span class="ar">→</span></a></div></div>
+    <div class="col-item"><div class="th"><img src="img/m/ev_20260730.jpg" alt="" loading="lazy" decoding="async"></div><div class="d">2026.07.30</div><div><h4><a href="https://the-bars.com/seminar/2026-r1-0730-1310/" target="_blank" rel="noopener">リフォーム産業フェア2026｜戸建ての買取再販入門編！「ボロボロ中古」を利益を生み出す商品に変える成功と失敗の分かれ道</a></h4><p>リフォーム産業新聞社主催、東京ビッグサイトにて。まいほむ 牧野智樹さん、JR西日本イノベーションズ 森一也さんとの座談会に菊池聖雄が登壇。</p></div><div class="go lks"><a class="lk web" href="https://the-bars.com/seminar/2026-r1-0730-1310/" target="_blank" rel="noopener"><span class="k">告知</span>リフォーム産業フェア<span class="ar">→</span></a><a class="lk ig" href="https://www.instagram.com/p/DcaqpiMpwLa/" target="_blank" rel="noopener"><span class="k">報告</span>Instagram<span class="ar">→</span></a></div></div>
+    <div class="col-item"><div class="th"><img src="img/m/m_31.jpg" alt="" loading="lazy" decoding="async"></div><div class="d">2026.07.25</div><div><h4><a href="/seminar/">第1回 八街市 空き家相談会＆セミナー</a></h4><p>八街市との協定にもとづく、市民向けの相談会とセミナー。菊池聖雄・菊池あかりが登壇。</p></div><div class="go lks"><a class="lk in" href="/seminar/"><span class="k">詳細</span>SEMINAR<span class="ar">→</span></a><a class="lk ig" href="https://www.instagram.com/p/Day7dKBJrYy/" target="_blank" rel="noopener"><span class="k">告知</span>Instagram<span class="ar">→</span></a></div></div>
+    <div class="col-item"><div class="th"><img src="img/m/ev_20260516.jpg" alt="" loading="lazy" decoding="async"></div><div class="d">2026.05.16</div><div><h4><a href="https://www.instagram.com/p/DYTtAvGiaic/" target="_blank" rel="noopener">アイダ設計｜終活と空き家対策セミナー（第2回）</a></h4><p>アイダ設計 八千代モデル店にて、菊池あかりが登壇。「おうち終活から考える後悔しない相続と住まいの整理術」。</p></div><div class="go lks"><a class="lk ig" href="https://www.instagram.com/p/DYTtAvGiaic/" target="_blank" rel="noopener"><span class="k">投稿</span>Instagram<span class="ar">→</span></a></div></div>
     <div class="col-item is-static"><div class="th tile"><span>芝浦美食会</span></div><div class="d">2026.04.27</div><div><h4>芝浦美食会｜セミナー講師</h4><p>菊池聖雄が登壇。</p></div><div class="go"></div></div>
     <div class="col-item is-static"><div class="th"><img src="img/m/ev_20260425.jpg" alt="" loading="lazy" decoding="async"></div><div class="d">2026.04.25</div><div><h4>毎日新聞社｜毎日新聞本社セミナー</h4><p>東京・一ツ橋の毎日新聞本社にて。菊池聖雄・菊池あかりが登壇。</p></div><div class="go"></div></div>
-    <a class="col-item" href="/seminar/"><div class="th"><img src="img/m/m_32.jpg" alt="" loading="lazy" decoding="async"></div><div class="d">2026.02.28</div><div><h4>つくば｜終活セミナー（講師：菊池あかり）</h4><p>おうち終活ノートの書き方講座。</p></div><div class="go">SEMINAR →</div></a>
-    <a class="col-item" href="https://www.instagram.com/reel/DVAlOe8kbJo/" target="_blank" rel="noopener"><div class="th"><img src="img/m/ev_20260221.jpg" alt="" loading="lazy" decoding="async"></div><div class="d">2026.02.21</div><div><h4>アイダ設計｜「空き家と終活」セミナー</h4><p>アイダ設計本社にて、菊池あかりが登壇。参加者のみなさまに「おうち終活ノート」をお持ち帰りいただきました。</p></div><div class="go">WATCH →</div></a>
+    <div class="col-item"><div class="th"><img src="img/m/m_32.jpg" alt="" loading="lazy" decoding="async"></div><div class="d">2026.02.28</div><div><h4><a href="/seminar/">つくば｜終活セミナー（講師：菊池あかり）</a></h4><p>おうち終活ノートの書き方講座。</p></div><div class="go lks"><a class="lk in" href="/seminar/"><span class="k">詳細</span>SEMINAR<span class="ar">→</span></a></div></div>
+    <div class="col-item"><div class="th"><img src="img/m/ev_20260221.jpg" alt="" loading="lazy" decoding="async"></div><div class="d">2026.02.21</div><div><h4><a href="https://www.instagram.com/reel/DVAlOe8kbJo/" target="_blank" rel="noopener">アイダ設計｜「空き家と終活」セミナー</a></h4><p>アイダ設計本社にて、菊池あかりが登壇。参加者のみなさまに「おうち終活ノート」をお持ち帰りいただきました。</p></div><div class="go lks"><a class="lk ig" href="https://www.instagram.com/reel/DVAlOe8kbJo/" target="_blank" rel="noopener"><span class="k">投稿</span>Instagram<span class="ar">→</span></a></div></div>
     <div class="col-item is-static"><div class="th"><img src="img/m/m_33.jpg" alt="" loading="lazy" decoding="async"></div><div class="d">2025.12.05</div><div><h4>納骨堂 了聞｜住まいの終活</h4><p>人生後半の住まいを考える終活セミナー。菊池聖雄・菊池あかりが登壇。参加20名。</p></div><div class="go"></div></div>
-    <a class="col-item" href="https://akiyasaisei.jp/?p=1210" target="_blank" rel="noopener"><div class="th"><img src="img/m/x_taipei.jpg" alt="" loading="lazy" decoding="async"></div><div class="d">2025.11.22</div><div><h4>OPEN HOUSE TAIPEI（打開台北）｜台湾・台北の国際建築イベントに出展</h4><p>世界50都市以上で開かれる「OPEN HOUSE WORLDWIDE」の台北版に、空き家再生協会として出展。</p></div><div class="go">READ →</div></a>
+    <div class="col-item"><div class="th"><img src="img/m/x_taipei.jpg" alt="" loading="lazy" decoding="async"></div><div class="d">2025.11.22</div><div><h4><a href="https://akiyasaisei.jp/?p=1210" target="_blank" rel="noopener">OPEN HOUSE TAIPEI（打開台北）｜台湾・台北の国際建築イベントに出展</a></h4><p>世界50都市以上で開かれる「OPEN HOUSE WORLDWIDE」の台北版に、空き家再生協会として出展。</p></div><div class="go lks"><a class="lk web" href="https://akiyasaisei.jp/?p=1210" target="_blank" rel="noopener"><span class="k">記事</span>協会サイト<span class="ar">→</span></a></div></div>
     <div class="col-item is-static"><div class="th tile"><span>JPSA 千葉支部</span></div><div class="d">2025.10.27</div><div><h4>JPSA 千葉支部｜支部会で講演</h4><p>菊池聖雄が登壇。</p></div><div class="go"></div></div>
-    <a class="col-item" href="https://ohanahome.jp/%E3%82%A8%E3%83%B3%E3%83%87%E3%82%A3%E3%83%B3%E3%82%B0%E7%94%A3%E6%A5%AD%E5%B1%952025%E3%81%AB%E3%81%A6%E8%AC%9B%E6%BC%94%E3%82%92%E8%A1%8C%E3%81%84%E3%81%BE%E3%81%97%E3%81%9F/" target="_blank" rel="noopener"><div class="th"><img src="img/m/m_34.jpg" alt="" loading="lazy" decoding="async"></div><div class="d">2025.09.10</div><div><h4>エンディング産業展2025｜終活をきっかけに創りだす紹介・信頼・顧客と収益が増えていく好循環の仕組みづくり</h4><p>主催：東京博善。菊池聖雄・菊池あかりが登壇。参加60名。</p></div><div class="go">READ →</div></a>
-    <a class="col-item" href="https://prtimes.jp/main/html/rd/p/000000005.000166247.html" target="_blank" rel="noopener"><div class="th"><img src="img/m/x_matsudo25.jpg" alt="" loading="lazy" decoding="async"></div><div class="d">2025.07.26</div><div><h4>松戸市公認講座｜おうちじまい®から考える 空き家と相続セミナー in 松戸</h4><p>一般市民向け。菊池聖雄・菊池あかりが登壇。</p></div><div class="go">READ →</div></a>
+    <div class="col-item"><div class="th"><img src="img/m/m_34.jpg" alt="" loading="lazy" decoding="async"></div><div class="d">2025.09.10</div><div><h4><a href="https://ohanahome.jp/%E3%82%A8%E3%83%B3%E3%83%87%E3%82%A3%E3%83%B3%E3%82%B0%E7%94%A3%E6%A5%AD%E5%B1%952025%E3%81%AB%E3%81%A6%E8%AC%9B%E6%BC%94%E3%82%92%E8%A1%8C%E3%81%84%E3%81%BE%E3%81%97%E3%81%9F/" target="_blank" rel="noopener">エンディング産業展2025｜終活をきっかけに創りだす紹介・信頼・顧客と収益が増えていく好循環の仕組みづくり</a></h4><p>主催：東京博善。菊池聖雄・菊池あかりが登壇。参加60名。</p></div><div class="go lks"><a class="lk web" href="https://ohanahome.jp/%E3%82%A8%E3%83%B3%E3%83%87%E3%82%A3%E3%83%B3%E3%82%B0%E7%94%A3%E6%A5%AD%E5%B1%952025%E3%81%AB%E3%81%A6%E8%AC%9B%E6%BC%94%E3%82%92%E8%A1%8C%E3%81%84%E3%81%BE%E3%81%97%E3%81%9F/" target="_blank" rel="noopener"><span class="k">記事</span>公式ブログ<span class="ar">→</span></a><a class="lk ig" href="https://www.instagram.com/p/DPDsGUsCXMh/" target="_blank" rel="noopener"><span class="k">報告</span>Instagram<span class="ar">→</span></a></div></div>
+    <div class="col-item"><div class="th"><img src="img/m/x_matsudo25.jpg" alt="" loading="lazy" decoding="async"></div><div class="d">2025.07.26</div><div><h4><a href="https://prtimes.jp/main/html/rd/p/000000005.000166247.html" target="_blank" rel="noopener">松戸市公認講座｜おうちじまい®から考える 空き家と相続セミナー in 松戸</a></h4><p>一般市民向け。菊池聖雄・菊池あかりが登壇。</p></div><div class="go lks"><a class="lk web" href="https://prtimes.jp/main/html/rd/p/000000005.000166247.html" target="_blank" rel="noopener"><span class="k">記事</span>PR TIMES<span class="ar">→</span></a></div></div>
     <div class="col-item is-static"><div class="th tile"><span>證大寺</span></div><div class="d">2025.07.11</div><div><h4>證大寺｜終活セミナー</h4><p>菊池聖雄・菊池あかりが登壇。</p></div><div class="go"></div></div>
-    <a class="col-item" href="https://ohanahome.jp/%e3%83%95%e3%83%a5%e3%83%bc%e3%83%8d%e3%83%a9%e3%83%ab%e3%83%93%e3%82%b8%e3%83%8d%e3%82%b9%e3%83%95%e3%82%a7%e3%82%a22025%e3%81%ab%e5%87%ba%e5%b1%95%e3%81%97%e3%81%be%e3%81%97%e3%81%9f%ef%bc%81/" target="_blank" rel="noopener"><div class="th"><img src="img/m/ev_20250604.jpg" alt="" loading="lazy" decoding="async"></div><div class="d">2025.06.04</div><div><h4>フューネラルビジネスフェア｜葬儀後のご遺族サポート『おうちじまい』支援で手間なく不動産ビジネス参入！</h4><p>葬送事業者向け。菊池聖雄・菊池あかりが登壇。参加80名。</p></div><div class="go">READ →</div></a>
-    <div class="col-item is-static"><div class="th tile"><span>JP税務戦略研究会</span></div><div class="d">2025.05.23</div><div><h4>JP税務戦略研究会｜空き家対策特別措置法と相続登記義務化</h4><p>税理士向けのオンラインセミナー。菊池聖雄が登壇。</p></div><div class="go"></div></div>
+    <div class="col-item"><div class="th"><img src="img/m/ev_20250604.jpg" alt="" loading="lazy" decoding="async"></div><div class="d">2025.06.04</div><div><h4><a href="https://ohanahome.jp/%e3%83%95%e3%83%a5%e3%83%bc%e3%83%8d%e3%83%a9%e3%83%ab%e3%83%93%e3%82%b8%e3%83%8d%e3%82%b9%e3%83%95%e3%82%a7%e3%82%a22025%e3%81%ab%e5%87%ba%e5%b1%95%e3%81%97%e3%81%be%e3%81%97%e3%81%9f%ef%bc%81/" target="_blank" rel="noopener">フューネラルビジネスフェア｜葬儀後のご遺族サポート『おうちじまい』支援で手間なく不動産ビジネス参入！</a></h4><p>葬送事業者向け。菊池聖雄・菊池あかりが登壇。参加80名。</p></div><div class="go lks"><a class="lk web" href="https://ohanahome.jp/%e3%83%95%e3%83%a5%e3%83%bc%e3%83%8d%e3%83%a9%e3%83%ab%e3%83%93%e3%82%b8%e3%83%8d%e3%82%b9%e3%83%95%e3%82%a7%e3%82%a22025%e3%81%ab%e5%87%ba%e5%b1%95%e3%81%97%e3%81%be%e3%81%97%e3%81%9f%ef%bc%81/" target="_blank" rel="noopener"><span class="k">記事</span>公式ブログ<span class="ar">→</span></a></div></div>
+    <div class="col-item is-static"><div class="th tile"><span>JP税務戦略研究会</span></div><div class="d">2025.05.23</div><div><h4>JP税務戦略研究会｜空き家対策特別措置法と相続登記義務化〜税理士が知っておくべき空き家の現状と解決策〜</h4><p>税理士向けのZoomセミナー。菊池聖雄が登壇。</p></div><div class="go"></div></div>
     <div class="col-item is-static"><div class="th"><img src="img/m/ev_20250221.jpg" alt="" loading="lazy" decoding="async"></div><div class="d">2025.02.21</div><div><h4>證大寺 船橋昭和浄苑｜しょうだいじさん終活セミナー</h4><p>檀家さん・一般の方向け。菊池聖雄・菊池あかりが登壇。</p></div><div class="go"></div></div>
-    <a class="col-item" href="/seminar/"><div class="th"><img src="img/m/ev_20241211.jpg" alt="" loading="lazy" decoding="async"></div><div class="d">2024.12.11</div><div><h4>八街市いきがい短期大学｜終活講座（講師：菊池あかり）</h4><p>自治体の生涯学習の場で、終活と住まいの整理を。</p></div><div class="go">SEMINAR →</div></a>
+    <div class="col-item"><div class="th"><img src="img/m/ev_20241211.jpg" alt="" loading="lazy" decoding="async"></div><div class="d">2024.12.11</div><div><h4><a href="/seminar/">八街市いきがい短期大学｜終活講座（講師：菊池あかり）</a></h4><p>自治体の生涯学習の場で、終活と住まいの整理を。</p></div><div class="go lks"><a class="lk in" href="/seminar/"><span class="k">詳細</span>SEMINAR<span class="ar">→</span></a></div></div>
     <div class="col-item is-static"><div class="th tile"><span>JA新潟十日町</span></div><div class="d">2024.08.18</div><div><h4>JA新潟十日町｜大切な我が家が空き家にならないための「終活セミナー」</h4><p>JA組合員向け。菊池聖雄が登壇。参加40名。</p></div><div class="go"></div></div>
     <div class="col-item is-static"><div class="th tile"><span>松戸市 市役所パートナー講座</span></div><div class="d">2024.07.26</div><div><h4>松戸市 市役所パートナー講座｜おうち終活セミナー in 松戸</h4><p>一般市民向け。菊池聖雄・菊池あかりが登壇。参加20名。</p></div><div class="go"></div></div>
-    <a class="col-item" href="https://www.keiyogas.co.jp/service/senior/pdf/seminar.pdf" target="_blank" rel="noopener"><div class="th tile"><span>第一生命×京葉ガス コラボ企画 </span></div><div class="d">2023.02.08</div><div><h4>第一生命×京葉ガス コラボ企画 オンラインセミナー</h4><p>空き家対策セミナー「親世代も子世代も必見! 我が家を『空き家問題』から守る特効薬」参加40名。</p></div><div class="go">PDF →</div></a>
-    <a class="col-item" href="https://www.youtube.com/watch?v=UeMl1pGer-E" target="_blank" rel="noopener"><div class="th"><img src="img/m/m_35.jpg" alt="" loading="lazy" decoding="async"></div><div class="d">2022.09.01</div><div><h4>エンディング産業展｜空き家再生のプロ「空き家再生士」が伝える、困った空き家予防と対策方法</h4><p>展示会のセミナー枠で登壇。参加80名。ダイジェスト動画あり。</p></div><div class="go">WATCH →</div></a>
-    <a class="col-item" href="/seminar/"><div class="th tile"><span>第43回 新潟県相続診断士会</span></div><div class="d">2022.07.12</div><div><h4>第43回 新潟県相続診断士会</h4><p>新潟ユニゾンプラザにて。相続と空き家の実務を共有。</p></div><div class="go">SEMINAR →</div></a>
+    <div class="col-item"><div class="th tile"><span>エンディング産業展2023</span></div><div class="d">2023.08.30</div><div><h4><a href="https://ohanahome.jp/%e3%83%93%e3%83%83%e3%82%b0%e3%82%b5%e3%82%a4%e3%83%88%e3%82%bb%e3%83%9f%e3%83%8a%e3%83%bc%e3%81%af%e6%ba%80%e5%93%a1%e5%be%a1%e7%a4%bc%e3%81%a7%e3%81%97%e3%81%9f%e3%80%82/" target="_blank" rel="noopener">エンディング産業展2023｜空き家は困るが役に立つ！〜終活から始める空き家対策〜</a></h4><p>東京ビッグサイトにて、菊池聖雄が登壇。定員60名に立ち見を含め70名超が参加し、参加者に「おうち終活ノート」をお渡ししました。</p></div><div class="go lks"><a class="lk web" href="https://ohanahome.jp/8-30%e3%82%a8%e3%83%b3%e3%83%87%e3%82%a3%e3%83%b3%e3%82%b0%e7%94%a3%e6%a5%ad%e5%b1%95%e3%81%a7%e7%a9%ba%e3%81%8d%e5%ae%b6%e3%81%ae%e3%82%bb%e3%83%9f%e3%83%8a%e3%83%bc%e3%82%92%e8%a1%8c%e3%82%8f/" target="_blank" rel="noopener"><span class="k">告知</span>公式ブログ<span class="ar">→</span></a><a class="lk web" href="https://ohanahome.jp/%e3%83%93%e3%83%83%e3%82%b0%e3%82%b5%e3%82%a4%e3%83%88%e3%82%bb%e3%83%9f%e3%83%8a%e3%83%bc%e3%81%af%e6%ba%80%e5%93%a1%e5%be%a1%e7%a4%bc%e3%81%a7%e3%81%97%e3%81%9f%e3%80%82/" target="_blank" rel="noopener"><span class="k">報告</span>公式ブログ<span class="ar">→</span></a></div></div>
+    <div class="col-item"><div class="th tile"><span>第一生命×京葉ガス コラボ企画 </span></div><div class="d">2023.02.08</div><div><h4><a href="https://www.keiyogas.co.jp/service/senior/pdf/seminar.pdf" target="_blank" rel="noopener">第一生命×京葉ガス コラボ企画 オンラインセミナー</a></h4><p>空き家対策セミナー「親世代も子世代も必見! 我が家を『空き家問題』から守る特効薬」参加40名。</p></div><div class="go lks"><a class="lk web" href="https://www.keiyogas.co.jp/service/senior/pdf/seminar.pdf" target="_blank" rel="noopener"><span class="k">資料</span>京葉ガス<span class="ar">→</span></a></div></div>
+    <div class="col-item"><div class="th"><img src="img/m/m_35.jpg" alt="" loading="lazy" decoding="async"></div><div class="d">2022.09.01</div><div><h4><a href="https://www.youtube.com/watch?v=UeMl1pGer-E" target="_blank" rel="noopener">エンディング産業展｜空き家再生のプロ「空き家再生士」が伝える、困った空き家予防と対策方法</a></h4><p>展示会のセミナー枠で登壇。参加80名。ダイジェスト動画あり。</p></div><div class="go lks"><a class="lk yt" href="https://www.youtube.com/watch?v=UeMl1pGer-E" target="_blank" rel="noopener"><span class="k">動画</span>YouTube<span class="ar">→</span></a></div></div>
+    <div class="col-item"><div class="th tile"><span>第43回 新潟県相続診断士会</span></div><div class="d">2022.07.12</div><div><h4><a href="/seminar/">第43回 新潟県相続診断士会</a></h4><p>新潟ユニゾンプラザにて。相続と空き家の実務を共有。</p></div><div class="go lks"><a class="lk in" href="/seminar/"><span class="k">詳細</span>SEMINAR<span class="ar">→</span></a></div></div>
     <div class="col-item is-static"><div class="th tile"><span>静岡県相続診断士会</span></div><div class="d">2021.10.26</div><div><h4>静岡県相続診断士会｜「空き家の相談が来たらどうする？」</h4><p>相続診断士向け。菊池聖雄が登壇。参加40名。</p></div><div class="go"></div></div>
-    <a class="col-item" href="/seminar/"><div class="th"><img src="img/m/ev_20210420.jpg" alt="" loading="lazy" decoding="async"></div><div class="d">2021.04.20</div><div><h4>第30回 三重県相続診断士会</h4><p>オンライン（Zoom）にて登壇。</p></div><div class="go">SEMINAR →</div></a>
+    <div class="col-item"><div class="th"><img src="img/m/ev_20210420.jpg" alt="" loading="lazy" decoding="async"></div><div class="d">2021.04.20</div><div><h4><a href="/seminar/">第30回 三重県相続診断士会</a></h4><p>オンライン（Zoom）にて登壇。</p></div><div class="go lks"><a class="lk in" href="/seminar/"><span class="k">詳細</span>SEMINAR<span class="ar">→</span></a></div></div>
     <div class="col-item is-static"><div class="th tile"><span>多摩相続診断士会</span></div><div class="d">2021.02.08</div><div><h4>多摩相続診断士会｜相続診断士が空き家を発生させないためのいろは</h4><p>相続診断士向けのオンラインセミナー。菊池聖雄が登壇。参加30名。</p></div><div class="go"></div></div>
     <div class="col-item is-static"><div class="th tile"><span>笑顔相続アカデミー</span></div><div class="d">2020.06.25</div><div><h4>笑顔相続アカデミー｜「尊厳死ってなに？」</h4><p>相続の実務者向けオンライン講座。看護師の経験をもとに菊池あかりが講師を務めました。</p></div><div class="go"></div></div>
     <div class="col-item is-static"><div class="th tile"><span>笑顔相続アカデミー</span></div><div class="d">2020.06.07</div><div><h4>笑顔相続アカデミー｜「どこで？（看取りについて）」</h4><p>相続の実務者向けオンライン講座。看護師の経験をもとに菊池あかりが講師を務めました。</p></div><div class="go"></div></div>
@@ -2335,12 +2365,42 @@
     if(!mq.matches) return;
     document.querySelectorAll('.wr-list').forEach(function(l){ foldList(l,6,'残り{n}件を見る'); });
     document.querySelectorAll('[data-until]').forEach(function(g){ if(new Date()>=new Date(g.getAttribute('data-until')+'T00:00:00+09:00')) g.textContent=''; });
-    document.querySelectorAll('.col-list').forEach(function(l){ foldList(l,4,'ほか{n}件を見る'); });
+    document.querySelectorAll('.col-list').forEach(function(l){ if(!l.closest('#view-media')) foldList(l,4,'ほか{n}件を見る'); });
     document.querySelectorAll('.person .body-txt, #view-seminar .two>.body-txt').forEach(clampText);
   }
   apply();
   window.addEventListener('routechange',function(){ setTimeout(apply,60); });
   if(mq.addEventListener) mq.addEventListener('change',apply);
+})();
+</script>
+<script>
+/* media-fold v1：一覧は最初の数件だけ見せて、残りは「もっと見る」で開く。目次に件数を出す */
+(function(){
+  var LIMIT={'media-seminar':10,'media-paper':6,'media-web':5,'media-press':5,'media-tv':6,'media-guest':6};
+  function init(){
+    var v=document.getElementById('view-media'); if(!v||v.dataset.fold) return; v.dataset.fold='1';
+    Object.keys(LIMIT).forEach(function(id){
+      var sec=document.getElementById(id); if(!sec) return;
+      var items=[].slice.call(sec.querySelectorAll('.col-list > .col-item'));
+      var j=v.querySelector('.media-jump button[data-t="'+id+'"] b'); if(j) j.textContent=items.length;
+      var n=LIMIT[id]; if(items.length<=n+2) return;
+      var rest=items.slice(n); rest.forEach(function(x){x.classList.add('fold-hide');});
+      var list=items[0].parentNode, b=document.createElement('button');
+      b.type='button'; b.className='fold-btn'; b.setAttribute('aria-expanded','false');
+      var lab=function(){b.textContent=b.getAttribute('aria-expanded')==='true'?'閉じる':'もっと見る（あと'+rest.length+'件）';}; lab();
+      b.addEventListener('click',function(){
+        var open=b.getAttribute('aria-expanded')!=='true';
+        rest.forEach(function(x){x.classList.toggle('fold-hide',!open);});
+        b.setAttribute('aria-expanded',open?'true':'false'); lab();
+        if(!open) sec.scrollIntoView({behavior:'smooth',block:'start'});
+      });
+      list.parentNode.insertBefore(b,list.nextSibling);
+    });
+    [].forEach.call(v.querySelectorAll('.media-jump button'),function(a){
+      a.addEventListener('click',function(e){var t=document.getElementById(a.dataset.t); if(t){t.scrollIntoView({behavior:'smooth',block:'start'});}});
+    });
+  }
+  if(document.readyState!=='loading') init(); else document.addEventListener('DOMContentLoaded',init);
 })();
 </script>
 </body>
