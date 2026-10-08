@@ -185,6 +185,13 @@
   .cmp .lb.al{right:10px;background:var(--wh);color:var(--bk);}
   .cmp .room{position:absolute;left:12px;bottom:12px;font-size:13px;font-weight:900;color:var(--wh);text-shadow:0 1px 8px rgba(0,0,0,.8);pointer-events:none;}
   .cmp-sq .cmp{aspect-ratio:1/1;}
+  .spec-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;}
+  .spec{background:#141414;border-top:2px solid var(--wh);padding:clamp(20px,2.4vw,32px);min-width:0;}
+  .spec .en{font-size:15px;letter-spacing:.14em;color:var(--gy);}
+  .spec h3{margin:6px 0 10px;font-size:clamp(17px,1.6vw,21px);font-weight:900;line-height:1.4;}
+  .spec p{margin:0;font-size:14px;line-height:1.85;font-weight:700;color:#ccc;}
+  @media(max-width:1100px){.spec-grid{grid-template-columns:1fr 1fr;}}
+  @media(max-width:600px){.spec-grid{grid-template-columns:1fr;}}
   .cmp-note{margin-top:14px;font-size:12px;color:var(--gy);font-weight:700;letter-spacing:.08em;}
   @media(max-width:1100px){.cmp-grid{grid-template-columns:1fr 1fr!important;}}
   @media(max-width:860px){.pair-grid{grid-template-columns:1fr!important;}.ba-grid{grid-template-columns:repeat(2,1fr);}.ba-mid{grid-template-columns:1fr;}.cmp-grid{grid-template-columns:1fr!important;}}
@@ -923,6 +930,22 @@
       <div class="cmp clip-b"><img class="b" src="img/cmp_tane_b3.jpg" alt="改修前のたね。赤い雨戸が閉まり、木に覆われた外観" loading="lazy" decoding="async"><img class="a" src="img/cmp_tane_a3.jpg" alt="現在のたね。赤い屋根と黄色い玄関" loading="lazy" decoding="async"><div class="bar"></div><span class="lb bl">BEFORE</span><span class="lb al">AFTER</span><span class="room">フリースクール たね・外観</span><input type="range" min="0" max="100" value="50" aria-label="フリースクールたね外観の前後を比較"></div>
     </div>
     <div class="cmp-note"><span class="ib">同一物件。</span><span class="ib">真ん中のつまみを左右に動かすと見比べられます</span></div>
+    <div class="ba-mid">
+      <div class="cond big fade">GRADE<span><span class="ib">いい設備で、</span><span class="ib">きれいに。</span></span></div>
+      <div class="fade">
+        <p class="jp"><span class="ib">ほかの買取再販の家と、</span><br><span class="ib">ぜひ見比べてください。</span></p>
+        <p>直したあとの家に住む人が「ここに住みたい」と思えるかどうか。それを基準に、仕上げと設備を社内の仕様書で決めて、職人さんと共有しています。家ごとに担当者の好みで変わらないように、どの家でも同じ基準です。</p>
+      </div>
+    </div>
+    <div class="spec-grid">
+      <div class="spec fade"><div class="cond en">WATER</div><h3>水まわりは、新品に</h3><p>販売するすべての家で、トイレ（TOTO・LIXILの指定機種）、洗面台（LIXIL ピアラ）、給湯器（24号・オート追い焚き）を新品に交換します。</p></div>
+      <div class="spec fade"><div class="cond en">KITCHEN &amp; BATH</div><h3>キッチンとお風呂</h3><p>交換するときは、キッチンはクリナップ「ラクエラ」。お風呂はTOTO「サザナ」に、浴室換気乾燥暖房機をつけます。</p></div>
+      <div class="spec fade"><div class="cond en">ELECTRIC</div><h3>スイッチと照明</h3><p>スイッチ・コンセントは全部新品（Panasonic、暗いところで光るホタルスイッチ）。照明は全室にあたたかい電球色、リビングは明るさを変えられるダウンライトです。</p></div>
+      <div class="spec fade"><div class="cond en">LEVEL</div><h3>床の傾きを測る</h3><p>レーザーで、廊下も含めた全室の水平を測ります。6/1000以上傾いていれば、5/1000以内まで直します。</p></div>
+      <div class="spec fade"><div class="cond en">LDK</div><h3>狭い台所は、つなげる</h3><p>8畳以下のダイニングキッチンは、構造上問題がなければ隣の部屋とつないで、ひと続きのLDKにします。</p></div>
+      <div class="spec fade"><div class="cond en">FINISH</div><h3>最後に、点検と掃除</h3><p>防蟻処理をして、ハウスクリーニング。照明・換気扇・給排水・サッシの開け閉めまで、引き渡しの前に確かめます。</p></div>
+    </div>
+    <div class="cmp-note"><span class="ib">オハナホーム標準リフォーム仕様（2026年5月版）より。</span><span class="ib">傷みの少ないキッチン・浴室は、水栓だけ交換して使うこともあります</span></div>
     <div style="margin-top:28px"><a class="btn-bk" href="/office/" style="font-size:clamp(16px,4.6vw,22px);white-space:nowrap;padding:16px 26px">もっと見たい方はこちら<span class="arrow"></span></a><div class="cmp-note" style="margin-top:12px"><span class="ib">本社も、</span><span class="ib">空き家を再生した建物です。</span><span class="ib">室内の前後を別ページで</span></div></div>
   </div>
 </section>
