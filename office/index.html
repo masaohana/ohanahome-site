@@ -544,6 +544,14 @@
   .sem-pics .ph:first-child{grid-row:span 2;}
   .sem-pics img{width:100%;height:100%;object-fit:cover;}
   @media(max-width:760px){.sem-themes{grid-template-columns:1fr;}.sem-pics{grid-template-columns:1fr 1fr;height:auto;}.sem-pics .ph{aspect-ratio:4/3;}.sem-pics .ph:first-child{grid-column:span 2;grid-row:auto;}}
+  .num-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(28px,4vw,56px) clamp(20px,3vw,44px);margin-top:clamp(28px,4vw,56px);}
+  .num{border-top:2px solid var(--bk);padding-top:18px;min-width:0;}
+  .num > div{display:flex;flex-direction:column;}
+  .num b{font-family:var(--cond);font-weight:900;font-size:clamp(52px,7vw,96px);line-height:1;white-space:nowrap;}
+  .num > div > span{font-size:13px;letter-spacing:.12em;font-weight:900;margin-top:8px;}
+  .num p{margin:10px 0 0;font-size:14px;line-height:1.8;font-weight:700;color:var(--gy-dark);}
+  .num-note{margin:clamp(24px,3vw,40px) 0 0;font-size:12px;line-height:1.8;font-weight:700;color:var(--gy);}
+  @media(max-width:860px){.num-grid{grid-template-columns:1fr 1fr;}}
   .sem-facts{display:flex;gap:clamp(20px,5vw,70px);flex-wrap:wrap;margin-top:clamp(28px,4vw,56px);}
   .sem-facts div{display:flex;flex-direction:column;}
   .sem-facts b{font-family:var(--cond);font-weight:900;font-size:clamp(44px,6vw,84px);line-height:1;}
@@ -869,6 +877,20 @@
     <li><div class="n">05</div><h3><span class="ib">お客様とご家族の想いを</span><span class="ib">何より大切に</span></h3><p>家は、思い出や家族の歴史が詰まった大切な場所。売る・残す・活かすなど、お客様やご家族の想いを伺いながら、その家のこれからを一緒に考えます。</p></li>
     <li><div class="n">06</div><h3><span class="ib">住まいと終活の専門家が、</span><span class="ib">選択肢を広げます</span></h3><p>終活・相続の知識を持つスタッフや空き家再生士が、それぞれの専門性を活かして対応。今の状況を整理し、売却だけにとらわれない住まいの選択肢をご提案します。</p></li>
   </ul>
+</section>
+<section class="wrap sec-gap" id="numbers">
+  <div class="cond sub">OHANA HOME IN NUMBERS</div>
+  <h2 class="cond ttl">NUMBERS</h2>
+  <p class="lead-jp" style="margin-top:20px"><span class="ib">数字で見るオハナホーム</span></p>
+  <div class="num-grid">
+    <div class="num fade"><div><b>2011</b><span><span class="ib">空き家の再生を</span><span class="ib">始めた年</span></span></div><p>会社員のかたわら空き家の再生を始め、2018年にオハナホームを設立しました。</p></div>
+    <div class="num fade"><div><b>30-40</b><span>年間の買取（件）</span></div><p>2024年は32件、2025年は37件の家と土地を買い取りました。</p></div>
+    <div class="num fade"><div><b>180+</b><span><span class="ib">2018年からの</span><span class="ib">買取（件）</span></span></div><p>2026年9月までに、千葉を中心に買い取った家と土地の数です。</p></div>
+    <div class="num fade"><div><b>35</b><span>講演・セミナーの登壇<span class="ib">（回）</span></span></div><p>自治体の相談会、相続診断士会、エンディング産業展などで話してきました。</p></div>
+    <div class="num fade"><div><b>200</b><span><span class="ib">全国の</span><span class="ib">空き家再生士（名）</span></span></div><p>一般社団法人 空き家再生協会®が認定した仲間が、全国にいます<span class="ib">（2026年9月現在）。</span></p></div>
+    <div class="num fade"><div><b>2026</b><span><span class="ib">八街市と</span><span class="ib">協定を結んだ年</span></span></div><p>協会が啓発を、オハナホームが実務を担う、空き家対策の協定です。</p></div>
+  </div>
+  <p class="num-note"><span class="ib">買取の数字は社内の物件台帳（2026年9月末時点）より。</span><span class="ib">講演の回数は、MEDIAページの一覧から自動で数えています。</span></p>
 </section>
 <section class="ba">
   <div class="ba-hero">
