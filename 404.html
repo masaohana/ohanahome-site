@@ -554,6 +554,32 @@
   .num p{margin:10px 0 0;font-size:14px;line-height:1.8;font-weight:700;color:var(--gy-dark);}
   .num-note{margin:clamp(24px,3vw,40px) 0 0;font-size:12px;line-height:1.8;font-weight:700;color:var(--gy);}
   @media(max-width:860px){.num-grid{grid-template-columns:1fr 1fr;}}
+  .cchart{margin:clamp(40px,6vw,72px) 0 0;}
+  .cchart figcaption{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 16px;}
+  .cchart figcaption b{font-size:clamp(17px,1.8vw,21px);font-weight:900;}
+  .cchart figcaption span{font-size:13px;font-weight:700;color:var(--gy-dark);}
+  .cc-plot{position:relative;height:clamp(180px,24vw,260px);margin:44px 0 0 34px;}
+  .cc-grid i{position:absolute;left:0;right:0;height:0;border-top:1px solid #e3e3e3;}
+  .cc-grid i:first-child{border-top-color:#9e9e9e;}
+  .cc-grid em{position:absolute;right:100%;top:-8px;margin-right:8px;font-style:normal;font-size:11px;font-weight:700;color:var(--gy);font-variant-numeric:tabular-nums;}
+  .cc-avg{position:absolute;left:0;right:0;height:0;border-top:1px solid var(--gy-dark);z-index:2;pointer-events:none;}
+  .cchart .cc-key{display:inline-flex;align-items:center;gap:6px;}
+  .cc-key i{display:inline-block;width:18px;border-top:1px solid var(--gy-dark);}
+  .cc-cols{position:absolute;inset:0;display:grid;grid-auto-flow:column;grid-auto-columns:1fr;}
+  .cc-col{position:relative;display:flex;align-items:flex-end;justify-content:center;outline:none;}
+  .cc-bar{width:min(24px,62%);background:var(--bk);border-radius:4px 4px 0 0;transition:opacity .2s;}
+  .cc-cols:hover .cc-bar{opacity:.35;}
+  .cc-cols .cc-col:hover .cc-bar,.cc-col:focus .cc-bar{opacity:1;}
+  .cc-tip{position:absolute;left:50%;bottom:calc(100% - 4px);transform:translate(-50%,-6px);white-space:nowrap;background:var(--bk);color:var(--wh);font-size:12px;font-weight:700;padding:6px 10px;border-radius:4px;opacity:0;pointer-events:none;transition:opacity .15s;z-index:3;}
+  .cc-tip b{margin-left:8px;font-weight:900;}
+  .cc-col:hover .cc-tip,.cc-col:focus .cc-tip{opacity:1;}
+  .cc-x{display:grid;grid-auto-flow:column;grid-auto-columns:1fr;margin:8px 0 0 34px;font-size:12px;font-weight:700;color:var(--gy-dark);text-align:center;}
+  .cc-table{margin-top:16px;font-size:13px;font-weight:700;}
+  .cc-table summary{cursor:pointer;color:var(--gy-dark);}
+  .cc-table table{margin-top:10px;border-collapse:collapse;}
+  .cc-table th,.cc-table td{padding:4px 18px 4px 0;text-align:left;font-variant-numeric:tabular-nums;border-bottom:1px solid #eee;}
+  .cc-note{margin:12px 0 0;font-size:12px;line-height:1.8;font-weight:700;color:var(--gy);}
+  @media(max-width:600px){.cc-x span{font-size:11px;}.cc-plot,.cc-x{margin-left:28px;}}
   .sem-facts{display:flex;gap:clamp(20px,5vw,70px);flex-wrap:wrap;margin-top:clamp(28px,4vw,56px);}
   .sem-facts div{display:flex;flex-direction:column;}
   .sem-facts b{font-family:var(--cond);font-weight:900;font-size:clamp(44px,6vw,84px);line-height:1;}
@@ -890,9 +916,10 @@
     <div class="num fade"><div><b>180+</b><span><span class="ib">2018年からの</span><span class="ib">買取（件）</span></span></div><p>2026年9月までに、千葉を中心に買い取った家と土地の数です。</p></div>
     <div class="num fade"><div><b>35</b><span>講演・セミナーの登壇<span class="ib">（回）</span></span></div><p>自治体の相談会、相続診断士会、エンディング産業展などで話してきました。</p></div>
     <div class="num fade"><div><b>200</b><span><span class="ib">全国の</span><span class="ib">空き家再生士（名）</span></span></div><p>一般社団法人 空き家再生協会®が認定した仲間が、全国にいます<span class="ib">（2026年9月現在）。</span></p></div>
-    <div class="num fade"><div><b>2026</b><span><span class="ib">八街市と</span><span class="ib">協定を結んだ年</span></span></div><p>協会が啓発を、オハナホームが実務を担う、空き家対策の協定です。</p></div>
+    <div class="num fade"><div><b>44</b><span><span class="ib">毎月の</span><span class="ib">ご相談（件・平均）</span></span></div><p>2026年1月〜9月に、空き家や土地のご相談・査定のご依頼を月平均44件お受けしました。</p></div>
   </div>
-  <p class="num-note"><span class="ib">買取の数字は社内の物件台帳（2026年9月末時点）より。</span><span class="ib">講演の回数は、MEDIAページの一覧から自動で数えています。</span></p>
+  <!--CCHART--><figure class="cchart fade"><figcaption><b>月ごとのご相談件数</b><span>2026年1月〜9月　合計393件</span><span class="cc-key"><i></i>月平均 44件</span></figcaption><div class="cc-plot" role="img" aria-label="2026年1月〜9月のご相談件数。最も多い月は53件、月平均は44件"><div class="cc-grid"><i style="bottom:0.0%"><em>0</em></i><i style="bottom:33.3%"><em>20</em></i><i style="bottom:66.7%"><em>40</em></i><i style="bottom:100.0%"><em>60</em></i></div><div class="cc-avg" style="bottom:73.3%"></div><div class="cc-cols"><div class="cc-col" tabindex="0"><div class="cc-bar" style="height:68.3%"></div><span class="cc-tip">2026年1月<b>41件</b></span></div><div class="cc-col" tabindex="0"><div class="cc-bar" style="height:75.0%"></div><span class="cc-tip">2026年2月<b>45件</b></span></div><div class="cc-col" tabindex="0"><div class="cc-bar" style="height:88.3%"></div><span class="cc-tip">2026年3月<b>53件</b></span></div><div class="cc-col" tabindex="0"><div class="cc-bar" style="height:73.3%"></div><span class="cc-tip">2026年4月<b>44件</b></span></div><div class="cc-col" tabindex="0"><div class="cc-bar" style="height:70.0%"></div><span class="cc-tip">2026年5月<b>42件</b></span></div><div class="cc-col" tabindex="0"><div class="cc-bar" style="height:88.3%"></div><span class="cc-tip">2026年6月<b>53件</b></span></div><div class="cc-col" tabindex="0"><div class="cc-bar" style="height:58.3%"></div><span class="cc-tip">2026年7月<b>35件</b></span></div><div class="cc-col" tabindex="0"><div class="cc-bar" style="height:80.0%"></div><span class="cc-tip">2026年8月<b>48件</b></span></div><div class="cc-col" tabindex="0"><div class="cc-bar" style="height:53.3%"></div><span class="cc-tip">2026年9月<b>32件</b></span></div></div></div><div class="cc-x"><span>1月</span><span>2月</span><span>3月</span><span>4月</span><span>5月</span><span>6月</span><span>7月</span><span>8月</span><span>9月</span></div><details class="cc-table"><summary>表で見る</summary><table><tr><th>2026年1月</th><td>41件</td></tr><tr><th>2026年2月</th><td>45件</td></tr><tr><th>2026年3月</th><td>53件</td></tr><tr><th>2026年4月</th><td>44件</td></tr><tr><th>2026年5月</th><td>42件</td></tr><tr><th>2026年6月</th><td>53件</td></tr><tr><th>2026年7月</th><td>35件</td></tr><tr><th>2026年8月</th><td>48件</td></tr><tr><th>2026年9月</th><td>32件</td></tr></table></details><p class="cc-note"><span class="ib">物件台帳に登録した、空き家や土地のご相談・査定のご依頼の件数です（不動産会社さんからのご紹介を含む）。</span><span class="ib">2026年9月末時点。</span></p></figure><!--/CCHART-->
+  <p class="num-note"><span class="ib">買取とご相談の数字は社内の物件台帳（2026年9月末時点）より。</span><span class="ib">講演の回数は、MEDIAページの一覧から自動で数えています。</span></p>
 </section>
 <section class="ba">
   <div class="ba-hero">
