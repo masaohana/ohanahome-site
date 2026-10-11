@@ -154,7 +154,7 @@
   .ba-hero{position:relative;height:clamp(420px,70vh,760px);overflow:hidden;}
   .ba-hero img{width:100%;height:100%;object-fit:cover;filter:grayscale(1) contrast(1.15);}
   .ba-hero .stamp{position:absolute;left:var(--pad);bottom:clamp(20px,4vw,50px);font-size:clamp(90px,18vw,256px);line-height:.85;color:var(--wh);mix-blend-mode:difference;}
-  .ba-hero .cap{position:absolute;right:var(--pad);bottom:clamp(24px,4vw,56px);max-width:36ch;text-align:right;font-size:clamp(13px,1.3vw,17px);line-height:1.8;text-shadow:0 2px 20px rgba(0,0,0,.8);}
+  .ba-hero .cap{position:absolute;right:var(--pad);bottom:clamp(24px,4vw,56px);max-width:none;text-align:right;font-size:min(clamp(13px,1.3vw,17px),calc((100vw - 2*var(--pad))/(var(--n,30)*1.07)));line-height:1.8;text-shadow:0 2px 20px rgba(0,0,0,.8);}
   .ba-after{margin-top:6px;}
   .ba-after img{filter:none;}
   .ba-after .stamp{color:var(--wh);mix-blend-mode:normal;text-shadow:0 10px 40px rgba(0,0,0,.6);}
@@ -424,7 +424,11 @@
   .pg-hero img,.pg-hero video{width:100%;height:100%;object-fit:cover;filter:grayscale(.15) contrast(1.05);}
   .pg-hero::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.55),transparent 40%,transparent 60%,rgba(0,0,0,.55));}
   .pg-hero .stamp{position:absolute;left:var(--pad);bottom:clamp(20px,4vw,50px);z-index:2;font-size:clamp(72px,14vw,199.1px);line-height:.85;color:var(--wh);text-shadow:0 10px 40px rgba(0,0,0,.6);}
-  .pg-hero .cap{position:absolute;right:var(--pad);bottom:clamp(24px,4vw,56px);z-index:2;max-width:36ch;text-align:right;color:var(--wh);font-size:clamp(13px,1.3vw,17px);line-height:1.8;text-shadow:0 2px 20px rgba(0,0,0,.8);}
+  .pg-hero .cap{position:absolute;right:var(--pad);bottom:clamp(24px,4vw,56px);z-index:2;max-width:none;text-align:right;color:var(--wh);font-size:min(clamp(13px,1.3vw,17px),calc((100vw - 2*var(--pad))/(var(--n,30)*1.07)));line-height:1.8;text-shadow:0 2px 20px rgba(0,0,0,.8);}
+  .ln{display:block;white-space:nowrap;}
+  .wrapok .ln{white-space:normal;}
+  .body-txt{container-type:inline-size;}
+  .lead-jp.one{white-space:nowrap;font-size:min(clamp(22px,3vw,40px),calc(100cqw/14.9));}
   /* video bands: keep the whole 16:9 frame visible on wide screens */
   /* worries / features / faq (2026-09-28) */
   .vband { height:max(56.25vw,300px) !important;max-height:none; }
@@ -923,7 +927,7 @@
 <a class="pg-hero band" href="/about/" style="display:block;height:clamp(300px,56vh,620px);margin-top:clamp(70px,11vw,160px)">
   <video data-src="img/team_loop.mp4" preload="none" class="hero-video" autoplay muted loop playsinline data-poster="img/team_loop_poster.webp"></video>
   <div class="cond stamp" style="font-size:clamp(56px,10vw,150px)">TEAM</div>
-  <div class="cap fade"><span class="ib">社員と、</span><span class="ib">職人と。</span><br><span class="ib">一軒ずつ、</span><span class="ib">手で向き合う。</span></div>
+  <div class="cap fade" style="--n:12"><span class="ln"><span class="ib">社員と、</span><span class="ib">職人と。</span></span><span class="ln"><span class="ib">一軒ずつ、</span><span class="ib">手で向き合う。</span></span></div>
 </a>
 <section class="wrap sec-gap" id="worries">
   <div class="cond sub">OUCHI NO ONAYAMI</div>
@@ -1011,7 +1015,7 @@
   <div class="ba-hero">
     <img src="img/g_room_clutter2.webp" alt="片付け前、家財が残されたままの部屋" loading="lazy" decoding="async">
     <div class="cond stamp">BEFORE</div>
-    <div class="cap fade"><span class="ib">誰かの暮らしが、</span><span class="ib">そのまま止まっている部屋。</span><br><span class="ib">ここから「おうちじまい」ははじまります。</span></div>
+    <div class="cap fade" style="--n:21"><span class="ln"><span class="ib">誰かの暮らしが、</span><span class="ib">そのまま止まっている部屋。</span></span><span class="ln"><span class="ib">ここから「おうちじまい」ははじまります。</span></span></div>
   </div>
   <div class="wrap">
     <div class="ba-grid">
@@ -1024,7 +1028,7 @@
   <div class="ba-hero vband" style="height:clamp(360px,56vh,640px);margin-top:6px">
     <video data-src="img/work_loop.mp4" preload="none" class="hero-video" autoplay muted loop playsinline data-poster="img/work_loop_poster.webp" style="width:100%;height:100%;object-fit:cover;filter:grayscale(.2) contrast(1.05)"></video>
     <div class="cond stamp">WORK</div>
-    <div class="cap fade"><span class="ib">片付けの現場で、</span><span class="ib">まず探すのは「残すもの」。</span><br><span class="ib">再生は、</span><span class="ib">そこから。</span></div>
+    <div class="cap fade" style="--n:21"><span class="ln"><span class="ib">片付けの現場で、</span><span class="ib">まず探すのは「残すもの」。</span></span><span class="ln"><span class="ib">再生は、</span><span class="ib">そこから。</span></span></div>
   </div>
   <div class="wrap">
     <div class="ba-grid" style="margin-top:6px">
@@ -1044,7 +1048,7 @@
   <div class="ba-hero ba-after">
     <img src="img/after_hero_kitchen.webp" alt="再生後のアイランドキッチン" loading="lazy" decoding="async">
     <div class="cond stamp">AFTER</div>
-    <div class="cap fade">昭和の台所が、<br><span class="ib">家族が集まるアイランドキッチンに。</span></div>
+    <div class="cap fade" style="--n:17"><span class="ln">昭和の台所が、</span><span class="ln"><span class="ib">家族が集まるアイランドキッチンに。</span></span></div>
   </div>
   <div class="wrap">
     <div class="ba-grid" style="margin-top:6px">
@@ -1199,7 +1203,7 @@
 <a class="pg-hero band" href="/seminar/" style="display:block;height:clamp(300px,56vh,620px);margin-top:clamp(70px,11vw,160px)">
   <video data-src="img/semin_loop.mp4" preload="none" class="hero-video" autoplay muted loop playsinline data-poster="img/semin_loop_poster.webp"></video>
   <div class="cond stamp" style="font-size:clamp(56px,10vw,150px)">SEMINAR</div>
-  <div class="cap fade"><span class="ib">終活・空き家セミナーは、</span><br><span class="ib">自治体でも、</span><span class="ib">企業でも。</span></div>
+  <div class="cap fade" style="--n:12"><span class="ln"><span class="ib">終活・空き家セミナーは、</span></span><span class="ln"><span class="ib">自治体でも、</span><span class="ib">企業でも。</span></span></div>
 </a>
 
 <section class="act wrap">
@@ -1245,7 +1249,7 @@
 <a class="pg-hero band" href="/about/" style="display:block;height:clamp(300px,56vh,620px);margin-top:clamp(70px,11vw,160px)">
   <video data-src="img/craft_loop.mp4" preload="none" class="hero-video" autoplay muted loop playsinline data-poster="img/craft_loop_poster.webp"></video>
   <div class="cond stamp" style="font-size:clamp(56px,10vw,150px)">CRAFT</div>
-  <div class="cap fade"><span class="ib">職人さんと、</span><span class="ib">同じテーブルで。</span><br><span class="ib">打合せも、</span><span class="ib">現場も、</span><span class="ib">乾杯も。</span></div>
+  <div class="cap fade" style="--n:14"><span class="ln"><span class="ib">職人さんと、</span><span class="ib">同じテーブルで。</span></span><span class="ln"><span class="ib">打合せも、</span><span class="ib">現場も、</span><span class="ib">乾杯も。</span></span></div>
 </a>
 <section class="guides">
   <div class="wrap">
@@ -1294,7 +1298,7 @@
 <a class="pg-hero band" href="/about/" style="display:block;height:clamp(300px,56vh,620px);margin-top:clamp(70px,11vw,160px)">
   <video data-src="img/hq_loop.mp4" preload="none" class="hero-video" autoplay muted loop playsinline data-poster="img/hq_loop_poster.webp"></video>
   <div class="cond stamp" style="font-size:clamp(56px,10vw,150px)">HOME BASE</div>
-  <div class="cap fade"><span class="ib">本社も、</span><span class="ib">空き家でした。</span><br><span class="ib">いまは、</span><span class="ib">僕らの居場所です。</span></div>
+  <div class="cap fade" style="--n:13"><span class="ln"><span class="ib">本社も、</span><span class="ib">空き家でした。</span></span><span class="ln"><span class="ib">いまは、</span><span class="ib">僕らの居場所です。</span></span></div>
 </a>
 
 </main>
@@ -1304,7 +1308,7 @@
 <div class="pg-hero">
   <img src="img/ceremony.webp" alt="八街市との協定締結式" style="object-position:50% 35%" loading="lazy" decoding="async">
   <div class="cond stamp">ABOUT</div>
-  <div class="cap fade"><span class="ib">行政と、</span><span class="ib">家族と、</span><span class="ib">職人と。</span><br><span class="ib">空き家の問題を、</span><span class="ib">ひとりで抱えない仕組みをつくる。</span></div>
+  <div class="cap fade" style="--n:24"><span class="ln"><span class="ib">行政と、</span><span class="ib">家族と、</span><span class="ib">職人と。</span></span><span class="ln"><span class="ib">空き家の問題を、</span><span class="ib">ひとりで抱えない仕組みをつくる。</span></span></div>
 </div>
 <section class="wrap" style="margin-top:clamp(60px,9vw,130px)">
   <div class="cond sub fade">PARTNERSHIP</div>
@@ -1335,7 +1339,7 @@
 </section>
 <div class="pg-hero vband" style="height:clamp(360px,62vh,720px);margin-top:clamp(28px,4vw,56px)">
   <video data-src="img/hq_loop.mp4" preload="none" class="hero-video" autoplay muted loop playsinline data-poster="img/hq_loop_poster.webp" style="filter:none"></video>
-  <div class="cap fade" style="left:var(--pad);right:auto;text-align:left">夕暮れの本社。<br><span class="ib">灯りがともる家に、</span><span class="ib">人は集まる。</span></div>
+  <div class="cap fade" style="--n:15;left:var(--pad);right:auto;text-align:left"><span class="ln">夕暮れの本社。</span><span class="ln"><span class="ib">灯りがともる家に、</span><span class="ib">人は集まる。</span></span></div>
 </div>
 <section class="wrap" style="margin-top:8px">
   <div class="ba-grid" style="grid-template-columns:repeat(3,1fr)">
@@ -1366,11 +1370,11 @@
 </section>
 <div class="pg-hero vband" style="height:clamp(360px,60vh,680px);margin-top:clamp(28px,4vw,56px)">
   <video data-src="img/team_loop.mp4" preload="none" class="hero-video" autoplay muted loop playsinline data-poster="img/team_loop_poster.webp"></video>
-  <div class="cap fade" style="left:var(--pad);right:auto;text-align:left"><span class="ib">空き家を再生した本社事務所。</span><br><span class="ib">社員・職人・仲間が、</span><span class="ib">ここに集まります。</span></div>
+  <div class="cap fade" style="--n:19;left:var(--pad);right:auto;text-align:left"><span class="ln"><span class="ib">空き家を再生した本社事務所。</span></span><span class="ln"><span class="ib">社員・職人・仲間が、</span><span class="ib">ここに集まります。</span></span></div>
 </div>
 <div class="pg-hero vband" style="height:clamp(320px,52vh,600px);margin-top:8px">
   <video data-src="img/craft_loop.mp4" preload="none" class="hero-video" autoplay muted loop playsinline data-poster="img/craft_loop_poster.webp"></video>
-  <div class="cap fade" style="left:var(--pad);right:auto;text-align:left"><span class="ib">職人さんとの時間。</span><br><span class="ib">打合せも、</span><span class="ib">現場も、</span><span class="ib">乾杯も、</span><span class="ib">同じテーブルで。</span></div>
+  <div class="cap fade" style="--n:21;left:var(--pad);right:auto;text-align:left"><span class="ln"><span class="ib">職人さんとの時間。</span></span><span class="ln"><span class="ib">打合せも、</span><span class="ib">現場も、</span><span class="ib">乾杯も、</span><span class="ib">同じテーブルで。</span></span></div>
 </div>
 <section class="wrap" style="margin-top:8px">
   <div class="ba-grid">
@@ -1391,7 +1395,7 @@
 </section>
 <div class="pg-hero" style="height:clamp(420px,80vh,880px);margin-top:clamp(28px,4vw,56px)">
   <img src="img/duo_sky.webp" alt="青空の下、本社の前に立つ菊池聖雄と菊池あかり" style="object-position:50% 35%;filter:none" loading="lazy" decoding="async">
-  <div class="cap fade" style="left:var(--pad);right:auto;text-align:left"><span class="ib">空き家と相続に、</span><span class="ib">夫婦で向き合う。</span><br><span class="ib">菊池 聖雄 ／ 菊池 あかり</span></div>
+  <div class="cap fade" style="--n:16;left:var(--pad);right:auto;text-align:left"><span class="ln"><span class="ib">空き家と相続に、</span><span class="ib">夫婦で向き合う。</span></span><span class="ln"><span class="ib">菊池 聖雄 ／ 菊池 あかり</span></span></div>
 </div>
 <section class="wrap">
   <article class="person">
@@ -1498,7 +1502,7 @@
 <div class="pg-hero">
   <img src="img/duo_sky.webp" alt="青空の下、本社の前に立つ菊池聖雄と菊池あかり" style="object-position:50% 35%" loading="lazy" decoding="async">
   <div class="cond stamp">VISION</div>
-  <div class="cap fade"><span class="ib">空き家を、</span><span class="ib">もう一度</span><br><span class="ib">誰かの居場所に。</span></div>
+  <div class="cap fade" style="--n:9"><span class="ln"><span class="ib">空き家を、</span><span class="ib">もう一度</span></span><span class="ln"><span class="ib">誰かの居場所に。</span></span></div>
 </div>
 
 <section class="wrap" style="margin-top:clamp(70px,11vw,160px)">
@@ -1529,7 +1533,7 @@
 <div class="pg-hero" style="height:clamp(360px,60vh,680px);margin-top:clamp(70px,11vw,160px)">
   <img src="img/hq_now.webp" alt="再生後の本社、夕暮れ" style="filter:none" loading="lazy" decoding="async">
   <div class="cond stamp">IBASHO</div>
-  <div class="cap fade"><span class="ib">家は、</span><span class="ib">誰かの居場所になる。</span></div>
+  <div class="cap fade" style="--n:13"><span class="ln"><span class="ib">家は、</span><span class="ib">誰かの居場所になる。</span></span></div>
 </div>
 <section class="wrap" style="margin-top:clamp(60px,9vw,130px)">
   <div class="cond sub fade">KEYWORD</div>
@@ -1579,7 +1583,7 @@
 <div class="pg-hero vband">
   <video data-src="img/sem_loop.mp4" preload="none" class="hero-video" autoplay muted loop playsinline data-poster="img/sem_poster.webp"></video>
   <div class="cond stamp">SEMINAR</div>
-  <div class="cap fade"><span class="ib">終活は、</span><span class="ib">菊池あかりが。</span><span class="ib">空き家は、</span><span class="ib">菊池聖雄が。</span><br><span class="ib">夫婦ふたりで、</span><span class="ib">家族の「その後」を話します。</span></div>
+  <div class="cap fade" style="--n:22"><span class="ln"><span class="ib">終活は、</span><span class="ib">菊池あかりが。</span><span class="ib">空き家は、</span><span class="ib">菊池聖雄が。</span></span><span class="ln"><span class="ib">夫婦ふたりで、</span><span class="ib">家族の「その後」を話します。</span></span></div>
 </div>
 <section class="wrap" style="margin-top:8px">
   <div class="ba-grid">
@@ -1621,7 +1625,7 @@
 
 <div class="pg-hero" style="height:clamp(320px,52vh,600px);margin-top:clamp(80px,12vw,180px)">
   <img src="img/sem_hall.webp" alt="大ホールの壇上で話す菊池聖雄と菊池あかり" style="object-position:50% 40%" loading="lazy" decoding="async">
-  <div class="cap fade" style="left:var(--pad);right:auto;text-align:left"><span class="ib">大きな会場でも、</span><br><span class="ib">話すことは現場のことだけ。</span></div>
+  <div class="cap fade" style="--n:13;left:var(--pad);right:auto;text-align:left"><span class="ln"><span class="ib">大きな会場でも、</span></span><span class="ln"><span class="ib">話すことは現場のことだけ。</span></span></div>
 </div>
 <section class="wrap" style="margin-top:clamp(60px,9vw,130px)">
   <div class="cond sub fade">02 · KIKUCHI MASAO</div>
@@ -1647,7 +1651,7 @@
   </div>
   <div class="pg-hero vband" style="height:clamp(320px,50vh,560px);margin-top:clamp(40px,6vw,80px)">
     <video data-src="img/sem_loop3.mp4" preload="none" class="hero-video" autoplay muted loop playsinline data-poster="img/sem_poster3.webp"></video>
-    <div class="cap fade" style="left:var(--pad);right:auto;text-align:left"><span class="ib">業界団体・展示会・自治体の相談会で。</span><br><span class="ib">「困った空き家が、</span><span class="ib">誰かの役に立つ。」</span></div>
+    <div class="cap fade" style="--n:18;left:var(--pad);right:auto;text-align:left"><span class="ln"><span class="ib">業界団体・展示会・自治体の相談会で。</span></span><span class="ln"><span class="ib">「困った空き家が、</span><span class="ib">誰かの役に立つ。」</span></span></div>
   </div>
   <div class="sem-pics">
     <div class="ph clip-l"><img src="img/masao_seminar.webp" alt="八街市 空き家相談会＆セミナーで登壇する菊池聖雄" loading="lazy" decoding="async"></div>
@@ -1703,7 +1707,7 @@
 <a class="pg-hero band" href="/contact/" style="display:block;height:clamp(300px,56vh,620px);margin-top:clamp(70px,11vw,160px)">
   <video data-src="img/semin_loop.mp4" preload="none" class="hero-video" autoplay muted loop playsinline data-poster="img/semin_loop_poster.webp"></video>
   <div class="cond stamp" style="font-size:clamp(56px,10vw,150px)">LIVE</div>
-  <div class="cap fade"><span class="ib">会場でも、</span><span class="ib">オンラインでも。</span><br><span class="ib">まずは聞きにきてください。</span></div>
+  <div class="cap fade" style="--n:13"><span class="ln"><span class="ib">会場でも、</span><span class="ib">オンラインでも。</span></span><span class="ln"><span class="ib">まずは聞きにきてください。</span></span></div>
 </a>
 
 
@@ -1751,13 +1755,13 @@
 <div class="pg-hero vband">
   <video data-src="img/team_loop.mp4" preload="none" class="hero-video" autoplay muted loop playsinline data-poster="img/team_loop_poster.webp"></video>
   <div class="cond stamp">RECRUIT</div>
-  <div class="cap fade"><span class="ib">空き家再生をとおして、</span><span class="ib">日本中を笑顔に。</span><br><span class="ib">その仕事を、</span><span class="ib">一緒にやる仲間を探しています。</span></div>
+  <div class="cap fade" style="--n:21"><span class="ln"><span class="ib">空き家再生をとおして、</span><span class="ib">日本中を笑顔に。</span></span><span class="ln"><span class="ib">その仕事を、</span><span class="ib">一緒にやる仲間を探しています。</span></span></div>
 </div>
 <div class="wrap rc-cta fade"><a class="btn-bk" href="https://jp.indeed.com/cmp/%E3%82%AA%E3%83%8F%E3%83%8A%E3%83%9B%E3%83%BC%E3%83%A0%E6%A0%AA%E5%BC%8F%E4%BC%9A%E7%A4%BE" target="_blank" rel="noopener">INDEEDで応募する<span class="arrow"></span></a><a class="btn-bk" href="/recruit/#ceo" style="background:var(--wh);color:var(--bk);border:2px solid var(--bk)">代表に直接メッセージ<span class="arrow"></span></a></div>
 <a class="pg-hero band" href="/about/" style="display:block;height:clamp(300px,56vh,620px);margin-top:clamp(70px,11vw,160px)">
   <video data-src="img/smile_loop.mp4" preload="none" class="hero-video" autoplay muted loop playsinline data-poster="img/smile_loop_poster.webp"></video>
   <div class="cond stamp" style="font-size:clamp(56px,10vw,150px)">SMILE</div>
-  <div class="cap fade"><span class="ib">「ありがとう」を、</span><br><span class="ib">直接もらえる仕事です。</span></div>
+  <div class="cap fade" style="--n:11"><span class="ln"><span class="ib">「ありがとう」を、</span></span><span class="ln"><span class="ib">直接もらえる仕事です。</span></span></div>
 </a>
 <section class="wrap" style="margin-top:clamp(60px,9vw,130px)">
   <div class="cond sub fade">MESSAGE</div>
@@ -1768,7 +1772,7 @@
       <div style="margin-top:14px;font-size:13px;letter-spacing:.2em;color:var(--gy-dark);font-weight:900">代表取締役　菊池 聖雄</div>
     </div>
     <div class="body-txt fade">
-      <p class="lead-jp">想いをつなぎ、<br>笑顔をつくる。</p>
+      <p class="lead-jp one"><span class="ln">想いをつなぎ、笑顔をつくる。</span></p>
       <p>空き家には、そこで暮らした家族の時間が残っています。片付けの現場で見つかる写真や手紙を、僕らは捨てずにご家族へお戻しします。家を「物件」ではなく、誰かの大切な居場所として扱う。それが、オハナホームの仕事の出発点です。</p>
       <p>誰も住まなくなった家を、職人さんと一緒に直して、次に暮らす人へ手渡す。相続や終活で迷っている家族の話を、急がせずに聞く。派手ではないけれど、「ありがとう」を直接受け取れる仕事です。</p>
       <p>僕らの本社も、もともとは空き家でした。手をかければ、家はもう一度、誰かの居場所になる。その景色を、一緒に増やしていける仲間を探しています。</p>
@@ -1959,7 +1963,7 @@
 <div class="pg-hero">
   <img src="img/masao_stage.webp" alt="セミナー会場で話す様子" loading="lazy" decoding="async">
   <div class="cond stamp">MEDIA</div>
-  <div class="cap"><span class="ib">テレビ、新聞、雑誌、Web。</span><br><span class="ib">空き家の専門家として、</span><span class="ib">取材を受けてきました。</span></div>
+  <div class="cap" style="--n:22"><span class="ln"><span class="ib">テレビ、新聞、雑誌、Web。</span></span><span class="ln"><span class="ib">空き家の専門家として、</span><span class="ib">取材を受けてきました。</span></span></div>
 </div>
 <section class="wrap" style="margin-top:clamp(40px,6vw,80px)">
   <div class="two">
@@ -2174,8 +2178,9 @@
     <label><span class="lb" id="msg-lb">ご相談内容<span class="req">必須</span></span><textarea name="message" rows="5" required placeholder="家の場所（市区町村まで）や、いまの状況を、分かる範囲で。"></textarea></label>
     <details class="privacy"><summary>個人情報の取り扱いについて</summary><p>ご入力いただいたお客様の個人情報（お名前・ご住所・メールアドレスなど）は、厳重に管理・保管し、お客様からのお問い合わせ対応と連絡の手段のみに使用します。第三者に開示することはありません。ただし、法令等に基づいた要請があった場合や、お客様の同意を得られた場合に限り、情報を開示します。</p></details>
     <label class="chk"><input type="checkbox" name="agree" required> 「個人情報の取り扱いについて」に同意する</label>
-    <p class="cform-note">確認画面はありません。入力内容をご確認のうえ、SENDを押してください。</p>
-    <div class="sales-blk" id="sales-note" hidden><details class="privacy"><summary>営業・売り込みへの対応について</summary><p>お客様のご相談時間を守るため、事業者様からの営業・売り込みへの対応は有料（1件 110,000円・税込）とさせていただいています。内容とお支払い方法は、このページ下の「特定商取引法に基づく表記」をご覧ください。提携のご提案は「提携のご提案」を選んでお送りください（無料）。</p></details><label class="chk"><input type="checkbox" name="sale_agree" disabled> 営業・売り込みへの有料対応（1件 110,000円・税込）に同意する</label></div>
+    <p class="cform-note">確認画面はありません。入力内容をご確認のうえ、「送信する」を押してください。</p>
+    <p class="cform-note"><span class="ib">事業者様からの商品・サービスの売り込みは、</span><span class="ib">選んだ項目にかかわらず</span><span class="ib">「営業・売り込み（有料対応）」として扱います。</span><span class="ib">提携のご提案（オハナホームが費用を負担しない形）は無料です。</span></p>
+    <div class="sales-blk" id="sales-note" hidden><details class="privacy"><summary>営業・売り込みへの対応について</summary><p>お客様のご相談時間を守るため、事業者様からの営業・売り込みへの対応は有料（1件 110,000円・税込）とさせていただいています。「その他」「提携のご提案」など別の項目で送られた売り込みも、同じ扱いです。内容とお支払い方法は、このページ下の「特定商取引法に基づく表記」をご覧ください。提携のご提案は「提携のご提案」を選んでお送りください（無料）。</p></details><label class="chk"><input type="checkbox" name="sale_agree" disabled> 営業・売り込みへの有料対応（1件 110,000円・税込）に同意する</label></div>
     <button type="submit" class="link">送信する<span class="arrow"></span></button>
     <div class="cform-msg" id="cform-msg" role="status" aria-live="polite"></div>
   </form>
@@ -2464,11 +2469,25 @@
   var SEL='.lead-jp,.concept-catch .jp,.pg-hero .cap,.ba-hero .cap,.ft-grid h3,.guide h3,.wr-list li';
   function fit(){
     document.querySelectorAll(SEL).forEach(function(el){
-      var ibs=el.querySelectorAll('.ib'); if(!ibs.length||!el.offsetParent) return;
-      el.style.fontSize='';
-      var base=parseFloat(getComputedStyle(el).fontSize), box=el.clientWidth; if(!box) return;
-      var need=0; ibs.forEach(function(s){ need=Math.max(need,s.scrollWidth); });
-      if(need>box+1){ var f=Math.max(13,Math.floor(base*box/need*100)/100); el.style.fontSize=f+'px'; }
+      var segs=el.querySelectorAll('.ln,.ib'); if(!segs.length||!el.offsetParent) return;
+      el.style.fontSize=''; el.classList.remove('wrapok');
+      var base=parseFloat(getComputedStyle(el).fontSize), box=el.clientWidth;
+      if(el.classList.contains('cap')){
+        /* 見出し（stamp）と同じ段にあるときは、stamp の右端から文の右端までが使える幅 */
+        var hero=el.parentElement, hr=hero.getBoundingClientRect(), cr=el.getBoundingClientRect();
+        var st=hero.querySelector('.stamp'), sr=st?st.getBoundingClientRect():null;
+        var pad=sr?(sr.left-hr.left):Math.min(cr.left-hr.left,hr.right-cr.right);
+        if(getComputedStyle(el).textAlign==='left'){ box=hr.right-cr.left-pad; }
+        else if(sr&&sr.top<cr.bottom&&sr.bottom>cr.top){ box=cr.right-sr.right-16; }
+        else { box=hr.width-2*pad; }
+      }
+      if(!box||box<0) return;
+      var need=0; segs.forEach(function(s){ need=Math.max(need,s.scrollWidth); });
+      if(need>box+1){
+        var f=Math.floor(base*box/need*100)/100;
+        if(f<11){ el.classList.add('wrapok'); f=11; }
+        el.style.fontSize=f+'px';
+      }
     });
   }
   var t; function run(){ clearTimeout(t); t=setTimeout(fit,60); }
