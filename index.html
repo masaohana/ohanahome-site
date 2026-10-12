@@ -807,8 +807,8 @@
   }
   @media (max-width:420px){ .catch .top { flex-wrap:wrap;gap:.4em .6em; } .catch .top .m { font-size:13px; } }
   @media (max-width:700px){ .catch{text-align:right;} .catch .top,.catch .btm{justify-content:flex-end;} }
-  .sp { display:none; }
-  @media (max-width:480px){ .sp { display:inline; } }
+  br.sp { display:none; }  /* スマホだけの改行。絵本の見開き .sp と衝突しないよう br に限定（2026-10-12） */
+  @media (max-width:480px){ br.sp { display:inline; } }
   /* 前後を並べて見せる（スライダー廃止 2026-10-01） */
   .pair-grid { display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(12px,2vw,28px); }
   .pair { margin:0;min-width:0; }
