@@ -504,6 +504,24 @@
   .fee-tbl dd b{font-size:1.15em;}
   @media(max-width:640px){.fee-tbl{grid-template-columns:1fr;}.fee-tbl dt{border-bottom:0;padding-bottom:0;}.fee-tbl dd{padding-top:6px;}}
   .mv .catch .tag{margin-top:clamp(10px,1.6vw,18px);font-family:var(--jp);font-weight:700;font-size:clamp(14px,1.5vw,20px);letter-spacing:.06em;line-height:1.7;color:var(--bk);}
+  .sd{margin-top:clamp(28px,4vw,56px);border:1px solid var(--bk);background:var(--wh);padding:clamp(20px,3vw,40px);}
+  .sd-char{display:flex;align-items:flex-start;gap:16px;margin-bottom:clamp(18px,2.5vw,28px);}
+  .sd-char img{width:clamp(72px,9vw,110px);height:auto;flex:none;}
+  .sd-bubble{position:relative;background:var(--gy-soft);padding:14px 18px;font-weight:700;line-height:1.8;border-radius:4px;}
+  .sd-bubble:before{content:"";position:absolute;left:-10px;top:22px;border:6px solid transparent;border-right-color:var(--gy-soft);border-left:0;}
+  .sd-q h3{font-size:clamp(17px,1.8vw,22px);margin:0 0 14px;line-height:1.6;}
+  .sd-opts{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;}
+  .sd-opts button{font:inherit;font-weight:700;text-align:left;padding:14px 16px;border:1px solid var(--bk);background:var(--wh);color:var(--bk);cursor:pointer;line-height:1.6;}
+  .sd-opts button:hover{background:var(--bk);color:var(--wh);}
+  .sd-r h3{font-size:clamp(20px,2.4vw,30px);margin:8px 0 12px;line-height:1.5;}
+  .sd-r p{line-height:1.95;}
+  .sd-next{display:flex;gap:12px;align-items:baseline;margin-top:14px;}
+  .sd-next b{flex:none;font-size:12px;letter-spacing:.12em;border:1px solid var(--bk);padding:2px 8px;}
+  .sd-links{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px;}
+  .sd-links a{display:inline-block;padding:10px 16px;border:2px solid var(--bk);background:var(--bk);color:var(--wh);text-decoration:none;font-weight:700;font-size:14px;}
+  .sd-links a.alt{background:var(--wh);color:var(--bk);}
+  .sd-again{margin-top:14px;font:inherit;font-size:13px;background:none;border:0;text-decoration:underline;cursor:pointer;color:var(--gy-dark);}
+  @media(max-width:640px){.sd-opts{grid-template-columns:1fr;}.sd-char{flex-direction:column;}.sd-bubble:before{display:none;}}
   .two{display:grid;grid-template-columns:1fr 1fr;gap:clamp(24px,5vw,71.1px);align-items:start;}
   .two>*{min-width:0;}
   @media(max-width:860px){.two{grid-template-columns:1fr;}}
@@ -952,6 +970,30 @@
   <div class="wr-cta">
     <a class="btn-bk" href="/contact/">無料で相談する</a>
     <p>ひとつでも当てはまったら、まずはお話を聞かせてください。</p>
+  </div>
+</section>
+<section class="wrap sec-gap" id="shindan">
+  <div class="cond sub">OUCHAMA NO SHITSUMON</div>
+  <h2 class="cond ttl ja" style="font-size:min(clamp(40px,6.4vw,84px),calc(84vw / 7));white-space:nowrap">3つの質問</h2>
+  <p class="lead-jp" style="margin-top:20px"><span class="ib">おうちゃまが、</span><span class="ib">3つだけ聞きます。</span></p>
+  <p class="body-txt flow-lead"><span class="ib">答えると、いまの家で</span><span class="ib">「最初に確かめること」が1つ分かります。</span><span class="ib">売るかどうかは、聞きません。</span></p>
+  <div class="sd" data-step="0">
+    <div class="sd-char"><img src="img/ch_ouchama.png" alt="おうちゃま" loading="lazy" decoding="async"><div class="sd-bubble" id="sd-say">まずは、その家のいまから教えてください。</div></div>
+    <div class="sd-q" data-q="1"><h3>① その家は、いま誰が使っていますか？</h3><div class="sd-opts">
+      <button type="button" data-v="nobody">誰も使っていない</button><button type="button" data-v="storage">ときどき帰る・物置になっている</button><button type="button" data-v="parent">親が住んでいる</button><button type="button" data-v="rent">人に貸している</button></div></div>
+    <div class="sd-q" data-q="2" hidden><h3>② 家の名義は、どなたですか？</h3><div class="sd-opts">
+      <button type="button" data-v="me">自分（または配偶者）</button><button type="button" data-v="deceased">亡くなった親のまま</button><button type="button" data-v="parent">親（ご存命）</button><button type="button" data-v="shared">きょうだいと共有・よく分からない</button></div></div>
+    <div class="sd-q" data-q="3" hidden><h3>③ いちばん気になっているのは？</h3><div class="sd-opts">
+      <button type="button" data-v="cost">固定資産税や管理の負担</button><button type="button" data-v="stuff">荷物や家財の片づけ</button><button type="button" data-v="family">家族との話し合い</button><button type="button" data-v="choice">売る・貸す・残す、どれがいいか</button><button type="button" data-v="vague">まだ漠然と不安なだけ</button></div></div>
+    <div class="sd-r" id="sd-result" hidden>
+      <div class="cond sub">FIRST STEP</div>
+      <h3 id="sd-title"></h3>
+      <p id="sd-body"></p>
+      <p class="sd-next"><b>最初の一歩</b><span id="sd-next"></span></p>
+      <div class="sd-links" id="sd-links"></div>
+      <p class="cmp-note"><span class="ib">これは目安です。</span><span class="ib">登記・税・法律の個別の判断は、</span><span class="ib">司法書士・税理士などの専門家の領域です。</span></p>
+      <button type="button" class="sd-again" id="sd-again">もう一度</button>
+    </div>
   </div>
 </section>
 <section class="method wrap">
@@ -2729,6 +2771,42 @@
     }
   }
   if(document.readyState!=='loading') setTimeout(init,0); else document.addEventListener('DOMContentLoaded',function(){setTimeout(init,0);});
+})();
+</script>
+<script>
+(function(){
+  var sd=document.querySelector('#shindan .sd'); if(!sd) return;
+  var say=document.getElementById('sd-say'), ans={};
+  var SAY={1:'まずは、その家のいまから教えてください。',2:'ありがとう。つぎは、名義のことです。分からなくても大丈夫。',3:'あと1つ。いちばん気になっていることは？'};
+  // 結果：最初に確かめること1つ（売るかどうかは決めさせない）
+  function result(a){
+    if(a.q2==='deceased') return {k:'souzoku',t:'名義を、いまの持ち主に。',b:'亡くなった親御さんの名義のままだと、売ることも、貸すことも、直す契約も進みません。相続登記には期限があります（相続を知った日から3年以内。2024年4月より前の相続は2027年3月31日まで）。家をどうするかは、そのあとでゆっくり決めて大丈夫です。',n:'登記事項証明書を取って、名義と住所を見る。',l:[['/column/','コラム：相続の話'],['/contact/','相談する（無料）','alt']]};
+    if(a.q3==='family'||a.q2==='shared') return {k:'kazoku',t:'家の前に、家族と。',b:'売る・残す・活かすのどれを選んでも、家族の中で話ができていないと、途中で止まります。最初は結論を出さなくていい。「その家で、どう過ごしてきたか」から話すと、空気が変わります。',n:'家族と話す日を1つ決める（話す中身は、おうち終活ノートが助けになります）。',l:[['/column/shitsumon-list/','コラム：最初に聞く7つのこと'],['/seminar/','おうち終活ノート','alt']]};
+    if(a.q1==='parent'||a.q2==='parent') return {k:'oyako',t:'元気なうちに、聞いておく。',b:'親御さんがご存命で、家の名義も親御さんなら、いまは「おうち終活」の時期です。権利証の場所、どの土地まで実家に含まれるか、家をどうしたいか。本人に聞けるのは、いまだけです。',n:'親御さんと一緒に、登記事項証明書を見る。',l:[['/seminar/','おうち終活ノート・終活セミナー'],['/contact/','相談する（無料）','alt']]};
+    if(a.q3==='stuff') return {k:'nimotsu',t:'荷物は、そのままで大丈夫。',b:'片づけてからでないと相談できない、と思っている方が多いです。荷物が残っていても、家の状態は見られます。先に片づけると、写真や通帳など大切なものを捨ててしまうこともあります。',n:'片づける前に、いまの状態のまま見せる。',l:[['/column/','コラム：荷物が残った家は売れる？'],['/contact/','相談する（無料）','alt']]};
+    if(a.q3==='cost') return {k:'futan',t:'負担を減らす道は、1つじゃない。',b:'固定資産税や草木の管理は、持っている限り続きます。売る、貸す、しばらく管理を頼む。それぞれの負担と残るものを並べて、比べてから決めればいい。解体は最後です（税金が上がることがあります）。',n:'いまの状態で、どの選択肢が取れるかを一緒に見る。',l:[['/#flow','ご相談の流れ'],['/contact/','相談する（無料）','alt']]};
+    return {k:'mazu',t:'まず、いまの状態を知る。',b:'まだ決めなくて大丈夫です。売るかどうかより先に、建物の状態・名義・使える選択肢を知ると、不安の正体がはっきりします。見に行くのも、査定書を作るのも無料です。',n:'家の写真を何枚か撮って、LINEかフォームで送る。',l:[['/#flow','ご相談の流れ'],['/contact/','相談する（無料）','alt']]};
+  }
+  sd.querySelectorAll('.sd-q').forEach(function(q){
+    q.querySelectorAll('button').forEach(function(b){
+      b.addEventListener('click',function(){
+        var n=+q.getAttribute('data-q'); ans['q'+n]=b.getAttribute('data-v'); q.hidden=true;
+        var nx=sd.querySelector('.sd-q[data-q="'+(n+1)+'"]');
+        if(nx){ nx.hidden=false; say.textContent=SAY[n+1]; }
+        else {
+          var r=result(ans);
+          document.getElementById('sd-title').textContent=r.t; document.getElementById('sd-body').textContent=r.b; document.getElementById('sd-next').textContent=r.n;
+          document.getElementById('sd-links').innerHTML=r.l.map(function(x){return '<a href="'+x[0]+'"'+(x[2]?' class="alt"':'')+'>'+x[1]+'</a>';}).join('');
+          say.textContent='ありがとう。いまの家で、最初に確かめることはこれです。';
+          document.getElementById('sd-result').hidden=false;
+          try{track('shindan_result',{result:r.k});}catch(e){}
+        }
+      });
+    });
+  });
+  document.getElementById('sd-again').addEventListener('click',function(){
+    ans={}; document.getElementById('sd-result').hidden=true; sd.querySelectorAll('.sd-q').forEach(function(q){q.hidden=q.getAttribute('data-q')!=='1';}); say.textContent=SAY[1];
+  });
 })();
 </script>
 </body>
