@@ -2476,6 +2476,7 @@
   document.addEventListener('click',function(e){
     var a=e.target.closest&&e.target.closest('a'); if(!a||a.target==='_blank'||e.metaKey||e.ctrlKey||e.shiftKey||e.altKey) return;
     var href=a.getAttribute('href'); if(!href||href.charAt(0)!=='/'||href.charAt(1)==='/'||/\.(html|xml|pdf|jpg|png|mp4)$/.test(href)) return;
+    var seg=href.replace(/^\/+/,'').split(/[\/?#]/)[0]; if(seg&&!views[seg]&&seg!=='office'&&seg!=='music') return;  // /en/ /zh-tw/ など、この仕組みの外のページは普通に開く
     e.preventDefault(); if(href!==location.pathname+location.hash) history.pushState(null,'',href); route();
   });
   document.getElementById('ham').addEventListener('click',function(){menu.classList.add('on');});
