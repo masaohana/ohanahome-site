@@ -866,6 +866,7 @@
   .fold-btn:hover{background:var(--bk);color:#fff;}
 .hd-lang{display:flex;gap:6px;align-self:center;margin-right:14px;font-family:var(--cond);font-weight:900;font-size:15px;letter-spacing:.08em}.hd-lang a{white-space:nowrap;color:var(--wh);padding:3px 9px;border:1px solid rgba(255,255,255,.75);border-radius:999px;background:rgba(0,0,0,.22);text-shadow:none;line-height:1.3}.hd-lang a:hover{background:var(--wh);color:var(--bk)}@media(max-width:600px){.hd-right{position:relative}.hd-lang{position:absolute;right:0;top:calc(100% + 8px);gap:4px;font-size:12px;margin:0}.hd-lang a{padding:1px 6px;letter-spacing:.02em}}
 .catch .tag{white-space:normal;max-width:calc(100vw - 2*var(--pad,16px))}
+.sd-note{margin:14px 0 0;padding:12px 16px;background:var(--cream);color:var(--bk);border-left:4px solid var(--sun);font-size:15px;line-height:1.7;font-weight:700}
 </style>
 
 <header class="hd" id="hd">
@@ -2343,6 +2344,7 @@
         'entry.140108967':body
       });
       track('generate_lead',{form:'contact',kind:data.kind});
+      try{sessionStorage.removeItem('ohana_sd');}catch(e){} window.__sdPending=null;
       form.classList.add('sent');msg.className='cform-msg ok';msg.innerHTML='送信しました。ありがとうございます。<br>内容を確認のうえ、ご希望の方法でご連絡します。';
     }catch(e){
       btn.disabled=false;
@@ -2821,7 +2823,12 @@
         else {
           var r=result(ans);
           document.getElementById('sd-title').textContent=r.t; document.getElementById('sd-body').textContent=r.b; document.getElementById('sd-next').textContent=r.n;
-          document.getElementById('sd-links').innerHTML=r.l.map(function(x){return '<a href="'+x[0]+'"'+(x[2]?' class="alt"':'')+'>'+x[1]+'</a>';}).join('');
+          var links=[['/contact/','この答えのまま相談する（無料）']].concat(r.l.filter(function(x){return x[0]!=='/contact/';}).map(function(x){return [x[0],x[1],'alt'];}));
+          document.getElementById('sd-links').innerHTML=links.map(function(x){return '<a href="'+x[0]+'"'+(x[2]?' class="alt"':' data-sd="1"')+'>'+x[1]+'</a>';}).join('');
+          // 相談フォームへ引き継ぐ文（答え3つ＋おうちゃまの答え）
+          var QL=[]; sd.querySelectorAll('.sd-q').forEach(function(q){var n=q.getAttribute('data-q'),v=ans['q'+n],bt=v&&q.querySelector('button[data-v="'+v+'"]'); if(bt) QL.push(q.querySelector('h3').textContent+'：'+bt.textContent);});
+          var KIND={souzoku:'相続',oyako:'終活',kazoku:'終活'};
+          window.__sd={k:r.k,kind:KIND[r.k]||'空き家',text:'【3つの質問の答え】\n'+QL.join('\n')+'\n\n【おうちゃまの答え】'+r.t+'\n最初の一歩：'+r.n+'\n\n'};
           say.textContent='ありがとう。いまの家で、最初に確かめることはこれです。';
           document.getElementById('sd-result').hidden=false;
           try{track('shindan_result',{result:r.k});}catch(e){}
@@ -2829,9 +2836,32 @@
       });
     });
   });
+  document.getElementById('sd-links').addEventListener('click',function(e){
+    var l=e.target.closest&&e.target.closest('a[data-sd]'); if(!l||!window.__sd) return;
+    try{sessionStorage.setItem('ohana_sd',JSON.stringify(window.__sd));}catch(err){}
+    window.__sdPending=window.__sd;
+    try{track('shindan_to_contact',{result:window.__sd.k});}catch(err){}
+  },true);
   document.getElementById('sd-again').addEventListener('click',function(){
     ans={}; document.getElementById('sd-result').hidden=true; sd.querySelectorAll('.sd-q').forEach(function(q){q.hidden=q.getAttribute('data-q')!=='1';}); say.textContent=SAY[1];
   });
+})();
+</script>
+<script>
+(function(){
+  var form=document.getElementById('cform'); if(!form) return;
+  var ta=form.querySelector('textarea[name="message"]'),sel=form.querySelector('select[name="kind"]'),filled='';
+  function get(){ if(window.__sdPending) return window.__sdPending; try{var v=sessionStorage.getItem('ohana_sd');return v?JSON.parse(v):null;}catch(e){return null;} }
+  function apply(){
+    if(!/^\/contact\/?$/.test(location.pathname)) return;
+    var d=get(); if(!d||!d.text) return;
+    if(ta.value.trim()&&ta.value!==filled) return;  // 自分で書いた文は消さない
+    ta.value=d.text; filled=d.text;
+    if(sel&&d.kind){sel.value=d.kind; sel.dispatchEvent(new Event('change',{bubbles:true}));}
+    if(!document.getElementById('sd-note')){var n=document.createElement('p');n.id='sd-note';n.className='sd-note';n.innerHTML='<span class="ib">3つの質問の答えを、</span><span class="ib">ご相談内容に入れておきました。</span><span class="ib">書き足すのも、</span><span class="ib">消すのも自由です。</span>';form.parentNode.insertBefore(n,form);}
+  }
+  window.addEventListener('routechange',function(){setTimeout(apply,0);});
+  if(document.readyState!=='loading') setTimeout(apply,0); else document.addEventListener('DOMContentLoaded',function(){setTimeout(apply,0);});
 })();
 </script>
 </body>
