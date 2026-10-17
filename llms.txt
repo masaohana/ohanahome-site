@@ -32,6 +32,7 @@
 - [トップ](https://we.ohanahome.jp/)：できること、流れ、お客様の声、よくある質問
 - [会社概要](https://we.ohanahome.jp/about/)：会社の情報、私たちの紹介
 - [理念とビジョン](https://we.ohanahome.jp/vision/)
+- [ビフォーアフター](https://we.ohanahome.jp/works/)：本社・フリースクール「たね」・買い取って再生した家の、同じ場所の前と後（家ごと）
 - [セミナー](https://we.ohanahome.jp/seminar/)：終活・空き家セミナーの依頼
 - [取材・掲載](https://we.ohanahome.jp/media/)：テレビ・新聞・雑誌・Web の取材と登壇の一覧
 - [コラム](https://we.ohanahome.jp/column/)
