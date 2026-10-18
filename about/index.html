@@ -2632,7 +2632,7 @@
     els=Array.prototype.slice.call(document.querySelectorAll('#'+views[h]+' .clip-l:not(.is-shown),#'+views[h]+' .clip-r:not(.is-shown),#'+views[h]+' .clip-b:not(.is-shown),#'+views[h]+' .fade:not(.is-shown)'));
     reveal();
     if(h==='home'){document.querySelector('.catch').classList.add('is-shown');}
-    var TT={"home": "OUCHI JIMAI｜千葉・八街の空き家と相続の相談「おうちじまい」｜オハナホーム", "about": "ABOUT｜会社概要とチーム｜オハナホーム（千葉県八街市）", "vision": "VISION｜理念とビジョン｜オハナホーム", "works": "WORKS｜空き家のビフォーアフター｜オハナホーム", "seminar": "SEMINAR｜千葉の終活・空き家セミナー｜オハナホーム", "column": "COLUMN｜空き家と相続のコラム｜オハナホーム", "media": "MEDIA｜取材・掲載・登壇｜オハナホーム", "recruit": "RECRUIT｜採用情報（千葉県八街市）｜オハナホーム", "contact": "CONTACT｜空き家・相続の無料相談｜オハナホーム"};
+    var TT={"home": "オハナホーム｜千葉・八街の空き家再生・相続・終活", "about": "ABOUT｜会社概要とチーム｜オハナホーム（千葉県八街市）", "vision": "VISION｜理念とビジョン｜オハナホーム", "works": "WORKS｜空き家のビフォーアフター｜オハナホーム", "seminar": "SEMINAR｜千葉の終活・空き家セミナー｜オハナホーム", "column": "COLUMN｜空き家と相続のコラム｜オハナホーム", "media": "MEDIA｜取材・掲載・登壇｜オハナホーム", "recruit": "RECRUIT｜採用情報（千葉県八街市）｜オハナホーム", "contact": "CONTACT｜空き家・相続の無料相談｜オハナホーム"};
     document.title=TT[h]||'オハナホーム';
     if(h==='column'){showArticle(sub);}
     if(h!=='column'&&sub){var t=document.getElementById(sub);if(t)setTimeout(function(){t.scrollIntoView();},60);}
