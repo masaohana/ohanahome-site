@@ -736,6 +736,14 @@
   .trk .lk{display:flex;flex-wrap:wrap;gap:6px 18px;margin-top:12px;}
   .trk .lk a{font-size:13px;font-weight:900;text-decoration:underline;text-underline-offset:3px;}
   @media(max-width:600px){.trk{grid-template-columns:84px 1fr;column-gap:14px;row-gap:0;align-items:start;}.trk .tb{display:contents;}.trk .cv{grid-row:1/3;}.trk .g{grid-column:2;align-self:end;}.trk h3{grid-column:2;font-size:17px;margin:2px 0 0;}.trk p{display:none;}.trk .pl{grid-column:1/-1;}.trk .lk{grid-column:1/-1;}.trk .tm{min-width:74px;font-size:14px;}}
+  .ceo-ph{position:relative;cursor:pointer;-webkit-tap-highlight-color:transparent;}
+  .ceo-ph img{position:absolute;inset:0;transition:opacity .6s ease;}
+  .ceo-ph .off{opacity:0;}
+  .ceo-tag{position:absolute;right:12px;bottom:12px;background:var(--bk);color:var(--wh);font-family:var(--cond);font-weight:900;font-size:15px;letter-spacing:.18em;padding:5px 10px 5px 12px;line-height:1;}
+  .ceo-tag i{display:none;font-style:normal;}
+  .ceo-ph.on .off{opacity:1;}
+  .ceo-ph.on .ceo-tag b{display:none;}.ceo-ph.on .ceo-tag i{display:inline;}
+  @media(hover:hover){.ceo-ph:hover .off{opacity:1;}.ceo-ph:hover .ceo-tag b{display:none;}.ceo-ph:hover .ceo-tag i{display:inline;}}
   .pl-all{display:flex;flex-wrap:wrap;align-items:center;gap:10px 18px;margin-top:clamp(18px,2.4vw,28px);}
   .pl-all button{display:inline-flex;align-items:center;gap:12px;background:var(--bk);color:var(--wh);border:0;padding:14px 26px 14px 20px;font-family:var(--jp);font-weight:900;font-size:16px;cursor:pointer;}
   .pl-all button .ic{width:0;height:0;border-style:solid;border-width:7px 0 7px 12px;border-color:transparent transparent transparent currentColor;}
@@ -1944,7 +1952,7 @@
   <h2 class="cond ttl fade ja" style="font-size:min(clamp(40px,6.4vw,84px),calc(84vw / 4));white-space:nowrap">代表から</h2>
   <div class="two" style="margin-top:clamp(28px,4vw,56px)">
     <div class="fade">
-      <div class="ph" style="aspect-ratio:4/5;overflow:hidden;max-width:420px"><img src="img/masao.webp" alt="代表取締役 菊池聖雄" style="width:100%;height:100%;object-fit:cover;object-position:50% 15%" loading="lazy" decoding="async"></div>
+      <div class="ph ceo-ph" style="aspect-ratio:4/5;overflow:hidden;max-width:420px" tabindex="0" role="button" aria-pressed="false" aria-label="写真を切り替える（仕事の日／休みの日）"><img src="img/masao.webp" alt="代表取締役 菊池聖雄" style="width:100%;height:100%;object-fit:cover;object-position:50% 15%" loading="lazy" decoding="async"><img class="off" src="img/masao_off.webp" alt="休みの日の菊池聖雄" style="width:100%;height:100%;object-fit:cover" loading="lazy" decoding="async"><span class="ceo-tag" aria-hidden="true"><b>ON</b><i>OFF</i></span></div>
       <div style="margin-top:14px;font-size:13px;letter-spacing:.2em;color:var(--gy-dark);font-weight:900">代表取締役　菊池 聖雄</div>
     </div>
     <div class="body-txt fade">
@@ -2627,6 +2635,12 @@
     else if(h.indexOf('indeed.com')>=0) track('click_indeed',{where:where});
   },true);
 
+  // 代表の写真：パソコンはカーソルで、スマホはタップで「休みの日」の写真に切り替える
+  document.querySelectorAll('.ceo-ph').forEach(function(ph){
+    function flip(){var on=ph.classList.toggle('on');ph.setAttribute('aria-pressed',on?'true':'false');}
+    ph.addEventListener('click',function(){if(!matchMedia('(hover:hover)').matches)flip();});
+    ph.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();flip();}});
+  });
   // MUSIC：▶で再生。同時に鳴るのは1曲だけ。自動再生はしない
   //   「全曲つづけて流す」を押したときだけ、曲が終わると次へ進み、最後まで行ったら最初に戻る。そのあいだはページを移っても止めない
   (function(){
