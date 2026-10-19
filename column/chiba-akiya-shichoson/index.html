@@ -409,7 +409,7 @@
   #splash.p2 .ww-dark{opacity:1;transition-delay:.1s;}
   #splash.p2 .ww-brand{opacity:1;transform:none;transition-delay:.4s;}
   #splash.p3 .ww-dark,#splash.p3 .ww-brand{opacity:0;transition:none;}
-  #splash.p3 .ww-title{opacity:1;transform:none;transition:none;}
+  #splash.p3 .ww-title{opacity:1;transform:none;transition:none;}#splash.p3 .ww-words{opacity:0;transition:none;}#splash .ww.ww-en{font-family:var(--cond);letter-spacing:.01em;line-height:.9;}#splash .ww-q{opacity:0;transition:opacity .35s ease;}#splash.q .ww-q{opacity:1;}
   #splash.out .ww-brand,#splash.out .ww-dark{transition-delay:0s;}
   @media(max-width:700px){#splash .ww-title{flex-direction:column;gap:0;font-size:min(30vw,24vh);}#splash .ww-brand{font-size:9vw;}}
   @media(prefers-reduced-motion:reduce){#splash .ww:not(.acc),#splash .ww-brand,#splash .ww-brand .l2{transform:none !important;}}
@@ -2838,7 +2838,7 @@
 <script>
 (function(){
   var WORDS=['空き家再生','おうち終活','おうちじまい','空き家再生士','相続','終活','あきやにあかり','リフォーム','空き家のミカタ','おうちゃま','空き家王'];
-  var NO_NARA=['おうちゃま','あきやにあかり','空き家王'];  // 「のことなら」がつながりにくい言葉は、色付き（拡大）の候補から外す（コラージュには出る）
+  var BRAND='OHANA HOME';  // ローマ字で、真ん中に来たら「?」を足す（本人 同日「真ん中に来るオハナホームはローマ字表記にして、その後に？を入れて」）。2026-10-19 本人「最初にランダムに出るところにオハナホームの名前を入れて、〇〇のことならではなく、オハナホームを真ん中に持ってきて What We are と言うようにしよう」
   var ACCENT='#dd742a';  // 色付きは1語だけ（M70 Y100 相当のオレンジ）
   function rnd(a,b){return a+Math.random()*(b-a);}
   function shuffle(a){for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t;}return a;}
@@ -2852,15 +2852,18 @@
     function later(f,ms){timers.push(setTimeout(f,ms));}
     // 言葉を重ならないように散らす（大・中・小の3段）
     function place(){
-      var W=innerWidth,H=innerHeight,vm=Math.min(W,H)/100,pad=Math.max(6,vm*1.2),rects=[],els=[],list=[];
+      var W=innerWidth,H=innerHeight,vm=Math.min(W,H)/100,pad=Math.max(6,vm*1.2),rects=[],els=[],list=[{t:BRAND,size:rnd(10,13.5),brand:1}];  // オハナホームは最初に置く（必ず場所を取る）
       shuffle(WORDS.slice()).forEach(function(w,i){list.push({t:w,size:i<4?rnd(10,13.5):rnd(6,8.5)});});
       shuffle(WORDS.slice()).forEach(function(w){list.push({t:w,size:rnd(3,4.6)});});
       shuffle(WORDS.slice()).forEach(function(w){list.push({t:w,size:rnd(2,2.8)});});
       list.forEach(function(it){
-        var el=document.createElement('span'); el.className='ww'+(Math.random()<.38?' v':''); el.textContent=it.t;
+        var el=document.createElement('span'); el.className='ww'+(it.brand?' ww-en':(Math.random()<.38?' v':'')); el.textContent=it.t;  // OHANA HOME は横書き・ロゴと同じ書体
+        if(it.brand){ var q=document.createElement('span'); q.className='ww-q'; q.textContent='?'; el.appendChild(q); }  // 「?」は場所だけ取っておき、真ん中に来てから出す
         el.style.fontSize=(it.size*vm)+'px'; el.style.color='#000'; el.dataset.size=it.size;
         el.style.visibility='hidden'; box.appendChild(el);
         var w=el.offsetWidth,hh=el.offsetHeight;
+        while(it.brand&&w>W-pad*2){ it.size*=.9; el.style.fontSize=(it.size*vm)+'px'; w=el.offsetWidth; hh=el.offsetHeight; }  // 画面が狭くても外さず縮める
+        if(it.brand){ el.dataset.brand='1'; }
         if(w>W-pad*2||hh>H-pad*2){el.remove();return;}
         for(var k=0;k<120;k++){
           var x=rnd(pad,W-w-pad),y=rnd(pad,H-hh-pad),ok=true;
@@ -2869,12 +2872,13 @@
         }
         el.remove();
       });
-      // 大きめの言葉から、1語だけランダムに色を付ける
-      var ok=function(e){return NO_NARA.indexOf(e.textContent)<0;};
-      var big=shuffle(els.filter(function(e){return +e.dataset.size>=10&&ok(e);}));
-      if(!big.length) big=shuffle(els.filter(function(e){return +e.dataset.size>=6&&ok(e);}));
-      if(!big.length) big=shuffle(els.filter(ok));
-      if(big[0]){ big[0].style.color=ACCENT; big[0].dataset.last='1'; big[0].classList.add('acc'); }
+      // 真ん中へ持ってくるのは毎回 OHANA HOME（黒のまま）。色はほかの大きめの言葉から1語だけランダムに（2026-10-19 本人「オハナホームはオレンジで出なくていい。それ以外に何か1つ…ランダムで」）
+      var a0=els.filter(function(e){return e.dataset.brand;})[0];
+      if(a0){ a0.dataset.last='1'; a0.classList.add('acc'); }
+      var big=shuffle(els.filter(function(e){return !e.dataset.brand&&+e.dataset.size>=10;}));
+      if(!big.length) big=shuffle(els.filter(function(e){return !e.dataset.brand&&+e.dataset.size>=6;}));
+      if(!big.length) big=shuffle(els.filter(function(e){return !e.dataset.brand;}));
+      if(big[0]) big[0].style.color=ACCENT;
       return els;
     }
     function fit(el){ // 大きな文字が画面幅からはみ出さないように縮める
@@ -2896,29 +2900,18 @@
       var tLast=60+els.length*38;
       later(function(){ s.classList.add('focus'); }, tLast+500);   // オレンジ以外を薄く
       var t0=tLast+800;
-      later(function(){ // 色付きの言葉が中心へ動きながら画面に収まる大きさまで拡大 → 「のことなら」を末尾にそろえて出す
+      later(function(){ // OHANA HOME が真ん中へ動きながら、画面に収まる大きさまで拡大（「のことなら」はやめた 2026-10-19）
         var a=s.querySelector('.ww.acc'),W=s.clientWidth,H=s.clientHeight;
         if(a){
-          var b=a.getBoundingClientRect(),vert=a.classList.contains('v'),n=document.createElement('div'); n.className='ww-nara'+(vert?' v':''); n.textContent='のことなら'; n.style.visibility='hidden';
-          if(!vert){
-            var sc=Math.min(W*.88/b.width,H*.46/b.height),wW=b.width*sc,wH=b.height*sc,nF=Math.max(18,Math.min(wH*.34,W*.09)),gap=nF*.14,blk=wH+gap+nF*1.0,cx=W/2,cy=(H-blk)/2+wH/2;
-            n.style.fontSize=nF+'px'; n.style.top=(cy+wH/2+gap)+'px'; n.style.right=(W-(cx+wW/2))+'px'; // 横書き：右端をそろえる
-            a.style.setProperty('--dy',(cy-(b.top+b.height/2))+'px'); a.style.setProperty('--dx',(cx-(b.left+b.width/2))+'px'); a.style.setProperty('--sc',sc); box.appendChild(n);
-          } else {
-            var sc2=Math.min(W*.6/b.width,H*.84/b.height),wW2=b.width*sc2,wH2=b.height*sc2,nF2=Math.max(22,Math.min(wW2*.44,H*.11,(H*.84-0)/5.4)),gap2=nF2*.14,blk2=wW2+gap2+nF2*1.0,cy2=H/2,wx=(W-blk2)/2+nF2*1.0+gap2+wW2/2;
-            n.style.fontSize=nF2+'px'; box.appendChild(n);
-            n.style.top=(cy2+wH2/2-n.offsetHeight)+'px'; n.style.left=(wx-wW2/2-gap2-n.offsetWidth)+'px'; // 縦書き：下端をそろえる（言葉の左隣）
-            a.style.setProperty('--dy',(cy2-(b.top+b.height/2))+'px'); a.style.setProperty('--dx',(wx-(b.left+b.width/2))+'px'); a.style.setProperty('--sc',sc2);
-          }
-          n.style.visibility='';
+          var b=a.getBoundingClientRect(),sc=Math.min(W*.88/b.width,H*.46/b.height);
+          a.style.setProperty('--dy',(H/2-(b.top+b.height/2))+'px'); a.style.setProperty('--dx',(W/2-(b.left+b.width/2))+'px'); a.style.setProperty('--sc',sc);
         }
         s.classList.add('zoom');
       }, t0);
-      later(function(){ s.classList.add('nara'); }, t0+650);
-      var t=t0+1700;                                          // 「のことなら」を見せてから（2026-10-11 本人指示で短く：2200→1700）
-      later(function(){ s.classList.add('p2'); }, t);          // 黒地に小さく OHANAHOME
-      later(function(){ s.classList.add('p3'); }, t+2100);     // 白地に大きく What We are?（OHANAHOME を長く：1400→2100）
-      later(finish, t+2100+1500);
+      later(function(){ s.classList.add('q'); }, t0+800);      // 真ん中に止まったら「?」
+      var t=t0+1900;                                          // 真ん中の OHANA HOME? を見せてから
+      later(function(){ s.classList.add('p3'); }, t);          // 白地に大きく What We are?（黒地の OHANAHOME は名前が2回続くのでやめた 2026-10-19）
+      later(finish, t+1500);
     }
     if(waitFonts&&document.fonts&&document.fonts.ready){ var go=false; document.fonts.ready.then(function(){ if(!go){go=true;start();} }); setTimeout(function(){ if(!go){go=true;start();} },900); } else start();
   }
