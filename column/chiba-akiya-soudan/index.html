@@ -386,7 +386,7 @@
   .menu .sub .k{font-size:13px;letter-spacing:.16em;color:var(--gy);}
   .menu .sub .v{display:flex;flex-wrap:wrap;gap:4px 18px;}
   @media(max-height:700px){.menu a{font-size:clamp(28px,8vw,64px);}}
-  #splash{position:fixed;inset:0;z-index:999;background:var(--wh);overflow:hidden;cursor:pointer;transition:opacity 1.8s ease;}
+  #splash{position:fixed;inset:0;z-index:999;background:var(--wh);overflow:hidden;cursor:pointer;transition:opacity 1.2s ease;}
   #splash.out{opacity:0;pointer-events:none;}
   #splash .ww-words{position:absolute;inset:0;transition:opacity .45s ease;}
   #splash .ww{position:absolute;left:0;top:0;font-family:var(--jp);font-weight:900;line-height:1.05;white-space:nowrap;letter-spacing:.02em;opacity:0;transform:translateY(6px);transition:opacity .4s ease,transform .6s ease;}
@@ -409,7 +409,7 @@
   #splash.p2 .ww-dark{opacity:1;transition-delay:.1s;}
   #splash.p2 .ww-brand{opacity:1;transform:none;transition-delay:.4s;}
   #splash.p3 .ww-dark,#splash.p3 .ww-brand{opacity:0;transition:none;}
-  #splash.p3 .ww-title{opacity:1;transform:none;transition:none;}#splash.p3 .ww-words{opacity:0;transition:none;}#splash .ww.ww-en{font-family:var(--cond);letter-spacing:.01em;line-height:.9;}#splash .ww-about,#splash .ww-dots{position:absolute;font-family:var(--cond);font-weight:900;color:var(--bk);line-height:.9;letter-spacing:.01em;white-space:nowrap;pointer-events:none;}#splash .ww-about{opacity:0;transition:opacity .45s ease;}#splash.about .ww-about{opacity:1;}#splash .ww-dots span{opacity:0;transition:opacity .25s ease;}#splash.about .ww-dots span{opacity:1;}#splash.about .ww-dots span:nth-child(1){transition-delay:.35s}#splash.about .ww-dots span:nth-child(2){transition-delay:.6s}#splash.about .ww-dots span:nth-child(3){transition-delay:.85s}
+  #splash.p3 .ww-title{opacity:1;transform:none;transition:none;}#splash.p3 .ww-words{opacity:0;transition:none;}#splash .ww.ww-en{font-family:var(--cond);letter-spacing:.01em;line-height:.9;}#splash .ww-about,#splash .ww-dots{position:absolute;font-family:var(--cond);font-weight:900;color:var(--bk);line-height:.9;letter-spacing:.01em;white-space:nowrap;pointer-events:none;}#splash .ww-about{opacity:0;transition:opacity .45s ease;}#splash.about .ww-about{opacity:1;}#splash .ww-dots span{opacity:0;transition:opacity .25s ease;}#splash.about .ww-dots span{opacity:1;}#splash.about .ww-dots span:nth-child(1){transition-delay:.2s}#splash.about .ww-dots span:nth-child(2){transition-delay:.38s}#splash.about .ww-dots span:nth-child(3){transition-delay:.56s}
   #splash.out .ww-brand,#splash.out .ww-dark{transition-delay:0s;}
   @media(max-width:700px){#splash .ww-title{flex-direction:column;gap:0;font-size:min(30vw,24vh);}#splash .ww-brand{font-size:9vw;}}
   @media(prefers-reduced-motion:reduce){#splash .ww:not(.acc),#splash .ww-brand,#splash .ww-brand .l2{transform:none !important;}}
@@ -2885,7 +2885,7 @@
       sp.forEach(function(x){sum+=x.offsetWidth;max=Math.max(max,x.offsetWidth);});
       var w=col?max:sum, lim=innerWidth*.92; if(w>lim){el.style.fontSize=(parseFloat(getComputedStyle(el).fontSize)*lim/w)+'px';}
     }
-    function finish(){ if(done) return; done=true; timers.forEach(clearTimeout); s.classList.add('out'); setTimeout(function(){s.remove();},1900); }  // いま出ている画面のまま、フェードでトップへ
+    function finish(){ if(done) return; done=true; timers.forEach(clearTimeout); s.classList.add('out'); setTimeout(function(){s.remove();},1300); }  // いま出ている画面のまま、フェードでトップへ
     s.addEventListener('click',finish);
     function start(){
       brandEl.style.opacity='';
@@ -2914,7 +2914,7 @@
         s.classList.add('zoom');
       }, t0);
       later(function(){ s.classList.add('about'); }, t0+800);  // 真ん中に止まったら About と ...
-      later(finish, t0+2700);                                 // 見せたら、そのままフェードでトップへ（What We are? と黒地の OHANAHOME はやめた 2026-10-19）
+      later(finish, t0+1900);                                 // 見せたら、そのままフェードでトップへ（What We are? と黒地の OHANAHOME はやめた 2026-10-19）。本人「ちょっと長い」→ 2700→1900
     }
     if(waitFonts&&document.fonts&&document.fonts.ready){ var go=false; document.fonts.ready.then(function(){ if(!go){go=true;start();} }); setTimeout(function(){ if(!go){go=true;start();} },900); } else start();
   }
