@@ -2048,7 +2048,7 @@
 <section class="wrap" id="recruit-song" style="margin-top:clamp(60px,9vw,120px)">
   <div class="cond sub fade">SONG</div>
   <h2 class="cond ttl fade ja" style="font-size:min(clamp(40px,6.4vw,84px),calc(84vw / 7));white-space:nowrap">オハナのうた</h2>
-  <div class="pl-all fade"><button type="button" id="play-all"><span class="ic"></span><b>全曲つづけて流す</b></button><small><span class="ib">このサイトのうたを順番に、</span><span class="ib">くりかえし流します。</span><span class="ib">ほかのページを見ていても止まりません。</span></small></div>
+  <div class="pl-all fade"><button type="button" id="play-all"><span class="ic"></span><b>全曲つづけて流す</b></button><small><span class="ib">このサイトのうたを順番に、</span><span class="ib">くりかえし流します。</span><span class="ib">ほかのページを見ていても、</span><span class="ib">画面を消しても止まりません。</span></small></div>
   <div class="trks" style="margin-top:clamp(24px,3vw,40px)">
     <div class="trk fade">
       <img class="cv" src="img/music_kureba.webp" alt="「オハナにくれば？〜仕事にくれば〜」のジャケット" loading="lazy" decoding="async">
@@ -2696,53 +2696,75 @@
     ph.addEventListener('click',function(){if(!matchMedia('(hover:hover)').matches)flip();});
     ph.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();flip();}});
   });
-  // MUSIC：▶で再生。同時に鳴るのは1曲だけ。自動再生はしない
-  //   「全曲つづけて流す」を押したときだけ、曲が終わると次へ進み、最後まで行ったら最初に戻る。そのあいだはページを移っても止めない
+  // MUSIC：▶を押すと、そのうたから順番に全曲を流し、最後まで行ったら最初に戻る（くりかえし）
+  //   ページを移っても、画面を消しても、ほかのアプリを開いても止めない。ロック画面・通知の再生ボタンでも操作できる（Media Session）
+  //   読み直したときは、前に聴いていたうたをミニプレイヤーに出し、▶で続きから再開できる（自動再生はブラウザが許さない）
+  //   音はWeb Audioではなく<audio>で鳴らす（iPhoneのマナーモードでも鳴るのはこちら）
   (function(){
-    var au=new Audio(),cur=null,all=false;au.preload='none';
-    var btnAll=document.getElementById('play-all'),mini=document.getElementById('mini-pl');
+    var au=document.createElement('audio');au.preload='none';au.setAttribute('playsinline','');au.setAttribute('aria-hidden','true');au.style.display='none';document.body.appendChild(au);
+    var cur=null,on=false,pendingAt=0,resume=false,lastSave=0;  // on：続けて流す状態。pendingAt：読み直し後に再開する位置
+    var btnAll=document.getElementById('play-all'),mini=document.getElementById('mini-pl'),KEY='ohana_bgm';
     function list(){var a=[].slice.call(document.querySelectorAll('#recruit-song .trk .pl'));[].forEach.call(document.querySelectorAll('.trk .pl'),function(p){if(a.indexOf(p)<0)a.push(p);});return a;}
     function title(p){return p.closest('.trk').querySelector('h3').textContent;}
     function cover(p){var c=p.closest('.trk').querySelector('.cv');return c.currentSrc||c.src;}
     function fmt(s){s=Math.floor(s||0);return Math.floor(s/60)+':'+('0'+s%60).slice(-2);}
     function ui(){
-      document.querySelectorAll('.trk .pl').forEach(function(p){var on=(p===cur&&!au.paused);p.querySelector('.pp').classList.toggle('on',on);p.querySelector('.pp').setAttribute('aria-label',(on?'一時停止：':'再生：')+title(p));});
-      if(btnAll){btnAll.classList.toggle('on',all);btnAll.querySelector('b').textContent=all?'つづけて再生を止める':'全曲つづけて流す';}
-      if(mini){mini.hidden=!(all&&cur);if(all&&cur){mini.querySelector('.mt').textContent=title(cur);var im=mini.querySelector('img'),u=cover(cur);if(im.getAttribute('src')!==u)im.setAttribute('src',u);var mp=mini.querySelector('.mp');mp.classList.toggle('on',!au.paused);mp.setAttribute('aria-label',au.paused?'再生':'一時停止');}}
+      document.querySelectorAll('.trk .pl').forEach(function(p){var o=(p===cur&&!au.paused);p.querySelector('.pp').classList.toggle('on',o);p.querySelector('.pp').setAttribute('aria-label',(o?'一時停止：':'再生：')+title(p));});
+      if(btnAll){var pl=!!(cur&&!au.paused);btnAll.classList.toggle('on',pl);btnAll.querySelector('b').textContent=pl?'止める':'全曲つづけて流す';}
+      if(mini){mini.hidden=!cur;if(cur){mini.querySelector('.mt').textContent=title(cur);mini.querySelector('small').textContent=au.paused?(resume?'つづきから':'PAUSED'):'NOW PLAYING';var im=mini.querySelector('img'),u=cover(cur);if(im.getAttribute('src')!==u)im.setAttribute('src',u);var mp=mini.querySelector('.mp');mp.classList.toggle('on',!au.paused);mp.setAttribute('aria-label',au.paused?(resume?'つづきを流す':'再生'):'一時停止');}}
       if('mediaSession' in navigator)navigator.mediaSession.playbackState=cur?(au.paused?'paused':'playing'):'none';
     }
     function tick(){if(!cur)return;var d=au.duration||0,t=au.currentTime||0;cur.querySelector('.bar i').style.width=(d?t/d*100:0)+'%';cur.querySelector('.bar').setAttribute('aria-valuenow',d?Math.round(t/d*100):0);if(d)cur.querySelector('.tm').textContent=fmt(t)+' / '+fmt(d);}
-    function meta(){if(!('mediaSession' in navigator)||!cur||!window.MediaMetadata)return;navigator.mediaSession.metadata=new MediaMetadata({title:title(cur),artist:'オハナホーム',album:'オハナのうた',artwork:[{src:cover(cur),sizes:'800x800'}]});}
-    function load(p){if(cur&&cur!==p){var d=au.duration;cur.querySelector('.bar i').style.width='0';if(d)cur.querySelector('.tm').textContent='0:00 / '+fmt(d);}cur=p;au.src=p.getAttribute('data-src');au.play();meta();ui();}
+    function pos(){if(!('mediaSession' in navigator)||!navigator.mediaSession.setPositionState)return;var d=au.duration;if(!d||!isFinite(d))return;try{navigator.mediaSession.setPositionState({duration:d,playbackRate:au.playbackRate||1,position:Math.min(d,au.currentTime||0)});}catch(e){}}
+    function meta(){if(!('mediaSession' in navigator)||!cur||!window.MediaMetadata)return;try{var u=cover(cur);navigator.mediaSession.metadata=new MediaMetadata({title:title(cur),artist:'オハナホーム',album:'オハナのうた',artwork:[{src:u,sizes:'600x600',type:'image/webp'},{src:u,sizes:'800x800',type:'image/webp'}]});}catch(e){}}
+    function save(){var now=Date.now();if(now-lastSave<4000)return;lastSave=now;saveNow();}
+    function saveNow(){try{if(!cur||!on){localStorage.removeItem(KEY);return;}localStorage.setItem(KEY,JSON.stringify({src:cur.getAttribute('data-src'),t:Math.floor(au.currentTime||0)}));}catch(e){}}
+    function go(){  // 再生（読み直し後の再開なら、前の位置まで進めてから）
+      resume=false;if(pendingAt){var t=pendingAt;pendingAt=0;var seek=function(){try{if(au.duration&&t<au.duration-3)au.currentTime=t;}catch(e){}};if(au.readyState>=1)seek();else au.addEventListener('loadedmetadata',seek,{once:true});}
+      var pr=au.play();if(pr&&pr.catch)pr.catch(function(){ui();});
+    }
+    function clearBar(p){if(!p)return;var d=au.duration;p.querySelector('.bar i').style.width='0';p.querySelector('.bar').setAttribute('aria-valuenow',0);if(d)p.querySelector('.tm').textContent='0:00 / '+fmt(d);}
+    function load(p){if(cur&&cur!==p)clearBar(cur);cur=p;on=true;pendingAt=0;au.src=p.getAttribute('data-src');au.preload='auto';go();meta();ui();lastSave=0;save();}
     function step(d){var a=list(),i=a.indexOf(cur);load(a[((i<0?0:i+d)%a.length+a.length)%a.length]);}
-    au.addEventListener('timeupdate',tick);au.addEventListener('play',ui);au.addEventListener('pause',ui);
-    au.addEventListener('ended',function(){if(all){step(1);return;}au.currentTime=0;tick();ui();});
+    function stop(){on=false;au.pause();var p=cur;cur=null;pendingAt=0;resume=false;clearBar(p);try{au.removeAttribute('src');au.load();}catch(e){}ui();saveNow();}
+    au.addEventListener('timeupdate',function(){tick();pos();save();});
+    au.addEventListener('loadedmetadata',function(){tick();pos();});
+    au.addEventListener('play',function(){ui();pos();});
+    au.addEventListener('pause',function(){ui();lastSave=0;save();});
+    au.addEventListener('ended',function(){if(on){step(1);return;}au.currentTime=0;tick();ui();});
+    au.addEventListener('error',function(){ui();});
     document.querySelectorAll('.trk .pl').forEach(function(p){
       p.querySelector('.pp').addEventListener('click',function(){
-        if(cur!==p){load(p);}else if(au.paused){au.play();}else{au.pause();}
+        if(cur!==p){load(p);}else if(au.paused){on=true;go();}else{au.pause();}
       });
       var bar=p.querySelector('.bar');
-      function seek(r){if(cur!==p){cur=p;au.src=p.getAttribute('data-src');meta();}var go=function(){au.currentTime=r*au.duration;au.play();};if(au.duration)go();else au.addEventListener('loadedmetadata',go,{once:true});}
+      function seek(r){if(cur!==p){if(cur)clearBar(cur);cur=p;on=true;pendingAt=0;au.src=p.getAttribute('data-src');au.preload='auto';meta();}var jump=function(){au.currentTime=r*au.duration;go();};if(au.duration)jump();else au.addEventListener('loadedmetadata',jump,{once:true});if(au.readyState<1)au.load();}
       bar.addEventListener('click',function(e){var b=bar.getBoundingClientRect();seek(Math.min(1,Math.max(0,(e.clientX-b.left)/b.width)));});
       bar.addEventListener('keydown',function(e){if(cur!==p||!au.duration)return;if(e.key==='ArrowRight'){au.currentTime=Math.min(au.duration,au.currentTime+5);}else if(e.key==='ArrowLeft'){au.currentTime=Math.max(0,au.currentTime-5);}});
     });
     if(btnAll)btnAll.addEventListener('click',function(){
-      if(all){all=false;au.pause();ui();return;}
-      all=true;
-      if(cur&&!au.paused){ui();}else if(cur&&au.currentTime>0){au.play();}else{load(list()[0]);}
+      if(cur&&!au.paused){au.pause();}else if(cur){on=true;go();}else{load(list()[0]);}
     });
     if(mini){
-      mini.querySelector('.mp').addEventListener('click',function(){if(au.paused)au.play();else au.pause();});
-      mini.querySelector('.mn').addEventListener('click',function(){step(1);});
-      mini.querySelector('.mx').addEventListener('click',function(){all=false;au.pause();ui();});
+      mini.querySelector('.mp').addEventListener('click',function(){if(!cur)return;if(au.paused){on=true;go();}else{au.pause();}});
+      mini.querySelector('.mn').addEventListener('click',function(){if(cur)step(1);});
+      mini.querySelector('.mx').addEventListener('click',stop);
     }
     if('mediaSession' in navigator){try{
-      navigator.mediaSession.setActionHandler('play',function(){if(cur)au.play();});
-      navigator.mediaSession.setActionHandler('pause',function(){au.pause();});
-      navigator.mediaSession.setActionHandler('nexttrack',function(){step(1);});
-      navigator.mediaSession.setActionHandler('previoustrack',function(){if(au.currentTime>3){au.currentTime=0;}else{step(-1);}});
+      var ms=navigator.mediaSession;
+      ms.setActionHandler('play',function(){if(cur){on=true;go();}});
+      ms.setActionHandler('pause',function(){au.pause();});
+      ms.setActionHandler('nexttrack',function(){if(cur)step(1);});
+      ms.setActionHandler('previoustrack',function(){if(!cur)return;if(au.currentTime>3){au.currentTime=0;}else{step(-1);}});
+      try{ms.setActionHandler('stop',stop);}catch(e){}
+      try{ms.setActionHandler('seekto',function(d){if(d&&typeof d.seekTime==='number'&&au.duration){au.currentTime=Math.min(au.duration,Math.max(0,d.seekTime));pos();}});}catch(e){}
+      try{ms.setActionHandler('seekbackward',function(d){au.currentTime=Math.max(0,au.currentTime-((d&&d.seekOffset)||10));pos();});}catch(e){}
+      try{ms.setActionHandler('seekforward',function(d){if(au.duration)au.currentTime=Math.min(au.duration,au.currentTime+((d&&d.seekOffset)||10));pos();});}catch(e){}
     }catch(e){}}
-    window.addEventListener('routechange',function(){if(!all)au.pause();});
+    window.addEventListener('pagehide',saveNow);
+    document.addEventListener('visibilitychange',function(){if(document.hidden)saveNow();});
+    // 読み直したとき：前に聴いていたうたをミニプレイヤーに出す（▶で続きから。勝手には鳴らさない）
+    (function(){var s=null;try{s=JSON.parse(localStorage.getItem(KEY)||'null');}catch(e){}if(!s||!s.src)return;var p=list().filter(function(q){return q.getAttribute('data-src')===s.src;})[0];if(!p)return;cur=p;on=true;pendingAt=s.t||0;resume=true;au.src=s.src;meta();ui();})();
   })();
   document.addEventListener('click',function(e){var b=e.target.closest&&e.target.closest('[data-jump]');if(!b)return;var t=document.getElementById(b.getAttribute('data-jump'));if(t)t.scrollIntoView({behavior:'smooth',block:'start'});});
   document.addEventListener('click',function(e){var b=e.target.closest&&e.target.closest('.ba-open');if(!b)return;var m=b.nextElementSibling;if(m){m.hidden=false;m.querySelectorAll('.clip-b').forEach(function(c){c.classList.add('is-shown');});}b.hidden=true;});  // WORKS：この家をもっと見る（開いた組は見せる印を付ける）
