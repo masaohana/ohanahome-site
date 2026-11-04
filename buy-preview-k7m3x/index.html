@@ -1,0 +1,657 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>オハナホーム 物件一覧</title>
+<meta name="description" content="オハナホームの販売中物件と成約実績を地図で。千葉県を中心に、空き家・中古戸建・土地。">
+<link rel="icon" href="img/logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sofia+Sans+Extra+Condensed:wght@800;900&family=Noto+Sans+JP:wght@400;500;700;900&family=Zen+Maru+Gothic:wght@500;700&display=swap">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
+<style>
+/* we.ohanahome.jp と同じ色・書体 */
+:root{
+  --bk:#000; --wh:#fff; --cream:#fbf5e6; --sun:#f2a93b; --night:#0b1a5c; --night-deep:#060f3a;
+  --gy:#9e9e9e; --gy-dark:#333; --gy-soft:#f4f4f4; --line:#d7d7d7; --sub:#5c5c5c;
+  --cond:"Sofia Sans Extra Condensed","Arial Narrow",sans-serif;
+  --jp:"Noto Sans JP","Hiragino Kaku Gothic ProN","Hiragino Sans",sans-serif;
+  --maru:"Zen Maru Gothic","Hiragino Maru Gothic ProN",sans-serif;
+  --ok:#1f8f4e; --warn:#b45309; --warn-bg:#fff7e6;
+  --shadow:0 1px 2px rgba(0,0,0,.06),0 6px 18px rgba(0,0,0,.08);
+}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%}
+body{font-family:var(--jp);color:var(--bk);background:var(--wh);display:flex;flex-direction:column;height:100vh;overflow:hidden;font-size:14px}
+button{font:inherit;cursor:pointer}
+a{color:inherit}
+.cond{font-family:var(--cond);font-weight:900;letter-spacing:.06em;text-transform:uppercase}
+
+.proto{background:var(--night-deep);color:#e9ecf7;font-size:12.5px;text-align:center;padding:6px 16px;letter-spacing:.02em}
+.proto b{color:var(--sun)}
+
+header{background:var(--bk);color:var(--wh);display:flex;align-items:center;gap:18px;padding:10px 24px;flex:none}
+.logo{display:block;color:var(--wh);text-decoration:none;white-space:nowrap;line-height:1}
+.logo small{display:block;font-family:var(--cond);font-weight:800;font-size:11px;letter-spacing:.3em;margin-bottom:3px;opacity:.9}
+.logo b{display:block;font-family:var(--cond);font-weight:900;font-size:34px;line-height:.9;letter-spacing:.02em;white-space:nowrap}
+.logo b i{font-style:normal;font-family:var(--jp);font-weight:900;font-size:.32em;letter-spacing:.2em;vertical-align:.55em;margin-left:.3em}
+.mode{display:flex;border:1px solid rgba(255,255,255,.75);border-radius:999px;overflow:hidden;background:rgba(0,0,0,.22)}
+.mode button{background:transparent;border:0;padding:8px 16px;font-family:var(--cond);font-weight:900;font-size:17px;letter-spacing:.08em;color:var(--wh)}
+.mode button small{font-family:var(--jp);font-weight:700;font-size:11px;letter-spacing:.06em;margin-left:6px;text-transform:none}
+.mode button.on{background:var(--wh);color:var(--bk)}
+.search{flex:1;max-width:440px;display:flex;align-items:center;gap:8px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.35);border-radius:999px;padding:8px 14px;color:var(--wh)}
+.search:focus-within{background:var(--wh);color:var(--bk);border-color:var(--wh)}
+.search input{border:0;outline:0;flex:1;font:inherit;font-size:14px;background:transparent;color:inherit}
+.search input::placeholder{color:currentColor;opacity:.6}
+nav{margin-left:auto;display:flex;gap:6px;align-items:center}
+nav button{background:transparent;border:0;padding:8px 12px;border-radius:8px;font-weight:700;color:var(--wh);opacity:.9}
+nav button:hover{background:rgba(255,255,255,.12);opacity:1}
+nav button.primary{background:var(--sun);color:var(--bk);font-family:var(--cond);font-weight:900;font-size:17px;letter-spacing:.08em;padding:9px 18px;border-radius:999px;opacity:1}
+nav button.primary:hover{background:#ffc166}
+.lang{border:1px solid rgba(255,255,255,.75);background:rgba(0,0,0,.22);border-radius:999px;padding:5px 11px;font-family:var(--cond);font-weight:900;font-size:15px;letter-spacing:.08em;color:var(--wh);white-space:nowrap}
+.lang:hover{background:var(--wh);color:var(--bk)}
+.proto{background:var(--night-deep)}
+.filters{background:var(--wh);border-bottom:1px solid var(--line);display:flex;align-items:center;gap:8px;padding:8px 24px;flex:none;overflow-x:auto;scrollbar-width:none}
+.filters::-webkit-scrollbar{display:none}
+.filters select,.filters .chip,.filters label.toggle{border:1.5px solid var(--line);background:#fff;border-radius:999px;padding:7px 12px;font-size:13px;font-weight:700;color:var(--bk);white-space:nowrap}
+.filters select{appearance:none;-webkit-appearance:none;padding-right:26px;background:#fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23333' stroke-width='2.5'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E") no-repeat right 10px center}
+.filters select.on,.chip.on{border-color:var(--bk);background:var(--bk);color:var(--wh)}
+.filters select.on{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23fff' stroke-width='2.5'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E")}
+.filters .sep{width:1px;height:24px;background:var(--line);flex:none}
+label.toggle{display:flex;align-items:center;gap:6px;cursor:pointer}
+label.toggle input{accent-color:var(--bk)}
+.filters .reset{margin-left:auto;border:0;background:transparent;color:var(--gy);font-size:13px;text-decoration:underline;white-space:nowrap}
+[hidden]{display:none!important}
+
+main{flex:1;display:grid;grid-template-columns:minmax(0,1fr) clamp(360px,46%,640px);min-height:0}
+#map{height:100%;background:#e9eef2}
+.list{background:var(--cream);overflow-y:auto;border-left:2px solid var(--bk)}
+.list-head{position:sticky;top:0;background:var(--cream);padding:14px 20px 10px;z-index:2;display:flex;align-items:flex-end;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.list-head h1{font-family:var(--cond);font-weight:900;font-size:34px;letter-spacing:.04em;margin:0;line-height:1;text-transform:uppercase}
+.list-head h1 small{display:block;font-family:var(--jp);font-weight:700;font-size:12px;letter-spacing:.08em;text-transform:none;margin-top:4px;color:var(--sub)}
+.list-head .count{color:var(--sub);font-size:12.5px;margin-top:6px}
+.list-head .right{display:flex;gap:8px;align-items:center}
+.list-head select{border:1.5px solid var(--line);border-radius:8px;padding:6px 8px;font-size:13px;background:#fff}
+.seg{display:flex;border:1.5px solid var(--bk);border-radius:8px;overflow:hidden;background:#fff}
+.seg button{border:0;background:#fff;padding:6px 10px;font-size:12.5px;font-weight:700}
+.seg button.on{background:var(--bk);color:#fff}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:14px;padding:6px 20px 24px}
+.empty{padding:40px 18px;text-align:center;color:var(--gy)}
+
+.card{background:#fff;border-radius:6px;box-shadow:var(--shadow);overflow:hidden;cursor:pointer;border:2px solid transparent;transition:transform .12s,border-color .12s;position:relative}
+.card:hover,.card.hl{transform:translateY(-2px);border-color:var(--bk)}
+.card .ph{aspect-ratio:4/3;background:var(--gy-soft);position:relative;overflow:hidden}
+.card .ph img.main{width:100%;height:100%;object-fit:cover;display:block}
+.card .ph img.plan-main{object-fit:contain;background:#fff}
+.card .inset{position:absolute;left:8px;bottom:8px;width:42%;aspect-ratio:4/3;border:2px solid #fff;border-radius:4px;background:#fff;box-shadow:0 2px 8px rgba(0,0,0,.3);overflow:hidden;cursor:pointer}
+.card .inset img{width:100%;height:100%;object-fit:cover;display:block}
+.card .inset.plan img{object-fit:contain}
+.card .inset span{position:absolute;left:0;right:0;bottom:0;background:rgba(0,0,0,.6);color:#fff;font-size:10px;text-align:center;padding:1px 0;font-weight:700}
+.card .badge{position:absolute;left:10px;top:10px;background:var(--bk);color:#fff;font-family:var(--cond);font-weight:900;font-size:13px;letter-spacing:.08em;padding:4px 9px;border-radius:3px}
+.card .badge.new{background:var(--sun);color:var(--bk)}
+.card .badge.sold{background:var(--night);font-size:15px}
+.card .badge.reform{left:auto;right:10px;top:10px;background:var(--sun);color:var(--bk);font-family:var(--jp);font-size:11px;font-weight:800}
+.card .badge.cnt{left:auto;right:48px;top:auto;bottom:10px;background:rgba(0,0,0,.6);font-family:var(--jp);font-weight:600;font-size:11px;letter-spacing:0}
+.card .fav{position:absolute;right:8px;top:8px;width:32px;height:32px;border-radius:50%;border:0;background:rgba(255,255,255,.92);display:grid;place-items:center;font-size:16px;color:#9aa3b2}
+.card .fav.on{color:#e0245e}
+.card .body{padding:12px 14px 14px}
+.card .price{font-family:var(--cond);font-weight:900;font-size:28px;letter-spacing:.02em;line-height:1}
+.card .price .yen{font-size:.9em}
+.card .price small{display:block;font-family:var(--jp);font-size:12px;font-weight:600;color:var(--sub);margin-top:4px;letter-spacing:0}
+.card .specs{display:flex;gap:10px;font-size:13px;color:var(--bk);margin:8px 0 4px;flex-wrap:wrap}
+.card .specs b{font-weight:700}
+.card .addr{font-size:12.5px;color:var(--sub)}
+.card .tags{display:flex;gap:5px;flex-wrap:wrap;margin-top:8px}
+.tag{font-size:11px;font-weight:600;padding:3px 7px;border-radius:3px;background:var(--gy-soft);color:var(--gy-dark)}
+.tag.good{background:#e9f7ee;color:var(--ok)}
+.tag.sun{background:#fdecd0;color:#8a5a0a}
+.nophoto{display:grid;place-items:center;height:100%;color:var(--gy);font-size:13px;background:var(--gy-soft)}
+
+/* markers */
+.pin{display:inline-block;position:absolute;left:0;top:0;background:var(--bk);border:2px solid var(--bk);color:#fff;border-radius:999px;font-family:var(--cond);font-weight:900;font-size:14px;letter-spacing:.03em;padding:3px 9px;white-space:nowrap;box-shadow:0 2px 6px rgba(0,0,0,.25);transform:translate(-50%,-100%);transition:transform .1s}
+.pin::after{content:"";position:absolute;left:50%;bottom:-6px;width:8px;height:8px;background:var(--bk);transform:translateX(-50%) rotate(45deg)}
+.pin.hl,.pin:hover{background:var(--sun);color:var(--bk);border-color:var(--sun);transform:translate(-50%,-100%) scale(1.08);z-index:999}
+.pin.hl::after,.pin:hover::after{background:var(--sun)}
+.pin.landpin{background:#fff;color:var(--bk)}.pin.landpin::after{background:#fff;border-right:2px solid var(--bk);border-bottom:2px solid var(--bk)}
+.pin.soldpin{background:var(--gy);border-color:var(--gy);font-size:11px;padding:2px 7px;opacity:.95}.pin.soldpin::after{background:var(--gy)}
+.pin.soldpin.reformpin{background:var(--night);border-color:var(--night)}.pin.soldpin.reformpin::after{background:var(--night)}
+.pin.fav{border-color:#e0245e}
+.basebtn{background:#fff;border:2px solid var(--bk);border-radius:999px;padding:6px 12px;font-family:var(--cond);font-weight:900;font-size:14px;letter-spacing:.06em;cursor:pointer;box-shadow:0 2px 6px rgba(0,0,0,.2);margin:0 0 24px 10px}
+.basebtn:hover{background:var(--bk);color:#fff}
+.leaflet-popup-content-wrapper{border-radius:6px;box-shadow:var(--shadow)}
+.leaflet-popup-content{margin:0;width:220px!important;font-family:var(--jp)}
+.pop img{width:100%;aspect-ratio:16/9;object-fit:cover;display:block;border-radius:6px 6px 0 0}
+.pop .b{padding:8px 12px 10px;font-size:12.5px}
+.pop .p{font-family:var(--cond);font-weight:900;font-size:20px}
+.pop a{display:inline-block;margin-top:6px;color:var(--night);font-weight:700;text-decoration:none}
+
+/* detail panel */
+.overlay{position:fixed;inset:0;background:rgba(0,0,0,.5);opacity:0;pointer-events:none;transition:opacity .2s;z-index:1000}
+.overlay.open{opacity:1;pointer-events:auto}
+.panel{position:fixed;top:0;right:0;bottom:0;width:min(760px,100%);background:#fff;transform:translateX(100%);transition:transform .25s cubic-bezier(.2,.8,.2,1);z-index:1001;overflow-y:auto;box-shadow:-10px 0 40px rgba(0,0,0,.2)}
+.panel.open{transform:none}
+.panel .close{position:sticky;top:12px;margin:12px 0 -44px 12px;z-index:3;width:36px;height:36px;border-radius:50%;border:0;background:rgba(255,255,255,.95);box-shadow:var(--shadow);font-size:18px}
+.gallery{display:grid;grid-template-columns:2fr 1fr;grid-template-rows:1fr 1fr;gap:4px;height:360px;background:#111}
+.gallery img{width:100%;height:100%;object-fit:cover;display:block}
+.gallery img:first-child{grid-row:1/3}
+.gallery.one{grid-template-columns:1fr;grid-template-rows:1fr}
+.thumbs{display:flex;gap:6px;overflow-x:auto;padding:8px 28px 0;background:#fff}
+.thumbs img{width:96px;height:72px;object-fit:cover;border-radius:4px;flex:none;cursor:pointer;border:2px solid transparent}
+.thumbs img.on{border-color:var(--sun)}
+.d{padding:20px 28px 40px}
+.d .top{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;flex-wrap:wrap}
+.d .price{font-family:var(--cond);font-weight:900;font-size:40px;letter-spacing:.02em;line-height:1}
+.d .price small{font-family:var(--jp);font-size:14px;color:var(--sub);font-weight:700;margin-left:8px;letter-spacing:0}
+.d .specs{display:flex;gap:16px;font-size:15px;margin:10px 0 6px;flex-wrap:wrap}
+.d .specs b{font-weight:800}
+.d .addr{color:var(--sub);font-size:14px}
+.d h2{font-family:var(--cond);font-weight:900;font-size:24px;letter-spacing:.06em;text-transform:uppercase;margin:26px 0 10px;padding-bottom:6px;border-bottom:2px solid var(--bk)}
+.d h2 small{font-family:var(--jp);font-weight:700;font-size:12px;letter-spacing:.06em;text-transform:none;margin-left:10px;color:var(--sub)}
+.d p{line-height:1.9;font-size:14.5px;color:#222;margin:0}
+.kv{display:grid;grid-template-columns:1fr 1fr;gap:0 24px;font-size:14px}
+.kv div{display:flex;justify-content:space-between;gap:10px;padding:9px 0;border-bottom:1px solid var(--line)}
+.kv span:first-child{color:var(--sub);flex:none}
+.kv span:last-child{font-weight:600;text-align:right}
+.uses{display:flex;gap:8px;flex-wrap:wrap}
+.uses span{background:var(--gy-soft);color:var(--bk);font-weight:600;padding:6px 11px;border-radius:999px;font-size:13px}
+.near{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;font-size:12.5px}
+.near div{background:var(--cream);border-radius:6px;padding:10px 12px;color:var(--sub)}
+.near b{display:block;font-size:13.5px;color:var(--bk)}
+.cta{position:sticky;bottom:0;background:#fff;border-top:2px solid var(--bk);padding:12px 28px;display:flex;gap:10px;margin:24px -28px -40px;flex-wrap:wrap}
+.btn{flex:1;border:0;border-radius:999px;padding:13px 18px;font-weight:800;font-size:15px;text-align:center;text-decoration:none;display:inline-flex;align-items:center;justify-content:center;gap:8px;min-width:200px}
+.btn.p{background:var(--bk);color:#fff;font-family:var(--cond);font-weight:900;font-size:19px;letter-spacing:.08em}
+.btn.p:hover{background:var(--night)}
+.btn.s{background:#fff;border:2px solid var(--bk);color:var(--bk)}
+.disclaimer{font-size:11.5px;color:var(--gy);line-height:1.6;margin-top:14px}
+.est{background:var(--cream);border:1px solid #efe3c4;border-radius:8px;padding:16px 18px;margin-top:18px}
+.est .lbl{font-size:12px;font-weight:700;color:var(--night);letter-spacing:.06em}
+.est .val{font-family:var(--cond);font-weight:900;font-size:30px;margin:4px 0}
+.est .val small{font-family:var(--jp);font-size:12px;font-weight:600;color:var(--sub);margin-left:6px}
+.est table{width:100%;border-collapse:collapse;font-size:13px;margin-top:10px}
+.est td{padding:5px 0;border-top:1px dashed #e4d7b4}
+.est td:last-child{text-align:right;font-variant-numeric:tabular-nums;font-weight:600}
+.est .note{font-size:11.5px;color:var(--gy);margin-top:8px;line-height:1.6}
+
+/* sell modal */
+.modal{position:fixed;inset:0;display:grid;place-items:center;z-index:1002;padding:16px;opacity:0;pointer-events:none;transition:opacity .2s}
+.modal.open{opacity:1;pointer-events:auto}
+.modal .box{background:#fff;border-radius:10px;width:min(560px,100%);box-shadow:0 20px 60px rgba(0,0,0,.3);overflow:hidden;max-height:92vh;overflow-y:auto}
+.modal .hd{background:var(--bk);color:#fff;padding:20px 24px}
+.modal .hd h2{margin:0 0 4px;font-family:var(--cond);font-weight:900;font-size:26px;letter-spacing:.06em}
+.modal .hd p{margin:0;opacity:.85;font-size:13px}
+.form{padding:20px 24px;display:grid;gap:14px}
+.form label{display:grid;gap:5px;font-size:13px;font-weight:700;color:var(--gy-dark)}
+.form select,.form input{border:1.5px solid var(--line);border-radius:6px;padding:10px;font:inherit;font-size:15px}
+.form .row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.checks{display:flex;flex-wrap:wrap;gap:8px}
+.checks label{flex-direction:row;align-items:center;border:1.5px solid var(--line);border-radius:999px;padding:7px 12px;cursor:pointer;font-weight:600;color:var(--bk)}
+.checks label:has(input:checked){border-color:var(--bk);background:var(--bk);color:#fff}
+.checks input{accent-color:var(--sun)}
+.result{margin:0 24px 24px;display:none}
+.result.show{display:block}
+.lightbox{position:fixed;inset:0;background:rgba(0,0,0,.88);z-index:1500;display:none;place-items:center;padding:24px;cursor:zoom-out}
+.lightbox.open{display:grid}
+.lightbox img{max-width:min(96vw,1400px);max-height:88vh;object-fit:contain;background:#fff;border-radius:4px}
+.lightbox .cap{position:absolute;left:0;right:0;bottom:14px;text-align:center;color:#fff;font-size:13px}
+.planblock{background:#fff;border:1px solid var(--line);border-radius:6px;padding:10px;cursor:zoom-in}
+.planblock img{width:100%;max-height:520px;object-fit:contain;display:block}
+.toast{position:fixed;left:50%;bottom:28px;transform:translateX(-50%) translateY(20px);background:var(--bk);color:#fff;padding:12px 18px;border-radius:6px;font-size:14px;opacity:0;transition:.25s;z-index:2000;pointer-events:none;max-width:90vw;text-align:center}
+.toast.show{opacity:1;transform:translateX(-50%)}
+
+.mobile-switch{display:none}
+@media (max-width:900px){
+  main{grid-template-columns:1fr;position:relative}
+  .list{border-left:0}
+  body.showmap .list{display:none}
+  body:not(.showmap) #map{display:none}
+  .cards{grid-template-columns:1fr}
+  .mobile-switch{display:flex;position:fixed;bottom:18px;left:50%;transform:translateX(-50%);z-index:900;background:var(--bk);color:#fff;border:0;border-radius:999px;padding:12px 20px;font-weight:800;box-shadow:0 6px 20px rgba(0,0,0,.3);gap:6px}
+  header{padding:8px 14px;gap:8px;flex-wrap:wrap}
+  .logo small{display:none}.logo b{font-size:26px}
+  .mode{order:2}.mode button{padding:6px 10px;font-size:14px}.mode button small{display:none}
+  .search{order:5;flex-basis:100%;max-width:none;padding:7px 10px}
+  nav{margin-left:auto;order:3}nav button:not(.primary){display:none}nav button.primary{padding:7px 12px;font-size:14px}
+  .lang{order:4;padding:6px 9px;font-size:11.5px}
+  .proto{font-size:11px;padding:5px 10px}
+  .filters{padding:8px 14px}
+  .gallery{height:240px}
+  .d{padding:16px 16px 40px}
+  .cta{padding:12px 16px;margin:24px -16px -40px}
+  .kv,.near{grid-template-columns:1fr}
+  .form .row{grid-template-columns:1fr}
+  .list-head h1{font-size:28px}
+}
+</style>
+</head>
+<body>
+<div class="proto" id="proto"></div>
+
+<header>
+  <a class="logo" href="https://we.ohanahome.jp/" title="OHANA HOME"><small>AKIYA · SOUZOKU · SHUKATSU</small><b>OHANA HOME<i data-t="logo.i">空き家再生</i></b></a>
+  <div class="mode" role="tablist">
+    <button id="modeSale" class="on" onclick="setMode('sale')">FOR SALE<small data-t="mode.sale">販売中</small></button>
+    <button id="modeSold" onclick="setMode('sold')">SOLD<small data-t="mode.sold">成約実績</small></button>
+  </div>
+  <div class="search">🔍<input id="q" data-ph="search.ph" placeholder="市町村・駅名で探す" autocomplete="off"></div>
+  <nav>
+    <button onclick="toggleFavOnly()" id="favbtn" data-t="nav.saved">♡ 保存した物件</button>
+    <button class="primary" onclick="openSell()" data-t="nav.sell">売りたい方へ</button>
+  </nav>
+  <button class="lang" id="langbtn" onclick="setLang(lang==='ja'?'en':'ja')" aria-label="Language">EN</button>
+</header>
+
+<div class="filters" id="filtersSale">
+  <select id="fPrice"><option value="" data-t="f.price">価格</option><option value="300" data-t="f.price.300">〜300万円</option><option value="500" data-t="f.price.500">〜500万円</option><option value="1000" data-t="f.price.1000">〜1,000万円</option><option value="2000" data-t="f.price.2000">〜2,000万円</option><option value="3000" data-t="f.price.3000">〜3,000万円</option><option value="5000" data-t="f.price.5000">〜5,000万円</option></select>
+  <select id="fRooms"><option value="" data-t="f.rooms">間取り</option><option value="2" data-t="f.rooms.2">2部屋以上</option><option value="3" data-t="f.rooms.3">3部屋以上</option><option value="4" data-t="f.rooms.4">4部屋以上</option><option value="5" data-t="f.rooms.5">5部屋以上</option></select>
+  <select id="fLand"><option value="" data-t="f.land">土地面積</option><option value="150" data-t="f.land.150">150㎡以上</option><option value="250" data-t="f.land.250">250㎡以上</option><option value="400" data-t="f.land.400">400㎡以上</option><option value="800" data-t="f.land.800">800㎡以上</option></select>
+  <select id="fAge"><option value="" data-t="f.age">築年数</option><option value="20" data-t="f.age.20">築20年以内</option><option value="35" data-t="f.age.35">築35年以内</option><option value="50" data-t="f.age.50">築50年以内</option></select>
+  <select id="fType"><option value="" data-t="f.type">種類</option><option value="house" data-t="type.house">戸建</option><option value="平屋" data-t="type.平屋">平屋</option><option value="2階建" data-t="type.2階建">2階建</option><option value="土地" data-t="type.土地">土地</option><option value="店舗付き住宅" data-t="type.店舗付き住宅">店舗付き住宅</option><option value="店舗" data-t="type.店舗">店舗</option><option value="マンション" data-t="type.マンション">マンション</option></select>
+  <span class="sep"></span>
+  <button class="chip" data-chip="new" data-t="chip.new">新着</button>
+  <button class="chip" data-chip="seller" data-t="chip.seller">売主物件</button>
+  <button class="chip" data-chip="walk15" data-t="chip.walk15">駅徒歩15分以内</button>
+  <span class="sep"></span>
+  <label class="toggle"><input type="checkbox" id="fBounds" checked><span data-t="f.bounds">地図の範囲で絞る</span></label>
+  <button class="reset" onclick="resetAll()" data-t="f.reset">条件をクリア</button>
+</div>
+<div class="filters" id="filtersSold" hidden>
+  <button class="chip" data-schip="reform" data-t="schip.reform">フルリフォーム済み</button>
+  <button class="chip" data-schip="house" data-t="schip.house">戸建</button>
+  <span class="sep"></span>
+  <label class="toggle"><input type="checkbox" id="fBoundsSold" checked><span data-t="f.bounds">地図の範囲で絞る</span></label>
+  <button class="reset" onclick="resetAll()" data-t="f.reset">条件をクリア</button>
+</div>
+
+<main>
+  <div id="map"></div>
+  <section class="list" id="list">
+    <div class="list-head">
+      <div><h1 id="title"></h1><div class="count" id="count"></div></div>
+      <div class="right">
+        <div class="seg" id="viewSeg"><button id="vPhoto" class="on" onclick="setView('photo')" data-t="view.photo">写真</button><button id="vPlan" onclick="setView('plan')" data-t="view.plan">間取り</button></div>
+        <select id="sort">
+          <option value="new" data-t="sort.new">新着順</option>
+          <option value="priceAsc" data-t="sort.priceAsc">価格が安い順</option>
+          <option value="priceDesc" data-t="sort.priceDesc">価格が高い順</option>
+          <option value="landDesc" data-t="sort.landDesc">土地が広い順</option>
+          <option value="ageAsc" data-t="sort.ageAsc">築年が新しい順</option>
+        </select>
+      </div>
+    </div>
+    <div class="cards" id="cards"></div>
+  </section>
+</main>
+<button class="mobile-switch" id="msw" onclick="document.body.classList.toggle('showmap');this.textContent=document.body.classList.contains('showmap')?t('m.list'):t('m.map');if(document.body.classList.contains('showmap'))setTimeout(()=>map.invalidateSize(),50)">🗺 地図を見る</button>
+
+<div class="overlay" id="overlay" onclick="closePanel()"></div>
+<aside class="panel" id="panel" aria-label="detail"></aside>
+
+<div class="modal" id="sell">
+  <div class="box">
+    <div class="hd"><h2 data-t="sell.h">空き家の参考価格</h2><p data-t="sell.p">4つ答えるだけで、おおよその目安が出ます（試作版・架空の係数で計算）</p></div>
+    <form class="form" id="sellForm" onsubmit="return calcSell(event)">
+      <div class="row">
+        <label><span data-t="sell.muni">市町村</span><select id="sMuni" required></select></label>
+        <label><span data-t="f.type">種類</span><select id="sType"><option value="平屋" data-t="type.平屋">平屋</option><option value="2階建" data-t="type.2階建">2階建</option><option value="古民家" data-t="type.古民家">古民家</option><option value="店舗付き住宅" data-t="type.店舗付き住宅">店舗付き住宅</option><option value="農家住宅" data-t="type.農家住宅">農家住宅</option></select></label>
+      </div>
+      <div class="row">
+        <label><span data-t="sell.land">土地面積（㎡）</span><input id="sLand" type="number" min="30" max="5000" value="250" required></label>
+        <label><span data-t="sell.bld">建物面積（㎡）</span><input id="sBld" type="number" min="20" max="1000" value="95" required></label>
+      </div>
+      <label><span data-t="sell.year">築年</span><input id="sYear" type="number" min="1900" max="2026" value="1978" required></label>
+      <label data-t="sell.cond">いまの状態（当てはまるものすべて）</label>
+      <div class="checks" id="sCond"></div>
+      <button class="btn p" type="submit" data-t="sell.go">参考価格を見る</button>
+    </form>
+    <div class="result" id="sellResult"></div>
+    <div style="padding:0 24px 20px;display:flex;gap:10px"><button class="btn s" type="button" onclick="closeSell()" data-t="close">閉じる</button></div>
+  </div>
+</div>
+<div class="toast" id="toast"></div>
+<div class="lightbox" id="lightbox" onclick="closeLightbox()"><img id="lbimg" alt=""><div class="cap" id="lbcap"></div></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<script src="listings.js"></script>
+<script src="sold.js"></script>
+<script src="config.js"></script>
+<script>
+/* ========== 言語 ========== */
+let lang='ja'; try{ lang=localStorage.getItem('akiya-lang')||'ja' }catch(e){}
+const USD=150; const ASOF=window.LISTINGS_ASOF||'';
+const CONTACT='https://we.ohanahome.jp/contact/', TEL='0120-087-255';
+const T={
+ ja:{ 'logo.i':'空き家再生', proto:`オハナホームが ATBB に登録している<b>販売中の物件 {n}件</b>（${ASOF} 時点）と成約実績。公開準備中のページです。`,
+  'mode.sale':'販売中','mode.sold':'成約実績','search.ph':'市町村・駅名で探す（例：茂原、いすみ、八街）','nav.saved':'♡ 保存した物件','nav.sell':'売りたい方へ',
+  'f.price':'価格','f.price.300':'〜300万円','f.price.500':'〜500万円','f.price.1000':'〜1,000万円','f.price.2000':'〜2,000万円','f.price.3000':'〜3,000万円','f.price.5000':'〜5,000万円',
+  'f.rooms':'間取り','f.rooms.2':'2部屋以上','f.rooms.3':'3部屋以上','f.rooms.4':'4部屋以上','f.rooms.5':'5部屋以上',
+  'f.land':'土地面積','f.land.150':'150㎡以上','f.land.250':'250㎡以上','f.land.400':'400㎡以上','f.land.800':'800㎡以上',
+  'f.age':'築年数','f.age.20':'築20年以内','f.age.35':'築35年以内','f.age.50':'築50年以内','f.type':'種類','f.bounds':'地図の範囲で絞る','f.reset':'条件をクリア',
+  'type.house':'戸建（すべて）','type.平屋':'平屋','type.2階建':'2階建','type.3階建':'3階建','type.戸建':'戸建','type.土地':'土地','type.店舗付き住宅':'店舗付き住宅','type.店舗':'店舗','type.マンション':'マンション','type.古民家':'古民家','type.農家住宅':'農家住宅',
+  'chip.new':'新着','chip.seller':'売主物件','chip.walk15':'駅徒歩15分以内','schip.reform':'フルリフォーム済み','schip.house':'戸建',
+  'view.photo':'写真','view.plan':'間取り','plan.zoom':'間取りを拡大','plan.hint':'クリックで閉じる','d.plan':'FLOOR PLAN','d.plan.sub':'間取り図（クリックで拡大）','sort.new':'新着順','sort.priceAsc':'価格が安い順','sort.priceDesc':'価格が高い順','sort.landDesc':'土地が広い順','sort.ageAsc':'築年が新しい順',
+  'm.map':'🗺 地図を見る','m.list':'☰ 一覧を見る','map.photo':'航空写真','map.map':'地図に戻す', title:'FOR SALE','title.sub':'販売中の物件','title.sold':'SOLD','title.sold.sub':'成約実績','title.saved':'保存した物件','title.q':'「{q}」', count:'{n}件{b}・全{t}件','count.b':'（地図の範囲内）',
+  empty:'この条件・この範囲には物件がありません。<br>地図を広げるか、条件を減らしてみてください。', new:'NEW', seller:'売主物件', sold:'SOLD OUT', reform:'フルリフォーム', land:'土地', bld:'建物', age:'築{a}年', ageNA:'築年不明', min:'{m}分', landOnly:'土地のみ', plan:'間取り', photo:'写真', drive:'現地写真',
+  'sold.date':'{y}年{m}月 成約','sold.nodate':'成約済み',
+  'toast.saved':'保存しました（この端末だけに残ります）','toast.unsaved':'保存を外しました','toast.nosell':'準備中のため、相談は送信されません',
+  'd.save':'♡ 保存する','d.saved':'♥ 保存済み','d.addr':'{addr}（番地は非公開）','d.access':'{st}駅 徒歩{m}分','d.accessBus':'{st}駅 バス便','d.accessDist':'{st}駅 {d}','d.year':'築{a}年（{y}）',
+  'd.about':'ABOUT','d.about.sub':'この物件について','d.basic':'DETAILS','d.basic.sub':'基本情報','d.kind':'種目','d.layout':'間取り','d.layoutDetail':'間取り内訳','d.land':'土地面積','d.bld':'建物面積','d.built':'築年月','d.structure':'構造・規模','d.access2':'交通','d.right':'土地権利','d.status':'現況','d.handover':'引渡し','d.deal':'取引態様','d.road':'接道状況','d.zoning':'用途地域・都市計画','d.bcr':'建ぺい率／容積率','d.parking':'駐車場',
+  'd.fac':'FACILITIES','d.fac.sub':'設備','d.near':'NEARBY','d.near.sub':'周辺環境','d.remarks':'NOTES','d.remarks.sub':'備考',
+  'd.abroad':'FROM OVERSEAS','d.abroad.sub':'海外から買う場合','d.abroadtxt':'日本では外国人・非居住者も土地と建物を所有できます。来日せずに購入する場合は、①本人確認書類（宣誓供述書など）②納税管理人の選任 ③送金の準備 ④登記後の外為法の事後報告、が主な手順です。すべて当社が窓口になって進めます。',
+  'd.broker':'BROKER','d.broker.sub':'取扱会社（宅地建物取引業者）','d.pub':'掲載期間','d.src':'出典：ATBB 登録情報（{asof} 時点）。価格・条件は変わることがあります。',
+  'd.disc':'公開準備中のページです。本番では不動産の表示に関する公正競争規約に定める項目を所定の形式で表示します。',
+  'd.inq':'この物件を問い合わせる','d.tel':'電話 {tel}','pop.more':'詳しく見る →','photos.n':'写真 {n}枚',
+  'sell.h':'空き家の参考価格','sell.p':'4つ答えるだけで、おおよその目安が出ます（準備中・架空の係数で計算）','sell.muni':'市町村','sell.land':'土地面積（㎡）','sell.bld':'建物面積（㎡）','sell.year':'築年','sell.cond':'いまの状態（当てはまるものすべて）','sell.go':'参考価格を見る', close:'閉じる',
+  'sell.r':'{muni}・{type}・土地{land}㎡・築{age}年 の参考価格','sell.landrow':'土地 {a}㎡ × {u}万円/㎡','sell.bldrow':'建物 {a}㎡ × 9万円 × 残存{r}%','d.repair':'修繕見込み（{c}）','none':'なし','d.mid':'中央 {p}','sell.low':'参考価格が低めです。「売る」以外に、貸す・地域に託す・解体して土地だけ売る、という選択肢も一緒に考えられます。','sell.note':'※ 架空の係数です。本番では近隣の成約事例・路線価・現地調査で算出し、算出日と根拠を示します。','sell.cta':'この価格で相談する（無料）'
+ },
+ en:{ 'logo.i':'AKIYA SAISEI', proto:`<b>{n} listings</b> currently published by Ohana Home on ATBB (as of ${ASOF}), plus past sales. This page is being prepared for launch.`,
+  'mode.sale':'For sale','mode.sold':'Past sales','search.ph':'Search by town or station (e.g. Mobara, Isumi, Yachimata)','nav.saved':'♡ Saved','nav.sell':'Selling?',
+  'f.price':'Price','f.price.300':'Up to ¥3M','f.price.500':'Up to ¥5M','f.price.1000':'Up to ¥10M','f.price.2000':'Up to ¥20M','f.price.3000':'Up to ¥30M','f.price.5000':'Up to ¥50M',
+  'f.rooms':'Rooms','f.rooms.2':'2+ rooms','f.rooms.3':'3+ rooms','f.rooms.4':'4+ rooms','f.rooms.5':'5+ rooms',
+  'f.land':'Lot size','f.land.150':'150 m²+','f.land.250':'250 m²+','f.land.400':'400 m²+','f.land.800':'800 m²+',
+  'f.age':'Age','f.age.20':'Built within 20 yrs','f.age.35':'Built within 35 yrs','f.age.50':'Built within 50 yrs','f.type':'Type','f.bounds':'Only in map view','f.reset':'Clear filters',
+  'type.house':'Houses (all)','type.平屋':'Single-story','type.2階建':'Two-story','type.3階建':'Three-story','type.戸建':'House','type.土地':'Land','type.店舗付き住宅':'Shop + residence','type.店舗':'Shop','type.マンション':'Condo','type.古民家':'Kominka','type.農家住宅':'Farmhouse',
+  'chip.new':'New','chip.seller':'Direct from owner','chip.walk15':'≤15 min to station','schip.reform':'Fully renovated','schip.house':'Houses',
+  'view.photo':'Photo','view.plan':'Floor plan','plan.zoom':'Enlarge plan','plan.hint':'click to close','d.plan':'FLOOR PLAN','d.plan.sub':'click to enlarge','sort.new':'Newest','sort.priceAsc':'Price: low to high','sort.priceDesc':'Price: high to low','sort.landDesc':'Largest lot','sort.ageAsc':'Newest build',
+  'm.map':'🗺 Map','m.list':'☰ List','map.photo':'Aerial','map.map':'Map', title:'FOR SALE','title.sub':'Chiba & nearby','title.sold':'SOLD','title.sold.sub':'Past sales by Ohana Home','title.saved':'Saved homes','title.q':'“{q}”', count:'{n} listings{b} · {t} total','count.b':' in map view',
+  empty:'No listings match these filters in this area.<br>Zoom out or remove a filter.', new:'NEW', seller:'DIRECT SALE', sold:'SOLD OUT', reform:'Fully renovated', land:'Lot', bld:'Bldg', age:'{a} yrs old', ageNA:'age n/a', min:'{m} min', landOnly:'land only', plan:'Plan', photo:'Photo', drive:'Site photo',
+  'sold.date':'Sold {m}/{y}','sold.nodate':'Sold',
+  'toast.saved':'Saved (on this device only)','toast.unsaved':'Removed from saved','toast.nosell':'Not live yet: requests are not sent',
+  'd.save':'♡ Save','d.saved':'♥ Saved','d.addr':'{addr} (exact address withheld)','d.access':'{m} min walk to {st} Station','d.accessBus':'Bus from {st} Station','d.accessDist':'{d} from {st} Station','d.year':'{a} yrs old (built {y})',
+  'd.about':'ABOUT','d.about.sub':'About this listing','d.basic':'DETAILS','d.basic.sub':'','d.kind':'Category','d.layout':'Layout','d.layoutDetail':'Rooms','d.land':'Lot size','d.bld':'Floor area','d.built':'Built','d.structure':'Structure','d.access2':'Access','d.right':'Land tenure','d.status':'Current status','d.handover':'Handover','d.deal':'Transaction','d.road':'Road frontage','d.zoning':'Zoning','d.bcr':'Coverage / floor-area ratio','d.parking':'Parking',
+  'd.fac':'FACILITIES','d.fac.sub':'','d.near':'NEARBY','d.near.sub':'','d.remarks':'NOTES','d.remarks.sub':'',
+  'd.abroad':'FROM OVERSEAS','d.abroad.sub':'Buying from abroad','d.abroadtxt':'Foreigners and non-residents can own land and buildings in Japan. If you buy without visiting, the main steps are: (1) identity documents such as an affidavit, (2) appointing a tax agent in Japan, (3) arranging the international transfer, and (4) a post-purchase report under the Foreign Exchange Act. We act as your single point of contact for all of it.',
+  'd.broker':'BROKER','d.broker.sub':'Licensed real-estate broker','d.pub':'Listed','d.src':'Source: ATBB registration as of {asof}. Price and terms may change.',
+  'd.disc':'This page is being prepared for launch. The live version will show every item required by Japan’s real-estate advertising rules in the prescribed format.',
+  'd.inq':'Ask about this listing','d.tel':'Call {tel}','pop.more':'View details →','photos.n':'{n} photos',
+  'sell.h':'Estimate for your vacant home','sell.p':'Answer four questions for a rough range (not live, fictional coefficients)','sell.muni':'Town','sell.land':'Lot size (m²)','sell.bld':'Floor area (m²)','sell.year':'Year built','sell.cond':'Current condition (check all that apply)','sell.go':'Show estimate', close:'Close',
+  'sell.r':'Estimate for {type} in {muni}, {land} m² lot, {age} yrs old','sell.landrow':'Lot {a} m² × ¥{u}k/m²','sell.bldrow':'Building {a} m² × ¥90k × {r}% remaining','d.repair':'Expected repairs ({c})','none':'none','d.mid':'mid {p}','sell.low':'The estimate is low. Besides selling, renting it out, handing it to the community, or demolishing and selling the land are options we can explore together.','sell.note':'Fictional coefficients. A live estimate would use nearby sales, official land values and an inspection, with the date and basis shown.','sell.cta':'Talk to us about this estimate (free)'
+ }
+};
+function t(k,v){ let s=T[lang][k]; if(s==null) s=T.ja[k]??k; if(v) for(const x in v) s=s.split('{'+x+'}').join(v[x]); return s; }
+
+/* ========== データ ========== */
+let DATA=(window.LISTINGS_DATA||[]).filter(l=>l.lat&&l.lng);
+let SOLD=(window.SOLD_DATA||[]);
+/* 掲載管理シート（ウェブに公開したCSV）を読んで、× の物件を外す・上書きを当てる。設定が無ければ何もしない */
+async function applyControlSheet(){
+  const url=window.CONTROL_CSV_URL; if(!url) return;
+  try{
+    const txt=await (await fetch(url,{cache:'no-store'})).text();
+    const rows=txt.split(/\r?\n/).map(r=>r.split(',')); const head=rows.shift();
+    const idx=n=>head.findIndex(h=>h.replace(/^\uFEFF/,'').trim()===n);
+    const iId=idx('ID'), iShow=idx('掲載'), iName=idx('表示名（上書き）'), iCom=idx('ひとこと（上書き）'), iRef=idx('フルリフォーム'); // 成約価格は絶対に出さない決まり：価格の列は読まない
+    const no=v=>['×','x','X','0'].includes((v||'').trim()), yes=v=>['○','〇','o','O','1'].includes((v||'').trim());
+    const ctl={}; rows.forEach(r=>{ if(r[iId]) ctl[r[iId].trim()]=r; });
+    DATA=DATA.filter(l=>!(ctl[l.no]&&no(ctl[l.no][iShow]))); DATA.forEach(l=>{ const r=ctl[l.no]; if(!r) return; if(r[iName]&&r[iName].trim()) l.name=r[iName].trim(); if(r[iCom]&&r[iCom].trim()) l.comment=r[iCom].trim(); });
+    SOLD=SOLD.filter(s=>!(ctl['SOLD-'+String(s.id-1).padStart(2,'0')]&&no(ctl['SOLD-'+String(s.id-1).padStart(2,'0')][iShow])));
+    SOLD.forEach(s=>{ const r=ctl['SOLD-'+String(s.id-1).padStart(2,'0')]; if(!r) return; if((r[iRef]||'').trim()) s.reform=yes(r[iRef]); if(r[iName]&&r[iName].trim()) s.town=r[iName].trim(); });
+    Object.keys(markers).forEach(id=>{ if(!DATA.find(l=>l.id==id)) saleLayer.removeLayer(markers[id]); });
+    Object.keys(smarkers).forEach(id=>{ if(!SOLD.find(s=>s.id==id)) soldLayer.removeLayer(smarkers[id]); });
+    render();
+  }catch(e){ console.warn('control sheet not applied',e); }
+}
+const HOUSE=new Set(['平屋','2階建','3階建','戸建']);
+const typeN=l=>lang==='en'?l.typeEn:l.type, muniN=l=>lang==='en'?l.muniEn:l.muni, nameN=l=>lang==='en'?l.nameEn:l.name, addrN=l=>lang==='en'?l.addrEn:l.addrJa;
+const layoutN=l=>l.layout||(l.type==='土地'?t('landOnly'):'—'); const ageOf=l=>l.year?2026-l.year:null;
+function accessN(l){ if(!l.station) return l.access||''; if(l.accessNote==='バス利用') return t('d.accessBus',{st:l.station}); if(l.accessNote) return t('d.accessDist',{st:l.station,d:l.accessNote.replace('駅から','')}); return t('d.access',{st:l.station,m:l.walk}); }
+const isPlan=p=>/間取/.test(p.type||''); const isExt=p=>/外観/.test(p.type||'');
+function photosOf(l){ const ex=l.photos.filter(isExt), pl=l.photos.filter(isPlan), rest=l.photos.filter(p=>!isExt(p)&&!isPlan(p)); const arr=ex.concat(rest); if(l.drivePhoto) arr.splice(1,0,{url:l.drivePhoto,type:'ドライブ',caption:t('drive'),local:true}); return arr.concat(pl); }
+const planOf=l=>l.photos.find(isPlan)||null; const mainOf=l=>photosOf(l)[0]||null;
+function img(p,w){ if(p.local) return p.url; if(w>=640||isPlan(p)) return p.url; return p.url+`?width=${w}&height=${w}&margin=true&dummy=.p`; }
+function fmtPrice(m){ if(lang==='en'){ const yen=m*10000; return `<span class="yen">¥</span>${(yen/1e6).toFixed(yen%1e6?2:0).replace(/\.?0+$/,'')}M<small>≈ $${Math.round(yen/USD/1000)}k</small>`; } return m>=10000? (m/10000).toFixed(m%10000?1:0)+'<span class="yen">億円</span>' : m.toLocaleString()+'<span class="yen">万円</span>'; }
+function fmtPlain(m){ if(lang==='en'){ const yen=m*10000; return `¥${(yen/1e6).toFixed(yen%1e6?2:0).replace(/\.?0+$/,'')}M`; } return m>=10000? (m/10000).toFixed(m%10000?1:0)+'億円' : m.toLocaleString()+'万円'; }
+function fmtShort(m){ if(lang==='en'){ const yen=m*10000; return '¥'+(yen/1e6).toFixed(yen%1e6?1:0).replace(/\.0$/,'')+'M'; } return m>=10000? (m/10000).toFixed(1)+'億' : m+'万'; }
+function fmtMan(m){ return lang==='en'? '¥'+(m*10000).toLocaleString() : m.toLocaleString()+'万円'; }
+
+/* ========== 状態 ========== */
+const state={mode:'sale',view:'photo',price:'',rooms:'',land:'',age:'',type:'',chips:new Set(),schips:new Set(),bounds:true,q:'',sort:'new',favOnly:false};
+let favs=new Set(); try{favs=new Set(JSON.parse(localStorage.getItem('akiya-favs-real')||'[]'))}catch(e){}
+function saveFavs(){try{localStorage.setItem('akiya-favs-real',JSON.stringify([...favs]))}catch(e){}}
+let openId=null;
+
+/* ========== 地図 ========== */
+const mapEl=document.getElementById('map');
+const map=L.map('map',{zoomControl:true}).setView([35.55,140.25],9);
+/* 地図：広域は淡色、寄ったら標準地図（駅・学校・店などのランドマーク入り）に自動で切替。航空写真はボタンで */
+const ATTR='<a href="https://maps.gsi.go.jp/development/ichiran.html" target="_blank" rel="noopener">地理院タイル</a>';
+const tilePale=L.tileLayer('https://cyberjapandata.gsi.go.jp/xyz/pale/{z}/{x}/{y}.png',{maxZoom:18,minZoom:5,attribution:ATTR});
+const tileStd=L.tileLayer('https://cyberjapandata.gsi.go.jp/xyz/std/{z}/{x}/{y}.png',{maxZoom:18,minZoom:5,attribution:ATTR});
+const tilePhoto=L.tileLayer('https://cyberjapandata.gsi.go.jp/xyz/seamlessphoto/{z}/{x}/{y}.jpg',{maxZoom:18,minZoom:5,attribution:ATTR});
+let base='auto'; let cur=null;
+function pickTile(){ const want = base==='photo'?tilePhoto : (map.getZoom()>=14?tileStd:tilePale); if(cur===want) return; if(cur) map.removeLayer(cur); cur=want; cur.addTo(map); cur.bringToBack(); document.getElementById('baseBtn').textContent = base==='photo'? t('map.map') : t('map.photo'); }
+map.on('zoomend',pickTile);
+const BaseCtl=L.Control.extend({onAdd(){ const b=L.DomUtil.create('button','basebtn'); b.id='baseBtn'; b.type='button'; L.DomEvent.disableClickPropagation(b); b.onclick=()=>{ base = base==='photo'?'auto':'photo'; pickTile(); }; return b; }});
+new BaseCtl({position:'bottomleft'}).addTo(map); pickTile();
+const saleLayer=L.layerGroup().addTo(map), soldLayer=L.layerGroup();
+const markers={}, smarkers={};
+function popHtml(l){ const m=mainOf(l); return `<div class="pop">${m?`<img src="${img(m,400)}" alt="">`:''}<div class="b"><div class="p">${fmtPlain(l.price)}</div>${layoutN(l)}${l.land?' · '+t('land')+' '+l.land+'㎡':''}${ageOf(l)?' · '+t('age',{a:ageOf(l)}):''}<br><span style="color:#5c5c5c">${muniN(l)} · ${nameN(l)}</span><br><a href="javascript:openDetail(${l.id})">${t('pop.more')}</a></div></div>`; }
+function spopHtml(s){ return `<div class="pop">${s.photo?`<img src="${s.photo}" alt="">`:''}<div class="b"><div class="p">${t('sold')}</div>${lang==='en'?s.muniEn:s.town}${s.kind?' · '+(lang==='en'?s.kindEn:s.kind):''}<br><span style="color:#5c5c5c">${soldWhen(s)}</span>${s.reform?'<br><b style="color:#8a5a0a">'+t('reform')+'</b>':''}</div></div>`; }
+function soldWhen(s){ if(!s.soldDate) return t('sold.nodate'); const [y,m]=s.soldDate.split('-'); return t('sold.date',{y,m:+m}); }
+DATA.forEach(l=>{
+  const icon=L.divIcon({className:'',html:`<div class="pin ${l.type==='土地'?'landpin':''}" id="pin${l.id}">${fmtShort(l.price)}</div>`,iconSize:[0,0]});
+  const mk=L.marker([l.lat,l.lng],{icon}).addTo(saleLayer); mk.bindPopup(popHtml(l),{closeButton:false,offset:[0,-30]});
+  mk.on('mouseover',()=>hl(l.id,true)); mk.on('mouseout',()=>hl(l.id,false)); mk.on('click',()=>{const c=document.getElementById('card'+l.id); if(c) c.scrollIntoView({behavior:'smooth',block:'center'});});
+  markers[l.id]=mk;
+});
+SOLD.filter(s=>s.lat).forEach(s=>{
+  const icon=L.divIcon({className:'',html:`<div class="pin soldpin ${s.reform?'reformpin':''}" id="spin${s.id}">SOLD</div>`,iconSize:[0,0]});
+  const mk=L.marker([s.lat,s.lng],{icon}).addTo(soldLayer); mk.bindPopup(spopHtml(s),{closeButton:false,offset:[0,-26]});
+  mk.on('mouseover',()=>shl(s.id,true)); mk.on('mouseout',()=>shl(s.id,false)); mk.on('click',()=>{const c=document.getElementById('scard'+s.id); if(c) c.scrollIntoView({behavior:'smooth',block:'center'});});
+  smarkers[s.id]=mk;
+});
+const SALE_BOUNDS=DATA.length?L.latLngBounds(DATA.map(l=>[l.lat,l.lng])).pad(0.08):null;
+const SOLD_BOUNDS=SOLD.some(s=>s.lat)?L.latLngBounds(SOLD.filter(s=>s.lat).map(s=>[s.lat,s.lng])).pad(0.08):null;
+function homeView(){ const b=state.mode==='sold'?SOLD_BOUNDS:SALE_BOUNDS; if(b) map.fitBounds(b); }
+map.on('moveend',()=>{ if(state.bounds) render(); });
+new ResizeObserver(()=>{ map.invalidateSize(); if(state.bounds) render(); }).observe(mapEl);
+setTimeout(()=>{ map.invalidateSize(); homeView(); render(); },300);
+
+/* ========== モード・表示 ========== */
+function setMode(m){ state.mode=m; document.getElementById('modeSale').classList.toggle('on',m==='sale'); document.getElementById('modeSold').classList.toggle('on',m==='sold');
+  document.getElementById('filtersSale').hidden=m!=='sale'; document.getElementById('filtersSold').hidden=m!=='sold'; document.getElementById('viewSeg').hidden=m!=='sale'; document.getElementById('sort').hidden=m!=='sold'?false:true;
+  if(m==='sold'){ map.removeLayer(saleLayer); soldLayer.addTo(map);} else { map.removeLayer(soldLayer); saleLayer.addTo(map); }
+  closePanel(); homeView(); render(); }
+function setView(v){ state.view=v; document.getElementById('vPhoto').classList.toggle('on',v==='photo'); document.getElementById('vPlan').classList.toggle('on',v==='plan'); render(); }
+
+/* ========== 絞り込み・描画 ========== */
+function passes(l,useBounds){
+  if(state.favOnly && !favs.has(l.id)) return false;
+  if(state.q){ const q=state.q, ql=q.toLowerCase(); if(!(l.muni.includes(q)||l.town.includes(q)||(l.station||'').includes(q)||l.name.includes(q)||l.muniEn.toLowerCase().includes(ql)||l.nameEn.toLowerCase().includes(ql))) return false; }
+  if(state.price && l.price>+state.price) return false;
+  if(state.rooms && l.rooms<+state.rooms) return false;
+  if(state.land && (l.land||0)<+state.land) return false;
+  if(state.age && (!l.year || (2026-l.year)>+state.age)) return false;
+  if(state.type==='house' ? !HOUSE.has(l.type) : (state.type && l.type!==state.type)) return false;
+  if(state.chips.has('new') && !l.isNew) return false;
+  if(state.chips.has('seller') && !/売主/.test(l.deal)) return false;
+  if(state.chips.has('walk15') && !(l.walk && l.walk<=15 && !l.accessNote)) return false;
+  if(useBounds && state.bounds && mapEl.clientWidth>0 && !map.getBounds().contains([l.lat,l.lng])) return false;
+  return true;
+}
+function spasses(s,useBounds){
+  if(state.q){ const q=state.q, ql=q.toLowerCase(); if(!(s.town.includes(q)||s.muni.includes(q)||s.muniEn.toLowerCase().includes(ql))) return false; }
+  if(state.schips.has('reform') && !s.reform) return false;
+  if(state.schips.has('house') && s.kind!=='戸建') return false;
+  if(useBounds && state.bounds && mapEl.clientWidth>0 && (!s.lat || !map.getBounds().contains([s.lat,s.lng]))) return false;
+  return true;
+}
+function sorted(arr){ const s=state.sort; return [...arr].sort((a,b)=> s==='priceAsc'?a.price-b.price : s==='priceDesc'?b.price-a.price : s==='landDesc'?(b.land||0)-(a.land||0) : s==='ageAsc'?(b.year||0)-(a.year||0) : ((b.isNew?1:0)-(a.isNew?1:0))||(b.pubFrom>a.pubFrom?1:b.pubFrom<a.pubFrom?-1:0)||(a.id-b.id)); }
+function cardImg(l){
+  const m=mainOf(l), p=planOf(l); const showPlan=state.view==='plan'&&p;
+  const main=showPlan?p:m; const other=showPlan?m:p;
+  const mainHtml=main?`<img class="main ${showPlan?'plan-main':''}" src="${img(main,640)}" alt="${nameN(l)}" loading="lazy" ${showPlan?`onclick="event.stopPropagation();openLightbox(${l.id},'plan')"`:''}>`:`<div class="nophoto">${t('photos.n',{n:0})}</div>`;
+  const inset=other?`<div class="inset ${showPlan?'':'plan'}" onclick="event.stopPropagation();${showPlan?`flipCard(${l.id})`:`openLightbox(${l.id},'plan')`}" title="${showPlan?t('photo'):t('plan.zoom')}"><img src="${img(other,400)}" alt="" loading="lazy"><span>${showPlan?t('photo'):t('plan.zoom')}</span></div>`:'';
+  return mainHtml+inset;
+}
+const flipped=new Set();
+function flipCard(id){ flipped.has(id)?flipped.delete(id):flipped.add(id); const l=DATA.find(x=>x.id===id); const ph=document.querySelector('#card'+id+' .ph'); if(!ph||!l) return; const sv=state.view; state.view=(flipped.has(id)?(sv==='plan'?'photo':'plan'):sv); const keep=[...ph.querySelectorAll('.badge,.fav')].map(e=>e.outerHTML).join(''); ph.innerHTML=cardImg(l)+keep; state.view=sv; }
+function render(){
+  const mode=state.mode;
+  document.getElementById('title').innerHTML = mode==='sold'?`${t('title.sold')}<small>${t('title.sold.sub')}</small>`:(state.favOnly?`SAVED<small>${t('title.saved')}</small>`:(state.q?`${t('title')}<small>${t('title.q',{q:state.q})}</small>`:`${t('title')}<small>${t('title.sub')}</small>`));
+  const c=document.getElementById('cards');
+  if(mode==='sold'){
+    const arr=SOLD.filter(s=>spasses(s,true));
+    SOLD.forEach(s=>{ const mk=smarkers[s.id]; if(!mk) return; const el=mk.getElement(); if(el) el.style.opacity=spasses(s,false)?1:.25; });
+    document.getElementById('count').textContent=t('count',{n:arr.length,b:(state.bounds&&mapEl.clientWidth>0)?t('count.b'):'',t:SOLD.length});
+    if(!arr.length){ c.innerHTML=`<div class="empty" style="grid-column:1/-1">${t('empty')}</div>`; return; }
+    c.innerHTML=arr.map(s=>`
+    <article class="card" id="scard${s.id}" onmouseenter="shl(${s.id},true)" onmouseleave="shl(${s.id},false)" onclick="${s.lat?`smarkers[${s.id}].openPopup();map.panTo([${s.lat},${s.lng}])`:''}">
+      <div class="ph">${s.photo?`<img class="main" src="${s.photo}" alt="" loading="lazy">`:`<div class="nophoto">${t('sold')}</div>`}<span class="badge sold">${t('sold')}</span>${s.reform?`<span class="badge reform">${t('reform')}</span>`:''}</div>
+      <div class="body">
+        <div class="price"><span style="font-size:22px">${t('sold')}</span><small>${soldWhen(s)}</small></div>
+        <div class="addr" style="margin-top:6px">${lang==='en'?s.muniEn:s.town}${s.kind?' ｜ '+(lang==='en'?s.kindEn:s.kind):''}</div>
+        <div class="tags">${s.reform?`<span class="tag sun">${t('reform')}</span>`:''}${s.reformPhotos?`<span class="tag">${lang==='en'?'after photos':'リフォーム後写真あり'}</span>`:''}</div>
+      </div>
+    </article>`).join('');
+    return;
+  }
+  const arr=sorted(DATA.filter(l=>passes(l,true)));
+  DATA.forEach(l=>{ const el=markers[l.id].getElement(); if(el) el.style.opacity=passes(l,false)?1:.25; const p=document.getElementById('pin'+l.id); if(p){ p.classList.toggle('fav',favs.has(l.id)); p.textContent=fmtShort(l.price);} });
+  document.getElementById('count').textContent=t('count',{n:arr.length,b:(state.bounds&&mapEl.clientWidth>0)?t('count.b'):'',t:DATA.length});
+  if(!arr.length){ c.innerHTML=`<div class="empty" style="grid-column:1/-1">${t('empty')}</div>`; return; }
+  c.innerHTML=arr.map(l=>`
+  <article class="card" id="card${l.id}" onmouseenter="hl(${l.id},true)" onmouseleave="hl(${l.id},false)" onclick="openDetail(${l.id})">
+    <div class="ph">${cardImg(l)}
+      ${l.isNew?'<span class="badge new">'+t('new')+'</span>':/売主/.test(l.deal)?'<span class="badge">'+t('seller')+'</span>':''}
+      ${l.photos.length?`<span class="badge cnt">${t('photos.n',{n:l.photos.length+(l.drivePhoto?1:0)})}</span>`:''}
+      <button class="fav ${favs.has(l.id)?'on':''}" onclick="event.stopPropagation();toggleFav(${l.id})" aria-label="save">${favs.has(l.id)?'♥':'♡'}</button>
+    </div>
+    <div class="body">
+      <div class="price">${fmtPrice(l.price)}</div>
+      <div class="specs"><span><b>${layoutN(l)}</b></span>${l.land?`<span>${t('land')} <b>${l.land}</b>㎡</span>`:''}${l.bld?`<span>${t('bld')} <b>${l.bld}</b>㎡</span>`:''}<span>${ageOf(l)?(lang==='en'?'<b>'+ageOf(l)+'</b> yrs':'築<b>'+ageOf(l)+'</b>年'):(l.type==='土地'?'':t('ageNA'))}</span></div>
+      <div class="addr">${muniN(l)}・${accessN(l)} ｜ ${typeN(l)}</div>
+      <div class="tags">${l.status?`<span class="tag">${l.status}</span>`:''}${l.handover?`<span class="tag">${lang==='en'?'handover: ':''}${l.handover}</span>`:''}${l.parking&&/有/.test(l.parking)?`<span class="tag good">${lang==='en'?'parking':'駐車場あり'}</span>`:''}</div>
+    </div>
+  </article>`).join('');
+}
+function hl(id,on){ const c=document.getElementById('card'+id); if(c) c.classList.toggle('hl',on); const p=document.getElementById('pin'+id); if(p) p.classList.toggle('hl',on); }
+function shl(id,on){ const c=document.getElementById('scard'+id); if(c) c.classList.toggle('hl',on); const p=document.getElementById('spin'+id); if(p) p.classList.toggle('hl',on); }
+function toggleFav(id){ favs.has(id)?favs.delete(id):favs.add(id); saveFavs(); render(); toast(favs.has(id)?t('toast.saved'):t('toast.unsaved')); }
+function toggleFavOnly(){ state.favOnly=!state.favOnly; const b=document.getElementById('favbtn'); b.style.background=state.favOnly?'#fff':''; b.style.color=state.favOnly?'#000':''; if(state.mode!=='sale') setMode('sale'); else render(); }
+function resetAll(){
+  Object.assign(state,{price:'',rooms:'',land:'',age:'',type:'',q:'',favOnly:false}); state.chips.clear(); state.schips.clear(); flipped.clear();
+  ['fPrice','fRooms','fLand','fAge','fType'].forEach(id=>{const e=document.getElementById(id); e.value=''; e.classList.remove('on')});
+  document.querySelectorAll('.chip').forEach(c=>c.classList.remove('on'));
+  document.getElementById('q').value=''; document.getElementById('favbtn').style.background=''; document.getElementById('favbtn').style.color='';
+  homeView(); render();
+}
+function toast(msg){ const e=document.getElementById('toast'); e.textContent=msg; e.classList.add('show'); clearTimeout(e._t); e._t=setTimeout(()=>e.classList.remove('show'),2200); }
+[['fPrice','price'],['fRooms','rooms'],['fLand','land'],['fAge','age'],['fType','type']].forEach(([id,k])=>{ document.getElementById(id).addEventListener('change',e=>{ state[k]=e.target.value; e.target.classList.toggle('on',!!e.target.value); render(); }); });
+document.querySelectorAll('#filtersSale .chip').forEach(c=>c.addEventListener('click',()=>{ const u=c.dataset.chip; state.chips.has(u)?state.chips.delete(u):state.chips.add(u); c.classList.toggle('on'); render(); }));
+document.querySelectorAll('#filtersSold .chip').forEach(c=>c.addEventListener('click',()=>{ const u=c.dataset.schip; state.schips.has(u)?state.schips.delete(u):state.schips.add(u); c.classList.toggle('on'); render(); }));
+document.getElementById('fBounds').addEventListener('change',e=>{ state.bounds=e.target.checked; document.getElementById('fBoundsSold').checked=e.target.checked; render(); });
+document.getElementById('fBoundsSold').addEventListener('change',e=>{ state.bounds=e.target.checked; document.getElementById('fBounds').checked=e.target.checked; render(); });
+document.getElementById('sort').addEventListener('change',e=>{ state.sort=e.target.value; render(); });
+document.getElementById('q').addEventListener('input',e=>{
+  state.q=e.target.value.trim().replace(/[市町村区駅]$/,''); const ql=state.q.toLowerCase();
+  const src=state.mode==='sold'?SOLD.filter(s=>s.lat):DATA;
+  const hits=src.filter(l=>state.q&&((l.muni||'').includes(state.q)||(l.town||'').includes(state.q)||(l.station||'').includes(state.q)||(l.muniEn||'').toLowerCase().includes(ql)));
+  if(hits.length){ map.fitBounds(L.latLngBounds(hits.map(l=>[l.lat,l.lng])).pad(0.5),{maxZoom:13}); } else if(!state.q){ homeView(); }
+  render();
+});
+
+/* ========== 詳細パネル ========== */
+function kv(label,val){ return val?`<div><span>${label}</span><span>${val}</span></div>`:''; }
+function h2(k){ return `<h2>${t(k)}${t(k+'.sub')?`<small>${t(k+'.sub')}</small>`:''}</h2>`; }
+function openDetail(id){
+  const l=DATA.find(x=>x.id===id); if(!l) return; openId=id;
+  const age=ageOf(l); const ph=photosOf(l);
+  const gal=ph.slice(0,3).map(p=>`<img src="${img(p,900)}" alt="${(p.caption||p.type||'').replace(/"/g,'')}" title="${(p.caption||p.type||'').replace(/"/g,'')}">`).join('');
+  const thumbs=ph.map((p,i)=>`<img src="${img(p,300)}" alt="" title="${(p.caption||p.type||'').replace(/"/g,'')}" onclick="swapMain(${l.id},${i})" loading="lazy">`).join('');
+  const fac=(l.facilities||'').split(/\s+/).filter(Boolean);
+  document.getElementById('panel').innerHTML=`
+  <button class="close" onclick="closePanel()" aria-label="close">✕</button>
+  ${ph.length?`<div class="gallery${ph.length<3?' one':''}" id="gal">${gal}</div>`:`<div class="gallery one"><div class="nophoto" style="height:100%">${t('photos.n',{n:0})}</div></div>`}
+  ${ph.length>1?`<div class="thumbs">${thumbs}</div>`:''}
+  <div class="d">
+    <div class="top">
+      <div>
+        <div class="price">${fmtPrice(l.price)}<small>${typeN(l)}</small></div>
+        <div class="specs"><span><b>${layoutN(l)}</b></span>${l.land?`<span>${t('land')} <b>${l.land}</b>㎡</span>`:''}${l.bld?`<span>${t('bld')} <b>${l.bld}</b>㎡</span>`:''}${age?`<span>${t('d.year',{a:age,y:l.builtJa})}</span>`:''}</div>
+        <div class="addr">${t('d.addr',{addr:addrN(l)})} ｜ ${accessN(l)}</div>
+      </div>
+      <button class="btn s" style="flex:0 0 auto;min-width:0;padding:10px 16px" onclick="toggleFav(${l.id});openDetail(${l.id})">${favs.has(l.id)?t('d.saved'):t('d.save')}</button>
+    </div>
+    ${h2('d.about')}
+    ${lang==='en'?`<p>${l.descEn}</p>${l.comment?`<p style="margin-top:10px;color:var(--sub);font-size:13.5px"><b>Agent’s note (Japanese):</b> ${l.comment}</p>`:''}`:`<p>${l.comment||l.descEn}</p>${l.appeal?`<p style="margin-top:10px">${l.appeal.replace(/\n/g,'<br>')}</p>`:''}`}
+    ${planOf(l)?`${h2('d.plan')}<div class="planblock" onclick="openLightbox(${l.id},'plan')"><img src="${img(planOf(l),1400)}" alt="${t('plan')}"></div>`:''}
+    ${h2('d.basic')}
+    <div class="kv">
+      ${kv(t('d.kind'),l.kind)}${kv(t('d.layout'),l.layout)}${kv(t('d.layoutDetail'),l.layoutDetail)}
+      ${kv(t('d.land'),l.landNote)}${kv(t('d.bld'),l.bld?l.bld+'㎡':'')}${kv(t('d.built'),l.builtJa)}
+      ${kv(t('d.structure'),[l.structure,l.scale].filter(Boolean).join(' '))}${kv(t('d.access2'),l.access)}
+      ${kv(t('d.right'),l.landRight)}${kv(t('d.status'),l.status)}${kv(t('d.handover'),l.handover)}${kv(t('d.deal'),lang==='en'?l.dealEn:l.deal)}
+      ${kv(t('d.road'),l.road)}${kv(t('d.zoning'),[l.zoning,l.cityPlan].filter(Boolean).join(' / '))}${kv(t('d.bcr'),(l.bcr||l.far)?`${l.bcr||'—'} / ${l.far||'—'}`:'')}${kv(t('d.parking'),l.parking)}
+    </div>
+    ${fac.length?`${h2('d.fac')}<div class="uses">${fac.map(f=>`<span>${f}</span>`).join('')}</div>`:''}
+    ${l.remarks?`${h2('d.remarks')}<p>${l.remarks}</p>`:''}
+    ${l.near.length?`${h2('d.near')}<div class="near">${l.near.map(n=>`<div>${n.cat}<b>${n.text}</b></div>`).join('')}</div>`:''}
+    ${h2('d.abroad')}<p>${t('d.abroadtxt')}</p>
+    ${h2('d.broker')}
+    <p style="font-size:13.5px">${l.broker}</p>
+    <p style="font-size:12.5px;color:var(--sub);margin-top:6px">${t('d.pub')}: ${l.pubFrom}〜${l.pubTo} ｜ ${t('d.src',{asof:ASOF})} ｜ ATBB No. ${l.no}</p>
+    <div class="disclaimer">${t('d.disc')}</div>
+    <div class="cta">
+      <a class="btn p" href="${CONTACT}" target="_blank" rel="noopener">${t('d.inq')}</a>
+      <a class="btn s" href="tel:${TEL.replace(/-/g,'')}">${t('d.tel',{tel:TEL})}</a>
+    </div>
+  </div>`;
+  document.getElementById('panel').scrollTop=0;
+  document.getElementById('panel').classList.add('open'); document.getElementById('overlay').classList.add('open');
+  markers[id].openPopup();
+}
+function swapMain(id,i){ const l=DATA.find(x=>x.id===id); const p=photosOf(l)[i]; const g=document.querySelector('#gal img'); if(g&&p){ g.src=img(p,900); g.title=p.caption||p.type||''; } document.querySelectorAll('.thumbs img').forEach((e,j)=>e.classList.toggle('on',j===i)); document.getElementById('panel').scrollTo({top:0,behavior:'smooth'}); }
+function openLightbox(id,which){ const l=DATA.find(x=>x.id===id); const p=which==='plan'?planOf(l):mainOf(l); if(!p) return; document.getElementById('lbimg').src=img(p,1400); document.getElementById('lbcap').textContent=(p.caption||p.type||'')+(which==='plan'?'　'+t('plan.hint'):''); document.getElementById('lightbox').classList.add('open'); }
+function closeLightbox(){ document.getElementById('lightbox').classList.remove('open'); }
+function closePanel(){ document.getElementById('panel').classList.remove('open'); document.getElementById('overlay').classList.remove('open'); }
+document.addEventListener('keydown',e=>{ if(e.key==='Escape'){closeLightbox();closePanel();closeSell();} });
+
+/* ========== 売りたい方：簡易参考価格（架空の係数） ========== */
+const MUNI_EST={'八街市':2.2,'佐倉市':4.5,'成田市':3.6,'富里市':2.6,'山武市':1.5,'東金市':2.4,'四街道市':6.0,'千葉市若葉区':5.2,'印西市':4.0,'酒々井町':3.0,'匝瑳市':1.2,'多古町':1.0,'芝山町':1.3,'大網白里市':2.8,'茂原市':2.5,'木更津市':3.4,'館山市':1.9,'南房総市':1.4,'香取市':1.3,'旭市':1.6,'いすみ市':1.4,'市原市':3.0,'柏市':7.0,'船橋市':9.0};
+const MUNI_EST_EN={'八街市':'Yachimata','佐倉市':'Sakura','成田市':'Narita','富里市':'Tomisato','山武市':'Sammu','東金市':'Togane','四街道市':'Yotsukaido','千葉市若葉区':'Chiba (Wakaba)','印西市':'Inzai','酒々井町':'Shisui','匝瑳市':'Sosa','多古町':'Tako','芝山町':'Shibayama','大網白里市':'Oamishirasato','茂原市':'Mobara','木更津市':'Kisarazu','館山市':'Tateyama','南房総市':'Minamiboso','香取市':'Katori','旭市':'Asahi','いすみ市':'Isumi','市原市':'Ichihara','柏市':'Kashiwa','船橋市':'Funabashi'};
+const COND={'雨漏りあり':150,'残置物あり':40,'水回り要交換':200,'建物に傾き':300,'外壁の傷み':120,'庭木が繁茂':25,'給湯器故障':30};
+const COND_EN={'雨漏りあり':'Roof leak','残置物あり':'Contents left behind','水回り要交換':'Kitchen/bath need replacing','建物に傾き':'Structural tilt','外壁の傷み':'Exterior wall damage','庭木が繁茂':'Overgrown garden','給湯器故障':'Water heater broken'};
+const condN=x=>lang==='en'?(COND_EN[x]||x):x;
+function estimate(muni,type,land,bld,year,conds){ const unit=MUNI_EST[muni]||2; const typeAdj={'平屋':1,'2階建':1.05,'古民家':0.8,'店舗付き住宅':1.1,'農家住宅':0.85}[type]||1; const age=2026-year, remain=Math.max(0.05,1-age/40); const landV=land*unit, bldV=bld*9*remain*typeAdj; const repair=conds.reduce((s,c)=>s+(COND[c]||0),0); const mid=Math.max(30,landV+bldV-repair); return {landV:Math.round(landV),bldV:Math.round(bldV),repair,mid:Math.round(mid),lo:Math.round(mid*0.88),hi:Math.round(mid*1.12)}; }
+function openSell(){ document.getElementById('sell').classList.add('open'); document.getElementById('overlay').classList.add('open'); }
+function closeSell(){ document.getElementById('sell').classList.remove('open'); if(!document.getElementById('panel').classList.contains('open')) document.getElementById('overlay').classList.remove('open'); }
+function calcSell(ev){
+  ev.preventDefault();
+  const muni=document.getElementById('sMuni').value, type=document.getElementById('sType').value;
+  const land=+document.getElementById('sLand').value, bld=+document.getElementById('sBld').value, year=+document.getElementById('sYear').value;
+  const conds=[...document.querySelectorAll('#sCond input:checked')].map(i=>i.value);
+  const e=estimate(muni,type,land,bld,year,conds); const r=document.getElementById('sellResult'); r.className='result show';
+  const mn=lang==='en'?(MUNI_EST_EN[muni]||muni):muni, tn=t('type.'+type), unit=lang==='en'?Math.round(MUNI_EST[muni]*10):MUNI_EST[muni];
+  r.innerHTML=`<div class="est"><div class="lbl">${t('sell.r',{muni:mn,type:tn,land,age:2026-year})}</div>
+    <div class="val">${fmtPlain(e.lo)} 〜 ${fmtPlain(e.hi)}<small>${t('d.mid',{p:fmtPlain(e.mid)})}</small></div>
+    <table><tr><td>${t('sell.landrow',{a:land,u:unit})}</td><td>${fmtMan(e.landV)}</td></tr>
+      <tr><td>${t('sell.bldrow',{a:bld,r:Math.round(Math.max(0.05,1-(2026-year)/40)*100)})}</td><td>${fmtMan(e.bldV)}</td></tr>
+      <tr><td>${t('d.repair',{c:conds.length?conds.map(condN).join(' · '):t('none')})}</td><td>− ${fmtMan(e.repair)}</td></tr></table>
+    ${e.mid<150?'<div class="note" style="color:var(--warn);font-weight:700;margin-top:10px">'+t('sell.low')+'</div>':''}
+    <div class="note">${t('sell.note')}</div>
+    <div style="display:flex;gap:10px;margin-top:14px"><a class="btn p" href="${CONTACT}" target="_blank" rel="noopener">${t('sell.cta')}</a></div></div>`;
+  r.scrollIntoView({behavior:'smooth',block:'nearest'}); return false;
+}
+
+/* ========== 言語の反映 ========== */
+function applyLang(){
+  document.documentElement.lang=lang;
+  document.title = lang==='en'?'Ohana Home Listings':'オハナホーム 物件一覧';
+  document.getElementById('proto').innerHTML=t('proto',{n:DATA.length});
+  document.querySelectorAll('[data-t]').forEach(el=>{ el.textContent=t(el.dataset.t); });
+  document.querySelectorAll('[data-t-html]').forEach(el=>{ el.innerHTML=t(el.dataset.tHtml); });
+  document.querySelectorAll('[data-ph]').forEach(el=>{ el.placeholder=t(el.dataset.ph); });
+  document.getElementById('langbtn').textContent = lang==='ja'?'EN':'日本語';
+  if(document.getElementById('baseBtn')) document.getElementById('baseBtn').textContent = base==='photo'? t('map.map') : t('map.photo');
+  document.getElementById('msw').textContent = document.body.classList.contains('showmap')?t('m.list'):t('m.map');
+  document.getElementById('sMuni').innerHTML=Object.keys(MUNI_EST).map(m=>`<option value="${m}">${lang==='en'?MUNI_EST_EN[m]:m}</option>`).join('');
+  document.getElementById('sCond').innerHTML=Object.keys(COND).map(c=>`<label><input type="checkbox" value="${c}">${condN(c)}</label>`).join('');
+  document.getElementById('sellResult').className='result';
+  DATA.forEach(l=>markers[l.id].setPopupContent(popHtml(l))); SOLD.forEach(s=>{ if(smarkers[s.id]) smarkers[s.id].setPopupContent(spopHtml(s)); });
+}
+function setLang(x){ lang=x; try{localStorage.setItem('akiya-lang',x)}catch(e){} applyLang(); render(); if(document.getElementById('panel').classList.contains('open')&&openId) openDetail(openId); }
+applyLang(); setMode('sale'); applyControlSheet();
+</script>
+</body>
+</html>
