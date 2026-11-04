@@ -90,6 +90,8 @@ main{flex:1;display:grid;grid-template-columns:minmax(0,1fr) clamp(360px,46%,640
 .card .inset span{position:absolute;left:0;right:0;bottom:0;background:rgba(0,0,0,.6);color:#fff;font-size:10px;text-align:center;padding:1px 0;font-weight:700}
 .card .badge{position:absolute;left:10px;top:10px;background:var(--bk);color:#fff;font-family:var(--cond);font-weight:900;font-size:13px;letter-spacing:.08em;padding:4px 9px;border-radius:3px}
 .card .badge.new{background:var(--sun);color:var(--bk)}
+.card .badge.reno{background:#c2410c;color:#fff;font-family:var(--jp);font-size:12px}
+.renobar{background:#fff3e8;border-left:4px solid #c2410c;padding:10px 14px;margin-top:14px;font-size:13.5px;font-weight:700;color:#7c2d12}
 .card .badge.sold{background:var(--night);font-size:15px}
 .card .badge.reform{left:auto;right:10px;top:10px;background:var(--sun);color:var(--bk);font-family:var(--jp);font-size:11px;font-weight:800}
 .card .badge.cnt{left:auto;right:48px;top:auto;bottom:10px;background:rgba(0,0,0,.6);font-family:var(--jp);font-weight:600;font-size:11px;letter-spacing:0}
@@ -132,6 +134,17 @@ main{flex:1;display:grid;grid-template-columns:minmax(0,1fr) clamp(360px,46%,640
 .panel{position:fixed;top:0;right:0;bottom:0;width:min(760px,100%);background:#fff;transform:translateX(100%);transition:transform .25s cubic-bezier(.2,.8,.2,1);z-index:1001;overflow-y:auto;box-shadow:-10px 0 40px rgba(0,0,0,.2)}
 .panel.open{transform:none}
 .panel .close{position:sticky;top:12px;margin:12px 0 -44px 12px;z-index:3;width:36px;height:36px;border-radius:50%;border:0;background:rgba(255,255,255,.95);box-shadow:var(--shadow);font-size:18px}
+.viewer{position:relative;background:#111;height:420px;user-select:none}
+.viewer img.vmain{width:100%;height:100%;object-fit:contain;display:block;cursor:zoom-in}
+.viewer .arrow{position:absolute;top:50%;transform:translateY(-50%);width:44px;height:44px;border-radius:50%;border:0;background:rgba(255,255,255,.9);font-size:22px;font-weight:900;display:grid;place-items:center;box-shadow:0 2px 8px rgba(0,0,0,.3);cursor:pointer}
+.viewer .arrow.l{left:12px}.viewer .arrow.r{right:12px}
+.viewer .arrow:hover{background:var(--sun)}
+.viewer .vbar{position:absolute;left:0;right:0;bottom:0;background:linear-gradient(transparent,rgba(0,0,0,.75));color:#fff;padding:28px 16px 10px;font-size:13px;display:flex;justify-content:space-between;gap:12px;align-items:flex-end}
+.viewer .vbar b{font-family:var(--cond);font-weight:900;font-size:18px;letter-spacing:.06em;flex:none}
+.vthumbs{display:flex;flex-wrap:wrap;gap:4px;padding:8px 28px 0;background:#fff}
+.vthumbs img{width:64px;height:48px;object-fit:cover;border-radius:3px;cursor:pointer;border:2px solid transparent;opacity:.75}
+.vthumbs img.on{border-color:var(--sun);opacity:1}
+.vthumbs img:hover{opacity:1}
 .gallery{display:grid;grid-template-columns:2fr 1fr;grid-template-rows:1fr 1fr;gap:4px;height:360px;background:#111}
 .gallery img{width:100%;height:100%;object-fit:cover;display:block}
 .gallery img:first-child{grid-row:1/3}
@@ -215,7 +228,7 @@ main{flex:1;display:grid;grid-template-columns:minmax(0,1fr) clamp(360px,46%,640
   .lang{order:4;padding:6px 9px;font-size:11.5px}
   .proto{font-size:11px;padding:5px 10px}
   .filters{padding:8px 14px}
-  .gallery{height:240px}
+  .gallery{height:240px}.viewer{height:260px}.vthumbs{padding:6px 16px 0}.vthumbs img{width:52px;height:40px}
   .d{padding:16px 16px 40px}
   .cta{padding:12px 16px;margin:24px -16px -40px}
   .kv,.near{grid-template-columns:1fr}
@@ -238,10 +251,12 @@ main{flex:1;display:grid;grid-template-columns:minmax(0,1fr) clamp(360px,46%,640
     <button onclick="toggleFavOnly()" id="favbtn" data-t="nav.saved">♡ 保存した物件</button>
     <button class="primary" onclick="openSell()" data-t="nav.sell">売りたい方へ</button>
   </nav>
-  <button class="lang" id="langbtn" onclick="setLang(lang==='ja'?'en':'ja')" aria-label="Language">EN</button>
+  <button class="lang" id="langbtn" onclick="toggleLang()" aria-label="Language">EN</button>
 </header>
 
 <div class="filters" id="filtersSale">
+  <select id="fPref"><option value="" data-t="f.pref">都道府県</option></select>
+  <select id="fMuni"><option value="" data-t="f.muni">市町村</option></select>
   <select id="fPriceMin"><option value="" data-t="f.pmin">価格 下限</option><option value="300" data-t="p.300">300万円</option><option value="500" data-t="p.500">500万円</option><option value="1000" data-t="p.1000">1,000万円</option><option value="1500" data-t="p.1500">1,500万円</option><option value="2000" data-t="p.2000">2,000万円</option><option value="3000" data-t="p.3000">3,000万円</option></select>
   <select id="fPrice"><option value="" data-t="f.pmax">価格 上限</option><option value="300" data-t="p.300">300万円</option><option value="500" data-t="p.500">500万円</option><option value="1000" data-t="p.1000">1,000万円</option><option value="1500" data-t="p.1500">1,500万円</option><option value="2000" data-t="p.2000">2,000万円</option><option value="3000" data-t="p.3000">3,000万円</option><option value="5000" data-t="p.5000">5,000万円</option></select>
   <select id="fRooms"><option value="" data-t="f.rooms">間取り</option><option value="2" data-t="f.rooms.2">2部屋以上</option><option value="3" data-t="f.rooms.3">3部屋以上</option><option value="4" data-t="f.rooms.4">4部屋以上</option><option value="5" data-t="f.rooms.5">5部屋以上</option></select>
@@ -252,12 +267,15 @@ main{flex:1;display:grid;grid-template-columns:minmax(0,1fr) clamp(360px,46%,640
   <button class="chip" data-chip="new" data-t="chip.new">新着</button>
   <button class="chip" data-chip="seller" data-t="chip.seller">売主物件</button>
   <button class="chip" data-chip="walk15" data-t="chip.walk15">駅徒歩15分以内</button>
+  <button class="chip" data-chip="reno" data-t="chip.reno">リフォーム中</button>
   <span class="sep"></span>
   <button class="chip adv" id="advBtn" onclick="openAdv()"><span data-t="f.adv">詳細条件</span><em id="advCount" hidden></em></button>
   <label class="toggle"><input type="checkbox" id="fBounds" checked><span data-t="f.bounds">地図の範囲で絞る</span></label>
   <button class="reset" onclick="resetAll()" data-t="f.reset">条件をクリア</button>
 </div>
 <div class="filters" id="filtersSold" hidden>
+  <select id="sPref"><option value="" data-t="f.pref">都道府県</option></select>
+  <select id="sMuniSel"><option value="" data-t="f.muni">市町村</option></select>
   <button class="chip" data-schip="reform" data-t="schip.reform">フルリフォーム済み</button>
   <button class="chip" data-schip="house" data-t="schip.house">戸建</button>
   <span class="sep"></span>
@@ -333,7 +351,7 @@ main{flex:1;display:grid;grid-template-columns:minmax(0,1fr) clamp(360px,46%,640
   </div>
 </div>
 <div class="toast" id="toast"></div>
-<div class="lightbox" id="lightbox" onclick="closeLightbox()"><img id="lbimg" alt=""><div class="cap" id="lbcap"></div></div>
+<div class="lightbox" id="lightbox" onclick="closeLightbox()"><button class="arrow l" style="position:absolute;left:16px;top:50%;transform:translateY(-50%);width:48px;height:48px;border-radius:50%;border:0;background:rgba(255,255,255,.9);font-size:24px;font-weight:900;cursor:pointer" onclick="event.stopPropagation();lbStep(-1)" aria-label="prev">‹</button><img id="lbimg" alt=""><button class="arrow r" style="position:absolute;right:16px;top:50%;transform:translateY(-50%);width:48px;height:48px;border-radius:50%;border:0;background:rgba(255,255,255,.9);font-size:24px;font-weight:900;cursor:pointer" onclick="event.stopPropagation();lbStep(1)" aria-label="next">›</button><div class="cap" id="lbcap"></div></div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
 <script src="listings.js"></script>
@@ -347,12 +365,12 @@ const CONTACT='https://we.ohanahome.jp/contact/', TEL='0120-087-255';
 const T={
  ja:{ 'logo.i':'空き家再生', proto:`オハナホームの<b>販売中の物件 {n}件</b>（${ASOF} 時点）と成約実績。千葉県を中心に、空き家・中古戸建・土地。`,
   'mode.sale':'販売中','mode.sold':'成約実績','search.ph':'市町村・駅名で探す（例：茂原、いすみ、八街）','nav.saved':'♡ 保存した物件','nav.sell':'売りたい方へ',
-  'f.pmin':'価格 下限','f.pmax':'価格 上限','p.300':'300万円','p.500':'500万円','p.1000':'1,000万円','p.1500':'1,500万円','p.2000':'2,000万円','p.3000':'3,000万円','p.5000':'5,000万円',
+  'f.pref':'都道府県','f.muni':'市町村','f.pmin':'価格 下限','f.pmax':'価格 上限','p.300':'300万円','p.500':'500万円','p.1000':'1,000万円','p.1500':'1,500万円','p.2000':'2,000万円','p.3000':'3,000万円','p.5000':'5,000万円',
   'f.rooms':'間取り','f.rooms.2':'2部屋以上','f.rooms.3':'3部屋以上','f.rooms.4':'4部屋以上','f.rooms.5':'5部屋以上',
   'f.land':'土地面積','f.land.150':'150㎡以上','f.land.250':'250㎡以上','f.land.400':'400㎡以上','f.land.800':'800㎡以上',
   'f.age':'築年数','f.age.20':'築20年以内','f.age.35':'築35年以内','f.age.50':'築50年以内','f.type':'種類','f.bounds':'地図の範囲で絞る','f.reset':'条件をクリア',
   'type.house':'戸建（すべて）','type.平屋':'平屋','type.2階建':'2階建','type.3階建':'3階建','type.戸建':'戸建','type.土地':'土地','type.店舗付き住宅':'店舗付き住宅','type.店舗':'店舗','type.マンション':'マンション','type.古民家':'古民家','type.農家住宅':'農家住宅',
-  'chip.new':'新着','chip.seller':'売主物件','chip.walk15':'駅徒歩15分以内','f.adv':'詳細条件','adv.h':'詳細条件','adv.p':'販売中の物件を、取引の形や設備で絞り込みます','adv.deal':'取引態様','adv.deal.all':'すべて','adv.deal.seller':'売主物件（当社が売主）','adv.deal.agent':'仲介物件（専任・一般媒介）','adv.bld':'建物面積 下限','adv.struct':'構造','adv.any':'指定なし','adv.wood':'木造','adv.steel':'鉄骨造','adv.rc':'鉄筋コンクリート','adv.parking':'駐車場あり','adv.vacant':'現況 空家','adv.plan':'間取り図あり','adv.photos':'写真10枚以上','adv.muni':'市町村（複数可）','adv.apply':'この条件で絞る','adv.clear':'詳細条件を外す','schip.reform':'フルリフォーム済み','schip.house':'戸建',
+  'chip.new':'新着','chip.seller':'売主物件','chip.walk15':'駅徒歩15分以内','chip.reno':'リフォーム中','reno':'リフォーム中','reno.detail':'現在リフォーム中です。完成後の写真はできしだい掲載します。内見のご相談は受け付けています。','f.adv':'詳細条件','adv.h':'詳細条件','adv.p':'販売中の物件を、取引の形や設備で絞り込みます','adv.deal':'取引態様','adv.deal.all':'すべて','adv.deal.seller':'売主物件（当社が売主）','adv.deal.agent':'仲介物件（専任・一般媒介）','adv.bld':'建物面積 下限','adv.struct':'構造','adv.any':'指定なし','adv.wood':'木造','adv.steel':'鉄骨造','adv.rc':'鉄筋コンクリート','adv.parking':'駐車場あり','adv.vacant':'現況 空家','adv.plan':'間取り図あり','adv.photos':'写真10枚以上','adv.muni':'市町村（複数可）','adv.apply':'この条件で絞る','adv.clear':'詳細条件を外す','schip.reform':'フルリフォーム済み','schip.house':'戸建',
   'view.photo':'写真','view.plan':'間取り','plan.zoom':'間取りを拡大','plan.hint':'クリックで閉じる','plan.open':'原寸で開く','plan.dl':'ダウンロード','plan.lowres':'※ athome 掲載の画像（横640px）。元図面が揃い次第、高解像度に差し替えます','d.plan':'FLOOR PLAN','d.plan.sub':'間取り図（クリックで拡大）','sort.new':'新着順','sort.priceAsc':'価格が安い順','sort.priceDesc':'価格が高い順','sort.landDesc':'土地が広い順','sort.ageAsc':'築年が新しい順',
   'm.map':'🗺 地図を見る','m.list':'☰ 一覧を見る','map.photo':'航空写真','map.map':'地図に戻す', title:'FOR SALE','title.sub':'販売中の物件','title.sold':'SOLD','title.sold.sub':'成約実績','title.saved':'保存した物件','title.q':'「{q}」', count:'{n}件{b}・全{t}件','count.b':'（地図の範囲内）',
   empty:'この条件・この範囲には物件がありません。<br>地図を広げるか、条件を減らしてみてください。', new:'NEW', seller:'売主物件', sold:'SOLD OUT', reform:'フルリフォーム', land:'土地', bld:'建物', age:'築{a}年', ageNA:'築年不明', min:'{m}分', landOnly:'土地のみ', plan:'間取り', photo:'写真', drive:'現地写真',
@@ -370,12 +388,12 @@ const T={
  },
  en:{ 'logo.i':'AKIYA SAISEI', proto:`<b>{n} homes and lots for sale</b> from Ohana Home (as of ${ASOF}), plus past sales. Chiba, Japan and nearby.`,
   'mode.sale':'For sale','mode.sold':'Past sales','search.ph':'Search by town or station (e.g. Mobara, Isumi, Yachimata)','nav.saved':'♡ Saved','nav.sell':'Selling?',
-  'f.pmin':'Min price','f.pmax':'Max price','p.300':'¥3M','p.500':'¥5M','p.1000':'¥10M','p.1500':'¥15M','p.2000':'¥20M','p.3000':'¥30M','p.5000':'¥50M',
+  'f.pref':'Prefecture','f.muni':'Municipality','f.pmin':'Min price','f.pmax':'Max price','p.300':'¥3M','p.500':'¥5M','p.1000':'¥10M','p.1500':'¥15M','p.2000':'¥20M','p.3000':'¥30M','p.5000':'¥50M',
   'f.rooms':'Rooms','f.rooms.2':'2+ rooms','f.rooms.3':'3+ rooms','f.rooms.4':'4+ rooms','f.rooms.5':'5+ rooms',
   'f.land':'Lot size','f.land.150':'150 m²+','f.land.250':'250 m²+','f.land.400':'400 m²+','f.land.800':'800 m²+',
   'f.age':'Age','f.age.20':'Built within 20 yrs','f.age.35':'Built within 35 yrs','f.age.50':'Built within 50 yrs','f.type':'Type','f.bounds':'Only in map view','f.reset':'Clear filters',
   'type.house':'Houses (all)','type.平屋':'Single-story','type.2階建':'Two-story','type.3階建':'Three-story','type.戸建':'House','type.土地':'Land','type.店舗付き住宅':'Shop + residence','type.店舗':'Shop','type.マンション':'Condo','type.古民家':'Kominka','type.農家住宅':'Farmhouse',
-  'chip.new':'New','chip.seller':'Direct from owner','chip.walk15':'≤15 min to station','f.adv':'More filters','adv.h':'More filters','adv.p':'Narrow down by transaction type, building and area','adv.deal':'Transaction type','adv.deal.all':'Any','adv.deal.seller':'Direct sale (Ohana Home is the seller)','adv.deal.agent':'Brokered (agency listings)','adv.bld':'Min floor area','adv.struct':'Structure','adv.any':'Any','adv.wood':'Wooden','adv.steel':'Steel frame','adv.rc':'Reinforced concrete','adv.parking':'Parking','adv.vacant':'Currently vacant','adv.plan':'Has floor plan','adv.photos':'10+ photos','adv.muni':'Municipality (multiple)','adv.apply':'Apply','adv.clear':'Clear these','schip.reform':'Fully renovated','schip.house':'Houses',
+  'chip.new':'New','chip.seller':'Direct from owner','chip.walk15':'≤15 min to station','chip.reno':'Renovating','reno':'RENOVATING','reno.detail':'Renovation in progress. Photos of the finished home will be added when ready. Viewing requests are welcome.','f.adv':'More filters','adv.h':'More filters','adv.p':'Narrow down by transaction type, building and area','adv.deal':'Transaction type','adv.deal.all':'Any','adv.deal.seller':'Direct sale (Ohana Home is the seller)','adv.deal.agent':'Brokered (agency listings)','adv.bld':'Min floor area','adv.struct':'Structure','adv.any':'Any','adv.wood':'Wooden','adv.steel':'Steel frame','adv.rc':'Reinforced concrete','adv.parking':'Parking','adv.vacant':'Currently vacant','adv.plan':'Has floor plan','adv.photos':'10+ photos','adv.muni':'Municipality (multiple)','adv.apply':'Apply','adv.clear':'Clear these','schip.reform':'Fully renovated','schip.house':'Houses',
   'view.photo':'Photo','view.plan':'Floor plan','plan.zoom':'Enlarge plan','plan.hint':'click to close','plan.open':'Open full size','plan.dl':'Download','plan.lowres':'athome image (640px wide). Original drawings will replace it when available.','d.plan':'FLOOR PLAN','d.plan.sub':'click to enlarge','sort.new':'Newest','sort.priceAsc':'Price: low to high','sort.priceDesc':'Price: high to low','sort.landDesc':'Largest lot','sort.ageAsc':'Newest build',
   'm.map':'🗺 Map','m.list':'☰ List','map.photo':'Aerial','map.map':'Map', title:'FOR SALE','title.sub':'Chiba & nearby','title.sold':'SOLD','title.sold.sub':'Past sales by Ohana Home','title.saved':'Saved homes','title.q':'“{q}”', count:'{n} listings{b} · {t} total','count.b':' in map view',
   empty:'No listings match these filters in this area.<br>Zoom out or remove a filter.', new:'NEW', seller:'DIRECT SALE', sold:'SOLD OUT', reform:'Fully renovated', land:'Lot', bld:'Bldg', age:'{a} yrs old', ageNA:'age n/a', min:'{m} min', landOnly:'land only', plan:'Plan', photo:'Photo', drive:'Site photo',
@@ -404,10 +422,10 @@ async function applyControlSheet(){
     const txt=await (await fetch(url,{cache:'no-store'})).text();
     const rows=txt.split(/\r?\n/).map(r=>r.split(',')); const head=rows.shift();
     const idx=n=>head.findIndex(h=>h.replace(/^\uFEFF/,'').trim()===n);
-    const iId=idx('ID'), iShow=idx('掲載'), iName=idx('表示名（上書き）'), iCom=idx('ひとこと（上書き）'), iRef=idx('フルリフォーム'); // 成約価格は絶対に出さない決まり：価格の列は読まない
+    const iId=idx('ID'), iShow=idx('掲載'), iName=idx('表示名（上書き）'), iCom=idx('ひとこと（上書き）'), iRef=idx('フルリフォーム'), iReno=idx('リフォーム中'); // 成約価格は絶対に出さない決まり：価格の列は読まない
     const no=v=>['×','x','X','0'].includes((v||'').trim()), yes=v=>['○','〇','o','O','1'].includes((v||'').trim());
     const ctl={}; rows.forEach(r=>{ if(r[iId]) ctl[r[iId].trim()]=r; });
-    DATA=DATA.filter(l=>!(ctl[l.no]&&no(ctl[l.no][iShow]))); DATA.forEach(l=>{ const r=ctl[l.no]; if(!r) return; if(r[iName]&&r[iName].trim()) l.name=r[iName].trim(); if(r[iCom]&&r[iCom].trim()) l.comment=r[iCom].trim(); });
+    DATA=DATA.filter(l=>!(ctl[l.no]&&no(ctl[l.no][iShow]))); DATA.forEach(l=>{ const r=ctl[l.no]; if(!r) return; if(r[iName]&&r[iName].trim()) l.name=r[iName].trim(); if(r[iCom]&&r[iCom].trim()) l.comment=r[iCom].trim(); if(iReno>=0) l.renovating=yes(r[iReno]); });
     SOLD=SOLD.filter(s=>!(ctl['SOLD-'+String(s.id-1).padStart(2,'0')]&&no(ctl['SOLD-'+String(s.id-1).padStart(2,'0')][iShow])));
     SOLD.forEach(s=>{ const r=ctl['SOLD-'+String(s.id-1).padStart(2,'0')]; if(!r) return; if((r[iRef]||'').trim()) s.reform=yes(r[iRef]); if(r[iName]&&r[iName].trim()) s.muni=r[iName].trim(); });
     Object.keys(markers).forEach(id=>{ if(!DATA.find(l=>l.id==id)) saleLayer.removeLayer(markers[id]); });
@@ -429,7 +447,7 @@ function fmtShort(m){ if(lang==='en'){ const yen=m*10000; return '¥'+(yen/1e6).
 function fmtMan(m){ return lang==='en'? '¥'+(m*10000).toLocaleString() : m.toLocaleString()+'万円'; }
 
 /* ========== 状態 ========== */
-const state={mode:'sale',view:'photo',adv:{deal:'',bldMin:'',structure:'',parking:false,vacant:false,plan:false,photos:false,munis:new Set()},price:'',priceMin:'',rooms:'',land:'',age:'',type:'',chips:new Set(),schips:new Set(),bounds:true,q:'',sort:'new',favOnly:false};
+const state={mode:'sale',view:'photo',pref:'',muni:'',spref:'',smuni:'',adv:{deal:'',bldMin:'',structure:'',parking:false,vacant:false,plan:false,photos:false,munis:new Set()},price:'',priceMin:'',rooms:'',land:'',age:'',type:'',chips:new Set(),schips:new Set(),bounds:true,q:'',sort:'new',favOnly:false};
 let favs=new Set(); try{favs=new Set(JSON.parse(localStorage.getItem('akiya-favs-real')||'[]'))}catch(e){}
 function saveFavs(){try{localStorage.setItem('akiya-favs-real',JSON.stringify([...favs]))}catch(e){}}
 let openId=null;
@@ -486,6 +504,8 @@ function setView(v){ state.view=v; document.getElementById('vPhoto').classList.t
 function passes(l,useBounds){
   if(state.favOnly && !favs.has(l.id)) return false;
   if(state.q){ const q=state.q, ql=q.toLowerCase(); if(!(l.muni.includes(q)||l.town.includes(q)||(l.station||'').includes(q)||l.name.includes(q)||l.muniEn.toLowerCase().includes(ql)||l.nameEn.toLowerCase().includes(ql))) return false; }
+  if(state.pref && l.pref!==state.pref) return false;
+  if(state.muni && l.muni!==state.muni) return false;
   if(state.price && l.price>+state.price) return false;
   if(state.priceMin && l.price<+state.priceMin) return false;
   if(state.rooms && l.rooms<+state.rooms) return false;
@@ -495,6 +515,7 @@ function passes(l,useBounds){
   if(state.chips.has('new') && !l.isNew) return false;
   if(state.chips.has('seller') && !/売主/.test(l.deal)) return false;
   if(state.chips.has('walk15') && !(l.walk && l.walk<=15 && !l.accessNote)) return false;
+  if(state.chips.has('reno') && !l.renovating) return false;
   const a=state.adv;
   if(a.deal==='seller' && !/売主/.test(l.deal)) return false;
   if(a.deal==='agent' && !/媒介/.test(l.deal)) return false;
@@ -510,6 +531,8 @@ function passes(l,useBounds){
 }
 function spasses(s,useBounds){
   if(state.q){ const q=state.q, ql=q.toLowerCase(); if(!(s.muni.includes(q)||s.muniEn.toLowerCase().includes(ql))) return false; }
+  if(state.spref && s.pref!==state.spref) return false;
+  if(state.smuni && s.muni!==state.smuni) return false;
   if(state.schips.has('reform') && !s.reform) return false;
   if(state.schips.has('house') && s.kind!=='戸建') return false;
   if(useBounds && state.bounds && mapEl.clientWidth>0 && (!s.lat || !map.getBounds().contains([s.lat,s.lng]))) return false;
@@ -552,7 +575,7 @@ function render(){
   c.innerHTML=arr.map(l=>`
   <article class="card" id="card${l.id}" onmouseenter="hl(${l.id},true)" onmouseleave="hl(${l.id},false)" onclick="openDetail(${l.id})">
     <div class="ph">${cardImg(l)}
-      ${l.isNew?'<span class="badge new">'+t('new')+'</span>':/売主/.test(l.deal)?'<span class="badge">'+t('seller')+'</span>':''}
+      ${l.renovating?'<span class="badge reno">'+t('reno')+'</span>':l.isNew?'<span class="badge new">'+t('new')+'</span>':/売主/.test(l.deal)?'<span class="badge">'+t('seller')+'</span>':''}
       ${l.photos.length?`<span class="badge cnt">${t('photos.n',{n:l.photos.length+(l.drivePhoto?1:0)})}</span>`:''}
       <button class="fav ${favs.has(l.id)?'on':''}" onclick="event.stopPropagation();toggleFav(${l.id})" aria-label="save">${favs.has(l.id)?'♥':'♡'}</button>
     </div>
@@ -569,7 +592,7 @@ function shl(id,on){ const c=document.getElementById('scard'+id); if(c) c.classL
 function toggleFav(id){ favs.has(id)?favs.delete(id):favs.add(id); saveFavs(); render(); toast(favs.has(id)?t('toast.saved'):t('toast.unsaved')); }
 function toggleFavOnly(){ state.favOnly=!state.favOnly; const b=document.getElementById('favbtn'); b.style.background=state.favOnly?'#fff':''; b.style.color=state.favOnly?'#000':''; if(state.mode!=='sale') setMode('sale'); else render(); }
 function resetAll(){
-  Object.assign(state,{price:'',priceMin:'',rooms:'',land:'',age:'',type:'',q:'',favOnly:false}); state.adv={deal:'',bldMin:'',structure:'',parking:false,vacant:false,plan:false,photos:false,munis:new Set()}; updateAdvBadge(); state.chips.clear(); state.schips.clear(); flipped.clear();
+  Object.assign(state,{price:'',priceMin:'',rooms:'',land:'',age:'',type:'',q:'',favOnly:false,pref:'',muni:'',spref:'',smuni:''}); fillGeoSelects(); state.adv={deal:'',bldMin:'',structure:'',parking:false,vacant:false,plan:false,photos:false,munis:new Set()}; updateAdvBadge(); state.chips.clear(); state.schips.clear(); flipped.clear();
   ['fPriceMin','fPrice','fRooms','fLand','fAge','fType'].forEach(id=>{const e=document.getElementById(id); e.value=''; e.classList.remove('on')});
   document.querySelectorAll('.chip').forEach(c=>c.classList.remove('on'));
   document.getElementById('q').value=''; document.getElementById('favbtn').style.background=''; document.getElementById('favbtn').style.color='';
@@ -584,6 +607,22 @@ function applyAdv(ev){ if(ev) ev.preventDefault(); const a=state.adv; a.deal=doc
 function clearAdv(){ state.adv={deal:'',bldMin:'',structure:'',parking:false,vacant:false,plan:false,photos:false,munis:new Set()}; updateAdvBadge(); closeAdv(); render(); }
 function updateAdvBadge(){ const a=state.adv; const n=[a.deal,a.bldMin,a.structure].filter(Boolean).length+[a.parking,a.vacant,a.plan,a.photos].filter(Boolean).length+(a.munis.size?1:0); const e=document.getElementById('advCount'); e.textContent=n; e.hidden=!n; document.getElementById('advBtn').classList.toggle('on',n>0); }
 function toast(msg){ const e=document.getElementById('toast'); e.textContent=msg; e.classList.add('show'); clearTimeout(e._t); e._t=setTimeout(()=>e.classList.remove('show'),2200); }
+function fillGeoSelects(){
+  const mk=(sel,items,cur)=>{ const first=sel.options[0].outerHTML; sel.innerHTML=first+items.map(([v,label,n])=>`<option value="${v}">${label}${n?' ('+n+')':''}</option>`).join(''); sel.value=cur; sel.classList.toggle('on',!!cur); };
+  const cnt=(arr,key)=>{ const m={}; arr.forEach(x=>{ if(x[key]) m[x[key]]=(m[x[key]]||0)+1; }); return Object.entries(m).sort((a,b)=>b[1]-a[1]); };
+  const prefEn={'千葉県':'Chiba','埼玉県':'Saitama','茨城県':'Ibaraki','東京都':'Tokyo','神奈川県':'Kanagawa'};
+  mk(document.getElementById('fPref'), cnt(DATA,'pref').map(([k,n])=>[k,lang==='en'?(prefEn[k]||k):k,n]), state.pref);
+  const dm=DATA.filter(l=>!state.pref||l.pref===state.pref);
+  mk(document.getElementById('fMuni'), cnt(dm,'muni').map(([k,n])=>[k,lang==='en'?(dm.find(l=>l.muni===k).muniEn):k,n]), state.muni);
+  mk(document.getElementById('sPref'), cnt(SOLD,'pref').map(([k,n])=>[k,lang==='en'?(prefEn[k]||k):k,n]), state.spref);
+  const sm=SOLD.filter(x=>!state.spref||x.pref===state.spref);
+  mk(document.getElementById('sMuniSel'), cnt(sm,'muni').map(([k,n])=>[k,lang==='en'?(sm.find(x=>x.muni===k).muniEn):k,n]), state.smuni);
+}
+document.getElementById('fPref').addEventListener('change',e=>{ state.pref=e.target.value; if(state.muni&&!DATA.some(l=>l.muni===state.muni&&(!state.pref||l.pref===state.pref))) state.muni=''; fillGeoSelects(); zoomToSel(); render(); });
+document.getElementById('fMuni').addEventListener('change',e=>{ state.muni=e.target.value; fillGeoSelects(); zoomToSel(); render(); });
+document.getElementById('sPref').addEventListener('change',e=>{ state.spref=e.target.value; if(state.smuni&&!SOLD.some(x=>x.muni===state.smuni&&(!state.spref||x.pref===state.spref))) state.smuni=''; fillGeoSelects(); zoomToSel(); render(); });
+document.getElementById('sMuniSel').addEventListener('change',e=>{ state.smuni=e.target.value; fillGeoSelects(); zoomToSel(); render(); });
+function zoomToSel(){ const sale=state.mode==='sale'; const src=sale?DATA:SOLD.filter(x=>x.lat); const pref=sale?state.pref:state.spref, muni=sale?state.muni:state.smuni; const hits=src.filter(x=>(!pref||x.pref===pref)&&(!muni||x.muni===muni)); if(hits.length&&(pref||muni)) map.fitBounds(L.latLngBounds(hits.map(x=>[x.lat,x.lng])).pad(0.4),{maxZoom:13}); else if(!pref&&!muni) homeView(); }
 [['fPriceMin','priceMin'],['fPrice','price'],['fRooms','rooms'],['fLand','land'],['fAge','age'],['fType','type']].forEach(([id,k])=>{ document.getElementById(id).addEventListener('change',e=>{ state[k]=e.target.value; e.target.classList.toggle('on',!!e.target.value); render(); }); });
 document.querySelectorAll('#filtersSale .chip').forEach(c=>c.addEventListener('click',()=>{ const u=c.dataset.chip; state.chips.has(u)?state.chips.delete(u):state.chips.add(u); c.classList.toggle('on'); render(); }));
 document.querySelectorAll('#filtersSold .chip').forEach(c=>c.addEventListener('click',()=>{ const u=c.dataset.schip; state.schips.has(u)?state.schips.delete(u):state.schips.add(u); c.classList.toggle('on'); render(); }));
@@ -604,13 +643,13 @@ function h2(k){ return `<h2>${t(k)}${t(k+'.sub')?`<small>${t(k+'.sub')}</small>`
 function openDetail(id){
   const l=DATA.find(x=>x.id===id); if(!l) return; openId=id;
   const age=ageOf(l); const ph=photosOf(l);
-  const gal=ph.slice(0,3).map(p=>`<img src="${img(p,900)}" alt="${(p.caption||p.type||'').replace(/"/g,'')}" title="${(p.caption||p.type||'').replace(/"/g,'')}">`).join('');
-  const thumbs=ph.map((p,i)=>`<img src="${img(p,300)}" alt="" title="${(p.caption||p.type||'').replace(/"/g,'')}" onclick="swapMain(${l.id},${i})" loading="lazy">`).join('');
+  vIdx=0;
+  const thumbs=ph.map((p,i)=>`<img src="${img(p,300)}" alt="" title="${(p.caption||p.type||'').replace(/"/g,'')}" onclick="showPhoto(${l.id},${i})" loading="lazy" class="${i===0?'on':''}">`).join('');
   const fac=(l.facilities||'').split(/\s+/).filter(Boolean);
   document.getElementById('panel').innerHTML=`
   <button class="close" onclick="closePanel()" aria-label="close">✕</button>
-  ${ph.length?`<div class="gallery${ph.length<3?' one':''}" id="gal">${gal}</div>`:`<div class="gallery one"><div class="nophoto" style="height:100%">${t('photos.n',{n:0})}</div></div>`}
-  ${ph.length>1?`<div class="thumbs">${thumbs}</div>`:''}
+  ${ph.length?`<div class="viewer" id="viewer"><img class="vmain" id="vmain" src="${img(ph[0],900)}" alt="" onclick="openLightbox(${l.id},'photo',vIdx)">${ph.length>1?`<button class="arrow l" onclick="stepPhoto(${l.id},-1)" aria-label="prev">‹</button><button class="arrow r" onclick="stepPhoto(${l.id},1)" aria-label="next">›</button>`:''}<div class="vbar"><span id="vcap">${(ph[0].caption||ph[0].type||'')}</span><b id="vcnt">1 / ${ph.length}</b></div></div>`:`<div class="gallery one"><div class="nophoto" style="height:100%">${t('photos.n',{n:0})}</div></div>`}
+  ${ph.length>1?`<div class="vthumbs" id="vthumbs">${thumbs}</div>`:''}
   <div class="d">
     <div class="top">
       <div>
@@ -620,6 +659,7 @@ function openDetail(id){
       </div>
       <button class="btn s" style="flex:0 0 auto;min-width:0;padding:10px 16px" onclick="toggleFav(${l.id});openDetail(${l.id})">${favs.has(l.id)?t('d.saved'):t('d.save')}</button>
     </div>
+    ${l.renovating?`<div class="renobar">${t('reno.detail')}</div>`:''}
     ${h2('d.about')}
     ${lang==='en'?`<p>${l.descEn}</p>${l.comment?`<p style="margin-top:10px;color:var(--sub);font-size:13.5px"><b>Agent’s note (Japanese):</b> ${l.comment}</p>`:''}`:`<p>${l.comment||l.descEn}</p>${l.appeal?`<p style="margin-top:10px">${l.appeal.replace(/\n/g,'<br>')}</p>`:''}`}
     ${planOf(l)?`${h2('d.plan')}<div class="planblock" onclick="openLightbox(${l.id},'plan')"><img src="${img(planOf(l),1400)}" alt="${t('plan')}"></div>`:''}
@@ -648,13 +688,20 @@ function openDetail(id){
   document.getElementById('panel').classList.add('open'); document.getElementById('overlay').classList.add('open');
   markers[id].openPopup();
 }
-function swapMain(id,i){ const l=DATA.find(x=>x.id===id); const p=photosOf(l)[i]; const g=document.querySelector('#gal img'); if(g&&p){ g.src=img(p,900); g.title=p.caption||p.type||''; } document.querySelectorAll('.thumbs img').forEach((e,j)=>e.classList.toggle('on',j===i)); document.getElementById('panel').scrollTo({top:0,behavior:'smooth'}); }
+let vIdx=0;
+function showPhoto(id,i){ const l=DATA.find(x=>x.id===id); const ph=photosOf(l); if(!ph.length) return; vIdx=(i+ph.length)%ph.length; const p=ph[vIdx]; const m=document.getElementById('vmain'); if(m){ m.src=img(p,900); } const c=document.getElementById('vcap'); if(c) c.textContent=p.caption||p.type||''; const n=document.getElementById('vcnt'); if(n) n.textContent=(vIdx+1)+' / '+ph.length; document.querySelectorAll('#vthumbs img').forEach((e,j)=>{ e.classList.toggle('on',j===vIdx); if(j===vIdx) e.scrollIntoView({block:'nearest',inline:'nearest'}); }); }
+function stepPhoto(id,d){ showPhoto(id,vIdx+d); }
+let touchX=null; document.addEventListener('touchstart',e=>{ if(e.target.closest('#viewer')) touchX=e.touches[0].clientX; },{passive:true});
+document.addEventListener('touchend',e=>{ if(touchX==null||!openId) return; const dx=e.changedTouches[0].clientX-touchX; touchX=null; if(Math.abs(dx)>40) stepPhoto(openId, dx<0?1:-1); },{passive:true});
 function planSrc(l){ return l.planHi? l.planHi : (planOf(l)? img(planOf(l),1400) : ''); }
-function openLightbox(id,which){ const l=DATA.find(x=>x.id===id); const p=which==='plan'?planOf(l):mainOf(l); const src=which==='plan'?planSrc(l):(p?img(p,1400):''); if(!src) return;
-  document.getElementById('lbimg').src=src; document.getElementById('lbcap').innerHTML=((p&&(p.caption||p.type))||'')+(which==='plan'?`　<a href="${src}" target="_blank" rel="noopener" onclick="event.stopPropagation()" style="color:#fff;margin-left:12px">${t('plan.open')}</a> <a href="${src}" download onclick="event.stopPropagation()" style="color:#fff;margin-left:12px">${t('plan.dl')}</a>　<span style="opacity:.7">${t('plan.hint')}</span>${l.planHi?'':'<br><span style="opacity:.7;font-size:12px">'+t('plan.lowres')+'</span>'}`:''); document.getElementById('lightbox').classList.add('open'); }
+let lbState={id:null,which:'photo',i:0};
+function openLightbox(id,which,i){ const l=DATA.find(x=>x.id===id); const ph=photosOf(l); if(which==='photo'&&typeof i==='number') lbState={id,which,i}; else lbState={id,which,i:0}; const p=which==='plan'?planOf(l):(ph[lbState.i]||mainOf(l)); const src=which==='plan'?planSrc(l):(p?img(p,1400):''); if(!src) return;
+  document.getElementById('lbimg').src=src; document.getElementById('lbcap').innerHTML=(which==='photo'&&ph.length>1?`<b>${lbState.i+1} / ${ph.length}</b>　`:'')+((p&&(p.caption||p.type))||'')+(which==='plan'?`　<a href="${src}" target="_blank" rel="noopener" onclick="event.stopPropagation()" style="color:#fff;margin-left:12px">${t('plan.open')}</a> <a href="${src}" download onclick="event.stopPropagation()" style="color:#fff;margin-left:12px">${t('plan.dl')}</a>　<span style="opacity:.7">${t('plan.hint')}</span>${l.planHi?'':'<br><span style="opacity:.7;font-size:12px">'+t('plan.lowres')+'</span>'}`:''); document.getElementById('lightbox').classList.add('open'); }
+function lbStep(d){ if(lbState.which!=='photo'||!lbState.id) return; const n=photosOf(DATA.find(x=>x.id===lbState.id)).length; const i=(lbState.i+d+n)%n; openLightbox(lbState.id,'photo',i); showPhoto(lbState.id,i); }
 function closeLightbox(){ document.getElementById('lightbox').classList.remove('open'); }
 function closePanel(){ document.getElementById('panel').classList.remove('open'); document.getElementById('overlay').classList.remove('open'); }
-document.addEventListener('keydown',e=>{ if(e.key==='Escape'){closeLightbox();closePanel();closeSell();closeAdv();} });
+document.addEventListener('keydown',e=>{ if(e.key==='Escape'){closeLightbox();closePanel();closeSell();closeAdv();}
+  if(e.key==='ArrowLeft'||e.key==='ArrowRight'){ const d=e.key==='ArrowRight'?1:-1; if(document.getElementById('lightbox').classList.contains('open')&&lbState.which==='photo'&&lbState.id){ const n=photosOf(DATA.find(x=>x.id===lbState.id)).length; openLightbox(lbState.id,'photo',(lbState.i+d+n)%n); showPhoto(lbState.id,(lbState.i)); } else if(openId&&document.getElementById('panel').classList.contains('open')) stepPhoto(openId,d); } });
 
 /* ========== 売りたい方：簡易参考価格（架空の係数） ========== */
 const MUNI_EST={'八街市':2.2,'佐倉市':4.5,'成田市':3.6,'富里市':2.6,'山武市':1.5,'東金市':2.4,'四街道市':6.0,'千葉市若葉区':5.2,'印西市':4.0,'酒々井町':3.0,'匝瑳市':1.2,'多古町':1.0,'芝山町':1.3,'大網白里市':2.8,'茂原市':2.5,'木更津市':3.4,'館山市':1.9,'南房総市':1.4,'香取市':1.3,'旭市':1.6,'いすみ市':1.4,'市原市':3.0,'柏市':7.0,'船橋市':9.0};
@@ -697,8 +744,10 @@ function applyLang(){
   document.getElementById('sMuni').innerHTML=Object.keys(MUNI_EST).map(m=>`<option value="${m}">${lang==='en'?MUNI_EST_EN[m]:m}</option>`).join('');
   document.getElementById('sCond').innerHTML=Object.keys(COND).map(c=>`<label><input type="checkbox" value="${c}">${condN(c)}</label>`).join('');
   document.getElementById('sellResult').className='result';
+  fillGeoSelects();
   DATA.forEach(l=>markers[l.id].setPopupContent(popHtml(l))); Object.values(SOLD_GROUPS).forEach(g=>smarkers[g.items[0].id].setPopupContent(gpopHtml(g)));
 }
+function toggleLang(){ setLang(lang==='ja'?'en':'ja'); }
 function setLang(x){ lang=x; try{localStorage.setItem('akiya-lang',x)}catch(e){} applyLang(); render(); if(document.getElementById('panel').classList.contains('open')&&openId) openDetail(openId); }
 applyLang(); setMode('sale'); applyControlSheet();
 </script>
