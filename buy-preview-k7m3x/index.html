@@ -332,7 +332,7 @@ const T={
   'view.photo':'写真','view.plan':'間取り','plan.zoom':'間取りを拡大','plan.hint':'クリックで閉じる','d.plan':'FLOOR PLAN','d.plan.sub':'間取り図（クリックで拡大）','sort.new':'新着順','sort.priceAsc':'価格が安い順','sort.priceDesc':'価格が高い順','sort.landDesc':'土地が広い順','sort.ageAsc':'築年が新しい順',
   'm.map':'🗺 地図を見る','m.list':'☰ 一覧を見る','map.photo':'航空写真','map.map':'地図に戻す', title:'FOR SALE','title.sub':'販売中の物件','title.sold':'SOLD','title.sold.sub':'成約実績','title.saved':'保存した物件','title.q':'「{q}」', count:'{n}件{b}・全{t}件','count.b':'（地図の範囲内）',
   empty:'この条件・この範囲には物件がありません。<br>地図を広げるか、条件を減らしてみてください。', new:'NEW', seller:'売主物件', sold:'SOLD OUT', reform:'フルリフォーム', land:'土地', bld:'建物', age:'築{a}年', ageNA:'築年不明', min:'{m}分', landOnly:'土地のみ', plan:'間取り', photo:'写真', drive:'現地写真',
-  'sold.date':'{y}年{m}月 成約','sold.nodate':'成約済み',
+  'sold.date':'{y}年{m}月 成約','sold.nodate':'成約済み','sold.count':'成約 {n}件','sold.approx':'成約物件の位置は市町村までの表示です','title.sold.note':'位置は市町村単位',
   'toast.saved':'保存しました（この端末だけに残ります）','toast.unsaved':'保存を外しました','toast.nosell':'準備中のため、相談は送信されません',
   'd.save':'♡ 保存する','d.saved':'♥ 保存済み','d.addr':'{addr}（番地は非公開）','d.access':'{st}駅 徒歩{m}分','d.accessBus':'{st}駅 バス便','d.accessDist':'{st}駅 {d}','d.year':'築{a}年（{y}）',
   'd.about':'ABOUT','d.about.sub':'この物件について','d.basic':'DETAILS','d.basic.sub':'基本情報','d.kind':'種目','d.layout':'間取り','d.layoutDetail':'間取り内訳','d.land':'土地面積','d.bld':'建物面積','d.built':'築年月','d.structure':'構造・規模','d.access2':'交通','d.right':'土地権利','d.status':'現況','d.handover':'引渡し','d.deal':'取引態様','d.road':'接道状況','d.zoning':'用途地域・都市計画','d.bcr':'建ぺい率／容積率','d.parking':'駐車場',
@@ -355,7 +355,7 @@ const T={
   'view.photo':'Photo','view.plan':'Floor plan','plan.zoom':'Enlarge plan','plan.hint':'click to close','d.plan':'FLOOR PLAN','d.plan.sub':'click to enlarge','sort.new':'Newest','sort.priceAsc':'Price: low to high','sort.priceDesc':'Price: high to low','sort.landDesc':'Largest lot','sort.ageAsc':'Newest build',
   'm.map':'🗺 Map','m.list':'☰ List','map.photo':'Aerial','map.map':'Map', title:'FOR SALE','title.sub':'Chiba & nearby','title.sold':'SOLD','title.sold.sub':'Past sales by Ohana Home','title.saved':'Saved homes','title.q':'“{q}”', count:'{n} listings{b} · {t} total','count.b':' in map view',
   empty:'No listings match these filters in this area.<br>Zoom out or remove a filter.', new:'NEW', seller:'DIRECT SALE', sold:'SOLD OUT', reform:'Fully renovated', land:'Lot', bld:'Bldg', age:'{a} yrs old', ageNA:'age n/a', min:'{m} min', landOnly:'land only', plan:'Plan', photo:'Photo', drive:'Site photo',
-  'sold.date':'Sold {m}/{y}','sold.nodate':'Sold',
+  'sold.date':'Sold {m}/{y}','sold.nodate':'Sold','sold.count':'{n} sold','sold.approx':'Sold listings are shown by municipality only','title.sold.note':'shown by municipality',
   'toast.saved':'Saved (on this device only)','toast.unsaved':'Removed from saved','toast.nosell':'Not live yet: requests are not sent',
   'd.save':'♡ Save','d.saved':'♥ Saved','d.addr':'{addr} (exact address withheld)','d.access':'{m} min walk to {st} Station','d.accessBus':'Bus from {st} Station','d.accessDist':'{d} from {st} Station','d.year':'{a} yrs old (built {y})',
   'd.about':'ABOUT','d.about.sub':'About this listing','d.basic':'DETAILS','d.basic.sub':'','d.kind':'Category','d.layout':'Layout','d.layoutDetail':'Rooms','d.land':'Lot size','d.bld':'Floor area','d.built':'Built','d.structure':'Structure','d.access2':'Access','d.right':'Land tenure','d.status':'Current status','d.handover':'Handover','d.deal':'Transaction','d.road':'Road frontage','d.zoning':'Zoning','d.bcr':'Coverage / floor-area ratio','d.parking':'Parking',
@@ -385,7 +385,7 @@ async function applyControlSheet(){
     const ctl={}; rows.forEach(r=>{ if(r[iId]) ctl[r[iId].trim()]=r; });
     DATA=DATA.filter(l=>!(ctl[l.no]&&no(ctl[l.no][iShow]))); DATA.forEach(l=>{ const r=ctl[l.no]; if(!r) return; if(r[iName]&&r[iName].trim()) l.name=r[iName].trim(); if(r[iCom]&&r[iCom].trim()) l.comment=r[iCom].trim(); });
     SOLD=SOLD.filter(s=>!(ctl['SOLD-'+String(s.id-1).padStart(2,'0')]&&no(ctl['SOLD-'+String(s.id-1).padStart(2,'0')][iShow])));
-    SOLD.forEach(s=>{ const r=ctl['SOLD-'+String(s.id-1).padStart(2,'0')]; if(!r) return; if((r[iRef]||'').trim()) s.reform=yes(r[iRef]); if(r[iName]&&r[iName].trim()) s.town=r[iName].trim(); });
+    SOLD.forEach(s=>{ const r=ctl['SOLD-'+String(s.id-1).padStart(2,'0')]; if(!r) return; if((r[iRef]||'').trim()) s.reform=yes(r[iRef]); if(r[iName]&&r[iName].trim()) s.muni=r[iName].trim(); });
     Object.keys(markers).forEach(id=>{ if(!DATA.find(l=>l.id==id)) saleLayer.removeLayer(markers[id]); });
     Object.keys(smarkers).forEach(id=>{ if(!SOLD.find(s=>s.id==id)) soldLayer.removeLayer(smarkers[id]); });
     render();
@@ -426,7 +426,7 @@ new BaseCtl({position:'bottomleft'}).addTo(map); pickTile();
 const saleLayer=L.layerGroup().addTo(map), soldLayer=L.layerGroup();
 const markers={}, smarkers={};
 function popHtml(l){ const m=mainOf(l); return `<div class="pop">${m?`<img src="${img(m,400)}" alt="">`:''}<div class="b"><div class="p">${fmtPlain(l.price)}</div>${layoutN(l)}${l.land?' · '+t('land')+' '+l.land+'㎡':''}${ageOf(l)?' · '+t('age',{a:ageOf(l)}):''}<br><span style="color:#5c5c5c">${muniN(l)} · ${nameN(l)}</span><br><a href="javascript:openDetail(${l.id})">${t('pop.more')}</a></div></div>`; }
-function spopHtml(s){ return `<div class="pop">${s.photo?`<img src="${s.photo}" alt="">`:''}<div class="b"><div class="p">${t('sold')}</div>${lang==='en'?s.muniEn:s.town}${s.kind?' · '+(lang==='en'?s.kindEn:s.kind):''}<br><span style="color:#5c5c5c">${soldWhen(s)}</span>${s.reform?'<br><b style="color:#8a5a0a">'+t('reform')+'</b>':''}</div></div>`; }
+function spopHtml(s){ return `<div class="pop">${s.photo?`<img src="${s.photo}" alt="">`:''}<div class="b"><div class="p">${t('sold')}</div>${lang==='en'?s.muniEn:s.muni}${s.kind?' · '+(lang==='en'?s.kindEn:s.kind):''}<br><span style="color:#5c5c5c">${soldWhen(s)}</span>${s.reform?'<br><b style="color:#8a5a0a">'+t('reform')+'</b>':''}</div></div>`; }
 function soldWhen(s){ if(!s.soldDate) return t('sold.nodate'); const [y,m]=s.soldDate.split('-'); return t('sold.date',{y,m:+m}); }
 DATA.forEach(l=>{
   const icon=L.divIcon({className:'',html:`<div class="pin ${l.type==='土地'?'landpin':''}" id="pin${l.id}">${fmtShort(l.price)}</div>`,iconSize:[0,0]});
@@ -434,11 +434,15 @@ DATA.forEach(l=>{
   mk.on('mouseover',()=>hl(l.id,true)); mk.on('mouseout',()=>hl(l.id,false)); mk.on('click',()=>{const c=document.getElementById('card'+l.id); if(c) c.scrollIntoView({behavior:'smooth',block:'center'});});
   markers[l.id]=mk;
 });
-SOLD.filter(s=>s.lat).forEach(s=>{
-  const icon=L.divIcon({className:'',html:`<div class="pin soldpin ${s.reform?'reformpin':''}" id="spin${s.id}">SOLD</div>`,iconSize:[0,0]});
-  const mk=L.marker([s.lat,s.lng],{icon}).addTo(soldLayer); mk.bindPopup(spopHtml(s),{closeButton:false,offset:[0,-26]});
-  mk.on('mouseover',()=>shl(s.id,true)); mk.on('mouseout',()=>shl(s.id,false)); mk.on('click',()=>{const c=document.getElementById('scard'+s.id); if(c) c.scrollIntoView({behavior:'smooth',block:'center'});});
-  smarkers[s.id]=mk;
+/* 成約はピンポイントにしない（決まり）：市町村ごとに1つのピンにまとめ、件数を出す */
+const SOLD_GROUPS={};
+SOLD.filter(s=>s.lat).forEach(s=>{ const k=s.muni; (SOLD_GROUPS[k]=SOLD_GROUPS[k]||{muni:k,muniEn:s.muniEn,lat:s.lat,lng:s.lng,items:[]}).items.push(s); });
+function gpopHtml(g){ const ph=g.items.find(x=>x.photo); return `<div class="pop">${ph?`<img src="${ph.photo}" alt="">`:''}<div class="b"><div class="p">${lang==='en'?g.muniEn:g.muni}</div>${t('sold.count',{n:g.items.length})}${g.items.some(x=>x.reform)?' · <b style="color:#8a5a0a">'+t('reform')+' '+g.items.filter(x=>x.reform).length+'</b>':''}</div></div>`; }
+Object.values(SOLD_GROUPS).forEach(g=>{
+  const icon=L.divIcon({className:'',html:`<div class="pin soldpin ${g.items.some(x=>x.reform)?'reformpin':''}" id="gpin${g.muni}">SOLD ×${g.items.length}</div>`,iconSize:[0,0]});
+  const mk=L.marker([g.lat,g.lng],{icon}).addTo(soldLayer); mk.bindPopup(gpopHtml(g),{closeButton:false,offset:[0,-26]});
+  mk.on('click',()=>{ const first=g.items.find(x=>spasses(x,false)); const c=first&&document.getElementById('scard'+first.id); if(c) c.scrollIntoView({behavior:'smooth',block:'center'}); });
+  g.items.forEach(s=>smarkers[s.id]=mk);
 });
 const SALE_BOUNDS=DATA.length?L.latLngBounds(DATA.map(l=>[l.lat,l.lng])).pad(0.08):null;
 const SOLD_BOUNDS=SOLD.some(s=>s.lat)?L.latLngBounds(SOLD.filter(s=>s.lat).map(s=>[s.lat,s.lng])).pad(0.08):null;
@@ -470,7 +474,7 @@ function passes(l,useBounds){
   return true;
 }
 function spasses(s,useBounds){
-  if(state.q){ const q=state.q, ql=q.toLowerCase(); if(!(s.town.includes(q)||s.muni.includes(q)||s.muniEn.toLowerCase().includes(ql))) return false; }
+  if(state.q){ const q=state.q, ql=q.toLowerCase(); if(!(s.muni.includes(q)||s.muniEn.toLowerCase().includes(ql))) return false; }
   if(state.schips.has('reform') && !s.reform) return false;
   if(state.schips.has('house') && s.kind!=='戸建') return false;
   if(useBounds && state.bounds && mapEl.clientWidth>0 && (!s.lat || !map.getBounds().contains([s.lat,s.lng]))) return false;
@@ -488,19 +492,19 @@ const flipped=new Set();
 function flipCard(id){ flipped.has(id)?flipped.delete(id):flipped.add(id); const l=DATA.find(x=>x.id===id); const ph=document.querySelector('#card'+id+' .ph'); if(!ph||!l) return; const sv=state.view; state.view=(flipped.has(id)?(sv==='plan'?'photo':'plan'):sv); const keep=[...ph.querySelectorAll('.badge,.fav')].map(e=>e.outerHTML).join(''); ph.innerHTML=cardImg(l)+keep; state.view=sv; }
 function render(){
   const mode=state.mode;
-  document.getElementById('title').innerHTML = mode==='sold'?`${t('title.sold')}<small>${t('title.sold.sub')}</small>`:(state.favOnly?`SAVED<small>${t('title.saved')}</small>`:(state.q?`${t('title')}<small>${t('title.q',{q:state.q})}</small>`:`${t('title')}<small>${t('title.sub')}</small>`));
+  document.getElementById('title').innerHTML = mode==='sold'?`${t('title.sold')}<small>${t('title.sold.sub')}・${t('title.sold.note')}</small>`:(state.favOnly?`SAVED<small>${t('title.saved')}</small>`:(state.q?`${t('title')}<small>${t('title.q',{q:state.q})}</small>`:`${t('title')}<small>${t('title.sub')}</small>`));
   const c=document.getElementById('cards');
   if(mode==='sold'){
     const arr=SOLD.filter(s=>spasses(s,true));
-    SOLD.forEach(s=>{ const mk=smarkers[s.id]; if(!mk) return; const el=mk.getElement(); if(el) el.style.opacity=spasses(s,false)?1:.25; });
+    Object.values(SOLD_GROUPS).forEach(g=>{ const el=smarkers[g.items[0].id]&&smarkers[g.items[0].id].getElement(); if(el) el.style.opacity=g.items.some(x=>spasses(x,false))?1:.25; });
     document.getElementById('count').textContent=t('count',{n:arr.length,b:(state.bounds&&mapEl.clientWidth>0)?t('count.b'):'',t:SOLD.length});
     if(!arr.length){ c.innerHTML=`<div class="empty" style="grid-column:1/-1">${t('empty')}</div>`; return; }
     c.innerHTML=arr.map(s=>`
-    <article class="card" id="scard${s.id}" onmouseenter="shl(${s.id},true)" onmouseleave="shl(${s.id},false)" onclick="${s.lat?`smarkers[${s.id}].openPopup();map.panTo([${s.lat},${s.lng}])`:''}">
+    <article class="card" id="scard${s.id}" onmouseenter="shl(${s.id},true)" onmouseleave="shl(${s.id},false)" onclick="${s.lat?`smarkers[${s.id}].openPopup();map.panTo([${s.lat},${s.lng}])`:''}" title="${t('sold.approx')}">
       <div class="ph">${s.photo?`<img class="main" src="${s.photo}" alt="" loading="lazy">`:`<div class="nophoto">${t('sold')}</div>`}<span class="badge sold">${t('sold')}</span>${s.reform?`<span class="badge reform">${t('reform')}</span>`:''}</div>
       <div class="body">
         <div class="price"><span style="font-size:22px">${t('sold')}</span><small>${soldWhen(s)}</small></div>
-        <div class="addr" style="margin-top:6px">${lang==='en'?s.muniEn:s.town}${s.kind?' ｜ '+(lang==='en'?s.kindEn:s.kind):''}</div>
+        <div class="addr" style="margin-top:6px">${lang==='en'?s.muniEn:s.muni}${s.kind?' ｜ '+(lang==='en'?s.kindEn:s.kind):''}</div>
         <div class="tags">${s.reform?`<span class="tag sun">${t('reform')}</span>`:''}${s.reformPhotos?`<span class="tag">${lang==='en'?'after photos':'リフォーム後写真あり'}</span>`:''}</div>
       </div>
     </article>`).join('');
@@ -648,7 +652,7 @@ function applyLang(){
   document.getElementById('sMuni').innerHTML=Object.keys(MUNI_EST).map(m=>`<option value="${m}">${lang==='en'?MUNI_EST_EN[m]:m}</option>`).join('');
   document.getElementById('sCond').innerHTML=Object.keys(COND).map(c=>`<label><input type="checkbox" value="${c}">${condN(c)}</label>`).join('');
   document.getElementById('sellResult').className='result';
-  DATA.forEach(l=>markers[l.id].setPopupContent(popHtml(l))); SOLD.forEach(s=>{ if(smarkers[s.id]) smarkers[s.id].setPopupContent(spopHtml(s)); });
+  DATA.forEach(l=>markers[l.id].setPopupContent(popHtml(l))); Object.values(SOLD_GROUPS).forEach(g=>smarkers[g.items[0].id].setPopupContent(gpopHtml(g)));
 }
 function setLang(x){ lang=x; try{localStorage.setItem('akiya-lang',x)}catch(e){} applyLang(); render(); if(document.getElementById('panel').classList.contains('open')&&openId) openDetail(openId); }
 applyLang(); setMode('sale'); applyControlSheet();
