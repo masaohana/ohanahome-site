@@ -360,10 +360,14 @@ main{flex:1;display:grid;grid-template-columns:minmax(0,1fr) clamp(360px,46%,640
 <script>
 /* ========== 言語 ========== */
 let lang='ja'; try{ lang=localStorage.getItem('akiya-lang')||'ja' }catch(e){}
-const USD=150; const ASOF=window.LISTINGS_ASOF||'';
+let USD=150, USD_INFO={src:'fallback',date:''}; const ASOF=window.LISTINGS_ASOF||'';
+/* 為替：欧州中央銀行の日次参考レート（Frankfurter API）。取れなければ 150 円のまま「概算」表示 */
+async function loadRate(){ try{ const r=await (await fetch('https://api.frankfurter.dev/v1/latest?base=USD&symbols=JPY',{cache:'no-store'})).json(); if(r&&r.rates&&r.rates.JPY){ USD=r.rates.JPY; USD_INFO={src:'ECB',date:r.date}; if(lang==='en'){ render(); applyLang(); if(openId&&document.getElementById('panel').classList.contains('open')) openDetail(openId); } } }catch(e){} }
+loadRate();
+function rateNote(){ return USD_INFO.src==='ECB'? t('rate.ecb',{r:USD.toFixed(1),d:USD_INFO.date}) : t('rate.fallback',{r:USD}); }
 const CONTACT='https://we.ohanahome.jp/contact/', TEL='0120-087-255';
 const T={
- ja:{ 'logo.i':'空き家再生', proto:`オハナホームの<b>販売中の物件 {n}件</b>（${ASOF} 時点）と成約実績。千葉県を中心に、空き家・中古戸建・土地。`,
+ ja:{ 'logo.i':'空き家再生', proto:`オハナホームの<b>販売中の物件 {n}件</b>（${ASOF} 時点）と成約実績。千葉県を中心に、空き家・中古戸建・土地。{rate}`,'rate.ecb':'','rate.fallback':'',
   'mode.sale':'販売中','mode.sold':'成約実績','search.ph':'市町村・駅名で探す（例：茂原、いすみ、八街）','nav.saved':'♡ 保存した物件','nav.sell':'売りたい方へ',
   'f.pref':'都道府県','f.muni':'市町村','f.pmin':'価格 下限','f.pmax':'価格 上限','p.300':'300万円','p.500':'500万円','p.1000':'1,000万円','p.1500':'1,500万円','p.2000':'2,000万円','p.3000':'3,000万円','p.5000':'5,000万円',
   'f.rooms':'間取り','f.rooms.2':'2部屋以上','f.rooms.3':'3部屋以上','f.rooms.4':'4部屋以上','f.rooms.5':'5部屋以上',
@@ -386,7 +390,7 @@ const T={
   'sell.h':'空き家の参考価格','sell.p':'4つ答えるだけで、おおよその目安が出ます（簡易計算。正式な査定は無料で承ります）','sell.muni':'市町村','sell.land':'土地面積（㎡）','sell.bld':'建物面積（㎡）','sell.year':'築年','sell.cond':'いまの状態（当てはまるものすべて）','sell.go':'参考価格を見る', close:'閉じる',
   'sell.r':'{muni}・{type}・土地{land}㎡・築{age}年 の参考価格','sell.landrow':'土地 {a}㎡ × {u}万円/㎡','sell.bldrow':'建物 {a}㎡ × 9万円 × 残存{r}%','d.repair':'修繕見込み（{c}）','none':'なし','d.mid':'中央 {p}','sell.low':'参考価格が低めです。「売る」以外に、貸す・地域に託す・解体して土地だけ売る、という選択肢も一緒に考えられます。','sell.note':'※ 架空の係数です。本番では近隣の成約事例・路線価・現地調査で算出し、算出日と根拠を示します。','sell.cta':'この価格で相談する（無料）'
  },
- en:{ 'logo.i':'AKIYA SAISEI', proto:`<b>{n} homes and lots for sale</b> from Ohana Home (as of ${ASOF}), plus past sales. Chiba, Japan and nearby.`,
+ en:{ 'logo.i':'AKIYA SAISEI', proto:`<b>{n} homes and lots for sale</b> from Ohana Home (as of ${ASOF}), plus past sales. Chiba, Japan and nearby. {rate}`,'rate.ecb':'USD figures use the ECB reference rate ¥{r}/USD ({d}).','rate.fallback':'USD figures are approximate at ¥{r}/USD.',
   'mode.sale':'For sale','mode.sold':'Past sales','search.ph':'Search by town or station (e.g. Mobara, Isumi, Yachimata)','nav.saved':'♡ Saved','nav.sell':'Selling?',
   'f.pref':'Prefecture','f.muni':'Municipality','f.pmin':'Min price','f.pmax':'Max price','p.300':'¥3M','p.500':'¥5M','p.1000':'¥10M','p.1500':'¥15M','p.2000':'¥20M','p.3000':'¥30M','p.5000':'¥50M',
   'f.rooms':'Rooms','f.rooms.2':'2+ rooms','f.rooms.3':'3+ rooms','f.rooms.4':'4+ rooms','f.rooms.5':'5+ rooms',
@@ -677,7 +681,7 @@ function openDetail(id){
     ${h2('d.abroad')}<p>${t('d.abroadtxt')}</p>
     ${h2('d.broker')}
     <p style="font-size:13.5px">${l.broker}</p>
-    <p style="font-size:12.5px;color:var(--sub);margin-top:6px">${t('d.pub')}: ${l.pubFrom}〜${l.pubTo} ｜ ${t('d.src',{asof:ASOF})} ｜ ATBB No. ${l.no}</p>
+    <p style="font-size:12.5px;color:var(--sub);margin-top:6px">${t('d.pub')}: ${l.pubFrom}〜${l.pubTo} ｜ ${t('d.src',{asof:ASOF})} ${lang==='en'?'｜ '+rateNote():''} ｜ ATBB No. ${l.no}</p>
     <div class="disclaimer">${t('d.disc')}</div>
     <div class="cta">
       <a class="btn p" href="${CONTACT}" target="_blank" rel="noopener">${t('d.inq')}</a>
@@ -734,7 +738,7 @@ function calcSell(ev){
 function applyLang(){
   document.documentElement.lang=lang;
   document.title = lang==='en'?'Ohana Home Listings':'オハナホーム 物件一覧';
-  document.getElementById('proto').innerHTML=t('proto',{n:DATA.length});
+  document.getElementById('proto').innerHTML=t('proto',{n:DATA.length,rate:lang==='en'?rateNote():''});
   document.querySelectorAll('[data-t]').forEach(el=>{ el.textContent=t(el.dataset.t); });
   document.querySelectorAll('[data-t-html]').forEach(el=>{ el.innerHTML=t(el.dataset.tHtml); });
   document.querySelectorAll('[data-ph]').forEach(el=>{ el.placeholder=t(el.dataset.ph); });
