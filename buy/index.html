@@ -51,7 +51,7 @@ nav button.primary:hover{background:#ffc166}
 .lang{border:1px solid rgba(255,255,255,.75);background:rgba(0,0,0,.22);border-radius:999px;padding:5px 11px;font-family:var(--cond);font-weight:900;font-size:15px;letter-spacing:.08em;color:var(--wh);white-space:nowrap}
 .lang:hover{background:var(--wh);color:var(--bk)}
 .proto{background:var(--night-deep)}
-.filters{background:var(--wh);border-bottom:1px solid var(--line);display:flex;align-items:center;gap:8px;padding:8px 24px;flex:none;overflow-x:auto;scrollbar-width:none}
+.filters{background:var(--wh);border-bottom:1px solid var(--line);display:flex;align-items:center;gap:8px;padding:8px 24px;flex:none;flex-wrap:wrap}
 .filters::-webkit-scrollbar{display:none}
 .filters select,.filters .chip,.filters label.toggle{border:1.5px solid var(--line);background:#fff;border-radius:999px;padding:7px 12px;font-size:13px;font-weight:700;color:var(--bk);white-space:nowrap}
 .filters select{appearance:none;-webkit-appearance:none;padding-right:26px;background:#fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23333' stroke-width='2.5'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E") no-repeat right 10px center}
@@ -200,9 +200,14 @@ main{flex:1;display:grid;grid-template-columns:minmax(0,1fr) clamp(360px,46%,640
 .form select,.form input{border:1.5px solid var(--line);border-radius:6px;padding:10px;font:inherit;font-size:15px}
 .form .row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
 .checks{display:flex;flex-wrap:wrap;gap:8px}
-.checks label{flex-direction:row;align-items:center;border:1.5px solid var(--line);border-radius:999px;padding:7px 12px;cursor:pointer;font-weight:600;color:var(--bk)}
-.checks label:has(input:checked){border-color:var(--bk);background:var(--bk);color:#fff}
+.form .checks{display:flex;flex-wrap:wrap;gap:6px}
+.form .checks label{display:inline-flex;flex-direction:row;align-items:center;gap:5px;border:1.5px solid var(--line);border-radius:999px;padding:4px 10px 4px 8px;cursor:pointer;font-weight:600;font-size:12.5px;line-height:1.3;color:var(--bk);white-space:nowrap}
+.form .checks label input{margin:0;width:14px;height:14px;flex:none}
+#aMunis{max-height:180px;overflow-y:auto;padding:2px}
+.form .checks label:has(input:checked){border-color:var(--bk);background:var(--bk);color:#fff}
 .checks input{accent-color:var(--sun)}
+.checks em.cnt{font-style:normal;opacity:.6;margin-left:4px;font-size:12px}
+.checks label:has(input:checked) em.cnt{opacity:.85}
 .result{margin:0 24px 24px;display:none}
 .result.show{display:block}
 .lightbox{position:fixed;inset:0;background:rgba(0,0,0,.88);z-index:1500;display:none;place-items:center;padding:24px;cursor:zoom-out}
@@ -261,15 +266,7 @@ main{flex:1;display:grid;grid-template-columns:minmax(0,1fr) clamp(360px,46%,640
   <select id="fMuni"><option value="" data-t="f.muni">市町村</option></select>
   <select id="fPriceMin"><option value="" data-t="f.pmin">価格 下限</option><option value="300" data-t="p.300">300万円</option><option value="500" data-t="p.500">500万円</option><option value="1000" data-t="p.1000">1,000万円</option><option value="1500" data-t="p.1500">1,500万円</option><option value="2000" data-t="p.2000">2,000万円</option><option value="3000" data-t="p.3000">3,000万円</option></select>
   <select id="fPrice"><option value="" data-t="f.pmax">価格 上限</option><option value="300" data-t="p.300">300万円</option><option value="500" data-t="p.500">500万円</option><option value="1000" data-t="p.1000">1,000万円</option><option value="1500" data-t="p.1500">1,500万円</option><option value="2000" data-t="p.2000">2,000万円</option><option value="3000" data-t="p.3000">3,000万円</option><option value="5000" data-t="p.5000">5,000万円</option></select>
-  <select id="fRooms"><option value="" data-t="f.rooms">間取り</option><option value="2" data-t="f.rooms.2">2部屋以上</option><option value="3" data-t="f.rooms.3">3部屋以上</option><option value="4" data-t="f.rooms.4">4部屋以上</option><option value="5" data-t="f.rooms.5">5部屋以上</option></select>
-  <select id="fLand"><option value="" data-t="f.land">土地面積</option><option value="150" data-t="f.land.150">150㎡以上</option><option value="250" data-t="f.land.250">250㎡以上</option><option value="400" data-t="f.land.400">400㎡以上</option><option value="800" data-t="f.land.800">800㎡以上</option></select>
-  <select id="fAge"><option value="" data-t="f.age">築年数</option><option value="20" data-t="f.age.20">築20年以内</option><option value="35" data-t="f.age.35">築35年以内</option><option value="50" data-t="f.age.50">築50年以内</option></select>
   <select id="fType"><option value="" data-t="f.type">種類</option><option value="house" data-t="type.house">戸建</option><option value="平屋" data-t="type.平屋">平屋</option><option value="2階建" data-t="type.2階建">2階建</option><option value="土地" data-t="type.土地">土地</option><option value="店舗付き住宅" data-t="type.店舗付き住宅">店舗付き住宅</option><option value="店舗" data-t="type.店舗">店舗</option><option value="マンション" data-t="type.マンション">マンション</option></select>
-  <span class="sep"></span>
-  <button class="chip" data-chip="new" data-t="chip.new">新着</button>
-  <button class="chip" data-chip="seller" data-t="chip.seller">売主物件</button>
-  <button class="chip" data-chip="walk15" data-t="chip.walk15">駅徒歩15分以内</button>
-  <button class="chip" data-chip="reno" data-t="chip.reno">リフォーム中</button>
   <span class="sep"></span>
   <button class="chip adv" id="advBtn" onclick="openAdv()"><span data-t="f.adv">詳細条件</span><em id="advCount" hidden></em></button>
   <label class="toggle"><input type="checkbox" id="fBounds" checked><span data-t="f.bounds">地図の範囲で絞る</span></label>
@@ -334,16 +331,27 @@ main{flex:1;display:grid;grid-template-columns:minmax(0,1fr) clamp(360px,46%,640
   <div class="box">
     <div class="hd"><h2 data-t="adv.h">詳細条件</h2><p data-t="adv.p">販売中の物件を、取引の形や設備で絞り込みます</p></div>
     <form class="form" id="advForm" onsubmit="return applyAdv(event)">
-      <label><span data-t="adv.deal">取引態様</span><select id="aDeal"><option value="" data-t="adv.deal.all">すべて</option><option value="seller" data-t="adv.deal.seller">売主物件（当社が売主）</option><option value="agent" data-t="adv.deal.agent">仲介物件（専任・一般媒介）</option></select></label>
+      <div class="row">
+        <label><span data-t="f.rooms">間取り</span><select id="aRooms"><option value="" data-t="adv.any">指定なし</option><option value="2">2部屋以上</option><option value="3">3部屋以上</option><option value="4">4部屋以上</option><option value="5">5部屋以上</option></select></label>
+        <label><span data-t="f.land">土地面積</span><select id="aLand"><option value="" data-t="adv.any">指定なし</option><option value="150">150㎡以上</option><option value="250">250㎡以上</option><option value="400">400㎡以上</option><option value="800">800㎡以上</option></select></label>
+      </div>
+      <div class="row">
+        <label><span data-t="f.age">築年数</span><select id="aAge"><option value="" data-t="adv.any">指定なし</option><option value="20">築20年以内</option><option value="35">築35年以内</option><option value="50">築50年以内</option></select></label>
+        <label><span data-t="adv.deal">取引態様</span><select id="aDeal"><option value="" data-t="adv.deal.all">すべて</option><option value="seller" data-t="adv.deal.seller">売主物件（当社が売主）</option><option value="agent" data-t="adv.deal.agent">仲介物件（専任・一般媒介）</option></select></label>
+      </div>
       <div class="row">
         <label><span data-t="adv.bld">建物面積 下限</span><select id="aBld"><option value="" data-t="adv.any">指定なし</option><option value="60">60㎡〜</option><option value="80">80㎡〜</option><option value="100">100㎡〜</option><option value="120">120㎡〜</option></select></label>
         <label><span data-t="adv.struct">構造</span><select id="aStruct"><option value="" data-t="adv.any">指定なし</option><option value="木造" data-t="adv.wood">木造</option><option value="鉄骨" data-t="adv.steel">鉄骨造</option><option value="ＲＣ" data-t="adv.rc">鉄筋コンクリート</option></select></label>
       </div>
       <div class="checks">
-        <label><input type="checkbox" id="aParking"><span data-t="adv.parking">駐車場あり</span></label>
-        <label><input type="checkbox" id="aVacant"><span data-t="adv.vacant">現況 空家</span></label>
-        <label><input type="checkbox" id="aPlan"><span data-t="adv.plan">間取り図あり</span></label>
-        <label><input type="checkbox" id="aPhotos"><span data-t="adv.photos">写真10枚以上</span></label>
+        <label><input type="checkbox" id="aNew"><span data-t="chip.new">新着</span><em class="cnt"></em></label>
+        <label><input type="checkbox" id="aSeller"><span data-t="chip.seller">売主物件</span><em class="cnt"></em></label>
+        <label><input type="checkbox" id="aWalk15"><span data-t="chip.walk15">駅徒歩15分以内</span><em class="cnt"></em></label>
+        <label><input type="checkbox" id="aReno"><span data-t="chip.reno">リフォーム中</span><em class="cnt"></em></label>
+        <label><input type="checkbox" id="aParking"><span data-t="adv.parking">駐車場あり</span><em class="cnt"></em></label>
+        <label><input type="checkbox" id="aVacant"><span data-t="adv.vacant">現況 空家</span><em class="cnt"></em></label>
+        <label><input type="checkbox" id="aPlan"><span data-t="adv.plan">間取り図あり</span><em class="cnt"></em></label>
+        <label><input type="checkbox" id="aPhotos"><span data-t="adv.photos">写真10枚以上</span><em class="cnt"></em></label>
       </div>
       <label><span data-t="adv.muni">市町村（複数可）</span></label>
       <div class="checks" id="aMunis"></div>
@@ -598,20 +606,32 @@ function shl(id,on){ const c=document.getElementById('scard'+id); if(c) c.classL
 function toggleFav(id){ favs.has(id)?favs.delete(id):favs.add(id); saveFavs(); render(); toast(favs.has(id)?t('toast.saved'):t('toast.unsaved')); }
 function toggleFavOnly(){ state.favOnly=!state.favOnly; const b=document.getElementById('favbtn'); b.style.background=state.favOnly?'#fff':''; b.style.color=state.favOnly?'#000':''; if(state.mode!=='sale') setMode('sale'); else render(); }
 function resetAll(){
-  Object.assign(state,{price:'',priceMin:'',rooms:'',land:'',age:'',type:'',q:'',favOnly:false,pref:'',muni:'',spref:'',smuni:''}); fillGeoSelects(); state.adv={deal:'',bldMin:'',structure:'',parking:false,vacant:false,plan:false,photos:false,munis:new Set()}; updateAdvBadge(); state.chips.clear(); state.schips.clear(); flipped.clear();
-  ['fPriceMin','fPrice','fRooms','fLand','fAge','fType'].forEach(id=>{const e=document.getElementById(id); e.value=''; e.classList.remove('on')});
+  Object.assign(state,{price:'',priceMin:'',rooms:'',land:'',age:'',type:'',q:'',favOnly:false,pref:'',muni:'',spref:'',smuni:''}); state.chips.clear(); fillGeoSelects(); state.adv={deal:'',bldMin:'',structure:'',parking:false,vacant:false,plan:false,photos:false,munis:new Set()}; updateAdvBadge(); state.chips.clear(); state.schips.clear(); flipped.clear();
+  ['fPriceMin','fPrice','fType'].forEach(id=>{const e=document.getElementById(id); e.value=''; e.classList.remove('on')});
   document.querySelectorAll('.chip').forEach(c=>c.classList.remove('on'));
   document.getElementById('q').value=''; document.getElementById('favbtn').style.background=''; document.getElementById('favbtn').style.color='';
   homeView(); render();
 }
-function openAdv(){ const a=state.adv; document.getElementById('aDeal').value=a.deal; document.getElementById('aBld').value=a.bldMin; document.getElementById('aStruct').value=a.structure; document.getElementById('aParking').checked=a.parking; document.getElementById('aVacant').checked=a.vacant; document.getElementById('aPlan').checked=a.plan; document.getElementById('aPhotos').checked=a.photos;
+/* 「いまの条件でこれを選ぶと何件か」を数える（地図の範囲は無視） */
+function countWith(mut){ const snap=JSON.stringify({s:{...state,chips:[...state.chips],adv:{...state.adv,munis:[...state.adv.munis]}}}); mut(); const n=DATA.filter(l=>passes(l,false)).length; const o=JSON.parse(snap).s; Object.assign(state,o); state.chips=new Set(o.chips); state.adv=o.adv; state.adv.munis=new Set(o.adv.munis); return n; }
+function fillCounts(){
+  const sel=(id,key)=>{ const e=document.getElementById(id); [...e.options].forEach(o=>{ if(!o.value) return; const base=o.dataset.label||o.textContent.replace(/\s*\(\d+\)$/,''); o.dataset.label=base; const n=countWith(()=>{ state[key]=o.value; }); o.textContent=`${base} (${n})`; }); };
+  sel('aRooms','rooms'); sel('aLand','land'); sel('aAge','age');
+  const selA=(id,key)=>{ const e=document.getElementById(id); [...e.options].forEach(o=>{ if(!o.value) return; const base=o.dataset.label||o.textContent.replace(/\s*\(\d+\)$/,''); o.dataset.label=base; const n=countWith(()=>{ state.adv[key]=o.value; }); o.textContent=`${base} (${n})`; }); };
+  selA('aDeal','deal'); selA('aBld','bldMin'); selA('aStruct','structure');
+  const chk=(id,mut)=>{ const n=countWith(mut); const em=document.querySelector('#'+id+' + span + em.cnt'); if(em) em.textContent='('+n+')'; };
+  chk('aNew',()=>state.chips.add('new')); chk('aSeller',()=>state.chips.add('seller')); chk('aWalk15',()=>state.chips.add('walk15')); chk('aReno',()=>state.chips.add('reno'));
+  chk('aParking',()=>state.adv.parking=true); chk('aVacant',()=>state.adv.vacant=true); chk('aPlan',()=>state.adv.plan=true); chk('aPhotos',()=>state.adv.photos=true);
+}
+function openAdv(){ const a=state.adv; document.getElementById('aRooms').value=state.rooms; document.getElementById('aLand').value=state.land; document.getElementById('aAge').value=state.age; document.getElementById('aNew').checked=state.chips.has('new'); document.getElementById('aSeller').checked=state.chips.has('seller'); document.getElementById('aWalk15').checked=state.chips.has('walk15'); document.getElementById('aReno').checked=state.chips.has('reno'); document.getElementById('aDeal').value=a.deal; document.getElementById('aBld').value=a.bldMin; document.getElementById('aStruct').value=a.structure; document.getElementById('aParking').checked=a.parking; document.getElementById('aVacant').checked=a.vacant; document.getElementById('aPlan').checked=a.plan; document.getElementById('aPhotos').checked=a.photos;
   const munis=[...new Set(DATA.map(l=>l.muni))].sort((x,y)=>DATA.filter(l=>l.muni===y).length-DATA.filter(l=>l.muni===x).length);
-  document.getElementById('aMunis').innerHTML=munis.map(m=>`<label><input type="checkbox" value="${m}" ${a.munis.has(m)?'checked':''}>${lang==='en'?(DATA.find(l=>l.muni===m).muniEn):m} <span style="opacity:.6">${DATA.filter(l=>l.muni===m).length}</span></label>`).join('');
+  document.getElementById('aMunis').innerHTML=munis.map(m=>`<label><input type="checkbox" value="${m}" ${a.munis.has(m)?'checked':''}>${lang==='en'?(DATA.find(l=>l.muni===m).muniEn):m} <em class="cnt">(${countWith(()=>{ state.adv.munis=new Set([m]); })})</em></label>`).join('');
+  fillCounts();
   document.getElementById('adv').classList.add('open'); document.getElementById('overlay').classList.add('open'); }
 function closeAdv(){ document.getElementById('adv').classList.remove('open'); if(!document.getElementById('panel').classList.contains('open')) document.getElementById('overlay').classList.remove('open'); }
-function applyAdv(ev){ if(ev) ev.preventDefault(); const a=state.adv; a.deal=document.getElementById('aDeal').value; a.bldMin=document.getElementById('aBld').value; a.structure=document.getElementById('aStruct').value; a.parking=document.getElementById('aParking').checked; a.vacant=document.getElementById('aVacant').checked; a.plan=document.getElementById('aPlan').checked; a.photos=document.getElementById('aPhotos').checked; a.munis=new Set([...document.querySelectorAll('#aMunis input:checked')].map(i=>i.value)); updateAdvBadge(); closeAdv(); render(); return false; }
-function clearAdv(){ state.adv={deal:'',bldMin:'',structure:'',parking:false,vacant:false,plan:false,photos:false,munis:new Set()}; updateAdvBadge(); closeAdv(); render(); }
-function updateAdvBadge(){ const a=state.adv; const n=[a.deal,a.bldMin,a.structure].filter(Boolean).length+[a.parking,a.vacant,a.plan,a.photos].filter(Boolean).length+(a.munis.size?1:0); const e=document.getElementById('advCount'); e.textContent=n; e.hidden=!n; document.getElementById('advBtn').classList.toggle('on',n>0); }
+function applyAdv(ev){ if(ev) ev.preventDefault(); const a=state.adv; state.rooms=document.getElementById('aRooms').value; state.land=document.getElementById('aLand').value; state.age=document.getElementById('aAge').value; state.chips=new Set([['aNew','new'],['aSeller','seller'],['aWalk15','walk15'],['aReno','reno']].filter(([id])=>document.getElementById(id).checked).map(([,k])=>k)); a.deal=document.getElementById('aDeal').value; a.bldMin=document.getElementById('aBld').value; a.structure=document.getElementById('aStruct').value; a.parking=document.getElementById('aParking').checked; a.vacant=document.getElementById('aVacant').checked; a.plan=document.getElementById('aPlan').checked; a.photos=document.getElementById('aPhotos').checked; a.munis=new Set([...document.querySelectorAll('#aMunis input:checked')].map(i=>i.value)); updateAdvBadge(); closeAdv(); render(); return false; }
+function clearAdv(){ state.adv={deal:'',bldMin:'',structure:'',parking:false,vacant:false,plan:false,photos:false,munis:new Set()}; state.rooms=state.land=state.age=''; state.chips.clear(); updateAdvBadge(); closeAdv(); render(); }
+function updateAdvBadge(){ const a=state.adv; const n=[a.deal,a.bldMin,a.structure,state.rooms,state.land,state.age].filter(Boolean).length+[a.parking,a.vacant,a.plan,a.photos].filter(Boolean).length+state.chips.size+(a.munis.size?1:0); const e=document.getElementById('advCount'); e.textContent=n; e.hidden=!n; document.getElementById('advBtn').classList.toggle('on',n>0); }
 function toast(msg){ const e=document.getElementById('toast'); e.textContent=msg; e.classList.add('show'); clearTimeout(e._t); e._t=setTimeout(()=>e.classList.remove('show'),2200); }
 function fillGeoSelects(){
   const mk=(sel,items,cur)=>{ const first=sel.options[0].outerHTML; sel.innerHTML=first+items.map(([v,label,n])=>`<option value="${v}">${label}${n?' ('+n+')':''}</option>`).join(''); sel.value=cur; sel.classList.toggle('on',!!cur); };
@@ -629,8 +649,7 @@ document.getElementById('fMuni').addEventListener('change',e=>{ state.muni=e.tar
 document.getElementById('sPref').addEventListener('change',e=>{ state.spref=e.target.value; if(state.smuni&&!SOLD.some(x=>x.muni===state.smuni&&(!state.spref||x.pref===state.spref))) state.smuni=''; fillGeoSelects(); zoomToSel(); render(); });
 document.getElementById('sMuniSel').addEventListener('change',e=>{ state.smuni=e.target.value; fillGeoSelects(); zoomToSel(); render(); });
 function zoomToSel(){ const sale=state.mode==='sale'; const src=sale?DATA:SOLD.filter(x=>x.lat); const pref=sale?state.pref:state.spref, muni=sale?state.muni:state.smuni; const hits=src.filter(x=>(!pref||x.pref===pref)&&(!muni||x.muni===muni)); if(hits.length&&(pref||muni)) map.fitBounds(L.latLngBounds(hits.map(x=>[x.lat,x.lng])).pad(0.4),{maxZoom:13}); else if(!pref&&!muni) homeView(); }
-[['fPriceMin','priceMin'],['fPrice','price'],['fRooms','rooms'],['fLand','land'],['fAge','age'],['fType','type']].forEach(([id,k])=>{ document.getElementById(id).addEventListener('change',e=>{ state[k]=e.target.value; e.target.classList.toggle('on',!!e.target.value); render(); }); });
-document.querySelectorAll('#filtersSale .chip').forEach(c=>c.addEventListener('click',()=>{ const u=c.dataset.chip; state.chips.has(u)?state.chips.delete(u):state.chips.add(u); c.classList.toggle('on'); render(); }));
+[['fPriceMin','priceMin'],['fPrice','price'],['fType','type']].forEach(([id,k])=>{ document.getElementById(id).addEventListener('change',e=>{ state[k]=e.target.value; e.target.classList.toggle('on',!!e.target.value); render(); }); });
 document.querySelectorAll('#filtersSold .chip').forEach(c=>c.addEventListener('click',()=>{ const u=c.dataset.schip; state.schips.has(u)?state.schips.delete(u):state.schips.add(u); c.classList.toggle('on'); render(); }));
 document.getElementById('fBounds').addEventListener('change',e=>{ state.bounds=e.target.checked; document.getElementById('fBoundsSold').checked=e.target.checked; render(); });
 document.getElementById('fBoundsSold').addEventListener('change',e=>{ state.bounds=e.target.checked; document.getElementById('fBounds').checked=e.target.checked; render(); });
