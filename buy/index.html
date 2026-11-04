@@ -312,16 +312,20 @@ main{flex:1;display:grid;grid-template-columns:minmax(0,1fr) clamp(360px,46%,640
     <form class="form" id="sellForm" onsubmit="return calcSell(event)">
       <div class="row">
         <label><span data-t="sell.muni">市町村</span><select id="sMuni" required></select></label>
+        <label><span data-t="sell.town">町名・字</span><select id="sTown"></select></label>
+      </div>
+      <div class="row">
         <label><span data-t="f.type">種類</span><select id="sType"><option value="平屋" data-t="type.平屋">平屋</option><option value="2階建" data-t="type.2階建">2階建</option><option value="古民家" data-t="type.古民家">古民家</option><option value="店舗付き住宅" data-t="type.店舗付き住宅">店舗付き住宅</option><option value="農家住宅" data-t="type.農家住宅">農家住宅</option></select></label>
+        <label><span data-t="sell.year">築年</span><input id="sYear" type="number" min="1900" max="2026" value="1978" required></label>
       </div>
       <div class="row">
         <label><span data-t="sell.land">土地面積（㎡）</span><input id="sLand" type="number" min="30" max="5000" value="250" required></label>
         <label><span data-t="sell.bld">建物面積（㎡）</span><input id="sBld" type="number" min="20" max="1000" value="95" required></label>
       </div>
-      <label><span data-t="sell.year">築年</span><input id="sYear" type="number" min="1900" max="2026" value="1978" required></label>
       <label data-t="sell.cond">いまの状態（当てはまるものすべて）</label>
       <div class="checks" id="sCond"></div>
       <button class="btn p" type="submit" data-t="sell.go">参考価格を見る</button>
+      <p class="note" style="font-size:11px;color:var(--gy);margin:0" data-t="sell.attr">町名データ：Geolonia 住所データ（国土交通省「位置参照情報」を加工、CC BY 4.0）</p>
     </form>
     <div class="result" id="sellResult"></div>
     <div style="padding:0 24px 20px;display:flex;gap:10px"><button class="btn s" type="button" onclick="closeSell()" data-t="close">閉じる</button></div>
@@ -364,9 +368,10 @@ main{flex:1;display:grid;grid-template-columns:minmax(0,1fr) clamp(360px,46%,640
 <div class="lightbox" id="lightbox" onclick="closeLightbox()"><button class="arrow l" style="position:absolute;left:16px;top:50%;transform:translateY(-50%);width:48px;height:48px;border-radius:50%;border:0;background:rgba(255,255,255,.9);font-size:24px;font-weight:900;cursor:pointer" onclick="event.stopPropagation();lbStep(-1)" aria-label="prev">‹</button><img id="lbimg" alt=""><button class="arrow r" style="position:absolute;right:16px;top:50%;transform:translateY(-50%);width:48px;height:48px;border-radius:50%;border:0;background:rgba(255,255,255,.9);font-size:24px;font-weight:900;cursor:pointer" onclick="event.stopPropagation();lbStep(1)" aria-label="next">›</button><div class="cap" id="lbcap"></div></div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
-<script src="listings.js"></script>
-<script src="sold.js"></script>
-<script src="config.js"></script>
+<script src="listings.js?v=20261104182004"></script>
+<script src="sold.js?v=20261104182004"></script>
+<script src="towns.js?v=20261104182004"></script>
+<script src="config.js?v=20261104182004"></script>
 <script>
 /* ========== 言語 ========== */
 let lang='ja'; try{ lang=localStorage.getItem('akiya-lang')||'ja' }catch(e){}
@@ -397,7 +402,7 @@ const T={
   'd.broker':'BROKER','d.broker.sub':'取扱会社（宅地建物取引業者）','d.pub':'掲載期間','d.src':'出典：ATBB 登録情報（{asof} 時点）。価格・条件は変わることがあります。',
   'd.disc':'掲載内容は不動産情報サイト（ATBB）の登録情報にもとづきます。価格・条件は変更されることがあります。所在地は町名までの表示です。詳細はお問い合わせください。',
   'd.inq':'この物件を問い合わせる','d.tel':'電話 {tel}','pop.more':'詳しく見る →','photos.n':'写真 {n}枚',
-  'sell.h':'空き家の参考価格','sell.p':'4つ答えるだけで、おおよその目安が出ます（簡易計算。正式な査定は無料で承ります）','sell.muni':'市町村','sell.land':'土地面積（㎡）','sell.bld':'建物面積（㎡）','sell.year':'築年','sell.cond':'いまの状態（当てはまるものすべて）','sell.go':'参考価格を見る', close:'閉じる',
+  'sell.h':'空き家の参考価格','sell.p':'4つ答えるだけで、おおよその目安が出ます（簡易計算。正式な査定は無料で承ります）','sell.muni':'市町村','sell.town':'町名・字','sell.town.any':'選ばない／わからない','sell.attr':'町名データ：Geolonia 住所データ（国土交通省「位置参照情報」を加工、CC BY 4.0）','sell.land':'土地面積（㎡）','sell.bld':'建物面積（㎡）','sell.year':'築年','sell.cond':'いまの状態（当てはまるものすべて）','sell.go':'参考価格を見る', close:'閉じる',
   'sell.r':'{muni}・{type}・土地{land}㎡・築{age}年 の参考価格','sell.landrow':'土地 {a}㎡ × {u}万円/㎡','sell.bldrow':'建物 {a}㎡ × 9万円 × 残存{r}%','d.repair':'修繕見込み（{c}）','none':'なし','d.mid':'中央 {p}','sell.low':'参考価格が低めです。「売る」以外に、貸す・地域に託す・解体して土地だけ売る、という選択肢も一緒に考えられます。','sell.note':'※ 架空の係数です。本番では近隣の成約事例・路線価・現地調査で算出し、算出日と根拠を示します。','sell.cta':'この価格で相談する（無料）'
  },
  en:{ 'logo.i':'AKIYA SAISEI', proto:`<b>{n} homes and lots for sale</b> from Ohana Home (as of ${ASOF}), plus past sales. Chiba, Japan and nearby. {rate}`,'rate.ecb':'USD figures use the ECB reference rate ¥{r}/USD ({d}).','rate.fallback':'USD figures are approximate at ¥{r}/USD.',
@@ -420,7 +425,7 @@ const T={
   'd.broker':'BROKER','d.broker.sub':'Licensed real-estate broker','d.pub':'Listed','d.src':'Source: ATBB registration as of {asof}. Price and terms may change.',
   'd.disc':'Details are based on the ATBB registration. Price and terms may change. Addresses are shown to town level. Please contact us for full details.',
   'd.inq':'Ask about this listing','d.tel':'Call {tel}','pop.more':'View details →','photos.n':'{n} photos',
-  'sell.h':'Estimate for your vacant home','sell.p':'Answer four questions for a rough range (simplified; a formal valuation is free)','sell.muni':'Town','sell.land':'Lot size (m²)','sell.bld':'Floor area (m²)','sell.year':'Year built','sell.cond':'Current condition (check all that apply)','sell.go':'Show estimate', close:'Close',
+  'sell.h':'Estimate for your vacant home','sell.p':'Answer four questions for a rough range (simplified; a formal valuation is free)','sell.muni':'Municipality','sell.town':'District','sell.town.any':'Skip / not sure','sell.attr':'District names: Geolonia address data (from MLIT location reference data, CC BY 4.0)','sell.land':'Lot size (m²)','sell.bld':'Floor area (m²)','sell.year':'Year built','sell.cond':'Current condition (check all that apply)','sell.go':'Show estimate', close:'Close',
   'sell.r':'Estimate for {type} in {muni}, {land} m² lot, {age} yrs old','sell.landrow':'Lot {a} m² × ¥{u}k/m²','sell.bldrow':'Building {a} m² × ¥90k × {r}% remaining','d.repair':'Expected repairs ({c})','none':'none','d.mid':'mid {p}','sell.low':'The estimate is low. Besides selling, renting it out, handing it to the community, or demolishing and selling the land are options we can explore together.','sell.note':'Fictional coefficients. A live estimate would use nearby sales, official land values and an inspection, with the date and basis shown.','sell.cta':'Talk to us about this estimate (free)'
  }
 };
@@ -452,7 +457,7 @@ const typeN=l=>lang==='en'?l.typeEn:l.type, muniN=l=>lang==='en'?l.muniEn:l.muni
 const layoutN=l=>l.layout||(l.type==='土地'?t('landOnly'):'—'); const ageOf=l=>l.year?2026-l.year:null;
 function accessN(l){ if(!l.station) return l.access||''; if(l.accessNote==='バス利用') return t('d.accessBus',{st:l.station}); if(l.accessNote) return t('d.accessDist',{st:l.station,d:l.accessNote.replace('駅から','')}); return t('d.access',{st:l.station,m:l.walk}); }
 const isPlan=p=>/間取/.test(p.type||''); const isExt=p=>/外観/.test(p.type||'');
-function photosOf(l){ const ex=l.photos.filter(isExt), pl=l.photos.filter(isPlan), rest=l.photos.filter(p=>!isExt(p)&&!isPlan(p)); const arr=ex.concat(rest); if(l.drivePhoto) arr.splice(1,0,{url:l.drivePhoto,type:'ドライブ',caption:t('drive'),local:true}); return arr.concat(pl); }
+function photosOf(l){ const ex=l.photos.filter(isExt).slice(0,1), pl=l.photos.filter(isPlan).slice(0,1), rest=l.photos.filter(p=>!isExt(p)&&!isPlan(p)); const arr=ex.concat(rest); if(l.drivePhoto) arr.push({url:l.drivePhoto,type:'現地写真',caption:t('drive'),local:true}); return arr.concat(pl); }
 const planOf=l=>l.photos.find(isPlan)||null; const mainOf=l=>photosOf(l)[0]||null;
 function img(p,w){ if(p.local) return p.url; if(w>=640||isPlan(p)) return p.url; return p.url+`?width=${w}&height=${w}&margin=true&dummy=.p`; }
 function fmtPrice(m){ if(lang==='en'){ const yen=m*10000; return `<span class="yen">¥</span>${(yen/1e6).toFixed(yen%1e6?2:0).replace(/\.?0+$/,'')}M<small>≈ $${Math.round(yen/USD/1000)}k</small>`; } return m>=10000? (m/10000).toFixed(m%10000?1:0)+'<span class="yen">億円</span>' : m.toLocaleString()+'<span class="yen">万円</span>'; }
@@ -735,15 +740,18 @@ const COND={'雨漏りあり':150,'残置物あり':40,'水回り要交換':200,
 const COND_EN={'雨漏りあり':'Roof leak','残置物あり':'Contents left behind','水回り要交換':'Kitchen/bath need replacing','建物に傾き':'Structural tilt','外壁の傷み':'Exterior wall damage','庭木が繁茂':'Overgrown garden','給湯器故障':'Water heater broken'};
 const condN=x=>lang==='en'?(COND_EN[x]||x):x;
 function estimate(muni,type,land,bld,year,conds){ const unit=MUNI_EST[muni]||2; const typeAdj={'平屋':1,'2階建':1.05,'古民家':0.8,'店舗付き住宅':1.1,'農家住宅':0.85}[type]||1; const age=2026-year, remain=Math.max(0.05,1-age/40); const landV=land*unit, bldV=bld*9*remain*typeAdj; const repair=conds.reduce((s,c)=>s+(COND[c]||0),0); const mid=Math.max(30,landV+bldV-repair); return {landV:Math.round(landV),bldV:Math.round(bldV),repair,mid:Math.round(mid),lo:Math.round(mid*0.88),hi:Math.round(mid*1.12)}; }
-function openSell(){ document.getElementById('sell').classList.add('open'); document.getElementById('overlay').classList.add('open'); }
+function fillTowns(){ const m=document.getElementById('sMuni').value; const list=(window.TOWNS||{})[m]||[]; const e=document.getElementById('sTown'); const cur=e.value; e.innerHTML=`<option value="">${t('sell.town.any')}</option>`+list.map(x=>`<option value="${x}">${x}</option>`).join(''); if(list.includes(cur)) e.value=cur; }
+function openSell(){ fillTowns(); document.getElementById('sell').classList.add('open'); document.getElementById('overlay').classList.add('open'); }
 function closeSell(){ document.getElementById('sell').classList.remove('open'); if(!document.getElementById('panel').classList.contains('open')) document.getElementById('overlay').classList.remove('open'); }
+document.getElementById('sMuni').addEventListener('change',fillTowns);
 function calcSell(ev){
   ev.preventDefault();
+  const town=document.getElementById('sTown').value;
   const muni=document.getElementById('sMuni').value, type=document.getElementById('sType').value;
   const land=+document.getElementById('sLand').value, bld=+document.getElementById('sBld').value, year=+document.getElementById('sYear').value;
   const conds=[...document.querySelectorAll('#sCond input:checked')].map(i=>i.value);
   const e=estimate(muni,type,land,bld,year,conds); const r=document.getElementById('sellResult'); r.className='result show';
-  const mn=lang==='en'?(MUNI_EST_EN[muni]||muni):muni, tn=t('type.'+type), unit=lang==='en'?Math.round(MUNI_EST[muni]*10):MUNI_EST[muni];
+  const mn=(lang==='en'?(MUNI_EST_EN[muni]||muni):muni)+(town?(lang==='en'?' ('+town+')':town):''), tn=t('type.'+type), unit=lang==='en'?Math.round(MUNI_EST[muni]*10):MUNI_EST[muni];
   r.innerHTML=`<div class="est"><div class="lbl">${t('sell.r',{muni:mn,type:tn,land,age:2026-year})}</div>
     <div class="val">${fmtPlain(e.lo)} 〜 ${fmtPlain(e.hi)}<small>${t('d.mid',{p:fmtPlain(e.mid)})}</small></div>
     <table><tr><td>${t('sell.landrow',{a:land,u:unit})}</td><td>${fmtMan(e.landV)}</td></tr>
@@ -770,6 +778,7 @@ function applyLang(){
   document.getElementById('sCond').innerHTML=Object.keys(COND).map(c=>`<label><input type="checkbox" value="${c}">${condN(c)}</label>`).join('');
   document.getElementById('sellResult').className='result';
   fillGeoSelects();
+  if(document.getElementById('sTown')) fillTowns();
   DATA.forEach(l=>markers[l.id].setPopupContent(popHtml(l))); Object.values(SOLD_GROUPS).forEach(g=>smarkers[g.items[0].id].setPopupContent(gpopHtml(g)));
 }
 function toggleLang(){ setLang(lang==='ja'?'en':'ja'); }
