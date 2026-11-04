@@ -374,7 +374,7 @@ const T={
   'view.photo':'写真','view.plan':'間取り','plan.zoom':'間取りを拡大','plan.hint':'クリックで閉じる','plan.open':'原寸で開く','plan.dl':'ダウンロード','plan.lowres':'※ athome 掲載の画像（横640px）。元図面が揃い次第、高解像度に差し替えます','d.plan':'FLOOR PLAN','d.plan.sub':'間取り図（クリックで拡大）','sort.new':'新着順','sort.priceAsc':'価格が安い順','sort.priceDesc':'価格が高い順','sort.landDesc':'土地が広い順','sort.ageAsc':'築年が新しい順',
   'm.map':'🗺 地図を見る','m.list':'☰ 一覧を見る','map.photo':'航空写真','map.map':'地図に戻す', title:'FOR SALE','title.sub':'販売中の物件','title.sold':'SOLD','title.sold.sub':'成約実績','title.saved':'保存した物件','title.q':'「{q}」', count:'{n}件{b}・全{t}件','count.b':'（地図の範囲内）',
   empty:'この条件・この範囲には物件がありません。<br>地図を広げるか、条件を減らしてみてください。', new:'NEW', seller:'売主物件', sold:'SOLD OUT', reform:'フルリフォーム', land:'土地', bld:'建物', age:'築{a}年', ageNA:'築年不明', min:'{m}分', landOnly:'土地のみ', plan:'間取り', photo:'写真', drive:'現地写真',
-  'sold.date':'{y}年{m}月 成約','sold.nodate':'成約済み','sold.count':'成約 {n}件','sold.approx':'成約物件の位置は市町村までの表示です','title.sold.note':'位置は市町村単位',
+  'sold.date':'{y}年{m}月 成約','sold.nodate':'成約済み','sold.count':'成約 {n}件','sold.approx':'成約物件の地図上の位置は市町村単位です','title.sold.note':'地図は市町村単位',
   'toast.saved':'保存しました（この端末だけに残ります）','toast.unsaved':'保存を外しました','toast.nosell':'お問い合わせページからご連絡ください',
   'd.save':'♡ 保存する','d.saved':'♥ 保存済み','d.addr':'{addr}（番地は非公開）','d.access':'{st}駅 徒歩{m}分','d.accessBus':'{st}駅 バス便','d.accessDist':'{st}駅 {d}','d.year':'築{a}年（{y}）',
   'd.about':'ABOUT','d.about.sub':'この物件について','d.basic':'DETAILS','d.basic.sub':'基本情報','d.kind':'種目','d.layout':'間取り','d.layoutDetail':'間取り内訳','d.land':'土地面積','d.bld':'建物面積','d.built':'築年月','d.structure':'構造・規模','d.access2':'交通','d.right':'土地権利','d.status':'現況','d.handover':'引渡し','d.deal':'取引態様','d.road':'接道状況','d.zoning':'用途地域・都市計画','d.bcr':'建ぺい率／容積率','d.parking':'駐車場',
@@ -397,7 +397,7 @@ const T={
   'view.photo':'Photo','view.plan':'Floor plan','plan.zoom':'Enlarge plan','plan.hint':'click to close','plan.open':'Open full size','plan.dl':'Download','plan.lowres':'athome image (640px wide). Original drawings will replace it when available.','d.plan':'FLOOR PLAN','d.plan.sub':'click to enlarge','sort.new':'Newest','sort.priceAsc':'Price: low to high','sort.priceDesc':'Price: high to low','sort.landDesc':'Largest lot','sort.ageAsc':'Newest build',
   'm.map':'🗺 Map','m.list':'☰ List','map.photo':'Aerial','map.map':'Map', title:'FOR SALE','title.sub':'Chiba & nearby','title.sold':'SOLD','title.sold.sub':'Past sales by Ohana Home','title.saved':'Saved homes','title.q':'“{q}”', count:'{n} listings{b} · {t} total','count.b':' in map view',
   empty:'No listings match these filters in this area.<br>Zoom out or remove a filter.', new:'NEW', seller:'DIRECT SALE', sold:'SOLD OUT', reform:'Fully renovated', land:'Lot', bld:'Bldg', age:'{a} yrs old', ageNA:'age n/a', min:'{m} min', landOnly:'land only', plan:'Plan', photo:'Photo', drive:'Site photo',
-  'sold.date':'Sold {m}/{y}','sold.nodate':'Sold','sold.count':'{n} sold','sold.approx':'Sold listings are shown by municipality only','title.sold.note':'shown by municipality',
+  'sold.date':'Sold {m}/{y}','sold.nodate':'Sold','sold.count':'{n} sold','sold.approx':'Sold listings are mapped by municipality only','title.sold.note':'mapped by municipality',
   'toast.saved':'Saved (on this device only)','toast.unsaved':'Removed from saved','toast.nosell':'Not live yet: requests are not sent',
   'd.save':'♡ Save','d.saved':'♥ Saved','d.addr':'{addr} (exact address withheld)','d.access':'{m} min walk to {st} Station','d.accessBus':'Bus from {st} Station','d.accessDist':'{d} from {st} Station','d.year':'{a} yrs old (built {y})',
   'd.about':'ABOUT','d.about.sub':'About this listing','d.basic':'DETAILS','d.basic.sub':'','d.kind':'Category','d.layout':'Layout','d.layoutDetail':'Rooms','d.land':'Lot size','d.bld':'Floor area','d.built':'Built','d.structure':'Structure','d.access2':'Access','d.right':'Land tenure','d.status':'Current status','d.handover':'Handover','d.deal':'Transaction','d.road':'Road frontage','d.zoning':'Zoning','d.bcr':'Coverage / floor-area ratio','d.parking':'Parking',
@@ -468,7 +468,7 @@ new BaseCtl({position:'bottomleft'}).addTo(map); pickTile();
 const saleLayer=L.layerGroup().addTo(map), soldLayer=L.layerGroup();
 const markers={}, smarkers={};
 function popHtml(l){ const m=mainOf(l); return `<div class="pop">${m?`<img src="${img(m,400)}" alt="">`:''}<div class="b"><div class="p">${fmtPlain(l.price)}</div>${layoutN(l)}${l.land?' · '+t('land')+' '+l.land+'㎡':''}${ageOf(l)?' · '+t('age',{a:ageOf(l)}):''}<br><span style="color:#5c5c5c">${muniN(l)} · ${nameN(l)}</span><br><a href="javascript:openDetail(${l.id})">${t('pop.more')}</a></div></div>`; }
-function spopHtml(s){ return `<div class="pop">${s.photo?`<img src="${s.photo}" alt="">`:''}<div class="b"><div class="p">${t('sold')}</div>${lang==='en'?s.muniEn:s.muni}${s.kind?' · '+(lang==='en'?s.kindEn:s.kind):''}<br><span style="color:#5c5c5c">${soldWhen(s)}</span>${s.reform?'<br><b style="color:#8a5a0a">'+t('reform')+'</b>':''}</div></div>`; }
+function spopHtml(s){ return `<div class="pop">${s.photo?`<img src="${s.photo}" alt="">`:''}<div class="b"><div class="p">${t('sold')}</div>${lang==='en'?s.muniEn:(s.town||s.muni)}${s.kind?' · '+(lang==='en'?s.kindEn:s.kind):''}<br><span style="color:#5c5c5c">${soldWhen(s)}</span>${s.reform?'<br><b style="color:#8a5a0a">'+t('reform')+'</b>':''}</div></div>`; }
 function soldWhen(s){ if(!s.soldDate) return t('sold.nodate'); const [y,m]=s.soldDate.split('-'); return t('sold.date',{y,m:+m}); }
 DATA.forEach(l=>{
   const icon=L.divIcon({className:'',html:`<div class="pin ${l.type==='土地'?'landpin':''}" id="pin${l.id}">${fmtShort(l.price)}</div>`,iconSize:[0,0]});
@@ -530,7 +530,7 @@ function passes(l,useBounds){
   return true;
 }
 function spasses(s,useBounds){
-  if(state.q){ const q=state.q, ql=q.toLowerCase(); if(!(s.muni.includes(q)||s.muniEn.toLowerCase().includes(ql))) return false; }
+  if(state.q){ const q=state.q, ql=q.toLowerCase(); if(!(s.muni.includes(q)||(s.town||'').includes(q)||s.muniEn.toLowerCase().includes(ql))) return false; }
   if(state.spref && s.pref!==state.spref) return false;
   if(state.smuni && s.muni!==state.smuni) return false;
   if(state.schips.has('reform') && !s.reform) return false;
@@ -562,7 +562,7 @@ function render(){
       <div class="ph">${s.photo?`<img class="main" src="${s.photo}" alt="" loading="lazy">`:`<div class="nophoto">${t('sold')}</div>`}<span class="badge sold">${t('sold')}</span>${s.reform?`<span class="badge reform">${t('reform')}</span>`:''}</div>
       <div class="body">
         <div class="price"><span style="font-size:22px">${t('sold')}</span><small>${soldWhen(s)}</small></div>
-        <div class="addr" style="margin-top:6px">${lang==='en'?s.muniEn:s.muni}${s.kind?' ｜ '+(lang==='en'?s.kindEn:s.kind):''}</div>
+        <div class="addr" style="margin-top:6px">${lang==='en'?s.muniEn:(s.town||s.muni)}${s.kind?' ｜ '+(lang==='en'?s.kindEn:s.kind):''}</div>
         <div class="tags">${s.reform?`<span class="tag sun">${t('reform')}</span>`:''}${s.reformPhotos?`<span class="tag">${lang==='en'?'after photos':'リフォーム後写真あり'}</span>`:''}</div>
       </div>
     </article>`).join('');
