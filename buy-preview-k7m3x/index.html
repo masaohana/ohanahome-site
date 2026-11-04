@@ -58,6 +58,7 @@ nav button.primary:hover{background:#ffc166}
 .filters select{appearance:none;-webkit-appearance:none;padding-right:26px;background:#fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23333' stroke-width='2.5'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E") no-repeat right 10px center}
 .filters select.on,.chip.on{border-color:var(--bk);background:var(--bk);color:var(--wh)}
 .filters select.on{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23fff' stroke-width='2.5'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E")}
+.chip.adv em{font-style:normal;background:var(--sun);color:var(--bk);border-radius:999px;padding:0 6px;margin-left:6px;font-size:11px}
 .filters .sep{width:1px;height:24px;background:var(--line);flex:none}
 label.toggle{display:flex;align-items:center;gap:6px;cursor:pointer}
 label.toggle input{accent-color:var(--bk)}
@@ -242,7 +243,8 @@ main{flex:1;display:grid;grid-template-columns:minmax(0,1fr) clamp(360px,46%,640
 </header>
 
 <div class="filters" id="filtersSale">
-  <select id="fPrice"><option value="" data-t="f.price">価格</option><option value="300" data-t="f.price.300">〜300万円</option><option value="500" data-t="f.price.500">〜500万円</option><option value="1000" data-t="f.price.1000">〜1,000万円</option><option value="2000" data-t="f.price.2000">〜2,000万円</option><option value="3000" data-t="f.price.3000">〜3,000万円</option><option value="5000" data-t="f.price.5000">〜5,000万円</option></select>
+  <select id="fPriceMin"><option value="" data-t="f.pmin">価格 下限</option><option value="300" data-t="p.300">300万円</option><option value="500" data-t="p.500">500万円</option><option value="1000" data-t="p.1000">1,000万円</option><option value="1500" data-t="p.1500">1,500万円</option><option value="2000" data-t="p.2000">2,000万円</option><option value="3000" data-t="p.3000">3,000万円</option></select>
+  <select id="fPrice"><option value="" data-t="f.pmax">価格 上限</option><option value="300" data-t="p.300">300万円</option><option value="500" data-t="p.500">500万円</option><option value="1000" data-t="p.1000">1,000万円</option><option value="1500" data-t="p.1500">1,500万円</option><option value="2000" data-t="p.2000">2,000万円</option><option value="3000" data-t="p.3000">3,000万円</option><option value="5000" data-t="p.5000">5,000万円</option></select>
   <select id="fRooms"><option value="" data-t="f.rooms">間取り</option><option value="2" data-t="f.rooms.2">2部屋以上</option><option value="3" data-t="f.rooms.3">3部屋以上</option><option value="4" data-t="f.rooms.4">4部屋以上</option><option value="5" data-t="f.rooms.5">5部屋以上</option></select>
   <select id="fLand"><option value="" data-t="f.land">土地面積</option><option value="150" data-t="f.land.150">150㎡以上</option><option value="250" data-t="f.land.250">250㎡以上</option><option value="400" data-t="f.land.400">400㎡以上</option><option value="800" data-t="f.land.800">800㎡以上</option></select>
   <select id="fAge"><option value="" data-t="f.age">築年数</option><option value="20" data-t="f.age.20">築20年以内</option><option value="35" data-t="f.age.35">築35年以内</option><option value="50" data-t="f.age.50">築50年以内</option></select>
@@ -252,6 +254,7 @@ main{flex:1;display:grid;grid-template-columns:minmax(0,1fr) clamp(360px,46%,640
   <button class="chip" data-chip="seller" data-t="chip.seller">売主物件</button>
   <button class="chip" data-chip="walk15" data-t="chip.walk15">駅徒歩15分以内</button>
   <span class="sep"></span>
+  <button class="chip adv" id="advBtn" onclick="openAdv()"><span data-t="f.adv">詳細条件</span><em id="advCount" hidden></em></button>
   <label class="toggle"><input type="checkbox" id="fBounds" checked><span data-t="f.bounds">地図の範囲で絞る</span></label>
   <button class="reset" onclick="resetAll()" data-t="f.reset">条件をクリア</button>
 </div>
@@ -308,6 +311,28 @@ main{flex:1;display:grid;grid-template-columns:minmax(0,1fr) clamp(360px,46%,640
     <div style="padding:0 24px 20px;display:flex;gap:10px"><button class="btn s" type="button" onclick="closeSell()" data-t="close">閉じる</button></div>
   </div>
 </div>
+<div class="modal" id="adv">
+  <div class="box">
+    <div class="hd"><h2 data-t="adv.h">詳細条件</h2><p data-t="adv.p">販売中の物件を、取引の形や設備で絞り込みます</p></div>
+    <form class="form" id="advForm" onsubmit="return applyAdv(event)">
+      <label><span data-t="adv.deal">取引態様</span><select id="aDeal"><option value="" data-t="adv.deal.all">すべて</option><option value="seller" data-t="adv.deal.seller">売主物件（当社が売主）</option><option value="agent" data-t="adv.deal.agent">仲介物件（専任・一般媒介）</option></select></label>
+      <div class="row">
+        <label><span data-t="adv.bld">建物面積 下限</span><select id="aBld"><option value="" data-t="adv.any">指定なし</option><option value="60">60㎡〜</option><option value="80">80㎡〜</option><option value="100">100㎡〜</option><option value="120">120㎡〜</option></select></label>
+        <label><span data-t="adv.struct">構造</span><select id="aStruct"><option value="" data-t="adv.any">指定なし</option><option value="木造" data-t="adv.wood">木造</option><option value="鉄骨" data-t="adv.steel">鉄骨造</option><option value="ＲＣ" data-t="adv.rc">鉄筋コンクリート</option></select></label>
+      </div>
+      <div class="checks">
+        <label><input type="checkbox" id="aParking"><span data-t="adv.parking">駐車場あり</span></label>
+        <label><input type="checkbox" id="aVacant"><span data-t="adv.vacant">現況 空家</span></label>
+        <label><input type="checkbox" id="aPlan"><span data-t="adv.plan">間取り図あり</span></label>
+        <label><input type="checkbox" id="aPhotos"><span data-t="adv.photos">写真10枚以上</span></label>
+      </div>
+      <label><span data-t="adv.muni">市町村（複数可）</span></label>
+      <div class="checks" id="aMunis"></div>
+      <div style="display:flex;gap:10px"><button class="btn p" type="submit" data-t="adv.apply">この条件で絞る</button><button class="btn s" type="button" onclick="clearAdv()" data-t="adv.clear">詳細条件を外す</button></div>
+    </form>
+    <div style="padding:0 24px 20px;display:flex;gap:10px"><button class="btn s" type="button" onclick="closeAdv()" data-t="close">閉じる</button></div>
+  </div>
+</div>
 <div class="toast" id="toast"></div>
 <div class="lightbox" id="lightbox" onclick="closeLightbox()"><img id="lbimg" alt=""><div class="cap" id="lbcap"></div></div>
 
@@ -323,13 +348,13 @@ const CONTACT='https://we.ohanahome.jp/contact/', TEL='0120-087-255';
 const T={
  ja:{ 'logo.i':'空き家再生', proto:`オハナホームが ATBB に登録している<b>販売中の物件 {n}件</b>（${ASOF} 時点）と成約実績。公開準備中のページです。`,
   'mode.sale':'販売中','mode.sold':'成約実績','search.ph':'市町村・駅名で探す（例：茂原、いすみ、八街）','nav.saved':'♡ 保存した物件','nav.sell':'売りたい方へ',
-  'f.price':'価格','f.price.300':'〜300万円','f.price.500':'〜500万円','f.price.1000':'〜1,000万円','f.price.2000':'〜2,000万円','f.price.3000':'〜3,000万円','f.price.5000':'〜5,000万円',
+  'f.pmin':'価格 下限','f.pmax':'価格 上限','p.300':'300万円','p.500':'500万円','p.1000':'1,000万円','p.1500':'1,500万円','p.2000':'2,000万円','p.3000':'3,000万円','p.5000':'5,000万円',
   'f.rooms':'間取り','f.rooms.2':'2部屋以上','f.rooms.3':'3部屋以上','f.rooms.4':'4部屋以上','f.rooms.5':'5部屋以上',
   'f.land':'土地面積','f.land.150':'150㎡以上','f.land.250':'250㎡以上','f.land.400':'400㎡以上','f.land.800':'800㎡以上',
   'f.age':'築年数','f.age.20':'築20年以内','f.age.35':'築35年以内','f.age.50':'築50年以内','f.type':'種類','f.bounds':'地図の範囲で絞る','f.reset':'条件をクリア',
   'type.house':'戸建（すべて）','type.平屋':'平屋','type.2階建':'2階建','type.3階建':'3階建','type.戸建':'戸建','type.土地':'土地','type.店舗付き住宅':'店舗付き住宅','type.店舗':'店舗','type.マンション':'マンション','type.古民家':'古民家','type.農家住宅':'農家住宅',
-  'chip.new':'新着','chip.seller':'売主物件','chip.walk15':'駅徒歩15分以内','schip.reform':'フルリフォーム済み','schip.house':'戸建',
-  'view.photo':'写真','view.plan':'間取り','plan.zoom':'間取りを拡大','plan.hint':'クリックで閉じる','d.plan':'FLOOR PLAN','d.plan.sub':'間取り図（クリックで拡大）','sort.new':'新着順','sort.priceAsc':'価格が安い順','sort.priceDesc':'価格が高い順','sort.landDesc':'土地が広い順','sort.ageAsc':'築年が新しい順',
+  'chip.new':'新着','chip.seller':'売主物件','chip.walk15':'駅徒歩15分以内','f.adv':'詳細条件','adv.h':'詳細条件','adv.p':'販売中の物件を、取引の形や設備で絞り込みます','adv.deal':'取引態様','adv.deal.all':'すべて','adv.deal.seller':'売主物件（当社が売主）','adv.deal.agent':'仲介物件（専任・一般媒介）','adv.bld':'建物面積 下限','adv.struct':'構造','adv.any':'指定なし','adv.wood':'木造','adv.steel':'鉄骨造','adv.rc':'鉄筋コンクリート','adv.parking':'駐車場あり','adv.vacant':'現況 空家','adv.plan':'間取り図あり','adv.photos':'写真10枚以上','adv.muni':'市町村（複数可）','adv.apply':'この条件で絞る','adv.clear':'詳細条件を外す','schip.reform':'フルリフォーム済み','schip.house':'戸建',
+  'view.photo':'写真','view.plan':'間取り','plan.zoom':'間取りを拡大','plan.hint':'クリックで閉じる','plan.open':'原寸で開く','plan.dl':'ダウンロード','plan.lowres':'※ athome 掲載の画像（横640px）。元図面が揃い次第、高解像度に差し替えます','d.plan':'FLOOR PLAN','d.plan.sub':'間取り図（クリックで拡大）','sort.new':'新着順','sort.priceAsc':'価格が安い順','sort.priceDesc':'価格が高い順','sort.landDesc':'土地が広い順','sort.ageAsc':'築年が新しい順',
   'm.map':'🗺 地図を見る','m.list':'☰ 一覧を見る','map.photo':'航空写真','map.map':'地図に戻す', title:'FOR SALE','title.sub':'販売中の物件','title.sold':'SOLD','title.sold.sub':'成約実績','title.saved':'保存した物件','title.q':'「{q}」', count:'{n}件{b}・全{t}件','count.b':'（地図の範囲内）',
   empty:'この条件・この範囲には物件がありません。<br>地図を広げるか、条件を減らしてみてください。', new:'NEW', seller:'売主物件', sold:'SOLD OUT', reform:'フルリフォーム', land:'土地', bld:'建物', age:'築{a}年', ageNA:'築年不明', min:'{m}分', landOnly:'土地のみ', plan:'間取り', photo:'写真', drive:'現地写真',
   'sold.date':'{y}年{m}月 成約','sold.nodate':'成約済み','sold.count':'成約 {n}件','sold.approx':'成約物件の位置は市町村までの表示です','title.sold.note':'位置は市町村単位',
@@ -346,13 +371,13 @@ const T={
  },
  en:{ 'logo.i':'AKIYA SAISEI', proto:`<b>{n} listings</b> currently published by Ohana Home on ATBB (as of ${ASOF}), plus past sales. This page is being prepared for launch.`,
   'mode.sale':'For sale','mode.sold':'Past sales','search.ph':'Search by town or station (e.g. Mobara, Isumi, Yachimata)','nav.saved':'♡ Saved','nav.sell':'Selling?',
-  'f.price':'Price','f.price.300':'Up to ¥3M','f.price.500':'Up to ¥5M','f.price.1000':'Up to ¥10M','f.price.2000':'Up to ¥20M','f.price.3000':'Up to ¥30M','f.price.5000':'Up to ¥50M',
+  'f.pmin':'Min price','f.pmax':'Max price','p.300':'¥3M','p.500':'¥5M','p.1000':'¥10M','p.1500':'¥15M','p.2000':'¥20M','p.3000':'¥30M','p.5000':'¥50M',
   'f.rooms':'Rooms','f.rooms.2':'2+ rooms','f.rooms.3':'3+ rooms','f.rooms.4':'4+ rooms','f.rooms.5':'5+ rooms',
   'f.land':'Lot size','f.land.150':'150 m²+','f.land.250':'250 m²+','f.land.400':'400 m²+','f.land.800':'800 m²+',
   'f.age':'Age','f.age.20':'Built within 20 yrs','f.age.35':'Built within 35 yrs','f.age.50':'Built within 50 yrs','f.type':'Type','f.bounds':'Only in map view','f.reset':'Clear filters',
   'type.house':'Houses (all)','type.平屋':'Single-story','type.2階建':'Two-story','type.3階建':'Three-story','type.戸建':'House','type.土地':'Land','type.店舗付き住宅':'Shop + residence','type.店舗':'Shop','type.マンション':'Condo','type.古民家':'Kominka','type.農家住宅':'Farmhouse',
-  'chip.new':'New','chip.seller':'Direct from owner','chip.walk15':'≤15 min to station','schip.reform':'Fully renovated','schip.house':'Houses',
-  'view.photo':'Photo','view.plan':'Floor plan','plan.zoom':'Enlarge plan','plan.hint':'click to close','d.plan':'FLOOR PLAN','d.plan.sub':'click to enlarge','sort.new':'Newest','sort.priceAsc':'Price: low to high','sort.priceDesc':'Price: high to low','sort.landDesc':'Largest lot','sort.ageAsc':'Newest build',
+  'chip.new':'New','chip.seller':'Direct from owner','chip.walk15':'≤15 min to station','f.adv':'More filters','adv.h':'More filters','adv.p':'Narrow down by transaction type, building and area','adv.deal':'Transaction type','adv.deal.all':'Any','adv.deal.seller':'Direct sale (Ohana Home is the seller)','adv.deal.agent':'Brokered (agency listings)','adv.bld':'Min floor area','adv.struct':'Structure','adv.any':'Any','adv.wood':'Wooden','adv.steel':'Steel frame','adv.rc':'Reinforced concrete','adv.parking':'Parking','adv.vacant':'Currently vacant','adv.plan':'Has floor plan','adv.photos':'10+ photos','adv.muni':'Municipality (multiple)','adv.apply':'Apply','adv.clear':'Clear these','schip.reform':'Fully renovated','schip.house':'Houses',
+  'view.photo':'Photo','view.plan':'Floor plan','plan.zoom':'Enlarge plan','plan.hint':'click to close','plan.open':'Open full size','plan.dl':'Download','plan.lowres':'athome image (640px wide). Original drawings will replace it when available.','d.plan':'FLOOR PLAN','d.plan.sub':'click to enlarge','sort.new':'Newest','sort.priceAsc':'Price: low to high','sort.priceDesc':'Price: high to low','sort.landDesc':'Largest lot','sort.ageAsc':'Newest build',
   'm.map':'🗺 Map','m.list':'☰ List','map.photo':'Aerial','map.map':'Map', title:'FOR SALE','title.sub':'Chiba & nearby','title.sold':'SOLD','title.sold.sub':'Past sales by Ohana Home','title.saved':'Saved homes','title.q':'“{q}”', count:'{n} listings{b} · {t} total','count.b':' in map view',
   empty:'No listings match these filters in this area.<br>Zoom out or remove a filter.', new:'NEW', seller:'DIRECT SALE', sold:'SOLD OUT', reform:'Fully renovated', land:'Lot', bld:'Bldg', age:'{a} yrs old', ageNA:'age n/a', min:'{m} min', landOnly:'land only', plan:'Plan', photo:'Photo', drive:'Site photo',
   'sold.date':'Sold {m}/{y}','sold.nodate':'Sold','sold.count':'{n} sold','sold.approx':'Sold listings are shown by municipality only','title.sold.note':'shown by municipality',
@@ -405,7 +430,7 @@ function fmtShort(m){ if(lang==='en'){ const yen=m*10000; return '¥'+(yen/1e6).
 function fmtMan(m){ return lang==='en'? '¥'+(m*10000).toLocaleString() : m.toLocaleString()+'万円'; }
 
 /* ========== 状態 ========== */
-const state={mode:'sale',view:'photo',price:'',rooms:'',land:'',age:'',type:'',chips:new Set(),schips:new Set(),bounds:true,q:'',sort:'new',favOnly:false};
+const state={mode:'sale',view:'photo',adv:{deal:'',bldMin:'',structure:'',parking:false,vacant:false,plan:false,photos:false,munis:new Set()},price:'',priceMin:'',rooms:'',land:'',age:'',type:'',chips:new Set(),schips:new Set(),bounds:true,q:'',sort:'new',favOnly:false};
 let favs=new Set(); try{favs=new Set(JSON.parse(localStorage.getItem('akiya-favs-real')||'[]'))}catch(e){}
 function saveFavs(){try{localStorage.setItem('akiya-favs-real',JSON.stringify([...favs]))}catch(e){}}
 let openId=null;
@@ -463,6 +488,7 @@ function passes(l,useBounds){
   if(state.favOnly && !favs.has(l.id)) return false;
   if(state.q){ const q=state.q, ql=q.toLowerCase(); if(!(l.muni.includes(q)||l.town.includes(q)||(l.station||'').includes(q)||l.name.includes(q)||l.muniEn.toLowerCase().includes(ql)||l.nameEn.toLowerCase().includes(ql))) return false; }
   if(state.price && l.price>+state.price) return false;
+  if(state.priceMin && l.price<+state.priceMin) return false;
   if(state.rooms && l.rooms<+state.rooms) return false;
   if(state.land && (l.land||0)<+state.land) return false;
   if(state.age && (!l.year || (2026-l.year)>+state.age)) return false;
@@ -470,6 +496,16 @@ function passes(l,useBounds){
   if(state.chips.has('new') && !l.isNew) return false;
   if(state.chips.has('seller') && !/売主/.test(l.deal)) return false;
   if(state.chips.has('walk15') && !(l.walk && l.walk<=15 && !l.accessNote)) return false;
+  const a=state.adv;
+  if(a.deal==='seller' && !/売主/.test(l.deal)) return false;
+  if(a.deal==='agent' && !/媒介/.test(l.deal)) return false;
+  if(a.bldMin && (l.bld||0)<+a.bldMin) return false;
+  if(a.structure && !(l.structure||'').includes(a.structure)) return false;
+  if(a.parking && !/有/.test(l.parking||'')) return false;
+  if(a.vacant && !/空/.test(l.status||'')) return false;
+  if(a.plan && !planOf(l)) return false;
+  if(a.photos && l.photos.length<10) return false;
+  if(a.munis.size && !a.munis.has(l.muni)) return false;
   if(useBounds && state.bounds && mapEl.clientWidth>0 && !map.getBounds().contains([l.lat,l.lng])) return false;
   return true;
 }
@@ -534,14 +570,22 @@ function shl(id,on){ const c=document.getElementById('scard'+id); if(c) c.classL
 function toggleFav(id){ favs.has(id)?favs.delete(id):favs.add(id); saveFavs(); render(); toast(favs.has(id)?t('toast.saved'):t('toast.unsaved')); }
 function toggleFavOnly(){ state.favOnly=!state.favOnly; const b=document.getElementById('favbtn'); b.style.background=state.favOnly?'#fff':''; b.style.color=state.favOnly?'#000':''; if(state.mode!=='sale') setMode('sale'); else render(); }
 function resetAll(){
-  Object.assign(state,{price:'',rooms:'',land:'',age:'',type:'',q:'',favOnly:false}); state.chips.clear(); state.schips.clear(); flipped.clear();
-  ['fPrice','fRooms','fLand','fAge','fType'].forEach(id=>{const e=document.getElementById(id); e.value=''; e.classList.remove('on')});
+  Object.assign(state,{price:'',priceMin:'',rooms:'',land:'',age:'',type:'',q:'',favOnly:false}); state.adv={deal:'',bldMin:'',structure:'',parking:false,vacant:false,plan:false,photos:false,munis:new Set()}; updateAdvBadge(); state.chips.clear(); state.schips.clear(); flipped.clear();
+  ['fPriceMin','fPrice','fRooms','fLand','fAge','fType'].forEach(id=>{const e=document.getElementById(id); e.value=''; e.classList.remove('on')});
   document.querySelectorAll('.chip').forEach(c=>c.classList.remove('on'));
   document.getElementById('q').value=''; document.getElementById('favbtn').style.background=''; document.getElementById('favbtn').style.color='';
   homeView(); render();
 }
+function openAdv(){ const a=state.adv; document.getElementById('aDeal').value=a.deal; document.getElementById('aBld').value=a.bldMin; document.getElementById('aStruct').value=a.structure; document.getElementById('aParking').checked=a.parking; document.getElementById('aVacant').checked=a.vacant; document.getElementById('aPlan').checked=a.plan; document.getElementById('aPhotos').checked=a.photos;
+  const munis=[...new Set(DATA.map(l=>l.muni))].sort((x,y)=>DATA.filter(l=>l.muni===y).length-DATA.filter(l=>l.muni===x).length);
+  document.getElementById('aMunis').innerHTML=munis.map(m=>`<label><input type="checkbox" value="${m}" ${a.munis.has(m)?'checked':''}>${lang==='en'?(DATA.find(l=>l.muni===m).muniEn):m} <span style="opacity:.6">${DATA.filter(l=>l.muni===m).length}</span></label>`).join('');
+  document.getElementById('adv').classList.add('open'); document.getElementById('overlay').classList.add('open'); }
+function closeAdv(){ document.getElementById('adv').classList.remove('open'); if(!document.getElementById('panel').classList.contains('open')) document.getElementById('overlay').classList.remove('open'); }
+function applyAdv(ev){ if(ev) ev.preventDefault(); const a=state.adv; a.deal=document.getElementById('aDeal').value; a.bldMin=document.getElementById('aBld').value; a.structure=document.getElementById('aStruct').value; a.parking=document.getElementById('aParking').checked; a.vacant=document.getElementById('aVacant').checked; a.plan=document.getElementById('aPlan').checked; a.photos=document.getElementById('aPhotos').checked; a.munis=new Set([...document.querySelectorAll('#aMunis input:checked')].map(i=>i.value)); updateAdvBadge(); closeAdv(); render(); return false; }
+function clearAdv(){ state.adv={deal:'',bldMin:'',structure:'',parking:false,vacant:false,plan:false,photos:false,munis:new Set()}; updateAdvBadge(); closeAdv(); render(); }
+function updateAdvBadge(){ const a=state.adv; const n=[a.deal,a.bldMin,a.structure].filter(Boolean).length+[a.parking,a.vacant,a.plan,a.photos].filter(Boolean).length+(a.munis.size?1:0); const e=document.getElementById('advCount'); e.textContent=n; e.hidden=!n; document.getElementById('advBtn').classList.toggle('on',n>0); }
 function toast(msg){ const e=document.getElementById('toast'); e.textContent=msg; e.classList.add('show'); clearTimeout(e._t); e._t=setTimeout(()=>e.classList.remove('show'),2200); }
-[['fPrice','price'],['fRooms','rooms'],['fLand','land'],['fAge','age'],['fType','type']].forEach(([id,k])=>{ document.getElementById(id).addEventListener('change',e=>{ state[k]=e.target.value; e.target.classList.toggle('on',!!e.target.value); render(); }); });
+[['fPriceMin','priceMin'],['fPrice','price'],['fRooms','rooms'],['fLand','land'],['fAge','age'],['fType','type']].forEach(([id,k])=>{ document.getElementById(id).addEventListener('change',e=>{ state[k]=e.target.value; e.target.classList.toggle('on',!!e.target.value); render(); }); });
 document.querySelectorAll('#filtersSale .chip').forEach(c=>c.addEventListener('click',()=>{ const u=c.dataset.chip; state.chips.has(u)?state.chips.delete(u):state.chips.add(u); c.classList.toggle('on'); render(); }));
 document.querySelectorAll('#filtersSold .chip').forEach(c=>c.addEventListener('click',()=>{ const u=c.dataset.schip; state.schips.has(u)?state.schips.delete(u):state.schips.add(u); c.classList.toggle('on'); render(); }));
 document.getElementById('fBounds').addEventListener('change',e=>{ state.bounds=e.target.checked; document.getElementById('fBoundsSold').checked=e.target.checked; render(); });
@@ -606,10 +650,12 @@ function openDetail(id){
   markers[id].openPopup();
 }
 function swapMain(id,i){ const l=DATA.find(x=>x.id===id); const p=photosOf(l)[i]; const g=document.querySelector('#gal img'); if(g&&p){ g.src=img(p,900); g.title=p.caption||p.type||''; } document.querySelectorAll('.thumbs img').forEach((e,j)=>e.classList.toggle('on',j===i)); document.getElementById('panel').scrollTo({top:0,behavior:'smooth'}); }
-function openLightbox(id,which){ const l=DATA.find(x=>x.id===id); const p=which==='plan'?planOf(l):mainOf(l); if(!p) return; document.getElementById('lbimg').src=img(p,1400); document.getElementById('lbcap').textContent=(p.caption||p.type||'')+(which==='plan'?'　'+t('plan.hint'):''); document.getElementById('lightbox').classList.add('open'); }
+function planSrc(l){ return l.planHi? l.planHi : (planOf(l)? img(planOf(l),1400) : ''); }
+function openLightbox(id,which){ const l=DATA.find(x=>x.id===id); const p=which==='plan'?planOf(l):mainOf(l); const src=which==='plan'?planSrc(l):(p?img(p,1400):''); if(!src) return;
+  document.getElementById('lbimg').src=src; document.getElementById('lbcap').innerHTML=((p&&(p.caption||p.type))||'')+(which==='plan'?`　<a href="${src}" target="_blank" rel="noopener" onclick="event.stopPropagation()" style="color:#fff;margin-left:12px">${t('plan.open')}</a> <a href="${src}" download onclick="event.stopPropagation()" style="color:#fff;margin-left:12px">${t('plan.dl')}</a>　<span style="opacity:.7">${t('plan.hint')}</span>${l.planHi?'':'<br><span style="opacity:.7;font-size:12px">'+t('plan.lowres')+'</span>'}`:''); document.getElementById('lightbox').classList.add('open'); }
 function closeLightbox(){ document.getElementById('lightbox').classList.remove('open'); }
 function closePanel(){ document.getElementById('panel').classList.remove('open'); document.getElementById('overlay').classList.remove('open'); }
-document.addEventListener('keydown',e=>{ if(e.key==='Escape'){closeLightbox();closePanel();closeSell();} });
+document.addEventListener('keydown',e=>{ if(e.key==='Escape'){closeLightbox();closePanel();closeSell();closeAdv();} });
 
 /* ========== 売りたい方：簡易参考価格（架空の係数） ========== */
 const MUNI_EST={'八街市':2.2,'佐倉市':4.5,'成田市':3.6,'富里市':2.6,'山武市':1.5,'東金市':2.4,'四街道市':6.0,'千葉市若葉区':5.2,'印西市':4.0,'酒々井町':3.0,'匝瑳市':1.2,'多古町':1.0,'芝山町':1.3,'大網白里市':2.8,'茂原市':2.5,'木更津市':3.4,'館山市':1.9,'南房総市':1.4,'香取市':1.3,'旭市':1.6,'いすみ市':1.4,'市原市':3.0,'柏市':7.0,'船橋市':9.0};
