@@ -3,7 +3,6 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="robots" content="noindex, nofollow">
 <title>オハナホーム 物件一覧</title>
 <meta name="description" content="オハナホームの販売中物件と成約実績を地図で。千葉県を中心に、空き家・中古戸建・土地。">
 <link rel="icon" href="img/logo.png">
@@ -346,7 +345,7 @@ let lang='ja'; try{ lang=localStorage.getItem('akiya-lang')||'ja' }catch(e){}
 const USD=150; const ASOF=window.LISTINGS_ASOF||'';
 const CONTACT='https://we.ohanahome.jp/contact/', TEL='0120-087-255';
 const T={
- ja:{ 'logo.i':'空き家再生', proto:`オハナホームが ATBB に登録している<b>販売中の物件 {n}件</b>（${ASOF} 時点）と成約実績。公開準備中のページです。`,
+ ja:{ 'logo.i':'空き家再生', proto:`オハナホームの<b>販売中の物件 {n}件</b>（${ASOF} 時点）と成約実績。千葉県を中心に、空き家・中古戸建・土地。`,
   'mode.sale':'販売中','mode.sold':'成約実績','search.ph':'市町村・駅名で探す（例：茂原、いすみ、八街）','nav.saved':'♡ 保存した物件','nav.sell':'売りたい方へ',
   'f.pmin':'価格 下限','f.pmax':'価格 上限','p.300':'300万円','p.500':'500万円','p.1000':'1,000万円','p.1500':'1,500万円','p.2000':'2,000万円','p.3000':'3,000万円','p.5000':'5,000万円',
   'f.rooms':'間取り','f.rooms.2':'2部屋以上','f.rooms.3':'3部屋以上','f.rooms.4':'4部屋以上','f.rooms.5':'5部屋以上',
@@ -358,18 +357,18 @@ const T={
   'm.map':'🗺 地図を見る','m.list':'☰ 一覧を見る','map.photo':'航空写真','map.map':'地図に戻す', title:'FOR SALE','title.sub':'販売中の物件','title.sold':'SOLD','title.sold.sub':'成約実績','title.saved':'保存した物件','title.q':'「{q}」', count:'{n}件{b}・全{t}件','count.b':'（地図の範囲内）',
   empty:'この条件・この範囲には物件がありません。<br>地図を広げるか、条件を減らしてみてください。', new:'NEW', seller:'売主物件', sold:'SOLD OUT', reform:'フルリフォーム', land:'土地', bld:'建物', age:'築{a}年', ageNA:'築年不明', min:'{m}分', landOnly:'土地のみ', plan:'間取り', photo:'写真', drive:'現地写真',
   'sold.date':'{y}年{m}月 成約','sold.nodate':'成約済み','sold.count':'成約 {n}件','sold.approx':'成約物件の位置は市町村までの表示です','title.sold.note':'位置は市町村単位',
-  'toast.saved':'保存しました（この端末だけに残ります）','toast.unsaved':'保存を外しました','toast.nosell':'準備中のため、相談は送信されません',
+  'toast.saved':'保存しました（この端末だけに残ります）','toast.unsaved':'保存を外しました','toast.nosell':'お問い合わせページからご連絡ください',
   'd.save':'♡ 保存する','d.saved':'♥ 保存済み','d.addr':'{addr}（番地は非公開）','d.access':'{st}駅 徒歩{m}分','d.accessBus':'{st}駅 バス便','d.accessDist':'{st}駅 {d}','d.year':'築{a}年（{y}）',
   'd.about':'ABOUT','d.about.sub':'この物件について','d.basic':'DETAILS','d.basic.sub':'基本情報','d.kind':'種目','d.layout':'間取り','d.layoutDetail':'間取り内訳','d.land':'土地面積','d.bld':'建物面積','d.built':'築年月','d.structure':'構造・規模','d.access2':'交通','d.right':'土地権利','d.status':'現況','d.handover':'引渡し','d.deal':'取引態様','d.road':'接道状況','d.zoning':'用途地域・都市計画','d.bcr':'建ぺい率／容積率','d.parking':'駐車場',
   'd.fac':'FACILITIES','d.fac.sub':'設備','d.near':'NEARBY','d.near.sub':'周辺環境','d.remarks':'NOTES','d.remarks.sub':'備考',
   'd.abroad':'FROM OVERSEAS','d.abroad.sub':'海外から買う場合','d.abroadtxt':'日本では外国人・非居住者も土地と建物を所有できます。来日せずに購入する場合は、①本人確認書類（宣誓供述書など）②納税管理人の選任 ③送金の準備 ④登記後の外為法の事後報告、が主な手順です。すべて当社が窓口になって進めます。',
   'd.broker':'BROKER','d.broker.sub':'取扱会社（宅地建物取引業者）','d.pub':'掲載期間','d.src':'出典：ATBB 登録情報（{asof} 時点）。価格・条件は変わることがあります。',
-  'd.disc':'公開準備中のページです。本番では不動産の表示に関する公正競争規約に定める項目を所定の形式で表示します。',
+  'd.disc':'掲載内容は不動産情報サイト（ATBB）の登録情報にもとづきます。価格・条件は変更されることがあります。所在地は町名までの表示です。詳細はお問い合わせください。',
   'd.inq':'この物件を問い合わせる','d.tel':'電話 {tel}','pop.more':'詳しく見る →','photos.n':'写真 {n}枚',
-  'sell.h':'空き家の参考価格','sell.p':'4つ答えるだけで、おおよその目安が出ます（準備中・架空の係数で計算）','sell.muni':'市町村','sell.land':'土地面積（㎡）','sell.bld':'建物面積（㎡）','sell.year':'築年','sell.cond':'いまの状態（当てはまるものすべて）','sell.go':'参考価格を見る', close:'閉じる',
+  'sell.h':'空き家の参考価格','sell.p':'4つ答えるだけで、おおよその目安が出ます（簡易計算。正式な査定は無料で承ります）','sell.muni':'市町村','sell.land':'土地面積（㎡）','sell.bld':'建物面積（㎡）','sell.year':'築年','sell.cond':'いまの状態（当てはまるものすべて）','sell.go':'参考価格を見る', close:'閉じる',
   'sell.r':'{muni}・{type}・土地{land}㎡・築{age}年 の参考価格','sell.landrow':'土地 {a}㎡ × {u}万円/㎡','sell.bldrow':'建物 {a}㎡ × 9万円 × 残存{r}%','d.repair':'修繕見込み（{c}）','none':'なし','d.mid':'中央 {p}','sell.low':'参考価格が低めです。「売る」以外に、貸す・地域に託す・解体して土地だけ売る、という選択肢も一緒に考えられます。','sell.note':'※ 架空の係数です。本番では近隣の成約事例・路線価・現地調査で算出し、算出日と根拠を示します。','sell.cta':'この価格で相談する（無料）'
  },
- en:{ 'logo.i':'AKIYA SAISEI', proto:`<b>{n} listings</b> currently published by Ohana Home on ATBB (as of ${ASOF}), plus past sales. This page is being prepared for launch.`,
+ en:{ 'logo.i':'AKIYA SAISEI', proto:`<b>{n} homes and lots for sale</b> from Ohana Home (as of ${ASOF}), plus past sales. Chiba, Japan and nearby.`,
   'mode.sale':'For sale','mode.sold':'Past sales','search.ph':'Search by town or station (e.g. Mobara, Isumi, Yachimata)','nav.saved':'♡ Saved','nav.sell':'Selling?',
   'f.pmin':'Min price','f.pmax':'Max price','p.300':'¥3M','p.500':'¥5M','p.1000':'¥10M','p.1500':'¥15M','p.2000':'¥20M','p.3000':'¥30M','p.5000':'¥50M',
   'f.rooms':'Rooms','f.rooms.2':'2+ rooms','f.rooms.3':'3+ rooms','f.rooms.4':'4+ rooms','f.rooms.5':'5+ rooms',
@@ -387,9 +386,9 @@ const T={
   'd.fac':'FACILITIES','d.fac.sub':'','d.near':'NEARBY','d.near.sub':'','d.remarks':'NOTES','d.remarks.sub':'',
   'd.abroad':'FROM OVERSEAS','d.abroad.sub':'Buying from abroad','d.abroadtxt':'Foreigners and non-residents can own land and buildings in Japan. If you buy without visiting, the main steps are: (1) identity documents such as an affidavit, (2) appointing a tax agent in Japan, (3) arranging the international transfer, and (4) a post-purchase report under the Foreign Exchange Act. We act as your single point of contact for all of it.',
   'd.broker':'BROKER','d.broker.sub':'Licensed real-estate broker','d.pub':'Listed','d.src':'Source: ATBB registration as of {asof}. Price and terms may change.',
-  'd.disc':'This page is being prepared for launch. The live version will show every item required by Japan’s real-estate advertising rules in the prescribed format.',
+  'd.disc':'Details are based on the ATBB registration. Price and terms may change. Addresses are shown to town level. Please contact us for full details.',
   'd.inq':'Ask about this listing','d.tel':'Call {tel}','pop.more':'View details →','photos.n':'{n} photos',
-  'sell.h':'Estimate for your vacant home','sell.p':'Answer four questions for a rough range (not live, fictional coefficients)','sell.muni':'Town','sell.land':'Lot size (m²)','sell.bld':'Floor area (m²)','sell.year':'Year built','sell.cond':'Current condition (check all that apply)','sell.go':'Show estimate', close:'Close',
+  'sell.h':'Estimate for your vacant home','sell.p':'Answer four questions for a rough range (simplified; a formal valuation is free)','sell.muni':'Town','sell.land':'Lot size (m²)','sell.bld':'Floor area (m²)','sell.year':'Year built','sell.cond':'Current condition (check all that apply)','sell.go':'Show estimate', close:'Close',
   'sell.r':'Estimate for {type} in {muni}, {land} m² lot, {age} yrs old','sell.landrow':'Lot {a} m² × ¥{u}k/m²','sell.bldrow':'Building {a} m² × ¥90k × {r}% remaining','d.repair':'Expected repairs ({c})','none':'none','d.mid':'mid {p}','sell.low':'The estimate is low. Besides selling, renting it out, handing it to the community, or demolishing and selling the land are options we can explore together.','sell.note':'Fictional coefficients. A live estimate would use nearby sales, official land values and an inspection, with the date and basis shown.','sell.cta':'Talk to us about this estimate (free)'
  }
 };
