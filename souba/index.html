@@ -60,6 +60,7 @@ select,input[type=number]{font:inherit;font-weight:700;font-size:16px;padding:12
 .row .v small{font-size:.5em;font-weight:900;margin-left:2px}
 .row .m{font-size:13px;color:var(--gy-dark);font-weight:700}
 .row.na .v{font-size:16px;line-height:1.7}
+.row .low{font-size:13px;font-weight:900;color:var(--bk);margin-top:6px}
 .bar{position:relative;height:8px;background:var(--gy-soft);margin:8px 0 2px;max-width:420px}
 .bar i{position:absolute;top:0;bottom:0;background:var(--bk)}
 .bar b{position:absolute;top:-4px;width:2px;height:16px;background:var(--sun)}
@@ -134,7 +135,7 @@ footer a{margin-right:16px}
     <p class="cond" id="r-cond"></p>
     <div id="r-rows"></div>
     <div class="note">
-      <span class="ib">ここに出るのは、</span><span class="ib">同じ市区町村で</span><span class="ib">実際に取引された価格の、</span><span class="ib">真ん中の半分</span><span class="ib">（安い方から25%〜75%）の</span><span class="ib">幅です。</span>
+      <span class="ib">ここに出るのは、</span><span class="ib">同じ市区町村で</span><span class="ib">実際に取引された価格を</span><span class="ib">安い順に並べたときの、</span><span class="ib">下から1割〜4分の3</span><span class="ib">（10%〜75%）の</span><span class="ib">幅です。</span><span class="ib">安めに成立した取引も</span><span class="ib">含めて見られるよう、</span><span class="ib">下側を広めにとっています。</span>
       <ul>
         <li>道路との接し方・土地の形・再建築できるか・建物の傷み・残っている荷物などで、同じ広さでも大きく変わります。</li>
         <li>古い家は、建物の値段がつかず、解体の費用を差し引いて考えることもあります。</li>
@@ -201,11 +202,12 @@ footer a{margin-right:16px}
     keys.forEach(function(k){
       var v=d[k[0]];
       if(!v){ rows.push('<div class="row na">'+(k[1]?'<div class="z">'+k[1]+'</div>':'')+'<div class="v">この条件の取引が少ないため、目安を出せません。<br>担当がお調べします。</div></div>'); return; }
-      var lo=v[0],md=v[1],hi=v[2],n=v[3], top=v[2]*1.15, html='';
+      var lo=v[0],md=v[2],hi=v[3],n=v[4], top=v[3]*1.15, html='';
       if(size){ html='<div class="v">約'+man(lo*size)+' 〜 '+man(hi*size)+'</div><div class="m">真ん中あたり 約'+man(md*size)+'｜'+unitLbl+' '+yen(lo,hi)+'〜'+yen(hi,hi)+'｜取引'+n+'件</div>'; }
       else { html='<div class="v">'+yen(lo,hi)+' 〜 '+yen(hi,hi)+'<small>（'+unitLbl+'）</small></div><div class="m">真ん中あたり '+yen(md,hi)+'｜取引'+n+'件</div>'; }
       var bar='<div class="bar" aria-hidden="true"><i style="left:'+(lo/top*100).toFixed(1)+'%;width:'+((hi-lo)/top*100).toFixed(1)+'%"></i><b style="left:'+(md/top*100).toFixed(1)+'%"></b></div>';
-      rows.push('<div class="row">'+(k[1]?'<div class="z">'+k[1]+'</div>':'')+html+bar+'</div>');
+      var lowk=v[5]||0, lowtxt=lowk?'<div class="low">100万円以下で取引された例も、'+n+'件中'+lowk+'件ありました。</div>':'';
+      rows.push('<div class="row">'+(k[1]?'<div class="z">'+k[1]+'</div>':'')+html+bar+lowtxt+'</div>');
     });
     $('#r-rows').innerHTML=rows.join('');
     var cond=c+'・'+TY[t]+(t!=='L'?'・'+AG[a]:'')+(size?'・'+(t==='M'?ar+'㎡':(u==='m2'?ar+'㎡':ar+'坪')):'');
