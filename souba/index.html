@@ -206,7 +206,9 @@ footer a{margin-right:16px}
       if(size){ html='<div class="v">約'+man(lo*size)+' 〜 '+man(hi*size)+'</div><div class="m">真ん中あたり 約'+man(md*size)+'｜'+unitLbl+' '+yen(lo,hi)+'〜'+yen(hi,hi)+'｜取引'+n+'件</div>'; }
       else { html='<div class="v">'+yen(lo,hi)+' 〜 '+yen(hi,hi)+'<small>（'+unitLbl+'）</small></div><div class="m">真ん中あたり '+yen(md,hi)+'｜取引'+n+'件</div>'; }
       var bar='<div class="bar" aria-hidden="true"><i style="left:'+(lo/top*100).toFixed(1)+'%;width:'+((hi-lo)/top*100).toFixed(1)+'%"></i><b style="left:'+(md/top*100).toFixed(1)+'%"></b></div>';
-      var lowk=v[5]||0, lowtxt=lowk?'<div class="low">100万円以下で取引された例も、'+n+'件中'+lowk+'件ありました。</div>':'';
+      var lowk=v[5]||0, lowtxt='';
+      if(lowk) lowtxt+='<div class="low">100万円以下で取引された例も、'+n+'件中'+lowk+'件ありました。</div>';
+      if(v[6]!=null){ var mp=v[6]<1e4?v[6].toLocaleString('ja-JP')+'円':man(v[6]); lowtxt+='<div class="low">いちばん安かった取引は、'+v[7]+'㎡（約'+Math.round(v[7]/3.305785)+'坪）で'+mp+'でした。</div>'; }
       rows.push('<div class="row">'+(k[1]?'<div class="z">'+k[1]+'</div>':'')+html+bar+lowtxt+'</div>');
     });
     $('#r-rows').innerHTML=rows.join('');
