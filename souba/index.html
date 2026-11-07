@@ -1,0 +1,223 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>かんたん相場チェック（千葉県）｜オハナホーム</title>
+<meta name="description" content="千葉県の市区町村ごとに、実際に取引された土地・戸建て・マンションの価格の幅を、国土交通省の取引価格データから出します。家の値段（査定額）ではありません。この家の場合は、担当が無料で机上査定します。">
+<link rel="canonical" href="https://we.ohanahome.jp/souba/">
+<meta property="og:title" content="かんたん相場チェック（千葉県）｜オハナホーム">
+<meta property="og:description" content="同じ市町村で実際に取引された価格の幅を、国の取引価格データから。">
+<meta property="og:image" content="https://we.ohanahome.jp/img/og.jpg">
+<meta property="og:type" content="website">
+<link rel="icon" href="/img/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sofia+Sans+Extra+Condensed:wght@800;900&family=Noto+Sans+JP:wght@400;500;700;900&display=swap">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-V3SPMSJXHT"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());if(!/^(localhost|127\.)/.test(location.hostname))gtag('config','G-V3SPMSJXHT');function track(n,p){try{gtag('event',n,p||{});}catch(e){}}</script>
+<style>
+/* we.ohanahome.jp と同じ色・書体 */
+:root{
+  --bk:#000; --wh:#fff; --cream:#fbf5e6; --sun:#f2a93b;
+  --gy:#9e9e9e; --gy-dark:#333; --gy-soft:#f4f4f4; --line:#d7d7d7;
+  --cond:"Sofia Sans Extra Condensed","Arial Narrow",sans-serif;
+  --jp:"Noto Sans JP","Hiragino Kaku Gothic ProN","Hiragino Sans",sans-serif;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+body{margin:0;font-family:var(--jp);color:var(--bk);background:var(--wh);line-height:1.8;-webkit-text-size-adjust:100%}
+a{color:inherit}
+.ib{display:inline-block}
+header{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px clamp(16px,4vw,40px);background:var(--bk);color:var(--wh)}
+header .logo{font-family:var(--cond);font-weight:900;font-size:clamp(26px,4vw,34px);letter-spacing:.02em;text-decoration:none;line-height:1}
+header .logo small{display:block;font-size:11px;letter-spacing:.2em;opacity:.8;margin-bottom:4px}
+header nav a{font-family:var(--cond);font-weight:800;font-size:16px;letter-spacing:.08em;text-decoration:none;margin-left:16px}
+.wrap{max-width:880px;margin:0 auto;padding:0 clamp(16px,4vw,32px)}
+.hero{padding:clamp(40px,7vw,80px) 0 clamp(20px,3vw,32px)}
+.sub{font-family:var(--cond);font-weight:900;letter-spacing:.18em;color:var(--gy);font-size:15px}
+h1{font-size:clamp(28px,5vw,44px);line-height:1.3;margin:6px 0 14px;font-weight:900}
+.lead{font-size:clamp(15px,1.7vw,17px);font-weight:700;margin:0;color:var(--gy-dark)}
+.lead b{color:var(--bk)}
+form{margin-top:clamp(24px,4vw,36px);display:grid;gap:22px}
+fieldset{border:0;margin:0;padding:0;min-width:0}
+legend,.lb{font-weight:900;font-size:15px;margin-bottom:8px;display:block;padding:0}
+.hint{font-size:13px;color:var(--gy-dark);font-weight:500;margin:6px 0 0;line-height:1.7}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chips label{cursor:pointer}
+.chips input{position:absolute;opacity:0;pointer-events:none}
+.chips span{display:inline-block;padding:10px 16px;border:1px solid var(--bk);font-weight:700;font-size:15px;line-height:1.4;background:var(--wh)}
+.chips input:checked+span{background:var(--bk);color:var(--wh)}
+.chips input:focus-visible+span{outline:3px solid var(--sun);outline-offset:2px}
+select,input[type=number]{font:inherit;font-weight:700;font-size:16px;padding:12px 14px;border:1px solid var(--bk);background:var(--wh);color:var(--bk);border-radius:0;width:100%;max-width:360px}
+.area{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.area input{max-width:180px}
+.res{margin-top:clamp(28px,4vw,40px);border-top:3px solid var(--bk);padding-top:22px}
+.res h2{font-size:clamp(18px,2.2vw,22px);margin:0 0 4px;font-weight:900}
+.res .cond{font-size:13px;color:var(--gy-dark);font-weight:700;margin:0 0 14px}
+.row{display:grid;grid-template-columns:1fr;gap:4px;padding:16px 0;border-bottom:1px solid var(--line)}
+.row .z{font-size:13px;font-weight:900;color:var(--gy-dark);letter-spacing:.04em}
+.row .v{font-size:clamp(26px,4.4vw,38px);font-weight:900;line-height:1.25}
+.row .v small{font-size:.5em;font-weight:900;margin-left:2px}
+.row .m{font-size:13px;color:var(--gy-dark);font-weight:700}
+.row.na .v{font-size:16px;line-height:1.7}
+.bar{position:relative;height:8px;background:var(--gy-soft);margin:8px 0 2px;max-width:420px}
+.bar i{position:absolute;top:0;bottom:0;background:var(--bk)}
+.bar b{position:absolute;top:-4px;width:2px;height:16px;background:var(--sun)}
+.note{margin:18px 0 0;padding:14px 16px;background:var(--cream);border-left:4px solid var(--sun);font-size:14px;font-weight:700;line-height:1.8}
+.note ul{margin:6px 0 0;padding-left:1.2em}
+.cta{margin:26px 0 0;display:flex;flex-direction:column;gap:12px;align-items:flex-start}
+.btn{display:inline-flex;align-items:center;gap:10px;background:var(--bk);color:var(--wh);text-decoration:none;font-weight:900;font-size:clamp(16px,2vw,18px);padding:16px 24px;border:2px solid var(--bk)}
+.btn.alt{background:var(--wh);color:var(--bk)}
+.btn:hover{opacity:.85}
+.small{font-size:13px;color:var(--gy-dark);font-weight:500}
+.how{margin:clamp(40px,6vw,64px) 0 0;font-size:14px;line-height:1.9;color:var(--gy-dark)}
+.how h2{font-size:17px;color:var(--bk);margin:0 0 8px}
+.how p{margin:0 0 10px}
+footer{margin-top:clamp(48px,7vw,80px);padding:24px clamp(16px,4vw,40px);background:var(--bk);color:var(--wh);font-size:13px}
+footer a{margin-right:16px}
+@media(max-width:600px){header nav a{margin-left:10px;font-size:14px}}
+</style>
+</head>
+<body>
+<header>
+  <a class="logo" href="/"><small>AKIYA · SOUZOKU · SHUKATSU</small>OHANA HOME</a>
+  <nav><a href="/">HOME</a><a href="/contact/">CONTACT</a></nav>
+</header>
+<main class="wrap">
+  <section class="hero">
+    <div class="sub">PRICE GUIDE</div>
+    <h1><span class="ib">かんたん</span><span class="ib">相場チェック</span><span class="ib">（千葉県）</span></h1>
+    <p class="lead"><span class="ib">同じ市区町村で、</span><span class="ib">実際に取引された価格の「幅」を、</span><span class="ib">国の取引価格データから出します。</span><br><b><span class="ib">この家の値段（査定額）では</span><span class="ib">ありません。</span></b><span class="ib">この家の場合は、</span><span class="ib">担当が無料でお調べします。</span></p>
+  </section>
+
+  <form id="sf" onsubmit="return false">
+    <fieldset>
+      <legend>何の相場ですか</legend>
+      <div class="chips" id="f-type">
+        <label><input type="radio" name="type" value="L" checked><span>土地だけ</span></label>
+        <label><input type="radio" name="type" value="H"><span>土地と建物（戸建て）</span></label>
+        <label><input type="radio" name="type" value="M"><span>マンション</span></label>
+      </div>
+    </fieldset>
+    <div>
+      <label class="lb" for="f-city">市区町村</label>
+      <select id="f-city"></select>
+    </div>
+    <fieldset id="g-zone">
+      <legend>区域</legend>
+      <div class="chips">
+        <label><input type="radio" name="zone" value="*" checked><span>分からない</span></label>
+        <label><input type="radio" name="zone" value="u"><span>用途地域がある区域（住宅地・商業地など）</span></label>
+        <label><input type="radio" name="zone" value="c"><span>市街化調整区域</span></label>
+        <label><input type="radio" name="zone" value="o"><span>用途地域のない区域（調整区域以外）</span></label>
+      </div>
+      <p class="hint">固定資産税の通知書や、市町村の都市計画の地図で分かります。分からなければ「分からない」のままで大丈夫です（区域ごとに並べて出します）。</p>
+    </fieldset>
+    <fieldset id="g-age" hidden>
+      <legend>建ってから何年くらいですか</legend>
+      <div class="chips">
+        <label><input type="radio" name="age" value="a"><span>20年以内</span></label>
+        <label><input type="radio" name="age" value="b"><span>21〜40年</span></label>
+        <label><input type="radio" name="age" value="c" checked><span>41年以上</span></label>
+      </div>
+    </fieldset>
+    <div>
+      <label class="lb" for="f-area" id="l-area">土地の広さ</label>
+      <div class="area"><input type="number" id="f-area" inputmode="decimal" min="1" step="any" placeholder="例：60"><div class="chips" id="g-unit"><label><input type="radio" name="unit" value="tsubo" checked><span>坪</span></label><label><input type="radio" name="unit" value="m2"><span>㎡</span></label></div></div>
+      <p class="hint" id="h-area">登記簿や固定資産税の通知書に書いてあります。入れなくても、1坪（1㎡）あたりの目安は出ます。</p>
+    </div>
+  </form>
+
+  <section class="res" id="res" aria-live="polite">
+    <h2>周辺の取引の目安</h2>
+    <p class="cond" id="r-cond"></p>
+    <div id="r-rows"></div>
+    <div class="note">
+      <span class="ib">ここに出るのは、</span><span class="ib">同じ市区町村で</span><span class="ib">実際に取引された価格の、</span><span class="ib">真ん中の半分</span><span class="ib">（安い方から25%〜75%）の</span><span class="ib">幅です。</span>
+      <ul>
+        <li>道路との接し方・土地の形・再建築できるか・建物の傷み・残っている荷物などで、同じ広さでも大きく変わります。</li>
+        <li>古い家は、建物の値段がつかず、解体の費用を差し引いて考えることもあります。</li>
+        <li>市街化調整区域は、買える人が限られるため、低めになりやすい区域です。</li>
+      </ul>
+    </div>
+    <div class="cta">
+      <a class="btn" id="to-contact" href="/contact/?kind=査定"><span><span class="ib">この家の場合を、</span><span class="ib">担当が見る</span><span class="ib">（無料・机上査定）</span></span><span aria-hidden="true">→</span></a>
+      <a class="btn alt" href="tel:0120087255">電話で聞く　0120-087-255</a>
+      <span class="small">受付 9:00〜17:00（日祝休み）・お返事は2営業日以内</span>
+    </div>
+  </section>
+
+  <section class="how">
+    <h2>この目安の作り方</h2>
+    <p id="how-data">国土交通省「不動産情報ライブラリ」の不動産取引価格情報（千葉県）をもとに、オハナホームが市区町村・区域・建物の古さごとにまとめ直しています。取引が少ない組み合わせ（8件未満）は、ぶれが大きいため目安を出していません。</p>
+    <p>戸建ては「土地と建物の取引価格」を土地1坪あたりに直して比べています。マンションは専有面積1㎡あたりです。</p>
+    <p>このページの目安の計算と表示は、オハナホーム株式会社の責任で行っています。お問い合わせはオハナホームへお願いします。</p>
+    <p>このサービスは、国土交通省の不動産情報ライブラリのAPI機能を使用していますが、提供情報の最新性、正確性、完全性等が保証されたものではありません。</p>
+  </section>
+</main>
+<footer>
+  <a href="/">オハナホーム</a><a href="/contact/">ご相談</a><a href="/privacy.html">プライバシーポリシー</a>
+  <div style="margin-top:8px">© OHANA HOME</div>
+</footer>
+<script>
+(function(){
+  var D=null, $=function(s){return document.querySelector(s);};
+  var ZN={u:'用途地域がある区域',c:'市街化調整区域',o:'用途地域のない区域（調整区域以外）'};
+  var AG={a:'築20年以内',b:'築21〜40年',c:'築41年以上'};
+  var TY={L:'土地だけ',H:'土地と建物（戸建て）',M:'マンション'};
+  function val(n){var e=document.querySelector('input[name="'+n+'"]:checked');return e?e.value:'';}
+  function man(y){ // 円 → 「1,230万円」
+    if(y>=1e8){var o=Math.round(y/1e6)/100;return o.toLocaleString('ja-JP')+'億円';}
+    var m=y>=1e7?Math.round(y/1e5)*10:Math.round(y/1e4); return m.toLocaleString('ja-JP')+'万円';
+  }
+  function yen(y,ref){var big=(ref||y)>=1e5; return big?(Math.round(y/1e3)/10).toLocaleString('ja-JP')+'万円':(Math.round(y/10)*10).toLocaleString('ja-JP')+'円';}  // 同じ行の中は単位をそろえる（ref＝その行の上限）
+  function per(p){var m=p.match(/(\d{4})年第(\d)四半期/);return m?m[1]+'年'+((+m[2])*3-2)+'月':p;}
+  function perEnd(p){var m=p.match(/(\d{4})年第(\d)四半期/);return m?m[1]+'年'+((+m[2])*3)+'月':p;}
+  function ui(){
+    var t=val('type');
+    $('#g-age').hidden=(t==='L'); $('#g-zone').hidden=(t==='M'); $('#g-unit').hidden=(t==='M');
+    $('#l-area').textContent=(t==='M'?'専有面積（㎡）':'土地の広さ');
+    $('#h-area').textContent=(t==='M'?'パンフレットや登記簿に書いてあります。入れなくても、1㎡あたりの目安は出ます。':'登記簿や固定資産税の通知書に書いてあります。入れなくても、1坪（1㎡）あたりの目安は出ます。');
+  }
+  function calc(){
+    if(!D) return; ui();
+    var t=val('type'),c=$('#f-city').value,z=val('zone'),a=val('age'),u=val('unit'),ar=parseFloat($('#f-area').value);
+    var d=D.d[c]||{}, rows=[], keys;
+    if(t==='M'){ keys=[['M'+a,'']]; }
+    else { var base=(t==='L'?'L':'H'+a); keys=(z==='*')?[['u',ZN.u],['c',ZN.c],['o',ZN.o]].map(function(x){return [base+x[0],x[1]];}).filter(function(k){return d[k[0]];}):[[base+z,ZN[z]]];
+      if(z==='*'&&!keys.length) keys=[[base+'u',ZN.u]]; }
+    // 1坪・1㎡あたり → 入力した広さ
+    var size=null, unitLbl='';
+    if(t==='M'){ if(ar>0){size=ar;} unitLbl='1㎡あたり'; }
+    else { if(ar>0){size=(u==='m2')?ar/3.305785:ar;} unitLbl='1坪あたり'; }
+    keys.forEach(function(k){
+      var v=d[k[0]];
+      if(!v){ rows.push('<div class="row na">'+(k[1]?'<div class="z">'+k[1]+'</div>':'')+'<div class="v">この条件の取引が少ないため、目安を出せません。<br>担当がお調べします。</div></div>'); return; }
+      var lo=v[0],md=v[1],hi=v[2],n=v[3], top=v[2]*1.15, html='';
+      if(size){ html='<div class="v">約'+man(lo*size)+' 〜 '+man(hi*size)+'</div><div class="m">真ん中あたり 約'+man(md*size)+'｜'+unitLbl+' '+yen(lo,hi)+'〜'+yen(hi,hi)+'｜取引'+n+'件</div>'; }
+      else { html='<div class="v">'+yen(lo,hi)+' 〜 '+yen(hi,hi)+'<small>（'+unitLbl+'）</small></div><div class="m">真ん中あたり '+yen(md,hi)+'｜取引'+n+'件</div>'; }
+      var bar='<div class="bar" aria-hidden="true"><i style="left:'+(lo/top*100).toFixed(1)+'%;width:'+((hi-lo)/top*100).toFixed(1)+'%"></i><b style="left:'+(md/top*100).toFixed(1)+'%"></b></div>';
+      rows.push('<div class="row">'+(k[1]?'<div class="z">'+k[1]+'</div>':'')+html+bar+'</div>');
+    });
+    $('#r-rows').innerHTML=rows.join('');
+    var cond=c+'・'+TY[t]+(t!=='L'?'・'+AG[a]:'')+(size?'・'+(t==='M'?ar+'㎡':(u==='m2'?ar+'㎡':ar+'坪')):'');
+    $('#r-cond').textContent=cond+'（'+per(D.meta.from)+'〜'+perEnd(D.meta.to)+'の取引）';
+    // 相談フォームへ引き継ぐ文
+    var sum=$('#r-rows').innerText.replace(/\n+/g,' ／ ').slice(0,400);
+    window.__sd={k:'souba',kind:'査定',note:'かんたん相場チェックで入れた内容を、ご相談内容に入れておきました。書き足すのも、消すのも自由です。',
+      text:'【かんたん相場チェックで入れた内容】\n'+cond+'\n目安：'+sum+'\n\n【この家について】\n所在地（町名まで）：\n建物の状態・気になること：\n'};
+    clearTimeout(window.__st); window.__st=setTimeout(function(){track('souba_calc',{type:t,city:c,zone:t==='M'?'':z,age:t==='L'?'':a,sized:size?1:0});},1500);
+  }
+  $('#to-contact').addEventListener('click',function(){ if(!window.__sd) return; try{sessionStorage.setItem('ohana_sd',JSON.stringify(window.__sd));}catch(e){} try{track('souba_to_contact',{type:val('type')});}catch(e){} });
+  document.getElementById('sf').addEventListener('input',calc); document.getElementById('sf').addEventListener('change',calc);
+  fetch('/data/souba.json').then(function(r){return r.json();}).then(function(j){
+    D=j; var cs=Object.keys(j.d).sort(function(a,b){return a.localeCompare(b,'ja');});
+    $('#f-city').innerHTML=cs.map(function(c){return '<option'+(c==='八街市'?' selected':'')+'>'+c+'</option>';}).join('');
+    var q=new URLSearchParams(location.search).get('city'); if(q&&j.d[q]) $('#f-city').value=q;
+    $('#how-data').textContent=$('#how-data').textContent.replace('（千葉県）','（千葉県・'+per(j.meta.from)+'〜'+perEnd(j.meta.to)+'の取引 '+j.meta.n.toLocaleString('ja-JP')+'件）');
+    calc();
+  }).catch(function(){ $('#r-rows').innerHTML='<div class="row na"><div class="v">データを読み込めませんでした。少し時間をおいて、もう一度開いてください。</div></div>'; });
+})();
+</script>
+</body>
+</html>

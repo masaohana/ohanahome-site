@@ -323,6 +323,8 @@
   .cform .satei[hidden]{display:none;}
   .cform .satei-ttl{font-size:15px;font-weight:900;letter-spacing:.1em;color:var(--wh);}
   .cform .satei-ttl small{margin-left:10px;font-size:12px;font-weight:700;opacity:.75;}
+  .cform .satei-link{margin:0;font-size:14px;font-weight:700;}
+  .cform .satei-link a{color:var(--wh);text-decoration:underline;text-underline-offset:3px;}
   .cform .privacy{color:var(--wh);font-size:13px;line-height:1.8;}
   .cform .privacy summary{cursor:pointer;font-weight:900;letter-spacing:.06em;}
   .cform .privacy p{margin:8px 0 0;font-weight:700;opacity:.85;}
@@ -2412,6 +2414,7 @@
     </div>
     <div class="satei" id="satei" hidden>
       <div class="satei-ttl">物件の情報<small>分かる範囲で大丈夫です（空欄でも送れます）</small></div>
+      <p class="satei-link"><a href="/souba/">先に、周辺の取引の目安を見る（かんたん相場チェック）→</a></p>
       <div class="row">
         <label><span class="lb">郵便番号</span><input type="text" name="zip" inputmode="numeric" autocomplete="postal-code" placeholder="2891107（住所が入ります）" maxlength="8"></label>
         <label><span class="lb">所在地</span><input type="text" name="addr" placeholder="千葉県八街市〇〇"></label>
@@ -3144,7 +3147,7 @@
     if(ta.value.trim()&&ta.value!==filled) return;  // 自分で書いた文は消さない
     ta.value=d.text; filled=d.text;
     if(sel&&d.kind){sel.value=d.kind; sel.dispatchEvent(new Event('change',{bubbles:true}));}
-    if(!document.getElementById('sd-note')){var n=document.createElement('p');n.id='sd-note';n.className='sd-note';n.innerHTML='<span class="ib">3つの質問の答えを、</span><span class="ib">ご相談内容に入れておきました。</span><span class="ib">書き足すのも、</span><span class="ib">消すのも自由です。</span>';form.parentNode.insertBefore(n,form);}
+    if(!document.getElementById('sd-note')){var n=document.createElement('p');n.id='sd-note';n.className='sd-note';n.innerHTML=d.note?d.note:'<span class="ib">3つの質問の答えを、</span><span class="ib">ご相談内容に入れておきました。</span><span class="ib">書き足すのも、</span><span class="ib">消すのも自由です。</span>';form.parentNode.insertBefore(n,form);}
   }
   function fromQuery(){ if(!/^\/contact\/?$/.test(location.pathname)) return; var k=new URLSearchParams(location.search).get('kind'); if(k&&sel&&[].some.call(sel.options,function(o){return o.value===k;})){sel.value=k;sel.dispatchEvent(new Event('change',{bubbles:true}));} }
   window.addEventListener('routechange',function(){setTimeout(function(){fromQuery();apply();},0);});
