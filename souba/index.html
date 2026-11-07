@@ -65,6 +65,7 @@ select,input[type=number]{font:inherit;font-weight:700;font-size:16px;padding:12
 .bar b{position:absolute;top:-4px;width:2px;height:16px;background:var(--sun)}
 .note{margin:18px 0 0;padding:14px 16px;background:var(--cream);border-left:4px solid var(--sun);font-size:14px;font-weight:700;line-height:1.8}
 .note ul{margin:6px 0 0;padding-left:1.2em}
+.note.kaitori{background:var(--wh);border-left-color:var(--bk);border:1px solid var(--bk);border-left-width:4px;margin-top:12px}
 .cta{margin:26px 0 0;display:flex;flex-direction:column;gap:12px;align-items:flex-start}
 .btn{display:inline-flex;align-items:center;gap:10px;background:var(--bk);color:var(--wh);text-decoration:none;font-weight:900;font-size:clamp(16px,2vw,18px);padding:16px 24px;border:2px solid var(--bk)}
 .btn.alt{background:var(--wh);color:var(--bk)}
@@ -138,7 +139,13 @@ footer a{margin-right:16px}
         <li>道路との接し方・土地の形・再建築できるか・建物の傷み・残っている荷物などで、同じ広さでも大きく変わります。</li>
         <li>古い家は、建物の値段がつかず、解体の費用を差し引いて考えることもあります。</li>
         <li>市街化調整区域は、買える人が限られるため、低めになりやすい区域です。</li>
+        <li id="li-reno">戸建ての取引には、直してから売り直された家も含まれます（データでは分けられません）。手を入れていない古い家は、この幅より低くなることがあります。</li>
       </ul>
+    </div>
+    <div class="note kaitori">
+      <b><span class="ib">買取の場合は、</span><span class="ib">この目安より低くなります。</span></b><br>
+      <span class="ib">オハナホームが買い取る場合は、</span><span class="ib">片付け・解体・直す費用と、</span><span class="ib">売れるまでの期間とリスクの分を</span><span class="ib">差し引いてお伝えします。</span><span class="ib">そのかわり、</span><span class="ib">荷物が残ったままでも、</span><span class="ib">早く、手間なく手放せます。</span><br>
+      <span class="ib">時間をかけて買う人を探す（仲介）か、</span><span class="ib">すぐに手放す（買取）かで、</span><span class="ib">手元に残る額は変わります。</span><span class="ib">どちらが合うかも、</span><span class="ib">一緒に考えます。</span>
     </div>
     <div class="cta">
       <a class="btn" id="to-contact" href="/contact/?kind=査定"><span><span class="ib">この家の場合を、</span><span class="ib">担当が見る</span><span class="ib">（無料・机上査定）</span></span><span aria-hidden="true">→</span></a>
@@ -176,6 +183,7 @@ footer a{margin-right:16px}
   function ui(){
     var t=val('type');
     $('#g-age').hidden=(t==='L'); $('#g-zone').hidden=(t==='M'); $('#g-unit').hidden=(t==='M');
+    $('#li-reno').hidden=(t!=='H');
     $('#l-area').textContent=(t==='M'?'専有面積（㎡）':'土地の広さ');
     $('#h-area').textContent=(t==='M'?'パンフレットや登記簿に書いてあります。入れなくても、1㎡あたりの目安は出ます。':'登記簿や固定資産税の通知書に書いてあります。入れなくても、1坪（1㎡）あたりの目安は出ます。');
   }
